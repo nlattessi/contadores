@@ -6,5 +6,4 @@ Links importantes:
 - [Documentacion Symfony](http://symfony.com/doc/current/index.html)
 
 Links Wiki:
-- [Recursos Boostra](https://github.com/nlattessi/contadores/wiki/Recursos-Bootstrap)
-- 
+- [Recursos Boostrap](https://github.com/nlattessi/contadores/wiki/Recursos-Bootstrap)
