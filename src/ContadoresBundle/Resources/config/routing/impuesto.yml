@@ -1,0 +1,30 @@
+impuesto:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:Impuesto:index" }
+
+impuesto_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:Impuesto:show" }
+
+impuesto_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:Impuesto:new" }
+
+impuesto_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:Impuesto:create" }
+    requirements: { _method: post }
+
+impuesto_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:Impuesto:edit" }
+
+impuesto_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:Impuesto:update" }
+    requirements: { _method: post|put }
+
+impuesto_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:Impuesto:delete" }
+    requirements: { _method: post|delete }

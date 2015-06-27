@@ -1,0 +1,30 @@
+tareametadata:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:TareaMetadata:index" }
+
+tareametadata_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:TareaMetadata:show" }
+
+tareametadata_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:TareaMetadata:new" }
+
+tareametadata_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:TareaMetadata:create" }
+    requirements: { _method: post }
+
+tareametadata_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:TareaMetadata:edit" }
+
+tareametadata_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:TareaMetadata:update" }
+    requirements: { _method: post|put }
+
+tareametadata_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:TareaMetadata:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,30 @@
+tarea:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:Tarea:index" }
+
+tarea_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:Tarea:show" }
+
+tarea_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:Tarea:new" }
+
+tarea_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:Tarea:create" }
+    requirements: { _method: post }
+
+tarea_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:Tarea:edit" }
+
+tarea_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:Tarea:update" }
+    requirements: { _method: post|put }
+
+tarea_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:Tarea:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,42 @@
+ContadoresBundle\Entity\SubTareaMetadata:
+    type: entity
+    table: sub_tarea_metadata
+    indexes:
+        tarea_sub_tarea_idx:
+            columns:
+                - tarea_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+        tiempoEstimado:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
+            column: tiempo_estimado
+    manyToOne:
+        tarea:
+            targetEntity: TareaMetadata
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tarea_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

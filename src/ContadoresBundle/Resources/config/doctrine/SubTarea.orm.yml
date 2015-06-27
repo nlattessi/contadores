@@ -1,0 +1,82 @@
+ContadoresBundle\Entity\SubTarea:
+    type: entity
+    table: sub_tarea
+    indexes:
+        metadata_subTarea_idx:
+            columns:
+                - sub_tarea_metadata_id
+        tarea_subTarea_idx:
+            columns:
+                - tarea_id
+        estado_subtarea_idx:
+            columns:
+                - estado_actual_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        fechaInicio:
+            type: datetime
+            nullable: true
+            column: fecha_inicio
+        fechaFin:
+            type: datetime
+            nullable: true
+            column: fecha_fin
+        fechaCreacion:
+            type: datetime
+            nullable: false
+            options:
+                default: CURRENT_TIMESTAMP
+            column: fecha_creacion
+        tiempoEmpleado:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
+            column: tiempo_empleado
+        nombre:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+    manyToOne:
+        estadoActual:
+            targetEntity: EstadoSubTarea
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                estado_actual_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        subTareaMetadata:
+            targetEntity: SubTareaMetadata
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                sub_tarea_metadata_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        tarea:
+            targetEntity: Tarea
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tarea_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

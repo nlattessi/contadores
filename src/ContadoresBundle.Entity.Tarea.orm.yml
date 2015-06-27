@@ -1,0 +1,93 @@
+ContadoresBundle\Entity\Tarea:
+    type: entity
+    table: tarea
+    indexes:
+        metaData_tarea_idx:
+            columns:
+                - tarea_metadata_id
+        cliente_tarea_idx:
+            columns:
+                - cliente_id
+        estado_tarea_idx:
+            columns:
+                - estado_actual_id
+        contador_tarea_idx:
+            columns:
+                - contador_id
+    id:
+        id:
+            id: true
+            type: integer
+            options:
+                unsigned: false
+            generator:
+                strategy: IDENTITY
+    fields:
+        fechaInicio:
+            type: date
+            nullable: true
+            column: fecha_inicio
+        fechaFin:
+            type: date
+            nullable: true
+            column: fecha_fin
+        fechaCreacion:
+            type: datetime
+            nullable: true
+            column: fecha_creacion
+        vencimientoFiscal:
+            type: date
+            nullable: true
+            column: vencimiento_fiscal
+        vencimientoInterno:
+            type: date
+            nullable: true
+            column: vencimiento_interno
+        nombre:
+            type: string
+            length: 45
+            options:
+                fixed: false
+            nullable: true
+    manyToOne:
+        contador:
+            targetEntity: ContadoresBundle\Entity\Contador
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                contador_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        cliente:
+            targetEntity: ContadoresBundle\Entity\Cliente
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                cliente_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        estadoActual:
+            targetEntity: ContadoresBundle\Entity\EstadoTarea
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                estado_actual_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        tareaMetadata:
+            targetEntity: ContadoresBundle\Entity\TareaMetadata
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tarea_metadata_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

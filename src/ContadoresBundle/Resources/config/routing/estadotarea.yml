@@ -1,0 +1,30 @@
+estadotarea:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:EstadoTarea:index" }
+
+estadotarea_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:EstadoTarea:show" }
+
+estadotarea_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:EstadoTarea:new" }
+
+estadotarea_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:EstadoTarea:create" }
+    requirements: { _method: post }
+
+estadotarea_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:EstadoTarea:edit" }
+
+estadotarea_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:EstadoTarea:update" }
+    requirements: { _method: post|put }
+
+estadotarea_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:EstadoTarea:delete" }
+    requirements: { _method: post|delete }

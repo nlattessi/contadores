@@ -1,0 +1,30 @@
+area:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:Area:index" }
+
+area_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:Area:show" }
+
+area_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:Area:new" }
+
+area_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:Area:create" }
+    requirements: { _method: post }
+
+area_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:Area:edit" }
+
+area_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:Area:update" }
+    requirements: { _method: post|put }
+
+area_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:Area:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,59 @@
+ContadoresBundle\Entity\Contador:
+    type: entity
+    table: contador
+    indexes:
+        usuario_contador_idx:
+            columns:
+                - usuario_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+        apellido:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+        celular:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+        mail:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+        telefono:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+    manyToOne:
+        usuario:
+            targetEntity: Usuario
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                usuario_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

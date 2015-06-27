@@ -1,0 +1,30 @@
+impuestocuil:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:ImpuestoCuil:index" }
+
+impuestocuil_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:ImpuestoCuil:show" }
+
+impuestocuil_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:ImpuestoCuil:new" }
+
+impuestocuil_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:ImpuestoCuil:create" }
+    requirements: { _method: post }
+
+impuestocuil_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:ImpuestoCuil:edit" }
+
+impuestocuil_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:ImpuestoCuil:update" }
+    requirements: { _method: post|put }
+
+impuestocuil_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:ImpuestoCuil:delete" }
+    requirements: { _method: post|delete }

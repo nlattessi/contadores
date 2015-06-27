@@ -1,0 +1,54 @@
+ContadoresBundle\Entity\ArchivoSubTareaMetadata:
+    type: entity
+    table: archivo_sub_tarea_metadata
+    indexes:
+        usuario_archivoSTM_idx:
+            columns:
+                - usuario_id
+        subTareaMetadata_archivo_idx:
+            columns:
+                - sub_tarea_metadata_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+        ruta:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+    manyToOne:
+        subTareaMetadata:
+            targetEntity: SubTareaMetadata
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                sub_tarea_metadata_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        usuario:
+            targetEntity: Usuario
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                usuario_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

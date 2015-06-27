@@ -1,0 +1,30 @@
+archivotareametadata:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:ArchivoTareaMetadata:index" }
+
+archivotareametadata_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:ArchivoTareaMetadata:show" }
+
+archivotareametadata_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:ArchivoTareaMetadata:new" }
+
+archivotareametadata_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:ArchivoTareaMetadata:create" }
+    requirements: { _method: post }
+
+archivotareametadata_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:ArchivoTareaMetadata:edit" }
+
+archivotareametadata_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:ArchivoTareaMetadata:update" }
+    requirements: { _method: post|put }
+
+archivotareametadata_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:ArchivoTareaMetadata:delete" }
+    requirements: { _method: post|delete }

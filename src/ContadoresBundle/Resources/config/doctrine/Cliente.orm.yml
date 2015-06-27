@@ -1,0 +1,60 @@
+ContadoresBundle\Entity\Cliente:
+    type: entity
+    table: cliente
+    indexes:
+        usuario_cliente_idx:
+            columns:
+                - usuario_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+        direccion:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+        telefono:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+        mail:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+        cuit:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+            column: CUIT
+    manyToOne:
+        usuario:
+            targetEntity: Usuario
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                usuario_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

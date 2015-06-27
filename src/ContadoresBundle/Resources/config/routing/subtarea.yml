@@ -1,0 +1,30 @@
+subtarea:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:SubTarea:index" }
+
+subtarea_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:SubTarea:show" }
+
+subtarea_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:SubTarea:new" }
+
+subtarea_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:SubTarea:create" }
+    requirements: { _method: post }
+
+subtarea_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:SubTarea:edit" }
+
+subtarea_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:SubTarea:update" }
+    requirements: { _method: post|put }
+
+subtarea_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:SubTarea:delete" }
+    requirements: { _method: post|delete }

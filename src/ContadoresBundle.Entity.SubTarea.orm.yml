@@ -1,0 +1,72 @@
+ContadoresBundle\Entity\SubTarea:
+    type: entity
+    table: sub_tarea
+    indexes:
+        metadata_subTarea_idx:
+            columns:
+                - sub_tarea_metadata_id
+        tarea_subTarea_idx:
+            columns:
+                - tarea_id
+    id:
+        id:
+            id: true
+            type: integer
+            options:
+                unsigned: false
+            generator:
+                strategy: IDENTITY
+    fields:
+        fechaInicio:
+            type: datetime
+            nullable: true
+            column: fecha_inicio
+        fechaFin:
+            type: datetime
+            nullable: true
+            column: fecha_fin
+        fechaCreacion:
+            type: datetime
+            nullable: true
+            column: fecha_creacion
+        estadoActualId:
+            type: integer
+            options:
+                unsigned: false
+            nullable: false
+            column: estado_actual_id
+        tiempoEmpleado:
+            type: integer
+            options:
+                unsigned: false
+                default: '0'
+            nullable: true
+            column: tiempo_empleado
+        nombre:
+            type: string
+            length: 45
+            options:
+                fixed: false
+            nullable: true
+    manyToOne:
+        subTareaMetadata:
+            targetEntity: ContadoresBundle\Entity\SubTareaMetadata
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                sub_tarea_metadata_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        tarea:
+            targetEntity: ContadoresBundle\Entity\Tarea
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tarea_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

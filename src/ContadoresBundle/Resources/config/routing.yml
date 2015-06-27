@@ -1,0 +1,75 @@
+contadores_tareametadata:
+    resource: "@ContadoresBundle/Resources/config/routing/tareametadata.yml"
+    prefix:   /tareametadata
+
+contadores_subtarea:
+    resource: "@ContadoresBundle/Resources/config/routing/subtarea.yml"
+    prefix:   /subtarea
+
+contadores_estadosubtarea:
+    resource: "@ContadoresBundle/Resources/config/routing/estadosubtarea.yml"
+    prefix:   /estadosubtarea
+
+contadores_estadotarea:
+    resource: "@ContadoresBundle/Resources/config/routing/estadotarea.yml"
+    prefix:   /estadotarea
+
+contadores_usuario:
+    resource: "@ContadoresBundle/Resources/config/routing/usuario.yml"
+    prefix:   /usuario
+
+contadores_tipoestado:
+    resource: "@ContadoresBundle/Resources/config/routing/tipoestado.yml"
+    prefix:   /tipoestado
+
+contadores_tarea:
+    resource: "@ContadoresBundle/Resources/config/routing/tarea.yml"
+    prefix:   /tarea
+
+contadores_subtareametadata:
+    resource: "@ContadoresBundle/Resources/config/routing/subtareametadata.yml"
+    prefix:   /subtareametadata
+
+contadores_rol:
+    resource: "@ContadoresBundle/Resources/config/routing/rol.yml"
+    prefix:   /rol
+
+contadores_impuestocuil:
+    resource: "@ContadoresBundle/Resources/config/routing/impuestocuil.yml"
+    prefix:   /impuestocuil
+
+contadores_impuesto:
+    resource: "@ContadoresBundle/Resources/config/routing/impuesto.yml"
+    prefix:   /impuesto
+
+contadores_contador:
+    resource: "@ContadoresBundle/Resources/config/routing/contador.yml"
+    prefix:   /contador
+
+contadores_cliente:
+    resource: "@ContadoresBundle/Resources/config/routing/cliente.yml"
+    prefix:   /cliente
+
+contadores_area:
+    resource: "@ContadoresBundle/Resources/config/routing/area.yml"
+    prefix:   /area
+
+contadores_archivotareametadata:
+    resource: "@ContadoresBundle/Resources/config/routing/archivotareametadata.yml"
+    prefix:   /archivotareametadata
+
+contadores_archivotarea:
+    resource: "@ContadoresBundle/Resources/config/routing/archivotarea.yml"
+    prefix:   /archivotarea
+
+contadores_archivosubtareametadata:
+    resource: "@ContadoresBundle/Resources/config/routing/archivosubtareametadata.yml"
+    prefix:   /archivosubtareametadata
+
+contadores_archivosubtarea:
+    resource: "@ContadoresBundle/Resources/config/routing/archivosubtarea.yml"
+    prefix:   /archivosubtarea
+
+contadores_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: ContadoresBundle:Default:index }

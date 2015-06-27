@@ -1,0 +1,30 @@
+contador:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:Contador:index" }
+
+contador_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:Contador:show" }
+
+contador_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:Contador:new" }
+
+contador_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:Contador:create" }
+    requirements: { _method: post }
+
+contador_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:Contador:edit" }
+
+contador_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:Contador:update" }
+    requirements: { _method: post|put }
+
+contador_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:Contador:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,53 @@
+ContadoresBundle\Entity\ArchivoSubTarea:
+    type: entity
+    table: archivo_sub_tarea
+    indexes:
+        usuario_archivo_idx:
+            columns:
+                - usuario_id
+        subTarea_archivo_idx:
+            columns:
+                - sub_tarea_id
+    id:
+        id:
+            id: true
+            type: integer
+            options:
+                unsigned: false
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            length: 45
+            options:
+                fixed: false
+            nullable: false
+        ruta:
+            type: string
+            length: 45
+            options:
+                fixed: false
+            nullable: false
+    manyToOne:
+        subTarea:
+            targetEntity: ContadoresBundle\Entity\SubTarea
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                sub_tarea_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        usuario:
+            targetEntity: ContadoresBundle\Entity\Usuario
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                usuario_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

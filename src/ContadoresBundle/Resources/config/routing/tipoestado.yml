@@ -1,0 +1,30 @@
+tipoestado:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:TipoEstado:index" }
+
+tipoestado_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:TipoEstado:show" }
+
+tipoestado_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:TipoEstado:new" }
+
+tipoestado_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:TipoEstado:create" }
+    requirements: { _method: post }
+
+tipoestado_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:TipoEstado:edit" }
+
+tipoestado_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:TipoEstado:update" }
+    requirements: { _method: post|put }
+
+tipoestado_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:TipoEstado:delete" }
+    requirements: { _method: post|delete }

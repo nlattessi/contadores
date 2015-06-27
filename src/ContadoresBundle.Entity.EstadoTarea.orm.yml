@@ -1,0 +1,70 @@
+ContadoresBundle\Entity\EstadoTarea:
+    type: entity
+    table: estado_tarea
+    indexes:
+        tarea_estadoTarea_idx:
+            columns:
+                - tarea_id
+        tipoEstado_estadoTarea_idx:
+            columns:
+                - tipo_estado_id
+        usuario_estadoTarea_idx:
+            columns:
+                - contador_id
+    id:
+        id:
+            id: true
+            type: integer
+            options:
+                unsigned: false
+            generator:
+                strategy: IDENTITY
+    fields:
+        fechaInicio:
+            type: datetime
+            nullable: false
+            column: fecha_inicio
+        fechaFin:
+            type: datetime
+            nullable: true
+            column: fecha_fin
+        indiceCompletado:
+            type: decimal
+            precision: 10
+            scale: 0
+            options:
+                default: '0'
+            nullable: true
+            column: indice_completado
+    manyToOne:
+        tarea:
+            targetEntity: ContadoresBundle\Entity\Tarea
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tarea_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        tipoEstado:
+            targetEntity: ContadoresBundle\Entity\TipoEstado
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tipo_estado_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        contador:
+            targetEntity: ContadoresBundle\Entity\Contador
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                contador_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
