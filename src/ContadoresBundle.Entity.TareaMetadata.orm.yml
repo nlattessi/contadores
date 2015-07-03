@@ -23,7 +23,7 @@ ContadoresBundle\Entity\TareaMetadata:
         esperiodica:
             type: boolean
             options:
-                default: '0'
+                default: false
             nullable: false
             column: esPeriodica
     manyToOne:

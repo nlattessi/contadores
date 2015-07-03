@@ -15,6 +15,7 @@ class UsuarioType extends AbstractType
             ->add('password')
             ->add('entidadId')
             ->add('rol')
+            ->add('activo', 'checkbox', array('required' => false))
         ;
     }
 

@@ -20,7 +20,7 @@ class TareaMetadata
     /**
      * @var boolean
      */
-    private $esperiodica = '0';
+    private $esperiodica = false;
 
     /**
      * @var \ContadoresBundle\Entity\Impuesto
