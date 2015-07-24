@@ -26,7 +26,7 @@ class SubTarea
     /**
      * @var \DateTime
      */
-    private $fechaCreacion ;
+    private $fechaCreacion;
 
     /**
      * @var integer
@@ -260,4 +260,3 @@ class SubTarea
         return $this->nombre;
     }
 }
-
