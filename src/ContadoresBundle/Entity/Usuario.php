@@ -30,7 +30,7 @@ class Usuario
     /**
      * @var boolean
      */
-    private $activo = '1';
+    private $activo = true;
 
     /**
      * @var \ContadoresBundle\Entity\Rol
