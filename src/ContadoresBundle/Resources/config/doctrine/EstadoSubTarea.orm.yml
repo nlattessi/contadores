@@ -5,7 +5,7 @@ ContadoresBundle\Entity\EstadoSubTarea:
         tipoEstado_estado_idx:
             columns:
                 - tipo_estado_id
-        estado_subTarea_idx:
+        subTarea_estado_sub_tarea_idx:
             columns:
                 - sub_tarea_id
         contador_estado_tarea_idx:
