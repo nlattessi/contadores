@@ -8,7 +8,7 @@ ContadoresBundle\Entity\SubTarea:
         tarea_subTarea_idx:
             columns:
                 - tarea_id
-        estado_subtarea_idx:
+        estado_subTarea_idx:
             columns:
                 - estado_actual_id
     id:
