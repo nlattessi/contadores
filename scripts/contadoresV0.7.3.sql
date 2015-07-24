@@ -244,10 +244,10 @@ CREATE TABLE `estado_sub_tarea` (
   `horas_trabajadas` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `tipoEstado_estado_idx` (`tipo_estado_id`),
-  KEY `estado_subTarea_idx` (`sub_tarea_id`),
+  KEY `subTarea_estado_sub_tarea_idx` (`sub_tarea_id`),
   KEY `contador_estado_tarea_idx` (`contador_id`),
   CONSTRAINT `contador_estado_tarea` FOREIGN KEY (`contador_id`) REFERENCES `contador` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `estado_subTarea` FOREIGN KEY (`sub_tarea_id`) REFERENCES `sub_tarea` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `subTarea_estado_sub_tarea` FOREIGN KEY (`sub_tarea_id`) REFERENCES `sub_tarea` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `tipoEstado_estado` FOREIGN KEY (`tipo_estado_id`) REFERENCES `tipo_estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -394,7 +394,7 @@ CREATE TABLE `sub_tarea` (
   PRIMARY KEY (`id`),
   KEY `metadata_subTarea_idx` (`sub_tarea_metadata_id`),
   KEY `tarea_subTarea_idx` (`tarea_id`),
-  KEY `estado_subtarea_idx` (`estado_actual_id`),
+  KEY `estado_subTarea_idx` (`estado_actual_id`),
   CONSTRAINT `fk_estado_subtarea` FOREIGN KEY (`estado_actual_id`) REFERENCES `estado_sub_tarea` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `metadata_subTarea` FOREIGN KEY (`sub_tarea_metadata_id`) REFERENCES `sub_tarea_metadata` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `tarea_subTarea` FOREIGN KEY (`tarea_id`) REFERENCES `tarea` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
