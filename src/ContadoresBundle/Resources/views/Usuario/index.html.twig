@@ -67,7 +67,7 @@
             <td>{{ entity.mail }}</td>
             <td>{{ entity.password }}</td>
             <td>{{ entity.entidadId }}</td>
-            <td>{% if entity.activo %}true{% else %}false{% endif %}</td>
+            <td>{% if entity.activo %}Activo{% else %}Inactivo{% endif %}</td>
             <td>
         <a class="btn btn-mini" href="{{ path('usuario_show', { 'id': entity.id }) }}">
             {{ 'views.actions.show'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}

@@ -14,7 +14,7 @@ class TareaMetadataType extends AbstractType
             ->add('nombre')
             ->add('impuesto')
             ->add('area')
-            ->add('esperiodica', 'checkbox', array('required' => false))
+            ->add('esperiodica', 'checkbox', array('required' => false, 'label' => 'Es periódica'))
         ;
     }
 
