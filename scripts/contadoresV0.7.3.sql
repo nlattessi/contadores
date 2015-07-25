@@ -370,7 +370,7 @@ CREATE TABLE `rol` (
 
 LOCK TABLES `rol` WRITE;
 /*!40000 ALTER TABLE `rol` DISABLE KEYS */;
-INSERT INTO `rol` VALUES (1,'ROLE_ADMIN'),(2,'ROLE_CONTADOR'),(3,'ROLE_CLIENTE'),(4, 'ROLE_DIRECTIVO');
+INSERT INTO `rol` VALUES (1,'ROLE_SUPERADMIN'),(2,'ROLE_CONTADOR'),(3,'ROLE_CLIENTE');
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -395,7 +395,7 @@ CREATE TABLE `sub_tarea` (
   KEY `metadata_subTarea_idx` (`sub_tarea_metadata_id`),
   KEY `tarea_subTarea_idx` (`tarea_id`),
   KEY `estado_subTarea_idx` (`estado_actual_id`),
-  CONSTRAINT `fk_estado_subtarea` FOREIGN KEY (`estado_actual_id`) REFERENCES `estado_sub_tarea` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_estado_subtarea` FOREIGN KEY (`estado_actual_id`) REFERENCES `estado_sub_tarea` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION,
   CONSTRAINT `metadata_subTarea` FOREIGN KEY (`sub_tarea_metadata_id`) REFERENCES `sub_tarea_metadata` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `tarea_subTarea` FOREIGN KEY (`tarea_id`) REFERENCES `tarea` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
@@ -561,7 +561,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,2,'contador@contador.com','contador',1,TRUE),(2,1,'admin@admin.com','admin',1,TRUE),(3,3,'cliente@cliente.com','cliente',1,TRUE),(4,4,'directivo@directivo.com','directivo',NULL,TRUE);
+INSERT INTO `usuario` VALUES (1,2,'contador@contador.com','contador',1,TRUE),(2,1,'superadmin@superadmin.com','superadmin',1,TRUE),(3,3,'cliente@cliente.com','cliente',1,TRUE);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
