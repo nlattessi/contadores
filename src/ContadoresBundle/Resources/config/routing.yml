@@ -74,10 +74,6 @@ contadores_homepage:
     path:     /hello/{name}
     defaults: { _controller: ContadoresBundle:Default:index }
 
-contadores_admin:
-    path:     /admin
-    defaults: { _controller: ContadoresBundle:Default:Admin }
-
 login:
     path:     /login
     defaults: { _controller: ContadoresBundle:Security:login }
@@ -87,3 +83,10 @@ login_check:
 
 logout:
     path: /logout
+
+default_security_target:
+    path:     /usuario
+
+unauthorized:
+    path:     /unauthorized
+    defaults: { _controller: ContadoresBundle:Default:unauthorized }

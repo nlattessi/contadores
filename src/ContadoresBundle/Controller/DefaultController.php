@@ -10,4 +10,9 @@ class DefaultController extends Controller
     {
         return $this->render('ContadoresBundle:Default:index.html.twig', array('name' => $name));
     }
+
+    public function unauthorizedAction()
+    {
+        return $this->render('ContadoresBundle:Default:unauthorized.html.twig');
+    }
 }
