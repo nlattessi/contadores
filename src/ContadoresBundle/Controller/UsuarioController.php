@@ -117,6 +117,7 @@ class UsuarioController extends Controller
     {
         $entity  = new Usuario();
         $form = $this->createForm(new UsuarioType(), $entity);
+
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -185,6 +186,7 @@ class UsuarioController extends Controller
         }
 
         $editForm = $this->createForm(new UsuarioType(), $entity);
+        $editForm->add('activo', 'checkbox', array('required' => false));
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ContadoresBundle:Usuario:edit.html.twig', array(
@@ -210,6 +212,7 @@ class UsuarioController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new UsuarioType(), $entity);
+        $editForm->add('activo', 'checkbox', array('required' => false));
         $editForm->bind($request);
 
         if ($editForm->isValid()) {

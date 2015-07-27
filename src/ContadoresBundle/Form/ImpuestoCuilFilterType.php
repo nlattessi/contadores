@@ -17,7 +17,9 @@ class ImpuestoCuilFilterType extends AbstractType
             ->add('id', 'filter_number_range')
             ->add('cuil', 'filter_number_range')
             ->add('mes', 'filter_text')
-            ->add('fecha', 'filter_date_range')
+            ->add('fecha', 'filter_date_range',array(
+                'left_date_options'  => array('widget' => 'single_text',  ),
+                'right_date_options' => array('widget' => 'single_text',  )))
         ;
 
         $listener = function(FormEvent $event)

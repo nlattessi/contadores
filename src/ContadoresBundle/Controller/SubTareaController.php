@@ -185,6 +185,7 @@ class SubTareaController extends Controller
         }
 
         $editForm = $this->createForm(new SubTareaType(), $entity);
+        $editForm ->add('fechaCreacion', 'datetime', array('label' => 'Fecha creación', 'date_widget' => 'single_text', 'time_widget' => 'single_text'));
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ContadoresBundle:SubTarea:edit.html.twig', array(
@@ -210,6 +211,7 @@ class SubTareaController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new SubTareaType(), $entity);
+        $editForm ->add('fechaCreacion', 'datetime', array('label' => 'Fecha creación', 'date_widget' => 'single_text', 'time_widget' => 'single_text'));
         $editForm->bind($request);
 
         if ($editForm->isValid()) {

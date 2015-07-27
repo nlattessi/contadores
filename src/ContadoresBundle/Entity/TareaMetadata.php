@@ -138,5 +138,10 @@ class TareaMetadata
     {
         return $this->area;
     }
+
+    public function __toString()
+    {
+        return $this->nombre;
+    }
 }
 
