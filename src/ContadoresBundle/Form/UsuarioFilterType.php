@@ -2,6 +2,7 @@
 
 namespace ContadoresBundle\Form;
 
+use Lexik\Bundle\FormFilterBundle\Filter\FilterOperands;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -15,7 +16,7 @@ class UsuarioFilterType extends AbstractType
     {
         $builder
             ->add('id', 'filter_number_range')
-            ->add('mail', 'filter_text')
+            ->add('mail', 'filter_text', array('condition_pattern' => FilterOperands::STRING_BOTH, ))
             ->add('password', 'filter_text')
             ->add('entidadId', 'filter_number_range')
             ->add('activo', 'filter_choice')

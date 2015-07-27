@@ -2,6 +2,7 @@
 
 namespace ContadoresBundle\Form;
 
+use Lexik\Bundle\FormFilterBundle\Filter\FilterOperands;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -15,11 +16,17 @@ class SubTareaFilterType extends AbstractType
     {
         $builder
             ->add('id', 'filter_number_range')
-            ->add('fechaInicio', 'filter_date_range')
-            ->add('fechaFin', 'filter_date_range')
-            ->add('fechaCreacion', 'filter_date_range')
+            ->add('fechaInicio', 'filter_date_range',array(
+                'left_date_options'  => array('widget' => 'single_text',  ),
+                'right_date_options' => array('widget' => 'single_text',  )))
+            ->add('fechaFin', 'filter_date_range',array(
+                'left_date_options'  => array('widget' => 'single_text',  ),
+                'right_date_options' => array('widget' => 'single_text',  )))
+            ->add('fechaCreacion', 'filter_date_range',array(
+                'left_date_options'  => array('widget' => 'single_text',  ),
+                'right_date_options' => array('widget' => 'single_text',  )))
             ->add('tiempoEmpleado', 'filter_number_range')
-            ->add('nombre', 'filter_text')
+            ->add('nombre', 'filter_text', array('condition_pattern' => FilterOperands::STRING_BOTH,))
         ;
 
         $listener = function(FormEvent $event)

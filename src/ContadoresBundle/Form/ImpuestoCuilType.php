@@ -13,7 +13,7 @@ class ImpuestoCuilType extends AbstractType
         $builder
             ->add('cuil')
             ->add('mes')
-            ->add('fecha')
+            ->add('fecha', 'date',array('widget' => 'single_text',  ))
             ->add('impuesto')
         ;
     }

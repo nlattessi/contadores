@@ -2,6 +2,7 @@
 
 namespace ContadoresBundle\Form;
 
+use Lexik\Bundle\FormFilterBundle\Filter\FilterOperands;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -15,11 +16,15 @@ class ClienteFilterType extends AbstractType
     {
         $builder
             ->add('id', 'filter_number_range')
-            ->add('nombre', 'filter_text')
-            ->add('direccion', 'filter_text')
+            ->add('nombre', 'filter_text', array('condition_pattern' => FilterOperands::STRING_BOTH,
+            ))
+            ->add('direccion', 'filter_text', array('condition_pattern' => FilterOperands::STRING_BOTH,
+            ))
             ->add('telefono', 'filter_text')
-            ->add('mail', 'filter_text')
-            ->add('cuit', 'filter_text')
+            ->add('mail', 'filter_text', array('condition_pattern' => FilterOperands::STRING_BOTH,
+            ))
+            ->add('cuit', 'filter_text', array('condition_pattern' => FilterOperands::STRING_BOTH,
+            ))
         ;
 
         $listener = function(FormEvent $event)
