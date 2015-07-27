@@ -78,7 +78,7 @@ contadores_admin:
     path:     /admin
     defaults: { _controller: ContadoresBundle:Default:Admin }
 
-login_route:
+login:
     path:     /login
     defaults: { _controller: ContadoresBundle:Security:login }
 

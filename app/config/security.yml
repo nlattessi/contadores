@@ -15,7 +15,7 @@ security:
 
         default:
             anonymous: ~
-            http_basic: ~
+            # http_basic: ~
             provider: db_provider
             form_login:
                 login_path:     /login
@@ -23,7 +23,7 @@ security:
                 csrf_provider:  security.csrf.token_manager
             logout:
                 path:   /logout
-                target: /usuario
+                target: /
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
