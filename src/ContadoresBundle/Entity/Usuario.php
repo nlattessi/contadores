@@ -3,11 +3,12 @@
 namespace ContadoresBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * Usuario
  */
-class Usuario implements UserInterface, \Serializable
+class Usuario implements UserInterface, \Serializable, AdvancedUserInterface
 {
     /**
      * @var integer
@@ -209,5 +210,25 @@ class Usuario implements UserInterface, \Serializable
             $this->mail,
             $this->password,
         ) = unserialize($serialized);
+    }
+
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->activo;
     }
 }
