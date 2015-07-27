@@ -2,10 +2,12 @@
 
 namespace ContadoresBundle\Entity;
 
+use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * Usuario
  */
-class Usuario
+class Usuario implements UserInterface, \Serializable
 {
     /**
      * @var integer
@@ -170,5 +172,42 @@ class Usuario
 
     public function __toString(){
         return $this->mail;
+    }
+
+    public function getUsername()
+    {
+        return $this->getMail();
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getRoles()
+    {
+        return array($this->getRol()->getNombre());
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->mail,
+            $this->password,
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->mail,
+            $this->password,
+        ) = unserialize($serialized);
     }
 }

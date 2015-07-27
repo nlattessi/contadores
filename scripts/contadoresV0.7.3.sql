@@ -546,7 +546,7 @@ CREATE TABLE `usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `rol_id` int(11) NOT NULL,
   `mail` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `entidad_id` int(11) DEFAULT NULL,
   `activo` boolean NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`),
