@@ -10,3 +10,4 @@ Links Wiki:
 - [Recursos extra](https://github.com/nlattessi/contadores/wiki/Recursos-extra)
 - [Fixtures](https://github.com/nlattessi/contadores/wiki/Fixtures)
 - [Flujo Heroku](https://github.com/nlattessi/contadores/wiki/Heroku)
+- [Internacionalizacion](https://github.com/nlattessi/contadores/wiki/Internacionalizaci%C3%B3n)
