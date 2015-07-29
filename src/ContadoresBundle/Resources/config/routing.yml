@@ -70,10 +70,6 @@ contadores_archivosubtarea:
     resource: "@ContadoresBundle/Resources/config/routing/archivosubtarea.yml"
     prefix:   /archivosubtarea
 
-contadores_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: ContadoresBundle:Default:index }
-
 login:
     path:     /login
     defaults: { _controller: ContadoresBundle:Security:login }
@@ -94,3 +90,7 @@ default_security_target:
 unauthorized:
     path:     /unauthorized
     defaults: { _controller: ContadoresBundle:Default:unauthorized }
+
+index:
+    path:     /
+    defaults: { _controller: ContadoresBundle:Default:index }
