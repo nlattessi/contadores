@@ -38,4 +38,11 @@ class SecurityController extends Controller
       );
 
     }
+
+    public function redirectAction()
+    {
+        if ($this->getUser()->getRol()->getNombre() == 'ROLE_SUPERADMIN') {
+            return $this->redirect($this->generateUrl('usuario'));
+        }
+    }
 }

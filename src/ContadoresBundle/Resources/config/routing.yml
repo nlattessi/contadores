@@ -81,11 +81,15 @@ login:
 login_check:
     path: /login_check
 
+login_redirect:
+    path:     /redirect
+    defaults: { _controller: ContadoresBundle:Security:redirect }
+
 logout:
     path: /logout
 
 default_security_target:
-    path:     /usuario
+    path: /redirect
 
 unauthorized:
     path:     /unauthorized
