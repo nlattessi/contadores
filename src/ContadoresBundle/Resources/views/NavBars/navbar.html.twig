@@ -1,0 +1,37 @@
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% if app.user.rol == 'ROLE_ADMIN' %}
+        {{ include('ContadoresBundle:NavBars:role_admin.html.twig') }}
+    {% endif %}
+    {% if app.user.rol == 'ROLE_JEFE' %}
+        {{ include('ContadoresBundle:NavBars:role_jefe.html.twig') }}
+    {% endif %}
+    {% if app.user.rol == 'ROLE_CONTADOR' %}
+        {{ include('ContadoresBundle:NavBars:role_contador.html.twig') }}
+    {% endif %}
+    {% if app.user.rol == 'ROLE_CLIENTE' %}
+        {{ include('ContadoresBundle:NavBars:role_cliente.html.twig') }}
+    {% endif %}
+{% endif %}
+
+<style>
+    body {
+      padding-top: 20px;
+      padding-bottom: 40px;
+    }
+    /* Custom container */
+    .container-narrow {
+      margin: 0 auto;
+      max-width: 700px;
+    }
+    .container-narrow > hr {
+      margin: 30px 0;
+    }
+    .jumbotron {
+      margin: 60px 0;
+      text-align: center;
+    }
+    .jumbotron h1 {
+      font-size: 72px;
+      line-height: 1;
+    }
+</style>

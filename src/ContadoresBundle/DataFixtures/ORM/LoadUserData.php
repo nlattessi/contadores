@@ -32,29 +32,37 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
      */
     public function load(ObjectManager $manager)
     {
-        $userSuperAdmin = new Usuario();
-        $userSuperAdmin->setMail('superadmin@superadmin.com');
-
+        $userAdmin = new Usuario();
+        $userAdmin->setMail('admin@admin.com');
         $encoder = $this->container
            ->get('security.encoder_factory')
-           ->getEncoder($userSuperAdmin)
+           ->getEncoder($userAdmin)
         ;
-        $userSuperAdmin->setPassword($encoder->encodePassword('superadmin', $userSuperAdmin->getSalt()));
+        $userAdmin->setPassword($encoder->encodePassword('admin', $userAdmin->getSalt()));
+        $userAdmin->setEntidadId(1);
+        $userAdmin->setActivo(true);
+        $userAdmin->setRol($this->getReference('rolAdmin'));
+        $this->addReference('userAdmin', $userAdmin);
 
-        $userSuperAdmin->setEntidadId(1);
-        $userSuperAdmin->setActivo(true);
-        $userSuperAdmin->setRol($this->getReference('rolSuperAdmin'));
-        $this->addReference('userSuperAdmin', $userSuperAdmin);
+        $userJefe = new Usuario();
+        $userJefe->setMail('jefe@jefe.com');
+        $encoder = $this->container
+           ->get('security.encoder_factory')
+           ->getEncoder($userJefe)
+        ;
+        $userJefe->setPassword($encoder->encodePassword('jefe', $userJefe->getSalt()));
+        $userJefe->setEntidadId(1);
+        $userJefe->setActivo(true);
+        $userJefe->setRol($this->getReference('rolJefe'));
+        $this->addReference('userJefe', $userJefe);
 
         $userContador = new Usuario();
         $userContador->setMail('contador@contador.com');
-
         $encoder = $this->container
            ->get('security.encoder_factory')
            ->getEncoder($userContador)
         ;
         $userContador->setPassword($encoder->encodePassword('contador', $userContador->getSalt()));
-
         $userContador->setEntidadId(1);
         $userContador->setActivo(true);
         $userContador->setRol($this->getReference('rolContador'));
@@ -62,19 +70,18 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
 
         $userCliente = new Usuario();
         $userCliente->setMail('cliente@cliente.com');
-
         $encoder = $this->container
            ->get('security.encoder_factory')
            ->getEncoder($userCliente)
         ;
         $userCliente->setPassword($encoder->encodePassword('cliente', $userCliente->getSalt()));
-
         $userCliente->setEntidadId(1);
         $userCliente->setActivo(true);
         $userCliente->setRol($this->getReference('rolCliente'));
         $this->addReference('userCliente', $userCliente);
 
-        $manager->persist($userSuperAdmin);
+        $manager->persist($userAdmin);
+        $manager->persist($userJefe);
         $manager->persist($userContador);
         $manager->persist($userCliente);
 

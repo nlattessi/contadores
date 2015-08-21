@@ -1,0 +1,44 @@
+<div class="navbar nav">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="{{ path('home') }}">Contadores</a>
+
+          	<div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="divider-vertical"></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tareas <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('en_construccion') }}">Crear TareaMetadata</a></li>
+                            <li><a href="{{ path('en_construccion') }}">Crear</a></li>
+                            <li><a href="{{ path('en_construccion') }}">Ver cargadas</a></li>
+                            <li><a href="{{ path('en_construccion') }}">Ver terminadas</a></li>
+                            <li><a href="{{ path('en_construccion') }}">Ver por Contador</a></li>
+                            <li><a href="{{ path('en_construccion') }}">Ver por Cliente</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">SubTareas <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('en_construccion') }}">Crear SubTareaMetadata</a></li>
+                            <li><a href="{{ path('en_construccion') }}">Crear</a></li>
+                            <li><a href="{{ path('en_construccion') }}">Ver cargadas</a></li>
+                            <li><a href="{{ path('en_construccion') }}">Ver terminadas</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Areas <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('en_construccion') }}">Crear</a></li>
+                            <li><a href="{{ path('en_construccion') }}">Ver</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ path('en_construccion') }}">Contadores</a></li>
+                </ul>
+                {{ include('ContadoresBundle:NavBars:menu_usuario.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>
