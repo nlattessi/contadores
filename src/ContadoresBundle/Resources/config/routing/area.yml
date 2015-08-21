@@ -19,6 +19,10 @@ area_edit:
     pattern:  /{id}/edit
     defaults: { _controller: "ContadoresBundle:Area:edit" }
 
+area_contadores:
+    pattern:  /{id}/contadores
+    defaults: { _controller: "ContadoresBundle:Area:contadores" }
+
 area_update:
     pattern:  /{id}/update
     defaults: { _controller: "ContadoresBundle:Area:update" }

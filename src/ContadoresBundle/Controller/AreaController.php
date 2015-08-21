@@ -270,4 +270,24 @@ class AreaController extends Controller
             ->getForm()
         ;
     }
+
+    public function contadoresAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('ContadoresBundle:Area')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Area entity.');
+        }
+        $queryBuilder = $em->getRepository('ContadoresBundle:Contador')->createQueryBuilder('c')
+            ->where('c.area = ?1')
+            ->setParameter(1, $entity->getId());
+        $contadores = $queryBuilder->getQuery()->getResult();
+
+        return $this->render('ContadoresBundle:Area:contadores.html.twig', array(
+            'area'      => $entity,
+            'entities'      => $contadores
+        ));
+    }
 }

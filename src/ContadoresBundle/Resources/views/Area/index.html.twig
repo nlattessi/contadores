@@ -65,7 +65,10 @@
         </a>
         <a class="btn btn-mini" href="{{ path('area_edit', { 'id': entity.id }) }}">
             {{ 'views.actions.edit'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>            </td>
+        </a>
+        <a class="btn btn-mini" href="{{ path('area_contadores', { 'id': entity.id }) }}">
+            {{ 'views.actions.contadores'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+        </a>   </td>
         </tr>
     {% endfor %}
     </tbody>

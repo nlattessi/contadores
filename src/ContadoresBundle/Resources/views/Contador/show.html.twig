@@ -27,7 +27,17 @@
         </div>        <div class="control-group">
             <label class="control-label">Telefono</label>
             <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.telefono }}</span>            </div>
-        </div>    </fieldset>
+        </div> <div class="control-group">
+            <label class="control-label">Área</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.area    }}</span>            </div>
+        </div>
+        {% for tarea in tareas %}
+            ++ {{ tarea.nombre }} <br/>
+            {% for subTarea in tarea.subTareas %}
+                +++ {{ subTarea.nombre }}----   {{ subTarea.id }}+++<br/>
+            {% endfor %}
+        {% endfor %}
+    </fieldset>
 </form>
 
 <div>

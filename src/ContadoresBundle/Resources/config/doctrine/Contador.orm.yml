@@ -46,6 +46,16 @@ ContadoresBundle\Entity\Contador:
             options:
                 fixed: false
     manyToOne:
+        area:
+            targetEntity: Area
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                area_id:
+                    referencedColumnName: id
+            orphanRemoval: false
         usuario:
             targetEntity: Usuario
             cascade: {  }
@@ -56,4 +66,5 @@ ContadoresBundle\Entity\Contador:
                 usuario_id:
                     referencedColumnName: id
             orphanRemoval: false
+
     lifecycleCallbacks: {  }

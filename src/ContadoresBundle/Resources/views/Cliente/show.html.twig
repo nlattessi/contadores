@@ -27,7 +27,13 @@
         </div>        <div class="control-group">
             <label class="control-label">Cuit</label>
             <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.cuit }}</span>            </div>
-        </div>    </fieldset>
+        </div>
+    {% for tarea in tareas %}
+        ++ {{ tarea.nombre }} <br/>
+        {% for subTarea in tarea.subTareas %}
+            +++ {{ subTarea.nombre }}----   {{ subTarea.id }}+++<br/>
+        {% endfor %}
+    {% endfor %}</fieldset>
 </form>
 
 <div>

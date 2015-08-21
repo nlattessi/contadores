@@ -62,6 +62,12 @@ class Tarea
      */
     private $tareaMetadata;
 
+    /**
+     * @OneToMany(targetEntity="SubTarea", mappedBy="tarea")
+     */
+    private $subTareas;
+
+
 
     /**
      * Get id
@@ -312,6 +318,25 @@ class Tarea
     {
         return $this->tareaMetadata;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSubTareas()
+    {
+        return $this->subTareas;
+    }
+
+    /**
+     * @param mixed $subTareas
+     */
+    public function setSubTareas($subTareas)
+    {
+        $this->subTareas = $subTareas;
+    }
+
+
+
 
     public function __toString(){
         return $this->nombre;
