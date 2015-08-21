@@ -116,6 +116,9 @@ class UsuarioController extends Controller
     public function createAction(Request $request)
     {
         $entity  = new Usuario();
+
+        $entity->setPassword("password");
+
         $form = $this->createForm(new UsuarioType(), $entity);
 
         $form->bind($request);
