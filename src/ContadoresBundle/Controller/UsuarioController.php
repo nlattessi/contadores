@@ -122,6 +122,11 @@ class UsuarioController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $encoder = $this->container
+               ->get('security.encoder_factory')
+               ->getEncoder($entity)
+            ;
+            $entity->setPassword($encoder->encodePassword($entity->getPassword(), $entity->getSalt()));
             $em->persist($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
@@ -216,6 +221,11 @@ class UsuarioController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+            $encoder = $this->container
+               ->get('security.encoder_factory')
+               ->getEncoder($entity)
+            ;
+            $entity->setPassword($encoder->encodePassword($entity->getPassword(), $entity->getSalt()));
             $em->persist($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', 'flash.update.success');

@@ -6,8 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction($name)
+    public function indexAction()
     {
-        return $this->render('ContadoresBundle:Default:index.html.twig', array('name' => $name));
+        return $this->redirect($this->generateUrl('login'));
+    }
+
+    public function unauthorizedAction()
+    {
+        return $this->render('ContadoresBundle:Default:unauthorized.html.twig');
     }
 }

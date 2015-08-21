@@ -6,10 +6,27 @@ use \Doctrine\Common\DataFixtures\AbstractFixture;
 use \Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use \Doctrine\Common\Persistence\ObjectManager;
 
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+
 use ContadoresBundle\Entity\Usuario;
 
-class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
+class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -17,7 +34,13 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     {
         $userSuperAdmin = new Usuario();
         $userSuperAdmin->setMail('superadmin@superadmin.com');
-        $userSuperAdmin->setPassword('superadmin');
+
+        $encoder = $this->container
+           ->get('security.encoder_factory')
+           ->getEncoder($userSuperAdmin)
+        ;
+        $userSuperAdmin->setPassword($encoder->encodePassword('superadmin', $userSuperAdmin->getSalt()));
+
         $userSuperAdmin->setEntidadId(1);
         $userSuperAdmin->setActivo(true);
         $userSuperAdmin->setRol($this->getReference('rolSuperAdmin'));
@@ -25,7 +48,13 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 
         $userContador = new Usuario();
         $userContador->setMail('contador@contador.com');
-        $userContador->setPassword('contador');
+
+        $encoder = $this->container
+           ->get('security.encoder_factory')
+           ->getEncoder($userContador)
+        ;
+        $userContador->setPassword($encoder->encodePassword('contador', $userContador->getSalt()));
+
         $userContador->setEntidadId(1);
         $userContador->setActivo(true);
         $userContador->setRol($this->getReference('rolContador'));
@@ -33,7 +62,13 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 
         $userCliente = new Usuario();
         $userCliente->setMail('cliente@cliente.com');
-        $userCliente->setPassword('cliente');
+
+        $encoder = $this->container
+           ->get('security.encoder_factory')
+           ->getEncoder($userCliente)
+        ;
+        $userCliente->setPassword($encoder->encodePassword('cliente', $userCliente->getSalt()));
+
         $userCliente->setEntidadId(1);
         $userCliente->setActivo(true);
         $userCliente->setRol($this->getReference('rolCliente'));
