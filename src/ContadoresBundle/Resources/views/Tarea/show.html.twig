@@ -4,6 +4,10 @@
 {{ parent() }} - {{ 'views.show.show'|trans({'%entity%': 'Tarea'}, 'JordiLlonchCrudGeneratorBundle') }}
 {% endblock %}
 
+{% block menu %}
+{{ include('ContadoresBundle:NavBars:navbar.html.twig') }}
+{% endblock %}
+
 {% block page %}
 
 <h1>Tarea</h1>

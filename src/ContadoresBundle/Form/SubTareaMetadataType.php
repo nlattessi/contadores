@@ -13,7 +13,7 @@ class SubTareaMetadataType extends AbstractType
         $builder
             ->add('nombre')
             ->add('tiempoEstimado', 'integer', array('label' => 'Tiempo estimado'))
-            ->add('tarea')
+            ->add('TareaMetadata')
         ;
     }
 

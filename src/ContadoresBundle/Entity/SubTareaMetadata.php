@@ -25,7 +25,7 @@ class SubTareaMetadata
     /**
      * @var \ContadoresBundle\Entity\TareaMetadata
      */
-    private $tarea;
+    private $tareaMetadata;
 
 
     /**
@@ -87,27 +87,27 @@ class SubTareaMetadata
     }
 
     /**
-     * Set tarea
+     * Set tareaMetadata
      *
-     * @param \ContadoresBundle\Entity\TareaMetadata $tarea
+     * @param \ContadoresBundle\Entity\TareaMetadata $tareaMetadata
      *
      * @return SubTareaMetadata
      */
-    public function setTarea(\ContadoresBundle\Entity\TareaMetadata $tarea = null)
+    public function setTareaMetadata(\ContadoresBundle\Entity\TareaMetadata $tareaMetadata = null)
     {
-        $this->tarea = $tarea;
+        $this->tareaMetadata = $tareaMetadata;
 
         return $this;
     }
 
     /**
-     * Get tarea
+     * Get tareaMetadata
      *
      * @return \ContadoresBundle\Entity\TareaMetadata
      */
-    public function getTarea()
+    public function getTareaMetadata()
     {
-        return $this->tarea;
+        return $this->tareaMetadata;
     }
 
     public function __toString(){

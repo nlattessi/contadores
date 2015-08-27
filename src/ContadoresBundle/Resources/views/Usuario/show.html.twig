@@ -4,6 +4,10 @@
 {{ parent() }} - {{ 'views.show.show'|trans({'%entity%': 'Usuario'}, 'JordiLlonchCrudGeneratorBundle') }}
 {% endblock %}
 
+{% block menu %}
+{{ include('ContadoresBundle:NavBars:navbar.html.twig') }}
+{% endblock %}
+
 {% block page %}
 
 <h1>Usuario</h1>
@@ -15,9 +19,6 @@
         </div>        <div class="control-group">
             <label class="control-label">Mail</label>
             <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.mail }}</span>            </div>
-        </div>        <div class="control-group">
-            <label class="control-label">Password</label>
-            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.password }}</span>            </div>
         </div>        <div class="control-group">
             <label class="control-label">Entidadid</label>
             <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.entidadId }}</span>            </div>

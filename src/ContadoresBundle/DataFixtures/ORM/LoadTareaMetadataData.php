@@ -15,7 +15,6 @@ class LoadTareaMetadataData extends AbstractFixture implements OrderedFixtureInt
      */
     public function load(ObjectManager $manager)
     {
-//INSERT INTO `tarea_metadata` VALUES (1,'Liquidar IVA',FALSE,1,NULL),(2,'Liquidar IVA 2015',FALSE,1,1);
         $tareaMetadata1 = new TareaMetadata();
         $tareaMetadata1->setNombre('Liquidar IVA');
         $tareaMetadata1->setEsperiodica(false);
@@ -41,6 +40,6 @@ class LoadTareaMetadataData extends AbstractFixture implements OrderedFixtureInt
      */
     public function getOrder()
     {
-        return 5;
+        return 9;
     }
 }

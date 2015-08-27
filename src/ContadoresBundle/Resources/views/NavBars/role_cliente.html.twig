@@ -1,0 +1,21 @@
+<div class="navbar nav">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="{{ path('home') }}">Contadores</a>
+
+          	<div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="divider-vertical"></li>
+                    <li><a href="{{ path('en_construccion') }}">Mis Tareas pendientes</a></li>
+                    <li><a href="{{ path('en_construccion') }}">Todas mis Tareas</a></li>
+                </ul>
+                {{ include('ContadoresBundle:NavBars:menu_usuario.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>

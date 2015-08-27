@@ -94,3 +94,15 @@ unauthorized:
 index:
     path:     /
     defaults: { _controller: ContadoresBundle:Default:index }
+
+home:
+    path:     /home
+    defaults: { _controller: ContadoresBundle:Default:home }
+
+en_construccion:
+    path:     /en_construccion
+    defaults: { _controller: ContadoresBundle:Default:enConstruccion }
+
+cambiar_password:
+    path:     /cambiar_password
+    defaults: { _controller: ContadoresBundle:Security:cambiarPassword }
