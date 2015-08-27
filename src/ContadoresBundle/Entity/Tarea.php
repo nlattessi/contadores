@@ -1,6 +1,7 @@
 <?php
 
 namespace ContadoresBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Tarea
@@ -63,7 +64,7 @@ class Tarea
     private $tareaMetadata;
 
     /**
-     * @OneToMany(targetEntity="SubTarea", mappedBy="tarea")
+     * @ORM\OneToMany(targetEntity="SubTarea", mappedBy="tarea")
      */
     private $subTareas;
 

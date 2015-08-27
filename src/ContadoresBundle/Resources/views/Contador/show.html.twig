@@ -31,13 +31,19 @@
             <label class="control-label">Área</label>
             <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.area    }}</span>            </div>
         </div>
-        {% for tarea in tareas %}
-            ++ {{ tarea.nombre }} <br/>
-            {% for subTarea in tarea.subTareas %}
-                +++ {{ subTarea.nombre }}----   {{ subTarea.id }}+++<br/>
-            {% endfor %}
-        {% endfor %}
+
     </fieldset>
+<h2>Tareas</h2>
+    {% for tarea in tareas %}
+        <b>{{ tarea.nombre }}</b>  <br/>
+        {% for subTarea in tarea.subTareas %}
+         <i>{{ subTarea.nombre }}</i>     <br/>
+        {% endfor %}
+    {% endfor %}
+    {% if not tareas %}
+        <p> <i>No hay tareas asignadas</i></p>
+    {% endif %}
+
 </form>
 
 <div>

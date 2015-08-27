@@ -160,6 +160,14 @@ class SubTarea
         return $this->tiempoEmpleado;
     }
 
+    public function sumarTiempo($tiempoEmpleado)
+    {
+        $this->tiempoEmpleado = $this->tiempoEmpleado + $tiempoEmpleado;
+
+        return $this;
+    }
+
+
     /**
      * Set nombre
      *
