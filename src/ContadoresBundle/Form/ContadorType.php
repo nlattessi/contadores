@@ -17,6 +17,7 @@ class ContadorType extends AbstractType
             ->add('mail')
             ->add('telefono')
             ->add('usuario')
+            ->add('area')
         ;
     }
 

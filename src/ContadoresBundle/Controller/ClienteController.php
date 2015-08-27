@@ -164,9 +164,11 @@ class ClienteController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
+        $tareas = $this->obtenerTareasPorCliente($id);
 
         return $this->render('ContadoresBundle:Cliente:show.html.twig', array(
             'entity'      => $entity,
+            'tareas' => $tareas ,
             'delete_form' => $deleteForm->createView(),        ));
     }
 
@@ -269,5 +271,14 @@ class ClienteController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+    private function obtenerTareasPorCliente($id)
+    {
+        $tareasService =  $this->get('contadores.servicios.tareas');
+        $tareasConSubTareas = $tareasService->obtenerTareasPorCliente($id);
+
+        return $tareasConSubTareas;
+
     }
 }

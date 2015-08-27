@@ -2,6 +2,7 @@
 
 namespace ContadoresBundle\Controller;
 
+use Proxies\__CG__\ContadoresBundle\Entity\EstadoSubTarea;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -19,6 +20,8 @@ use ContadoresBundle\Form\SubTareaFilterType;
  */
 class SubTareaController extends Controller
 {
+
+
     /**
      * Lists all SubTarea entities.
      *
@@ -121,8 +124,17 @@ class SubTareaController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setFechaCreacion(new \DateTime(null));
+
             $em->persist($entity);
             $em->flush();
+
+            $tareasService =  $this->get('contadores.servicios.tareas');
+            $estadoNuevo = $tareasService->crearEstadoSubTareaNuevo($entity);
+            $entity->setEstadoActual($estadoNuevo);
+            $em->persist($entity);
+            $em->flush();
+
             $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
 
             return $this->redirect($this->generateUrl('subtarea_show', array('id' => $entity->getId())));

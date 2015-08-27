@@ -123,6 +123,14 @@ class TareaController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+
+            $tareasService =  $this->get('contadores.servicios.tareas');
+            $estadoNuevo = $tareasService->crearEstadoTareaNuevo($entity);
+            $entity->setEstadoActual($estadoNuevo);
+            $em->persist($entity);
+            $em->flush();
+
+
             $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
 
             return $this->redirect($this->generateUrl('tarea_show', array('id' => $entity->getId())));
@@ -213,8 +221,16 @@ class TareaController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+            $entity->setFechaCreacion(new \DateTime(null));
             $em->persist($entity);
             $em->flush();
+
+            $tareasService =  $this->get('contadores.servicios.tareas');
+            $estadoNuevo = $tareasService->crearEstadoTareaNuevo($entity);
+            $entity->setEstadoActual($estadoNuevo);
+            $em->persist($entity);
+            $em->flush();
+
             $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
 
             return $this->redirect($this->generateUrl('tarea_edit', array('id' => $id)));

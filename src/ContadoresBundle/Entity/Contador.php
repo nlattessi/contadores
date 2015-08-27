@@ -42,6 +42,11 @@ class Contador
      */
     private $usuario;
 
+    /**
+     * @var \ContadoresBundle\Entity\Area
+     */
+    private $area;
+
 
     /**
      * Get id
@@ -196,6 +201,32 @@ class Contador
     {
         return $this->usuario;
     }
+
+
+    /**
+     * Get area
+     *
+     * @return \ContadoresBundle\Entity\Area
+     */
+    public function getArea()
+    {
+        return $this->area;
+    }
+
+    /**
+     * Set area
+     *
+     * @param \ContadoresBundle\Entity\Area $area
+     *
+     * @return Contador
+     */
+    public function setArea($area)
+    {
+        $this->area = $area;
+
+        return $this;
+    }
+
     public function __toString(){
         return $this->nombre . " " . $this->apellido;
     }

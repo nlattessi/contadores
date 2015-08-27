@@ -50,6 +50,10 @@ ContadoresBundle\Entity\Tarea:
             length: 45
             options:
                 fixed: false
+    oneToMany:
+      subTareas:
+        targetEntity: SubTarea
+        mappedBy: tarea
     manyToOne:
         contador:
             targetEntity: Contador
