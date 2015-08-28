@@ -21,7 +21,7 @@ class LoadClienteData extends AbstractFixture implements OrderedFixtureInterface
         $cliente1->setTelefono('156654342');
         $cliente1->setMail('este es el mail');
         $cliente1->setCuit('30-12345345-7');
-        $cliente1->setUsuario($this->getReference('userCliente'))
+        $cliente1->setUsuario($this->getReference('userCliente'));
         $this->addReference('cliente1', $cliente1);
 
         $manager->persist($cliente1);
