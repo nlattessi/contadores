@@ -149,10 +149,13 @@ CREATE TABLE `contador` (
   `apellido` varchar(45) NOT NULL,
   `celular` varchar(45) DEFAULT NULL,
   `mail` varchar(45) DEFAULT NULL,
-  `usuario_id` int(11) NOT NULL,
+  `usuario_id` int(11) DEFAULT NULL,
   `telefono` varchar(45) DEFAULT NULL,
+  `area_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `usuario_contador_idx` (`usuario_id`),
+  KEY `area_contador_idx` (`area_id`),
+  CONSTRAINT `area_contador` FOREIGN KEY (`area_id`) REFERENCES `area` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `usuario_contador` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;

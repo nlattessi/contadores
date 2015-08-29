@@ -2,6 +2,7 @@
 
 namespace ContadoresBundle\Controller;
 
+use ContadoresBundle\Form\TareaFilterType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -279,6 +280,33 @@ class ContadorController extends Controller
         $tareasConSubTareas = $tareasService->obtenerTareasPorContador($id);
 
         return $tareasConSubTareas;
+    }
+    private function obtenerTareasPendientesPorContador($id)
+    {
+        $tareasService =  $this->get('contadores.servicios.tareas');
+        $tareasConSubTareas = $tareasService->obtenerTareasPendientesPorContador($id);
 
+        return $tareasConSubTareas;
+    }
+
+    public function tareasTodasAction()
+    {
+        $tareas = $this->obtenerTareasPorContador($this->getUser()->getEntidadId());
+        $filterForm = $this->createForm(new TareaFilterType());
+
+        return $this->render('ContadoresBundle:Contador:todasmistareas.html.twig', array(
+            'tareas' => $tareas,
+            'filterForm' => $filterForm->createView()
+        ));
+    }
+
+    public function tareasPendientesAction()
+    {
+        $tareas = $this->obtenerTareasPendientesPorContador($this->getUser()->getEntidadId());
+        $filterForm = $this->createForm(new TareaFilterType());
+        return $this->render('ContadoresBundle:Contador:tareaspendientes.html.twig', array(
+            'tareas' => $tareas,
+            'filterForm' => $filterForm->createView()
+        ));
     }
 }

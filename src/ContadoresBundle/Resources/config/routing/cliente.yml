@@ -28,3 +28,11 @@ cliente_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "ContadoresBundle:Cliente:delete" }
     requirements: { _method: post|delete }
+
+cliente_tareas:
+    pattern:  /tareas
+    defaults: { _controller: "ContadoresBundle:Cliente:tareasTodas" }
+
+cliente_pendientes:
+    pattern:  /pendientes
+    defaults: { _controller: "ContadoresBundle:Cliente:tareasPendientes" }

@@ -120,6 +120,11 @@ class TareaController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
+            if(strlen($entity->getNombre()) < 1){
+
+                $entity->setNombre($entity->getTareaMetadata()->getNombre() . ' ' . $entity->getCliente()->getNombre());
+            }
+            $entity->setFechaCreacion(new \DateTime(null));
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -161,7 +166,8 @@ class TareaController extends Controller
      * Finds and displays a Tarea entity.
      *
      */
-    public function showAction($id)
+
+    private function mostrar($id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -171,11 +177,29 @@ class TareaController extends Controller
             throw $this->createNotFoundException('Unable to find Tarea entity.');
         }
 
+        return $entity;
+    }
+
+    public function showAction($id)
+    {
+
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ContadoresBundle:Tarea:show.html.twig', array(
-            'entity'      => $entity,
+            'entity'      => $this->mostrar($id),
             'delete_form' => $deleteForm->createView(),        ));
+    }
+
+    public function showClienteAction($id)
+    {
+        return $this->render('ContadoresBundle:Tarea:showcliente.html.twig', array(
+            'entity'      => $this->mostrar($id),));
+    }
+
+    public function showContadorAction($id)
+    {
+        return $this->render('ContadoresBundle:Tarea:showcontador.html.twig', array(
+            'entity'      => $this->mostrar($id),));
     }
 
     /**

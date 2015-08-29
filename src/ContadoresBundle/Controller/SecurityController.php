@@ -12,7 +12,7 @@ class SecurityController extends Controller
     public function loginAction(Request $request)
     {
         if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            return $this->redirect($this->generateUrl('home'));
+             return $this->redirect($this->generateUrl('home'));
         }
 
         $session = $request->getSession();
@@ -45,6 +45,7 @@ class SecurityController extends Controller
 
     public function redirectAction()
     {
+
         return $this->redirect($this->generateUrl('home'));
     }
 

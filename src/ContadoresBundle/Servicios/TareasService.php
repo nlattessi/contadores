@@ -11,18 +11,37 @@ namespace ContadoresBundle\Servicios;
 
 use ContadoresBundle\Entity\EstadoSubTarea;
 use ContadoresBundle\Entity\EstadoTarea;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 
 
 class TareasService {
     protected $em;
     protected $tipoEstadoNuevo;
+    protected $rolContador;
+    protected $rolCliente;
 
     public function __construct(EntityManager $entityManager)
     {
         $this->em = $entityManager;
         $this->tipoEstadoNuevo = 1;
+        $this->rolCliente = "ROLE_CLIENTE";
+        $this->rolContador = "ROLE_CONTADOR";
     }
+
+    public function obtenerTareasUrgentesPorUsuario($usuario)
+    {
+
+        if($usuario->getRol()->getNombre() == $this->rolCliente)
+        {
+            return $this->obtenerTareasUrgentesPorCliente($usuario->getEntidadId());
+        }else if ($usuario->getRol()->getNombre() == $this->rolContador)
+        {
+            return $this->obtenerTareasUrgentesPorContador($usuario->getEntidadId());
+        }
+        return new ArrayCollection();
+    }
+
 
     public function obtenerTareasPorCliente($id)
     {
@@ -33,11 +52,63 @@ class TareasService {
 
         return $tareas;
     }
+    public function obtenerTareasUrgentesPorCliente($id)
+    {
+        $urgente = new \DateTime(null);
+        $urgente->add(new \DateInterval('P10D'));
+        $queryBuilder = $this->em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('t')
+            ->where('t.cliente = ?1')
+            ->andWhere('t.vencimientoInterno < ?2')
+            ->andWhere('t.fechaFin is NULL')
+            ->setParameter(1, $id)
+            ->setParameter(2, $urgente);
+        $tareas = $queryBuilder->getQuery()->getResult();
+
+        return $tareas;
+    }
+    public function obtenerTareasPendientesPorCliente($id)
+    {
+        $queryBuilder = $this->em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('t')
+            ->where('t.cliente = ?1')
+            ->andWhere('t.fechaFin is NULL')
+            ->setParameter(1, $id);
+        $tareas = $queryBuilder->getQuery()->getResult();
+
+        return $tareas;
+    }
 
     public function obtenerTareasPorContador($id)
     {
+
         $queryBuilder = $this->em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('t')
             ->where('t.contador = ?1')
+            ->setParameter(1, $id);
+        $tareas = $queryBuilder->getQuery()->getResult();
+
+        return $tareas;
+    }
+
+    public function obtenerTareasUrgentesPorContador($id)
+    {
+        $urgente = new \DateTime(null);
+        $urgente->add(new \DateInterval('P10D'));
+        $queryBuilder = $this->em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('t')
+            ->where('t.contador = ?1')
+            ->andWhere('t.vencimientoInterno < ?2')
+            ->andWhere('t.fechaFin is NULL')
+            ->setParameter(1, $id)
+            ->setParameter(2, $urgente);
+        $tareas = $queryBuilder->getQuery()->getResult();
+
+        return $tareas;
+    }
+
+    public function obtenerTareasPendientesPorContador($id)
+    {
+
+        $queryBuilder = $this->em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('t')
+            ->where('t.contador = ?1')
+            ->andWhere('t.fechaFin is NULL')
             ->setParameter(1, $id);
         $tareas = $queryBuilder->getQuery()->getResult();
 
