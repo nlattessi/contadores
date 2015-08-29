@@ -28,3 +28,11 @@ tarea_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "ContadoresBundle:Tarea:delete" }
     requirements: { _method: post|delete }
+
+tarea_cliente_show:
+    pattern:  /{id}/showcliente
+    defaults: { _controller: "ContadoresBundle:Tarea:showCliente" }
+
+tarea_contador_show:
+    pattern:  /{id}/showcontador
+    defaults: { _controller: "ContadoresBundle:Tarea:showContador" }

@@ -165,7 +165,7 @@ class SubTareaController extends Controller
      * Finds and displays a SubTarea entity.
      *
      */
-    public function showAction($id)
+    private function mostrar($id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -175,11 +175,28 @@ class SubTareaController extends Controller
             throw $this->createNotFoundException('Unable to find SubTarea entity.');
         }
 
+        return $entity;
+    }
+
+    public function showAction($id)
+    {
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ContadoresBundle:SubTarea:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
+    }
+
+    public function showClienteAction($id)
+    {
+        return $this->render('ContadoresBundle:SubTarea:showcliente.html.twig', array(
+            'entity'      => $this->mostrar($id),));
+    }
+
+    public function showContadorAction($id)
+    {
+        return $this->render('ContadoresBundle:SubTarea:showcontador.html.twig', array(
+            'entity'      => $this->mostrar($id),));
     }
 
     /**

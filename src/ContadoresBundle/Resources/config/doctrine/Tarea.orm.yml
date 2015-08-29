@@ -77,7 +77,8 @@ ContadoresBundle\Entity\Tarea:
             orphanRemoval: false
         estadoActual:
             targetEntity: EstadoTarea
-            cascade: {  }
+            cascade: { }
+            onDelete: "CASCADE"
             fetch: LAZY
             mappedBy: null
             inversedBy: null

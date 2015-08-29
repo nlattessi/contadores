@@ -2,6 +2,7 @@
 
 namespace ContadoresBundle\Controller;
 
+use ContadoresBundle\Form\TareaFilterType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -272,13 +273,39 @@ class ClienteController extends Controller
             ->getForm()
         ;
     }
-
     private function obtenerTareasPorCliente($id)
     {
         $tareasService =  $this->get('contadores.servicios.tareas');
         $tareasConSubTareas = $tareasService->obtenerTareasPorCliente($id);
 
         return $tareasConSubTareas;
+    }
+    private function obtenerTareasPendientesPorCliente($id)
+    {
+        $tareasService =  $this->get('contadores.servicios.tareas');
+        $tareasConSubTareas = $tareasService->obtenerTareasPendientesPorCliente($id);
 
+        return $tareasConSubTareas;
+    }
+
+    public function tareasTodasAction()
+    {
+        $tareas = $this->obtenerTareasPorCliente($this->getUser()->getEntidadId());
+        $filterForm = $this->createForm(new TareaFilterType());
+
+        return $this->render('ContadoresBundle:Cliente:todasmistareas.html.twig', array(
+            'tareas' => $tareas,
+            'filterForm' => $filterForm->createView()
+        ));
+    }
+
+    public function tareasPendientesAction()
+    {
+        $tareas = $this->obtenerTareasPendientesPorCliente($this->getUser()->getEntidadId());
+        $filterForm = $this->createForm(new TareaFilterType());
+        return $this->render('ContadoresBundle:Cliente:tareaspendientes.html.twig', array(
+            'tareas' => $tareas,
+            'filterForm' => $filterForm->createView()
+        ));
     }
 }

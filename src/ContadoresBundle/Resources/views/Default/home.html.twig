@@ -11,8 +11,39 @@
 {% block page %}
 
 <div class="jumbotron">
-    <h1>Home</h1>
     <p class="lead">Bienvenido, {{ app.user.mail }}</p>
+    <h2>Tareas Próximas a vencer</h2>
+    <h5><i>SubTareas</i></h5>
+    <br/>   <br/>
+    {% if  tareas %}
+    {% for tarea in tareas %}
+        <a style="color: red;" href=
+        {% if app.user.rol == "ROLE_CONTADOR" %}
+        "{{ path('tarea_contador_show', { 'id': tarea.id }) }}"
+        {% else %}
+         "{{ path('tarea_cliente_show', { 'id': tarea.id }) }}"
+        {% endif %}
+        >
+            <b>{{ tarea.nombre }}</b>
+        </a>
+       <br/>
+        {% for subTarea in tarea.subTareas %}
+            <a style="color: red;" href=
+            {% if app.user.rol == "ROLE_CONTADOR" %}
+        "{{ path('subtarea_contador_show', { 'id': subTarea.id }) }}"
+        {% else %}
+        "{{ path( 'subtarea_cliente_show', { 'id': subTarea.id }) }}"
+        {% endif %}
+            >
+                <i>{{ subTarea.nombre }}</i>
+            </a>
+                <br/>
+        {% endfor %}
+    {% endfor %}
+    {% endif %}
+    {% if not tareas %}
+        <p> <i>No hay tareas Urgentes</i></p>
+    {% endif %}
 </div>
 
 {% endblock %}

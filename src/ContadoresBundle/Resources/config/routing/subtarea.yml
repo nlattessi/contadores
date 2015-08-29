@@ -28,3 +28,11 @@ subtarea_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "ContadoresBundle:SubTarea:delete" }
     requirements: { _method: post|delete }
+
+subtarea_cliente_show:
+    pattern:  /{id}/showcliente
+    defaults: { _controller: "ContadoresBundle:SubTarea:showCliente" }
+
+subtarea_contador_show:
+    pattern:  /{id}/showcontador
+    defaults: { _controller: "ContadoresBundle:SubTarea:showContador" }

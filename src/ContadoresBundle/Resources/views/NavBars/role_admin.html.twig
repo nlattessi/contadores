@@ -11,20 +11,20 @@
           	<div class="nav-collapse collapse">
                 <ul class="nav">
                     <li class="divider-vertical"></li>
-                    <li><a href="{{ path('en_construccion') }}">Crear Usuario</a></li>
+                    <li><a href="{{ path('usuario_new') }}">Crear Usuario</a></li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Clientes <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ path('en_construccion') }}">Crear</a></li>
+                            <li><a href="{{ path('cliente_new') }}">Crear</a></li>
                             <li><a href="{{ path('en_construccion') }}">Asociar Cliente y Usuario</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Contadores <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ path('en_construccion') }}">Crear</a></li>
+                            <li><a href="{{ path('contador_new') }}">Crear</a></li>
                             <li><a href="{{ path('en_construccion') }}">Asociar Contador y Usuario</a></li>
                         </ul>
                     </li>
-                    <li><a href="{{ path('en_construccion') }}">Crear tipo de estado</a></li>
+                    <li><a href="{{ path('tipoestado_new') }}">Crear tipo de estado</a></li>
                 </ul>
                 {{ include('ContadoresBundle:NavBars:menu_usuario.html.twig') }}
             </div>

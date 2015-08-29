@@ -32,6 +32,12 @@ class TareaFilterType extends AbstractType
                 'left_date_options'  => array('widget' => 'single_text',  ),
                 'right_date_options' => array('widget' => 'single_text',  )))
             ->add('nombre', 'filter_text', array('condition_pattern' => FilterOperands::STRING_BOTH,))
+            ->add('contador', 'entity',
+            array('class' => 'ContadoresBundle\Entity\Contador',
+                'property' => 'nombre'))
+            ->add('cliente', 'entity',
+                array('class' => 'ContadoresBundle\Entity\Cliente',
+                    'property' => 'nombre'))
         ;
 
         $listener = function(FormEvent $event)
