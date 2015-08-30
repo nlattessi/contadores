@@ -2,6 +2,7 @@
 
 namespace ContadoresBundle\Controller;
 
+use ContadoresBundle\Form\TareaContadorFilterType;
 use ContadoresBundle\Form\TareaFilterType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -165,7 +166,7 @@ class ContadorController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $tareas = $this->obtenerTareasPorContador($id);
+        $tareas = $this->obtenerTareasPorContador($id,null,false);
 
         return $this->render('ContadoresBundle:Contador:show.html.twig', array(
             'entity'      => $entity,
@@ -273,26 +274,27 @@ class ContadorController extends Controller
             ->getForm()
         ;
     }
-
-    private function obtenerTareasPorContador($id)
+   /*
+    * $pendientes en true trae SOLO las pendientes
+    * */
+    private function obtenerTareasPorContador($id, $filterForm, $pendientes)
     {
         $tareasService =  $this->get('contadores.servicios.tareas');
-        $tareasConSubTareas = $tareasService->obtenerTareasPorContador($id);
 
-        return $tareasConSubTareas;
-    }
-    private function obtenerTareasPendientesPorContador($id)
-    {
-        $tareasService =  $this->get('contadores.servicios.tareas');
-        $tareasConSubTareas = $tareasService->obtenerTareasPendientesPorContador($id);
-
+        $tareasConSubTareas = $tareasService->obtenerTareasPorContador($id,$filterForm,
+            $this->get('lexik_form_filter.query_builder_updater'),$pendientes  );
         return $tareasConSubTareas;
     }
 
-    public function tareasTodasAction()
+    public function tareasTodasAction(Request $request)
     {
-        $tareas = $this->obtenerTareasPorContador($this->getUser()->getEntidadId());
-        $filterForm = $this->createForm(new TareaFilterType());
+        $filterForm = $this->createForm(new TareaContadorFilterType());
+        if ($request->get('filter_action') == 'filter') {
+            $filterForm->bind($request);
+            $tareas = $this->obtenerTareasPorContador($this->getUser()->getEntidadId(), $filterForm, false);
+        }else{
+            $tareas = $this->obtenerTareasPorContador($this->getUser()->getEntidadId(), null, false);
+        }
 
         return $this->render('ContadoresBundle:Contador:todasmistareas.html.twig', array(
             'tareas' => $tareas,
@@ -300,13 +302,18 @@ class ContadorController extends Controller
         ));
     }
 
-    public function tareasPendientesAction()
+    public function tareasPendientesAction(Request $request)
     {
-        $tareas = $this->obtenerTareasPendientesPorContador($this->getUser()->getEntidadId());
-        $filterForm = $this->createForm(new TareaFilterType());
+        $filterForm = $this->createForm(new TareaContadorFilterType());
+        if ($request->get('filter_action') == 'filter') {
+            $filterForm->bind($request);
+            $tareas = $this->obtenerTareasPorContador($this->getUser()->getEntidadId(), $filterForm, true);
+        }else{
+            $tareas = $this->obtenerTareasPorContador($this->getUser()->getEntidadId(), null, true);
+        }
         return $this->render('ContadoresBundle:Contador:tareaspendientes.html.twig', array(
             'tareas' => $tareas,
-            'filterForm' => $filterForm->createView()
+            'filterForm'=> $filterForm->createView()
         ));
     }
 }
