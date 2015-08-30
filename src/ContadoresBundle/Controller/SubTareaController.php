@@ -183,7 +183,7 @@ class SubTareaController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ContadoresBundle:SubTarea:show.html.twig', array(
-            'entity'      => $entity,
+            'entity'      => $this->mostrar($id),
             'delete_form' => $deleteForm->createView(),        ));
     }
 

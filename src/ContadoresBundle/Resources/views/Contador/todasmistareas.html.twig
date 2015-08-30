@@ -35,10 +35,9 @@
         <div class="span12">
             <div id="filters" class="collapse">
 
-                <form class="well" action="{{ path('tarea') }}" method="get" {{ form_enctype(filterForm) }}>
+                <form class="well" action="{{ path('contador_tareas') }}" method="get" {{ form_enctype(filterForm) }}>
 
                     {{ form_row(filterForm.fechaInicio) }}
-                    {{ form_row(filterForm.fechaFin) }}
                     {{ form_row(filterForm.fechaCreacion) }}
                     {{ form_row(filterForm.vencimientoFiscal) }}
                     {{ form_row(filterForm.vencimientoInterno) }}

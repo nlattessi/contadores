@@ -43,11 +43,18 @@ class TareasService {
     }
 
 
-    public function obtenerTareasPorCliente($id)
+    public function obtenerTareasPorCliente($id, $filterForm, $queryUpdater, $soloPendientes)
     {
         $queryBuilder = $this->em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('t')
             ->where('t.cliente = ?1')
             ->setParameter(1, $id);
+        if($filterForm) {
+            $queryUpdater->addFilterConditions($filterForm, $queryBuilder);
+        }
+        if($soloPendientes){
+            $queryBuilder->andWhere('t.fechaFin is NULL');
+        }
+
         $tareas = $queryBuilder->getQuery()->getResult();
 
         return $tareas;
@@ -66,23 +73,20 @@ class TareasService {
 
         return $tareas;
     }
-    public function obtenerTareasPendientesPorCliente($id)
+
+
+    public function obtenerTareasPorContador($id, $filterForm, $queryUpdater, $soloPendientes)
     {
-        $queryBuilder = $this->em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('t')
-            ->where('t.cliente = ?1')
-            ->andWhere('t.fechaFin is NULL')
-            ->setParameter(1, $id);
-        $tareas = $queryBuilder->getQuery()->getResult();
-
-        return $tareas;
-    }
-
-    public function obtenerTareasPorContador($id)
-    {
-
         $queryBuilder = $this->em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('t')
             ->where('t.contador = ?1')
             ->setParameter(1, $id);
+        if($filterForm) {
+            $queryUpdater->addFilterConditions($filterForm, $queryBuilder);
+        }
+        if($soloPendientes){
+            $queryBuilder->andWhere('t.fechaFin is NULL');
+        }
+
         $tareas = $queryBuilder->getQuery()->getResult();
 
         return $tareas;
@@ -98,18 +102,6 @@ class TareasService {
             ->andWhere('t.fechaFin is NULL')
             ->setParameter(1, $id)
             ->setParameter(2, $urgente);
-        $tareas = $queryBuilder->getQuery()->getResult();
-
-        return $tareas;
-    }
-
-    public function obtenerTareasPendientesPorContador($id)
-    {
-
-        $queryBuilder = $this->em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('t')
-            ->where('t.contador = ?1')
-            ->andWhere('t.fechaFin is NULL')
-            ->setParameter(1, $id);
         $tareas = $queryBuilder->getQuery()->getResult();
 
         return $tareas;
