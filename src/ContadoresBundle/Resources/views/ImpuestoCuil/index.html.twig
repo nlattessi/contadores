@@ -68,7 +68,7 @@
             <td><a href="{{ path('impuestocuil_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.cuil }}</td>
             <td>{{ entity.mes }}</td>
-            <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d ') }}{% endif %}</td>
             <td>
         <a class="btn btn-mini" href="{{ path('impuestocuil_show', { 'id': entity.id }) }}">
             {{ 'views.actions.show'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}

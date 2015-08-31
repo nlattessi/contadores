@@ -20,6 +20,8 @@ class TareasService {
     protected $tipoEstadoNuevo;
     protected $rolContador;
     protected $rolCliente;
+    protected $rolJefe;
+    protected $estadosTerminales;
 
     public function __construct(EntityManager $entityManager)
     {
@@ -27,6 +29,8 @@ class TareasService {
         $this->tipoEstadoNuevo = 1;
         $this->rolCliente = "ROLE_CLIENTE";
         $this->rolContador = "ROLE_CONTADOR";
+        $this->rolContador = "ROLE_JEFE";
+        $this->estadosTerminales = array(3);
     }
 
     public function obtenerTareasUrgentesPorUsuario($usuario)
@@ -38,10 +42,24 @@ class TareasService {
         }else if ($usuario->getRol()->getNombre() == $this->rolContador)
         {
             return $this->obtenerTareasUrgentesPorContador($usuario->getEntidadId());
+        }else if ($usuario->getRol()->getNombre() == $this->rolJefe)
+        {
+            return $this->obtenerTareasUrgentes();
         }
         return new ArrayCollection();
     }
+    public function obtenerTareasUrgentes()
+    {
+        $urgente = new \DateTime(null);
+        $urgente->add(new \DateInterval('P10D'));
+        $queryBuilder = $this->em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('t')
+            ->where('t.vencimientoInterno < ?1')
+            ->andWhere('t.fechaFin is NULL')
+            ->setParameter(1, $urgente);
+        $tareas = $queryBuilder->getQuery()->getResult();
 
+        return $tareas;
+    }
 
     public function obtenerTareasPorCliente($id, $filterForm, $queryUpdater, $soloPendientes)
     {
@@ -120,10 +138,13 @@ class TareasService {
         $estadoViejo->setHorasTrabajadas($horas);
         $this->em->persist($estadoViejo);
 
-        $estadoSubTarea = new EstadoSubTarea();
-        $estadoSubTarea->setTipoEstado($tipoEstado);
-        $estadoSubTarea->setSubTarea($subTarea);
-        $estadoSubTarea->setFechaInicio(new \DateTime(null));
+        $estadoSubTarea = $this->crearEstadoSubTarea($subTarea,$tipoEstado);
+
+        if(in_array($nuevoEstadoId,$this->estadosTerminales))
+        {
+            $estadoSubTarea->setFechaFin(new \DateTime(null));
+        }
+
       //  $estadoSubTarea->setContador($subTarea->getTarea()->getContador());
         $this->em->persist($estadoSubTarea);
 
@@ -132,17 +153,21 @@ class TareasService {
         $this->em->persist($subTarea);
 
         $this->em->flush();
+        $this->verificarEstadoTarea($subTarea->getTarea(),$nuevoEstadoId );
+
+        return $subTarea;
     }
 
     public function crearEstadoSubTareaNuevo($subTarea)
     {
-        return $this->crearEstadoSubTarea($subTarea, $this->tipoEstadoNuevo);
+        $tipoEstado =  $this->em->getRepository('ContadoresBundle:TipoEstado')->find($this->tipoEstadoNuevo);
+        return $this->crearEstadoSubTarea($subTarea, $tipoEstado);
     }
 
     public function crearEstadoSubTarea($subTarea, $tipoEstado){
-        $tipoEstadoNuevo = $this->em->getRepository('ContadoresBundle:TipoEstado')->find($tipoEstado);
+
         $estadoSubTarea = new EstadoSubTarea();
-        $estadoSubTarea->setTipoEstado($tipoEstadoNuevo);
+        $estadoSubTarea->setTipoEstado($tipoEstado);
         $estadoSubTarea->setSubTarea($subTarea);
         $estadoSubTarea->setFechaInicio(new \DateTime(null));
 
@@ -157,8 +182,8 @@ class TareasService {
         return $this->crearEstadoTarea($tarea, $this->tipoEstadoNuevo);
     }
 
-    public function crearEstadoTarea($tarea, $tipoEstado){
-        $tipoEstadoNuevo = $this->em->getRepository('ContadoresBundle:TipoEstado')->find($tipoEstado);
+    public function crearEstadoTarea($tarea, $tipoEstadoId){
+        $tipoEstadoNuevo = $this->em->getRepository('ContadoresBundle:TipoEstado')->find($tipoEstadoId);
         $estadoTarea = new EstadoTarea();
         $estadoTarea->setTipoEstado($tipoEstadoNuevo);
         $estadoTarea->setTarea($tarea);
@@ -168,6 +193,43 @@ class TareasService {
         $this->em->flush();
 
         return $estadoTarea;
+    }
+
+    public function verificarEstadoTarea($tarea,$tipoEstadoId){
+
+        foreach( $tarea->getSubTareas() as $subTarea )
+        {
+            if(! in_array($subTarea->getEstadoActual()->getTipoEstado()->getId(),$this->estadosTerminales)){
+                return false;
+            }
+        }
+        $tarea->setFechaFin(new \DateTime(null));
+        $this->cambiarEstadoTarea($tarea, $tipoEstadoId);
+
+    }
+
+    public function cambiarEstadoTarea($tarea, $nuevoEstadoId)
+    {
+        $estadoViejo = $tarea->getEstadoActual();
+        $estadoViejo->setFechaFin(new \DateTime(null));
+        $this->em->persist($estadoViejo);
+
+        $estadoTarea = $this->crearEstadoTarea($tarea,$nuevoEstadoId);
+
+        if(in_array($nuevoEstadoId,$this->estadosTerminales))
+        {
+            $estadoTarea->setFechaFin(new \DateTime(null));
+        }
+
+        //  $estadoSubTarea->setContador($subTarea->getTarea()->getContador());
+        $this->em->persist($estadoTarea);
+
+        $tarea->setEstadoActual($estadoTarea);
+        $this->em->persist($tarea);
+
+        $this->em->flush();
+
+        return $tarea;
     }
 
 }
