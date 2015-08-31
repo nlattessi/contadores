@@ -20,8 +20,10 @@
         <a style="color: red;" href=
         {% if app.user.rol == "ROLE_CONTADOR" %}
         "{{ path('tarea_contador_show', { 'id': tarea.id }) }}"
-        {% else %}
+        {% elseif app.user.rol == "ROLE_CLIENTE" %}
          "{{ path('tarea_cliente_show', { 'id': tarea.id }) }}"
+        {% elseif app.user.rol == "ROLE_JEFE" %}
+            "{{ path('tarea_show', { 'id': tarea.id }) }}"
         {% endif %}
         >
             <b>{{ tarea.nombre }}</b>
@@ -31,9 +33,11 @@
             <a style="color: red;" href=
             {% if app.user.rol == "ROLE_CONTADOR" %}
         "{{ path('subtarea_contador_show', { 'id': subTarea.id }) }}"
-        {% else %}
+        {% elseif app.user.rol == "ROLE_CLIENTE"%}
         "{{ path( 'subtarea_cliente_show', { 'id': subTarea.id }) }}"
-        {% endif %}
+        {% elseif app.user.rol == "ROLE_JEFE" %}
+            "{{ path('subtarea_show', { 'id': tarea.id }) }}"
+    {% endif %}
             >
                 <i>{{ subTarea.nombre }}</i>
             </a>

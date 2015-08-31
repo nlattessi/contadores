@@ -186,11 +186,14 @@ class SubTareaController extends Controller
 
     public function showAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($id);
+        $estados = $em->getRepository('ContadoresBundle:TipoEstado')->createQueryBuilder('e')->getQuery()->getResult();
 
         return $this->render('ContadoresBundle:SubTarea:show.html.twig', array(
             'entity'      => $this->mostrar($id),
-            'delete_form' => $deleteForm->createView(),        ));
+            'delete_form' => $deleteForm->createView(),
+            'estados' => $estados,));
     }
 
     public function showClienteAction($id)
@@ -311,16 +314,26 @@ class SubTareaController extends Controller
         ;
     }
 
-    public function cambiarEstadoAction(Request $request, $id)
-    {
+    private function cambiarEstado(Request $request, $id){
         $tareasService =  $this->get('contadores.servicios.tareas');
-       $subtarea = $tareasService->cambiarEstadoSubTarea($id,$request->get('idTipoEstado'),$request->get('horas'));
+        $subtarea = $tareasService->cambiarEstadoSubTarea($id,$request->get('idTipoEstado'),$request->get('horas'));
 
         $em = $this->getDoctrine()->getManager();
         $estados = $em->getRepository('ContadoresBundle:TipoEstado')->createQueryBuilder('e')->getQuery()->getResult();
-        return $this->render('ContadoresBundle:SubTarea:showcontador.html.twig', array(
+        return array(
             'entity'      => $subtarea,
-            'estados' => $estados));
+            'estados' => $estados);
+    }
 
+    public function cambiarEstadoAction(Request $request, $id)
+    {
+        return $this->render('ContadoresBundle:SubTarea:showcontador.html.twig', $this->cambiarEstado($request, $id));
+
+    }
+
+    public function cambiarEstadoJefeAction(Request $request, $id)
+    {
+        $this->cambiarEstado($request, $id);
+        return $this->showAction($id);
     }
 }

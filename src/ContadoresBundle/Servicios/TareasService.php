@@ -20,6 +20,7 @@ class TareasService {
     protected $tipoEstadoNuevo;
     protected $rolContador;
     protected $rolCliente;
+    protected $rolJefe;
     protected $estadosTerminales;
 
     public function __construct(EntityManager $entityManager)
@@ -28,6 +29,7 @@ class TareasService {
         $this->tipoEstadoNuevo = 1;
         $this->rolCliente = "ROLE_CLIENTE";
         $this->rolContador = "ROLE_CONTADOR";
+        $this->rolContador = "ROLE_JEFE";
         $this->estadosTerminales = array(3);
     }
 
@@ -40,10 +42,24 @@ class TareasService {
         }else if ($usuario->getRol()->getNombre() == $this->rolContador)
         {
             return $this->obtenerTareasUrgentesPorContador($usuario->getEntidadId());
+        }else if ($usuario->getRol()->getNombre() == $this->rolJefe)
+        {
+            return $this->obtenerTareasUrgentes();
         }
         return new ArrayCollection();
     }
+    public function obtenerTareasUrgentes()
+    {
+        $urgente = new \DateTime(null);
+        $urgente->add(new \DateInterval('P10D'));
+        $queryBuilder = $this->em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('t')
+            ->where('t.vencimientoInterno < ?1')
+            ->andWhere('t.fechaFin is NULL')
+            ->setParameter(1, $urgente);
+        $tareas = $queryBuilder->getQuery()->getResult();
 
+        return $tareas;
+    }
 
     public function obtenerTareasPorCliente($id, $filterForm, $queryUpdater, $soloPendientes)
     {
