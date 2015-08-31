@@ -195,8 +195,11 @@ class SubTareaController extends Controller
 
     public function showContadorAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $estados = $em->getRepository('ContadoresBundle:TipoEstado')->createQueryBuilder('e')->getQuery()->getResult();
         return $this->render('ContadoresBundle:SubTarea:showcontador.html.twig', array(
-            'entity'      => $this->mostrar($id),));
+            'entity'      => $this->mostrar($id),
+            'estados' => $estados));
     }
 
     /**
@@ -300,5 +303,18 @@ class SubTareaController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+    public function cambiarEstadoAction(Request $request, $id)
+    {
+        $tareasService =  $this->get('contadores.servicios.tareas');
+       $subtarea = $tareasService->cambiarEstadoSubTarea($id,$request->get('idTipoEstado'),$request->get('horas'));
+
+        $em = $this->getDoctrine()->getManager();
+        $estados = $em->getRepository('ContadoresBundle:TipoEstado')->createQueryBuilder('e')->getQuery()->getResult();
+        return $this->render('ContadoresBundle:SubTarea:showcontador.html.twig', array(
+            'entity'      => $subtarea,
+            'estados' => $estados));
+
     }
 }

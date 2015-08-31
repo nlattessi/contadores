@@ -36,3 +36,8 @@ subtarea_cliente_show:
 subtarea_contador_show:
     pattern:  /{id}/showcontador
     defaults: { _controller: "ContadoresBundle:SubTarea:showContador" }
+
+subtarea_cambiar_estado:
+      pattern:  /{id}/nuevoestado
+      defaults: { _controller: "ContadoresBundle:SubTarea:cambiarEstado" }
+      requirements: { _method: post }
