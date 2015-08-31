@@ -72,11 +72,11 @@
     {% for entity in entities %}
         <tr>
             <td><a href="{{ path('tarea_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{% if entity.fechaFin %}{{ entity.fechaFin|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{% if entity.fechaCreacion %}{{ entity.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{% if entity.vencimientoFiscal %}{{ entity.vencimientoFiscal|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{% if entity.vencimientoInterno %}{{ entity.vencimientoInterno|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d ') }}{% endif %}</td>
+            <td>{% if entity.fechaFin %}{{ entity.fechaFin|date('Y-m-d ') }}{% endif %}</td>
+            <td>{% if entity.fechaCreacion %}{{ entity.fechaCreacion|date('Y-m-d ') }}{% endif %}</td>
+            <td>{% if entity.vencimientoFiscal %}{{ entity.vencimientoFiscal|date('Y-m-d ') }}{% endif %}</td>
+            <td>{% if entity.vencimientoInterno %}{{ entity.vencimientoInterno|date('Y-m-d ') }}{% endif %}</td>
             <td>{{ entity.nombre }}</td>
             <td>
         <a class="btn btn-mini" href="{{ path('tarea_show', { 'id': entity.id }) }}">

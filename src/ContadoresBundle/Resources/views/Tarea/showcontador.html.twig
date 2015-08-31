@@ -15,14 +15,14 @@
 <form class="form-horizontal">
     <fieldset>           <div class="control-group">
             <label class="control-label">Fecha inicio</label>
-            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.fechaInicio|date('Y-m-d H:i:s') }}</span>            </div>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.fechaInicio|date('Y-m-d ') }}</span>            </div>
         </div>
         <div class="control-group">
             <label class="control-label">Fecha fin</label>
             <div class="controls">
                         <span class="input-xlarge uneditable-input">
                              {% if entity.fechaFin %}
-                                 {{ entity.fechaFin|date('Y-m-d H:i:s') }}
+                                 {{ entity.fechaFin|date('Y-m-d ') }}
                              {% else %}
                                  <i>Esta tarea no está terminada aún</i>
                              {% endif %}
@@ -33,14 +33,14 @@
             <label class="control-label">Vencimiento fiscal</label>
             <div class="controls">                <span class="input-xlarge uneditable-input">
                     {% if entity.vencimientoFiscal %}
-                        {{ entity.vencimientoFiscal|date('Y-m-d H:i:s') }}
+                        {{ entity.vencimientoFiscal|date('Y-m-d ') }}
                     {% else %}
                         <i>Sin Vencimiento Fiscal</i>
                     {% endif %}
                 </span>            </div>
         </div>        <div class="control-group">
             <label class="control-label">Vencimiento interno</label>
-            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.vencimientoInterno|date('Y-m-d H:i:s') }}</span>            </div>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.vencimientoInterno|date('Y-m-d ') }}</span>            </div>
         </div>        </fieldset>
 </form>
     <h4 class="control-label">Sub tareas ({{ entity.subTareas|length }})</h4>
