@@ -127,7 +127,6 @@ class TareasService {
         if(in_array($nuevoEstadoId,$this->estadosTerminales))
         {
             $estadoSubTarea->setFechaFin(new \DateTime(null));
-            $this->verificarEstadoTarea($subTarea->getTarea(),$nuevoEstadoId );
         }
 
       //  $estadoSubTarea->setContador($subTarea->getTarea()->getContador());
@@ -138,13 +137,15 @@ class TareasService {
         $this->em->persist($subTarea);
 
         $this->em->flush();
+        $this->verificarEstadoTarea($subTarea->getTarea(),$nuevoEstadoId );
 
         return $subTarea;
     }
 
     public function crearEstadoSubTareaNuevo($subTarea)
     {
-        return $this->crearEstadoSubTarea($subTarea, $this->tipoEstadoNuevo);
+        $tipoEstado =  $this->em->getRepository('ContadoresBundle:TipoEstado')->find($this->tipoEstadoNuevo);
+        return $this->crearEstadoSubTarea($subTarea, $tipoEstado);
     }
 
     public function crearEstadoSubTarea($subTarea, $tipoEstado){

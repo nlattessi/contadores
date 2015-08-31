@@ -53,7 +53,7 @@
         {% for subTarea in entity.subTareas %}
             <p>
                 <a href="{{ path('subtarea_cliente_show', { 'id': subTarea.id }) }}">
-                    <i>{{ subTarea.nombre }}</i>
+                    <i>{{ subTarea.nombre }}({{ subTarea.estadoActual.tipoEstado }} )</i>
                 </a>
             </p>
         {% endfor %}

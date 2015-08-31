@@ -126,6 +126,12 @@ class SubTareaController extends Controller
             $em = $this->getDoctrine()->getManager();
             $entity->setFechaCreacion(new \DateTime(null));
 
+
+            if(strlen($entity->getNombre()) < 1){
+
+                $entity->setNombre($entity->getSubTareaMetadata()->getNombre() . ' de ' . $entity->getTarea()->getNombre());
+            }
+
             $em->persist($entity);
             $em->flush();
 
