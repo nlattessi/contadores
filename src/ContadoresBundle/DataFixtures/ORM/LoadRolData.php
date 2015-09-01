@@ -40,8 +40,8 @@ class LoadRolData extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($rolContador);
         $manager->persist($rolCliente);
 
-        $metadata = $manager->getClassMetaData(get_class($rolAdmin));
-        $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+        //$metadata = $manager->getClassMetaData(get_class($rolAdmin));
+        //$metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
 
         $manager->flush();
     }
