@@ -33,8 +33,8 @@ class LoadTipoEstadoData extends AbstractFixture implements OrderedFixtureInterf
         $manager->persist($tipoEstado1);
         $manager->persist($tipoEstado2);
         $manager->persist($tipoEstado3);
-        $metadata = $manager->getClassMetaData(get_class($tipoEstado1));
-        $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+        //$metadata = $manager->getClassMetaData(get_class($tipoEstado1));
+        //$metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
 
         $manager->flush();
     }
