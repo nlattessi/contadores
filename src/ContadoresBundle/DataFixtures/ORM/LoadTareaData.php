@@ -209,6 +209,44 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($tarea8);
 
         $manager->flush();
+
+        $this->getReference('estadoTarea1')->setTarea($this->getReference('tarea'));
+        $this->getReference('estadoTarea2')->setTarea($this->getReference('tarea1'));
+        $this->getReference('estadoTarea3')->setTarea($this->getReference('tarea2'));
+        $this->getReference('estadoTarea4')->setTarea($this->getReference('tarea3'));
+        $this->getReference('estadoTarea5')->setTarea($this->getReference('tarea4'));
+        $this->getReference('estadoTarea6')->setTarea($this->getReference('tarea5'));
+        $this->getReference('estadoTarea7')->setTarea($this->getReference('tarea6'));
+        $this->getReference('estadoTarea8')->setTarea($this->getReference('tarea7'));
+        $this->getReference('estadoTarea9')->setTarea($this->getReference('tarea8'));
+        $manager->persist($this->getReference('estadoTarea1'));
+        $manager->persist($this->getReference('estadoTarea2'));
+        $manager->persist($this->getReference('estadoTarea3'));
+        $manager->persist($this->getReference('estadoTarea4'));
+        $manager->persist($this->getReference('estadoTarea5'));
+        $manager->persist($this->getReference('estadoTarea6'));
+        $manager->persist($this->getReference('estadoTarea7'));
+        $manager->persist($this->getReference('estadoTarea9'));
+        $manager->flush();
+
+        $this->getReference('tarea')->setEstadoActual($this->getReference('estadoTarea1'));
+        $this->getReference('tarea1')->setEstadoActual($this->getReference('estadoTarea2'));
+        $this->getReference('tarea2')->setEstadoActual($this->getReference('estadoTarea3'));
+        $this->getReference('tarea3')->setEstadoActual($this->getReference('estadoTarea4'));
+        $this->getReference('tarea4')->setEstadoActual($this->getReference('estadoTarea5'));
+        $this->getReference('tarea5')->setEstadoActual($this->getReference('estadoTarea6'));
+        $this->getReference('tarea6')->setEstadoActual($this->getReference('estadoTarea7'));
+        $this->getReference('tarea7')->setEstadoActual($this->getReference('estadoTarea8'));
+        $this->getReference('tarea8')->setEstadoActual($this->getReference('estadoTarea9'));
+        $manager->persist($this->getReference('tarea'));
+        $manager->persist($this->getReference('tarea2'));
+        $manager->persist($this->getReference('tarea3'));
+        $manager->persist($this->getReference('tarea4'));
+        $manager->persist($this->getReference('tarea5'));
+        $manager->persist($this->getReference('tarea6'));
+        $manager->persist($this->getReference('tarea7'));
+        $manager->persist($this->getReference('tarea8'));
+        $manager->flush();
     }
 
     /**
@@ -216,6 +254,6 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 11;
+        return 13;
     }
 }

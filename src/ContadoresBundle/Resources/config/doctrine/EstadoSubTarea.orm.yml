@@ -46,6 +46,7 @@ ContadoresBundle\Entity\EstadoSubTarea:
             joinColumns:
                 contador_id:
                     referencedColumnName: id
+                    onDelete: SET NULL
             orphanRemoval: false
         subTarea:
             targetEntity: SubTarea
@@ -56,6 +57,7 @@ ContadoresBundle\Entity\EstadoSubTarea:
             joinColumns:
                 sub_tarea_id:
                     referencedColumnName: id
+                    onDelete: SET NULL
             orphanRemoval: false
         tipoEstado:
             targetEntity: TipoEstado
@@ -66,5 +68,6 @@ ContadoresBundle\Entity\EstadoSubTarea:
             joinColumns:
                 tipo_estado_id:
                     referencedColumnName: id
+                    onDelete: SET NULL
             orphanRemoval: false
     lifecycleCallbacks: {  }
