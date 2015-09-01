@@ -18,8 +18,8 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $dateNow = new \DateTime();
         $dateInicio = new \DateTime();
         $dateFin    = new \DateTime();
-        $dateInicio->modify('+2 days');
-        $dateFin->modify('+2 months');
+        $dateInicio->add(new \DateInterval('P2D'));
+        $dateFin->add(new \DateInterval('P2M'));
 
         $tarea = new Tarea();
         $tarea->setNombre('Impuestos Empresas');
@@ -29,7 +29,7 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $tarea->setFechaCreacion($dateNow);
         $tarea->setEstadoActual(null);
         $tarea->setFechaInicio($dateInicio);
-//        $tarea->setFechaFin($dateFin);
+        $tarea->setVencimientoInterno($dateFin);
         $tarea->setSubTareas(null);
         $tarea->setTareaMetadata($this->getReference('tareaMetadata1'));
         $this->addReference('tarea', $tarea);
@@ -38,8 +38,8 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $dateNow = new \DateTime();
         $dateInicio = new \DateTime();
         $dateFin    = new \DateTime();
-        $dateInicio->modify('+1 days');
-        $dateFin->modify('+10 days');
+        $dateInicio->add(new \DateInterval('P1D'));
+        $dateFin->add(new \DateInterval('P6D'));
 
         $tarea1 = new Tarea();
         $tarea1->setNombre('ART');
@@ -49,7 +49,7 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $tarea1->setFechaCreacion($dateNow);
         $tarea1->setEstadoActual(null);
         $tarea1->setFechaInicio($dateInicio);
-//        $tarea1->setFechaFin($dateFin);
+        $tarea1->setVencimientoInterno($dateFin);
         $tarea1->setSubTareas(null);
         $tarea1->setTareaMetadata($this->getReference('tareaMetadata1'));
         $this->addReference('tarea1', $tarea1);
@@ -58,8 +58,8 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $dateNow = new \DateTime();
         $dateInicio = new \DateTime();
         $dateFin    = new \DateTime();
-        $dateInicio->modify('+12 days');
-        $dateFin->modify('+10 months');
+        $dateInicio->add(new \DateInterval('P12D'));
+        $dateFin->add(new \DateInterval('P10M'));
 
         $tarea2 = new Tarea();
         $tarea2->setNombre('Bienes Personales');
@@ -69,7 +69,7 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $tarea2->setFechaCreacion($dateNow);
         $tarea2->setEstadoActual(null);
         $tarea2->setFechaInicio($dateInicio);
-//        $tarea2->setFechaFin($dateFin);
+        $tarea2->setVencimientoInterno($dateFin);
         $tarea2->setSubTareas(null);
         $tarea2->setTareaMetadata($this->getReference('tareaMetadata1'));
         $this->addReference('tarea2', $tarea2);
@@ -80,8 +80,8 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $dateNow = new \DateTime();
         $dateInicio = new \DateTime();
         $dateFin    = new \DateTime();
-        $dateInicio->modify('+2 days');
-        $dateFin->modify('+2 months');
+        $dateInicio->add(new \DateInterval('P2D'));
+        $dateFin->add(new \DateInterval('P2M'));
 
         $tarea3 = new Tarea();
         $tarea3->setNombre('Impuestos Varios');
@@ -91,7 +91,7 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $tarea3->setFechaCreacion($dateNow);
         $tarea3->setEstadoActual(null);
         $tarea3->setFechaInicio($dateInicio);
-//        $tarea3->setFechaFin($dateFin);
+        $tarea3->setVencimientoInterno($dateFin);
         $tarea3->setSubTareas(null);
         $tarea3->setTareaMetadata($this->getReference('tareaMetadata2'));
         $this->addReference('tarea3', $tarea3);
@@ -99,8 +99,8 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $dateNow = new \DateTime();
         $dateInicio = new \DateTime();
         $dateFin    = new \DateTime();
-        $dateInicio->modify('+1 days');
-        $dateFin->modify('+10 days');
+        $dateInicio->add(new \DateInterval('P1D'));
+        $dateFin->add(new \DateInterval('P4D'));
 
         $tarea4 = new Tarea();
         $tarea4->setNombre('Ajuste de impuestos');
@@ -110,7 +110,7 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $tarea4->setFechaCreacion($dateNow);
         $tarea4->setEstadoActual(null);
         $tarea4->setFechaInicio($dateInicio);
-//        $tarea4->setFechaFin($dateFin);
+        $tarea4->setVencimientoInterno($dateFin);
         $tarea4->setSubTareas(null);
         $tarea4->setTareaMetadata($this->getReference('tareaMetadata2'));
         $this->addReference('tarea4', $tarea4);
@@ -119,8 +119,8 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $dateNow = new \DateTime();
         $dateInicio = new \DateTime();
         $dateFin    = new \DateTime();
-        $dateInicio->modify('+12 days');
-        $dateFin->modify('+10 months');
+        $dateInicio->add(new \DateInterval('P12D'));
+        $dateFin->add(new \DateInterval('P10M'));
 
         $tarea5 = new Tarea();
         $tarea5->setNombre('Firma de libros');
@@ -130,7 +130,7 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $tarea5->setFechaCreacion($dateNow);
         $tarea5->setEstadoActual(null);
         $tarea5->setFechaInicio($dateInicio);
-//        $tarea5->setFechaFin($dateFin);
+        $tarea5->setVencimientoInterno($dateFin);
         $tarea5->setSubTareas(null);
         $tarea5->setTareaMetadata($this->getReference('tareaMetadata1'));
         $this->addReference('tarea5', $tarea5);
@@ -141,8 +141,8 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $dateNow = new \DateTime();
         $dateInicio = new \DateTime();
         $dateFin    = new \DateTime();
-        $dateInicio->modify('+2 days');
-        $dateFin->modify('+2 months');
+        $dateInicio->add(new \DateInterval('P2D'));
+        $dateFin->add(new \DateInterval('P2M'));
 
         $tarea6 = new Tarea();
         $tarea6->setNombre('Presentar Impuestos');
@@ -160,8 +160,8 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $dateNow = new \DateTime();
         $dateInicio = new \DateTime();
         $dateFin    = new \DateTime();
-        $dateInicio->modify('+1 days');
-        $dateFin->modify('+10 days');
+        $dateInicio->add(new \DateInterval('P1D'));
+        $dateFin->add(new \DateInterval('P3D'));
 
         $tarea7 = new Tarea();
         $tarea7->setNombre('Afip');
@@ -180,8 +180,8 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $dateNow = new \DateTime();
         $dateInicio = new \DateTime();
         $dateFin    = new \DateTime();
-        $dateInicio->modify('+12 days');
-        $dateFin->modify('+10 months');
+        $dateInicio->add(new \DateInterval('P12D'));
+        $dateFin->add(new \DateInterval('P10M'));
 
         $tarea8 = new Tarea();
         $tarea8->setNombre('Ajuste de libro general');

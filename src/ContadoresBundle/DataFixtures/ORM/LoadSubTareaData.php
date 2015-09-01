@@ -18,8 +18,10 @@ class LoadSubTareaData extends AbstractFixture implements OrderedFixtureInterfac
         $dateNow = new \DateTime();
         $dateInicio = new \DateTime();
         $dateFin    = new \DateTime();
+
         $dateInicio->modify('+2 days');
         $dateFin->modify('+2 months');
+
 
         $subtarea = new SubTarea();
         $subtarea->setNombre('Impuestos uno');
