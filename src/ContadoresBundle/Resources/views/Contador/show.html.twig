@@ -39,9 +39,14 @@
     </fieldset>
 <h2>Tareas</h2>
     {% for tarea in tareas %}
-        <b>{{ tarea.nombre }}</b>  <br/>
+        <a href="{{ path('tarea_show', { 'id': tarea.id }) }}" >
+            <b>{{ tarea.nombre }}</b>
+        </a>  <br/>
         {% for subTarea in tarea.subTareas %}
-         <i>{{ subTarea.nombre }}</i>     <br/>
+        <a href="{{ path('subtarea_show', { 'id': tarea.id }) }}"
+                >
+            <i>{{ subTarea.nombre }}</i>
+        </a>    <br/>
         {% endfor %}
     {% endfor %}
     {% if not tareas %}

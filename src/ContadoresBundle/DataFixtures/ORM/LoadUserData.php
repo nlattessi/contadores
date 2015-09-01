@@ -36,8 +36,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $userAdmin->setMail('admin@admin.com');
         $encoder = $this->container
            ->get('security.encoder_factory')
-           ->getEncoder($userAdmin)
-        ;
+           ->getEncoder($userAdmin);
         $userAdmin->setPassword($encoder->encodePassword('admin', $userAdmin->getSalt()));
         $userAdmin->setEntidadId(1);
         $userAdmin->setActivo(true);
@@ -48,8 +47,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $userJefe->setMail('jefe@jefe.com');
         $encoder = $this->container
            ->get('security.encoder_factory')
-           ->getEncoder($userJefe)
-        ;
+           ->getEncoder($userJefe);
+
         $userJefe->setPassword($encoder->encodePassword('jefe', $userJefe->getSalt()));
         $userJefe->setEntidadId(1);
         $userJefe->setActivo(true);
@@ -60,20 +59,38 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $userContador->setMail('contador@contador.com');
         $encoder = $this->container
            ->get('security.encoder_factory')
-           ->getEncoder($userContador)
-        ;
+           ->getEncoder($userContador);
         $userContador->setPassword($encoder->encodePassword('contador', $userContador->getSalt()));
-        $userContador->setEntidadId(1);
         $userContador->setActivo(true);
         $userContador->setRol($this->getReference('rolContador'));
         $this->addReference('userContador', $userContador);
+
+        $userContador2 = new Usuario();
+        $userContador2->setMail('contador2@contador.com');
+        $encoder = $this->container
+            ->get('security.encoder_factory')
+            ->getEncoder($userContador2);
+        $userContador2->setPassword($encoder->encodePassword('contador', $userContador2->getSalt()));
+        $userContador2->setActivo(true);
+        $userContador2->setRol($this->getReference('rolContador'));
+        $this->addReference('userContador2', $userContador2);
+
+        $userContador3 = new Usuario();
+        $userContador3->setMail('contador3@contador.com');
+        $encoder = $this->container
+            ->get('security.encoder_factory')
+            ->getEncoder($userContador3);
+        $userContador3->setPassword($encoder->encodePassword('contador', $userContador3->getSalt()));
+        $userContador3->setActivo(true);
+        $userContador3->setRol($this->getReference('rolContador'));
+        $this->addReference('userContador3', $userContador3);
 
         $userCliente = new Usuario();
         $userCliente->setMail('cliente@cliente.com');
         $encoder = $this->container
            ->get('security.encoder_factory')
-           ->getEncoder($userCliente)
-        ;
+           ->getEncoder($userCliente);
+
         $userCliente->setPassword($encoder->encodePassword('cliente', $userCliente->getSalt()));
         $userCliente->setEntidadId(1);
         $userCliente->setActivo(true);
@@ -83,6 +100,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $manager->persist($userAdmin);
         $manager->persist($userJefe);
         $manager->persist($userContador);
+        $manager->persist($userContador2);
+        $manager->persist($userContador3);
         $manager->persist($userCliente);
 
         $manager->flush();

@@ -17,6 +17,11 @@ class Rol
      */
     private $nombre;
 
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
 
     /**
      * Get id

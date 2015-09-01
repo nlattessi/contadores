@@ -29,7 +29,7 @@ class TareasService {
         $this->tipoEstadoNuevo = 1;
         $this->rolCliente = "ROLE_CLIENTE";
         $this->rolContador = "ROLE_CONTADOR";
-        $this->rolContador = "ROLE_JEFE";
+        $this->rolJefe = "ROLE_JEFE";
         $this->estadosTerminales = array(3);
     }
 

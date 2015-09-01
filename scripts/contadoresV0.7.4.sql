@@ -405,7 +405,6 @@ ALTER TABLE archivo_sub_tarea_metadata CHANGE usuario_id usuario_id INT DEFAULT 
 ALTER TABLE archivo_sub_tarea CHANGE usuario_id usuario_id INT DEFAULT NULL;
 ALTER TABLE sub_tarea_metadata CHANGE tarea_metadata_id tarea_metadata_id INT DEFAULT NULL;
 
-ALTER TABLE contador ADD area_id INT DEFAULT NULL;
 ALTER TABLE contador ADD CONSTRAINT FK_E83EF8FABD0F409C FOREIGN KEY (area_id) REFERENCES area (id);
 CREATE INDEX IDX_E83EF8FABD0F409C ON contador (area_id);
 
