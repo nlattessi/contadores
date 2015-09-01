@@ -48,6 +48,16 @@ class LoadContadorData extends AbstractFixture implements OrderedFixtureInterfac
         $manager->persist($contador3);
 
         $manager->flush();
+
+        $this->getReference('userContador')->setEntidadId($this->getReference('userContador')->getId());
+        $this->getReference('userContador2')->setEntidadId($this->getReference('userContador2')->getId());
+        $this->getReference('userContador3')->setEntidadId($this->getReference('userContador3')->getId());
+
+        $manager->persist($this->getReference('userContador'));
+        $manager->persist($this->getReference('userContador2'));
+        $manager->persist($this->getReference('userContador3'));
+
+        $manager->flush();
     }
 
     /**

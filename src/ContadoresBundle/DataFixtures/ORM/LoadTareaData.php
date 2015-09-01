@@ -29,7 +29,7 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $tarea->setFechaCreacion($dateNow);
         $tarea->setEstadoActual(null);
         $tarea->setFechaInicio($dateInicio);
-        $tarea->setFechaFin($dateFin);
+//        $tarea->setFechaFin($dateFin);
         $tarea->setSubTareas(null);
         $tarea->setTareaMetadata($this->getReference('tareaMetadata1'));
         $this->addReference('tarea', $tarea);
@@ -49,7 +49,7 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $tarea1->setFechaCreacion($dateNow);
         $tarea1->setEstadoActual(null);
         $tarea1->setFechaInicio($dateInicio);
-        $tarea1->setFechaFin($dateFin);
+//        $tarea1->setFechaFin($dateFin);
         $tarea1->setSubTareas(null);
         $tarea1->setTareaMetadata($this->getReference('tareaMetadata1'));
         $this->addReference('tarea1', $tarea1);
@@ -69,7 +69,7 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $tarea2->setFechaCreacion($dateNow);
         $tarea2->setEstadoActual(null);
         $tarea2->setFechaInicio($dateInicio);
-        $tarea2->setFechaFin($dateFin);
+//        $tarea2->setFechaFin($dateFin);
         $tarea2->setSubTareas(null);
         $tarea2->setTareaMetadata($this->getReference('tareaMetadata1'));
         $this->addReference('tarea2', $tarea2);
@@ -91,7 +91,7 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $tarea3->setFechaCreacion($dateNow);
         $tarea3->setEstadoActual(null);
         $tarea3->setFechaInicio($dateInicio);
-        $tarea3->setFechaFin($dateFin);
+//        $tarea3->setFechaFin($dateFin);
         $tarea3->setSubTareas(null);
         $tarea3->setTareaMetadata($this->getReference('tareaMetadata2'));
         $this->addReference('tarea3', $tarea3);
@@ -110,7 +110,7 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $tarea4->setFechaCreacion($dateNow);
         $tarea4->setEstadoActual(null);
         $tarea4->setFechaInicio($dateInicio);
-        $tarea4->setFechaFin($dateFin);
+//        $tarea4->setFechaFin($dateFin);
         $tarea4->setSubTareas(null);
         $tarea4->setTareaMetadata($this->getReference('tareaMetadata2'));
         $this->addReference('tarea4', $tarea4);
@@ -130,7 +130,7 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
         $tarea5->setFechaCreacion($dateNow);
         $tarea5->setEstadoActual(null);
         $tarea5->setFechaInicio($dateInicio);
-        $tarea5->setFechaFin($dateFin);
+//        $tarea5->setFechaFin($dateFin);
         $tarea5->setSubTareas(null);
         $tarea5->setTareaMetadata($this->getReference('tareaMetadata1'));
         $this->addReference('tarea5', $tarea5);
