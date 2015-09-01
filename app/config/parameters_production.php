@@ -1,6 +1,6 @@
 <?php
 
-$url = parse_url(getenv('DATABASE_URL'));
+$url = parse_url(getenv('HEROKU_POSTGRESQL_MAROON_URL'));
 
 $container->setParameter('database_driver', 'pdo_pgsql');
 $container->setParameter('database_host', $url['host']);
