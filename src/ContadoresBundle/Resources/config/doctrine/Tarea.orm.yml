@@ -85,6 +85,7 @@ ContadoresBundle\Entity\Tarea:
             joinColumns:
                 estado_actual_id:
                     referencedColumnName: id
+                    onDelete: SET NULL
             orphanRemoval: false
         tareaMetadata:
             targetEntity: TareaMetadata
