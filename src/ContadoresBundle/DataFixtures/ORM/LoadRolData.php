@@ -35,13 +35,25 @@ class LoadRolData extends AbstractFixture implements OrderedFixtureInterface
         $rolCliente->setNombre('ROLE_CLIENTE');
         $this->addReference('rolCliente', $rolCliente);
 
+        $metadata = $manager->getClassMetaData(get_class($rolAdmin));
+        $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+        $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
         $manager->persist($rolAdmin);
-        $manager->persist($rolJefe);
-        $manager->persist($rolContador);
-        $manager->persist($rolCliente);
 
-        //$metadata = $manager->getClassMetaData(get_class($rolAdmin));
-        //$metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+        $metadata = $manager->getClassMetaData(get_class($rolJefe));
+        $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+        $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
+        $manager->persist($rolJefe);
+
+        $metadata = $manager->getClassMetaData(get_class($rolContador));
+        $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+        $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
+        $manager->persist($rolContador);
+
+        $metadata = $manager->getClassMetaData(get_class($rolCliente));
+        $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+        $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
+        $manager->persist($rolCliente);
 
         $manager->flush();
     }
