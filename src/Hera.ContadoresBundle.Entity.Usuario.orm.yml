@@ -1,0 +1,51 @@
+Hera\ContadoresBundle\Entity\Usuario:
+    type: entity
+    table: usuario
+    indexes:
+        rol_usuario_idx:
+            columns:
+                - rol_id
+    id:
+        id:
+            id: true
+            type: integer
+            options:
+                unsigned: false
+            generator:
+                strategy: IDENTITY
+    fields:
+        mail:
+            type: string
+            length: 45
+            options:
+                fixed: false
+            nullable: false
+        password:
+            type: string
+            length: 60
+            options:
+                fixed: false
+            nullable: false
+        entidadId:
+            type: integer
+            options:
+                unsigned: false
+            nullable: true
+            column: entidad_id
+        activo:
+            type: boolean
+            options:
+                default: '1'
+            nullable: true
+    manyToOne:
+        rol:
+            targetEntity: Hera\ContadoresBundle\Entity\Rol
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                rol_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

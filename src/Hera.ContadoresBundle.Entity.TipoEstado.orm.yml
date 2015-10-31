@@ -1,0 +1,25 @@
+Hera\ContadoresBundle\Entity\TipoEstado:
+    type: entity
+    table: tipo_estado
+    id:
+        id:
+            id: true
+            type: integer
+            options:
+                unsigned: false
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            length: 45
+            options:
+                fixed: false
+            nullable: false
+        esEstadoFinal:
+            type: boolean
+            options:
+                default: '0'
+            nullable: true
+            column: es_estado_final
+    lifecycleCallbacks: {  }
