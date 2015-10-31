@@ -115,7 +115,6 @@ CREATE TABLE `contador` (
   PRIMARY KEY (`id`),
   KEY `usuario_contador_idx` (`usuario_id`),
   KEY `area_contador_idx` (`area_id`),
-  KEY `IDX_E83EF8FABD0F409C` (`area_id`),
   CONSTRAINT `area_contador` FOREIGN KEY (`area_id`) REFERENCES `area` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_E83EF8FABD0F409C` FOREIGN KEY (`area_id`) REFERENCES `area` (`id`),
   CONSTRAINT `usuario_contador` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
