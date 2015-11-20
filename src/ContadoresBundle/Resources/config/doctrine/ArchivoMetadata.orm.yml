@@ -1,13 +1,13 @@
-ContadoresBundle\Entity\ArchivoSubTareaMetadata:
+ContadoresBundle\Entity\ArchivoMetadata:
     type: entity
-    table: archivo_sub_tarea_metadata
+    table: archivo_metadata
     indexes:
-        usuario_archivoSTM_idx:
+        tareaMetadata_archivo_idx:
             columns:
-                - usuario_id
-        subTareaMetadata_archivo_idx:
+                - tarea_metadata_id
+        archivo_metadata_idx:
             columns:
-                - sub_tarea_metadata_id
+                - archivo_id
     id:
         id:
             type: integer
@@ -17,38 +17,25 @@ ContadoresBundle\Entity\ArchivoSubTareaMetadata:
             id: true
             generator:
                 strategy: IDENTITY
-    fields:
-        nombre:
-            type: string
-            nullable: false
-            length: 45
-            options:
-                fixed: false
-        ruta:
-            type: string
-            nullable: false
-            length: 45
-            options:
-                fixed: false
     manyToOne:
-        subTareaMetadata:
-            targetEntity: SubTareaMetadata
+        tareaMetadata:
+            targetEntity: TareaMetadata
             cascade: {  }
             fetch: LAZY
             mappedBy: null
             inversedBy: null
             joinColumns:
-                sub_tarea_metadata_id:
+                tarea_metadata_id:
                     referencedColumnName: id
             orphanRemoval: false
-        usuario:
-            targetEntity: Usuario
+        archivo:
+            targetEntity: Archivo
             cascade: {  }
             fetch: LAZY
             mappedBy: null
             inversedBy: null
             joinColumns:
-                usuario_id:
+                archivo_id:
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }

@@ -29,14 +29,17 @@ ContadoresBundle\Entity\EstadoTarea:
             type: datetime
             nullable: true
             column: fecha_fin
-        indiceCompletado:
-            type: decimal
+        minutosTrabajados:
+            type: integer
             nullable: true
-            precision: 10
-            scale: 0
             options:
+                unsigned: false
                 default: '0'
-            column: indice_completado
+            column: minutos_trabajados
+        fechaCreacion:
+            type: date
+            nullable: true
+            column: fecha_creacion
     manyToOne:
         tarea:
             targetEntity: Tarea
@@ -47,7 +50,6 @@ ContadoresBundle\Entity\EstadoTarea:
             joinColumns:
                 tarea_id:
                     referencedColumnName: id
-                    onDelete: SET NULL
             orphanRemoval: false
         tipoEstado:
             targetEntity: TipoEstado
@@ -58,7 +60,6 @@ ContadoresBundle\Entity\EstadoTarea:
             joinColumns:
                 tipo_estado_id:
                     referencedColumnName: id
-                    onDelete: SET NULL
             orphanRemoval: false
         contador:
             targetEntity: Contador
@@ -69,6 +70,5 @@ ContadoresBundle\Entity\EstadoTarea:
             joinColumns:
                 contador_id:
                     referencedColumnName: id
-                    onDelete: SET NULL
             orphanRemoval: false
     lifecycleCallbacks: {  }

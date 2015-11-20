@@ -1,13 +1,10 @@
-ContadoresBundle\Entity\ArchivoSubTarea:
+ContadoresBundle\Entity\Archivo:
     type: entity
-    table: archivo_sub_tarea
+    table: archivo
     indexes:
-        usuario_archivo_idx:
+        usuario_archivoT_idx:
             columns:
                 - usuario_id
-        subTarea_archivo_idx:
-            columns:
-                - sub_tarea_id
     id:
         id:
             type: integer
@@ -31,16 +28,6 @@ ContadoresBundle\Entity\ArchivoSubTarea:
             options:
                 fixed: false
     manyToOne:
-        subTarea:
-            targetEntity: SubTarea
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                sub_tarea_id:
-                    referencedColumnName: id
-            orphanRemoval: false
         usuario:
             targetEntity: Usuario
             cascade: {  }

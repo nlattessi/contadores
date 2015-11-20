@@ -1,7 +1,3 @@
-hera_contadores:
-    resource: "@HeraContadoresBundle/Resources/config/routing.yml"
-    prefix:   /
-
 contadores:
     resource: "@ContadoresBundle/Resources/config/routing.yml"
     prefix:   /

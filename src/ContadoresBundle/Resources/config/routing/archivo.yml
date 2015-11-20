@@ -1,0 +1,30 @@
+archivo:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:Archivo:index" }
+
+archivo_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:Archivo:show" }
+
+archivo_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:Archivo:new" }
+
+archivo_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:Archivo:create" }
+    requirements: { _method: post }
+
+archivo_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:Archivo:edit" }
+
+archivo_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:Archivo:update" }
+    requirements: { _method: post|put }
+
+archivo_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:Archivo:delete" }
+    requirements: { _method: post|delete }

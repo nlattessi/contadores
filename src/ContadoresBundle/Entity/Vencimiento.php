@@ -3,9 +3,9 @@
 namespace ContadoresBundle\Entity;
 
 /**
- * SubTareaMetadata
+ * Vencimiento
  */
-class SubTareaMetadata
+class Vencimiento
 {
     /**
      * @var integer
@@ -13,14 +13,19 @@ class SubTareaMetadata
     private $id;
 
     /**
-     * @var string
+     * @var \DateTime
      */
-    private $nombre;
+    private $fecha;
 
     /**
      * @var integer
      */
-    private $tiempoEstimado = '0';
+    private $periodoId;
+
+    /**
+     * @var string
+     */
+    private $colaCuil;
 
     /**
      * @var \ContadoresBundle\Entity\TareaMetadata
@@ -39,51 +44,75 @@ class SubTareaMetadata
     }
 
     /**
-     * Set nombre
+     * Set fecha
      *
-     * @param string $nombre
+     * @param \DateTime $fecha
      *
-     * @return SubTareaMetadata
+     * @return Vencimiento
      */
-    public function setNombre($nombre)
+    public function setFecha($fecha)
     {
-        $this->nombre = $nombre;
+        $this->fecha = $fecha;
 
         return $this;
     }
 
     /**
-     * Get nombre
+     * Get fecha
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getNombre()
+    public function getFecha()
     {
-        return $this->nombre;
+        return $this->fecha;
     }
 
     /**
-     * Set tiempoEstimado
+     * Set periodoId
      *
-     * @param integer $tiempoEstimado
+     * @param integer $periodoId
      *
-     * @return SubTareaMetadata
+     * @return Vencimiento
      */
-    public function setTiempoEstimado($tiempoEstimado)
+    public function setPeriodoId($periodoId)
     {
-        $this->tiempoEstimado = $tiempoEstimado;
+        $this->periodoId = $periodoId;
 
         return $this;
     }
 
     /**
-     * Get tiempoEstimado
+     * Get periodoId
      *
      * @return integer
      */
-    public function getTiempoEstimado()
+    public function getPeriodoId()
     {
-        return $this->tiempoEstimado;
+        return $this->periodoId;
+    }
+
+    /**
+     * Set colaCuil
+     *
+     * @param string $colaCuil
+     *
+     * @return Vencimiento
+     */
+    public function setColaCuil($colaCuil)
+    {
+        $this->colaCuil = $colaCuil;
+
+        return $this;
+    }
+
+    /**
+     * Get colaCuil
+     *
+     * @return string
+     */
+    public function getColaCuil()
+    {
+        return $this->colaCuil;
     }
 
     /**
@@ -91,7 +120,7 @@ class SubTareaMetadata
      *
      * @param \ContadoresBundle\Entity\TareaMetadata $tareaMetadata
      *
-     * @return SubTareaMetadata
+     * @return Vencimiento
      */
     public function setTareaMetadata(\ContadoresBundle\Entity\TareaMetadata $tareaMetadata = null)
     {
@@ -108,9 +137,5 @@ class SubTareaMetadata
     public function getTareaMetadata()
     {
         return $this->tareaMetadata;
-    }
-
-    public function __toString(){
-        return $this->nombre;
     }
 }

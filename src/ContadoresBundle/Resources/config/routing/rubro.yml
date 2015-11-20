@@ -1,0 +1,30 @@
+rubro:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:Rubro:index" }
+
+rubro_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:Rubro:show" }
+
+rubro_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:Rubro:new" }
+
+rubro_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:Rubro:create" }
+    requirements: { _method: post }
+
+rubro_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:Rubro:edit" }
+
+rubro_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:Rubro:update" }
+    requirements: { _method: post|put }
+
+rubro_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:Rubro:delete" }
+    requirements: { _method: post|delete }

@@ -9,18 +9,18 @@ use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\View\TwitterBootstrapView;
 
-use ContadoresBundle\Entity\ArchivoTareaMetadata;
-use ContadoresBundle\Form\ArchivoTareaMetadataType;
-use ContadoresBundle\Form\ArchivoTareaMetadataFilterType;
+use ContadoresBundle\Entity\Vencimiento;
+use ContadoresBundle\Form\VencimientoType;
+use ContadoresBundle\Form\VencimientoFilterType;
 
 /**
- * ArchivoTareaMetadata controller.
+ * Vencimiento controller.
  *
  */
-class ArchivoTareaMetadataController extends Controller
+class VencimientoController extends Controller
 {
     /**
-     * Lists all ArchivoTareaMetadata entities.
+     * Lists all Vencimiento entities.
      *
      */
     public function indexAction()
@@ -29,7 +29,7 @@ class ArchivoTareaMetadataController extends Controller
 
         list($entities, $pagerHtml) = $this->paginator($queryBuilder);
 
-        return $this->render('ContadoresBundle:ArchivoTareaMetadata:index.html.twig', array(
+        return $this->render('ContadoresBundle:Vencimiento:index.html.twig', array(
             'entities' => $entities,
             'pagerHtml' => $pagerHtml,
             'filterForm' => $filterForm->createView(),
@@ -44,13 +44,13 @@ class ArchivoTareaMetadataController extends Controller
     {
         $request = $this->getRequest();
         $session = $request->getSession();
-        $filterForm = $this->createForm(new ArchivoTareaMetadataFilterType());
+        $filterForm = $this->createForm(new VencimientoFilterType());
         $em = $this->getDoctrine()->getManager();
-        $queryBuilder = $em->getRepository('ContadoresBundle:ArchivoTareaMetadata')->createQueryBuilder('e');
+        $queryBuilder = $em->getRepository('ContadoresBundle:Vencimiento')->createQueryBuilder('e');
 
         // Reset filter
         if ($request->get('filter_action') == 'reset') {
-            $session->remove('ArchivoTareaMetadataControllerFilter');
+            $session->remove('VencimientoControllerFilter');
         }
 
         // Filter action
@@ -63,13 +63,13 @@ class ArchivoTareaMetadataController extends Controller
                 $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
                 // Save filter to session
                 $filterData = $filterForm->getData();
-                $session->set('ArchivoTareaMetadataControllerFilter', $filterData);
+                $session->set('VencimientoControllerFilter', $filterData);
             }
         } else {
             // Get filter from session
-            if ($session->has('ArchivoTareaMetadataControllerFilter')) {
-                $filterData = $session->get('ArchivoTareaMetadataControllerFilter');
-                $filterForm = $this->createForm(new ArchivoTareaMetadataFilterType(), $filterData);
+            if ($session->has('VencimientoControllerFilter')) {
+                $filterData = $session->get('VencimientoControllerFilter');
+                $filterForm = $this->createForm(new VencimientoFilterType(), $filterData);
                 $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
             }
         }
@@ -94,7 +94,7 @@ class ArchivoTareaMetadataController extends Controller
         $me = $this;
         $routeGenerator = function($page) use ($me)
         {
-            return $me->generateUrl('archivotareametadata', array('page' => $page));
+            return $me->generateUrl('vencimiento', array('page' => $page));
         };
 
         // Paginator - view
@@ -110,13 +110,13 @@ class ArchivoTareaMetadataController extends Controller
     }
 
     /**
-     * Creates a new ArchivoTareaMetadata entity.
+     * Creates a new Vencimiento entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity  = new ArchivoTareaMetadata();
-        $form = $this->createForm(new ArchivoTareaMetadataType(), $entity);
+        $entity  = new Vencimiento();
+        $form = $this->createForm(new VencimientoType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -125,69 +125,69 @@ class ArchivoTareaMetadataController extends Controller
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
 
-            return $this->redirect($this->generateUrl('archivotareametadata_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('vencimiento_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('ContadoresBundle:ArchivoTareaMetadata:new.html.twig', array(
+        return $this->render('ContadoresBundle:Vencimiento:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Displays a form to create a new ArchivoTareaMetadata entity.
+     * Displays a form to create a new Vencimiento entity.
      *
      */
     public function newAction()
     {
-        $entity = new ArchivoTareaMetadata();
-        $form   = $this->createForm(new ArchivoTareaMetadataType(), $entity);
+        $entity = new Vencimiento();
+        $form   = $this->createForm(new VencimientoType(), $entity);
 
-        return $this->render('ContadoresBundle:ArchivoTareaMetadata:new.html.twig', array(
+        return $this->render('ContadoresBundle:Vencimiento:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a ArchivoTareaMetadata entity.
+     * Finds and displays a Vencimiento entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ContadoresBundle:ArchivoTareaMetadata')->find($id);
+        $entity = $em->getRepository('ContadoresBundle:Vencimiento')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ArchivoTareaMetadata entity.');
+            throw $this->createNotFoundException('Unable to find Vencimiento entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('ContadoresBundle:ArchivoTareaMetadata:show.html.twig', array(
+        return $this->render('ContadoresBundle:Vencimiento:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
 
     /**
-     * Displays a form to edit an existing ArchivoTareaMetadata entity.
+     * Displays a form to edit an existing Vencimiento entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ContadoresBundle:ArchivoTareaMetadata')->find($id);
+        $entity = $em->getRepository('ContadoresBundle:Vencimiento')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ArchivoTareaMetadata entity.');
+            throw $this->createNotFoundException('Unable to find Vencimiento entity.');
         }
 
-        $editForm = $this->createForm(new ArchivoTareaMetadataType(), $entity);
+        $editForm = $this->createForm(new VencimientoType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('ContadoresBundle:ArchivoTareaMetadata:edit.html.twig', array(
+        return $this->render('ContadoresBundle:Vencimiento:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -195,21 +195,21 @@ class ArchivoTareaMetadataController extends Controller
     }
 
     /**
-     * Edits an existing ArchivoTareaMetadata entity.
+     * Edits an existing Vencimiento entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ContadoresBundle:ArchivoTareaMetadata')->find($id);
+        $entity = $em->getRepository('ContadoresBundle:Vencimiento')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ArchivoTareaMetadata entity.');
+            throw $this->createNotFoundException('Unable to find Vencimiento entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new ArchivoTareaMetadataType(), $entity);
+        $editForm = $this->createForm(new VencimientoType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -217,12 +217,12 @@ class ArchivoTareaMetadataController extends Controller
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
 
-            return $this->redirect($this->generateUrl('archivotareametadata_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('vencimiento_edit', array('id' => $id)));
         } else {
             $this->get('session')->getFlashBag()->add('error', 'flash.update.error');
         }
 
-        return $this->render('ContadoresBundle:ArchivoTareaMetadata:edit.html.twig', array(
+        return $this->render('ContadoresBundle:Vencimiento:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -230,7 +230,7 @@ class ArchivoTareaMetadataController extends Controller
     }
 
     /**
-     * Deletes a ArchivoTareaMetadata entity.
+     * Deletes a Vencimiento entity.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -240,10 +240,10 @@ class ArchivoTareaMetadataController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ContadoresBundle:ArchivoTareaMetadata')->find($id);
+            $entity = $em->getRepository('ContadoresBundle:Vencimiento')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find ArchivoTareaMetadata entity.');
+                throw $this->createNotFoundException('Unable to find Vencimiento entity.');
             }
 
             $em->remove($entity);
@@ -253,11 +253,11 @@ class ArchivoTareaMetadataController extends Controller
             $this->get('session')->getFlashBag()->add('error', 'flash.delete.error');
         }
 
-        return $this->redirect($this->generateUrl('archivotareametadata'));
+        return $this->redirect($this->generateUrl('vencimiento'));
     }
 
     /**
-     * Creates a form to delete a ArchivoTareaMetadata entity by id.
+     * Creates a form to delete a Vencimiento entity by id.
      *
      * @param mixed $id The entity id
      *

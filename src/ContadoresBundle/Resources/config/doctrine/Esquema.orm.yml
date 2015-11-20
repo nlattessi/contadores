@@ -1,6 +1,6 @@
-ContadoresBundle\Entity\Impuesto:
+ContadoresBundle\Entity\Esquema:
     type: entity
-    table: impuesto
+    table: esquema
     id:
         id:
             type: integer

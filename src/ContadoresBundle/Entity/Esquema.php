@@ -3,9 +3,9 @@
 namespace ContadoresBundle\Entity;
 
 /**
- * Impuesto
+ * Esquema
  */
-class Impuesto
+class Esquema
 {
     /**
      * @var integer
@@ -33,7 +33,7 @@ class Impuesto
      *
      * @param string $nombre
      *
-     * @return Impuesto
+     * @return Esquema
      */
     public function setNombre($nombre)
     {
@@ -49,10 +49,6 @@ class Impuesto
      */
     public function getNombre()
     {
-        return $this->nombre;
-    }
-
-    public function __toString(){
         return $this->nombre;
     }
 }

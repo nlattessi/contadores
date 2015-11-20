@@ -3,9 +3,9 @@
 namespace ContadoresBundle\Entity;
 
 /**
- * TipoEstado
+ * Rubro
  */
-class TipoEstado
+class Rubro
 {
     /**
      * @var integer
@@ -18,9 +18,9 @@ class TipoEstado
     private $nombre;
 
     /**
-     * @var boolean
+     * @var \ContadoresBundle\Entity\Area
      */
-    private $esEstadoFinal = '0';
+    private $area;
 
 
     /**
@@ -38,7 +38,7 @@ class TipoEstado
      *
      * @param string $nombre
      *
-     * @return TipoEstado
+     * @return Rubro
      */
     public function setNombre($nombre)
     {
@@ -58,26 +58,26 @@ class TipoEstado
     }
 
     /**
-     * Set esEstadoFinal
+     * Set area
      *
-     * @param boolean $esEstadoFinal
+     * @param \ContadoresBundle\Entity\Area $area
      *
-     * @return TipoEstado
+     * @return Rubro
      */
-    public function setEsEstadoFinal($esEstadoFinal)
+    public function setArea(\ContadoresBundle\Entity\Area $area = null)
     {
-        $this->esEstadoFinal = $esEstadoFinal;
+        $this->area = $area;
 
         return $this;
     }
 
     /**
-     * Get esEstadoFinal
+     * Get area
      *
-     * @return boolean
+     * @return \ContadoresBundle\Entity\Area
      */
-    public function getEsEstadoFinal()
+    public function getArea()
     {
-        return $this->esEstadoFinal;
+        return $this->area;
     }
 }

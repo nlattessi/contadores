@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormError;
 
-class ArchivoTareaFilterType extends AbstractType
+class ArchivoClienteFilterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -38,6 +38,6 @@ class ArchivoTareaFilterType extends AbstractType
 
     public function getName()
     {
-        return 'contadoresbundle_archivotareafiltertype';
+        return 'contadoresbundle_archivoclientefiltertype';
     }
 }

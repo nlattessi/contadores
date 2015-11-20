@@ -9,12 +9,15 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormError;
 
-class ArchivoTareaFilterType extends AbstractType
+class PeriodoFilterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('id', 'filter_number_range')
+            ->add('nombre', 'filter_text')
+            ->add('fechaDesde', 'filter_date_range')
+            ->add('fechaHasta', 'filter_date_range')
         ;
 
         $listener = function(FormEvent $event)
@@ -38,6 +41,6 @@ class ArchivoTareaFilterType extends AbstractType
 
     public function getName()
     {
-        return 'contadoresbundle_archivotareafiltertype';
+        return 'contadoresbundle_periodofiltertype';
     }
 }

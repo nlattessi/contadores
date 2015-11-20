@@ -3,9 +3,9 @@
 namespace ContadoresBundle\Entity;
 
 /**
- * ArchivoSubTareaMetadata
+ * Archivo
  */
-class ArchivoSubTareaMetadata
+class Archivo
 {
     /**
      * @var integer
@@ -21,11 +21,6 @@ class ArchivoSubTareaMetadata
      * @var string
      */
     private $ruta;
-
-    /**
-     * @var \ContadoresBundle\Entity\SubTareaMetadata
-     */
-    private $subTareaMetadata;
 
     /**
      * @var \ContadoresBundle\Entity\Usuario
@@ -48,7 +43,7 @@ class ArchivoSubTareaMetadata
      *
      * @param string $nombre
      *
-     * @return ArchivoSubTareaMetadata
+     * @return Archivo
      */
     public function setNombre($nombre)
     {
@@ -72,7 +67,7 @@ class ArchivoSubTareaMetadata
      *
      * @param string $ruta
      *
-     * @return ArchivoSubTareaMetadata
+     * @return Archivo
      */
     public function setRuta($ruta)
     {
@@ -92,35 +87,11 @@ class ArchivoSubTareaMetadata
     }
 
     /**
-     * Set subTareaMetadata
-     *
-     * @param \ContadoresBundle\Entity\SubTareaMetadata $subTareaMetadata
-     *
-     * @return ArchivoSubTareaMetadata
-     */
-    public function setSubTareaMetadata(\ContadoresBundle\Entity\SubTareaMetadata $subTareaMetadata = null)
-    {
-        $this->subTareaMetadata = $subTareaMetadata;
-
-        return $this;
-    }
-
-    /**
-     * Get subTareaMetadata
-     *
-     * @return \ContadoresBundle\Entity\SubTareaMetadata
-     */
-    public function getSubTareaMetadata()
-    {
-        return $this->subTareaMetadata;
-    }
-
-    /**
      * Set usuario
      *
      * @param \ContadoresBundle\Entity\Usuario $usuario
      *
-     * @return ArchivoSubTareaMetadata
+     * @return Archivo
      */
     public function setUsuario(\ContadoresBundle\Entity\Usuario $usuario = null)
     {

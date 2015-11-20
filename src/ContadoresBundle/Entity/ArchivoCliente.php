@@ -3,9 +3,9 @@
 namespace ContadoresBundle\Entity;
 
 /**
- * ArchivoTarea
+ * ArchivoCliente
  */
-class ArchivoTarea
+class ArchivoCliente
 {
     /**
      * @var integer
@@ -18,9 +18,9 @@ class ArchivoTarea
     private $archivo;
 
     /**
-     * @var \ContadoresBundle\Entity\Tarea
+     * @var \ContadoresBundle\Entity\Cliente
      */
-    private $tarea;
+    private $cliente;
 
 
     /**
@@ -38,7 +38,7 @@ class ArchivoTarea
      *
      * @param \ContadoresBundle\Entity\Archivo $archivo
      *
-     * @return ArchivoTarea
+     * @return ArchivoCliente
      */
     public function setArchivo(\ContadoresBundle\Entity\Archivo $archivo = null)
     {
@@ -58,27 +58,27 @@ class ArchivoTarea
     }
 
     /**
-     * Set tarea
+     * Set cliente
      *
-     * @param \ContadoresBundle\Entity\Tarea $tarea
+     * @param \ContadoresBundle\Entity\Cliente $cliente
      *
-     * @return ArchivoTarea
+     * @return ArchivoCliente
      */
-    public function setTarea(\ContadoresBundle\Entity\Tarea $tarea = null)
+    public function setCliente(\ContadoresBundle\Entity\Cliente $cliente = null)
     {
-        $this->tarea = $tarea;
+        $this->cliente = $cliente;
 
         return $this;
     }
 
     /**
-     * Get tarea
+     * Get cliente
      *
-     * @return \ContadoresBundle\Entity\Tarea
+     * @return \ContadoresBundle\Entity\Cliente
      */
-    public function getTarea()
+    public function getCliente()
     {
-        return $this->tarea;
+        return $this->cliente;
     }
 }
 

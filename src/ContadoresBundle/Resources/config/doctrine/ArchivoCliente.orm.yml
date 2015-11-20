@@ -1,13 +1,13 @@
-ContadoresBundle\Entity\ArchivoTarea:
+ContadoresBundle\Entity\ArchivoCliente:
     type: entity
-    table: archivo_tarea
+    table: archivo_cliente
     indexes:
-        fk_archivo_tarea_idx:
+        fk_cliente_archivo_idx:
             columns:
                 - archivo_id
-        fk_tarea_archivo_idx:
+        fk_archivo_cliente_idx:
             columns:
-                - tarea_id
+                - cliente_id
     id:
         id:
             type: integer
@@ -28,14 +28,14 @@ ContadoresBundle\Entity\ArchivoTarea:
                 archivo_id:
                     referencedColumnName: id
             orphanRemoval: false
-        tarea:
-            targetEntity: Tarea
+        cliente:
+            targetEntity: Cliente
             cascade: {  }
             fetch: LAZY
             mappedBy: null
             inversedBy: null
             joinColumns:
-                tarea_id:
+                cliente_id:
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }

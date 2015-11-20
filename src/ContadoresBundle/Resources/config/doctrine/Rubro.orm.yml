@@ -1,10 +1,10 @@
-ContadoresBundle\Entity\ImpuestoCuil:
+ContadoresBundle\Entity\Rubro:
     type: entity
-    table: impuesto_cuil
+    table: rubro
     indexes:
-        impuestos_cuil_idx:
+        fk_area_rubro_idx:
             columns:
-                - impuesto_id
+                - area_id
     id:
         id:
             type: integer
@@ -15,29 +15,21 @@ ContadoresBundle\Entity\ImpuestoCuil:
             generator:
                 strategy: IDENTITY
     fields:
-        cuil:
-            type: integer
-            nullable: false
-            options:
-                unsigned: false
-        mes:
+        nombre:
             type: string
             nullable: false
-            length: 12
+            length: 45
             options:
                 fixed: false
-        fecha:
-            type: date
-            nullable: false
     manyToOne:
-        impuesto:
-            targetEntity: Impuesto
+        area:
+            targetEntity: Area
             cascade: {  }
             fetch: LAZY
             mappedBy: null
             inversedBy: null
             joinColumns:
-                impuesto_id:
+                area_id:
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }

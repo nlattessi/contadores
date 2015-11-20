@@ -9,18 +9,18 @@ use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\View\TwitterBootstrapView;
 
-use ContadoresBundle\Entity\ArchivoSubTarea;
-use ContadoresBundle\Form\ArchivoSubTareaType;
-use ContadoresBundle\Form\ArchivoSubTareaFilterType;
+use ContadoresBundle\Entity\ArchivoMetadata;
+use ContadoresBundle\Form\ArchivoMetadataType;
+use ContadoresBundle\Form\ArchivoMetadataFilterType;
 
 /**
- * ArchivoSubTarea controller.
+ * ArchivoMetadata controller.
  *
  */
-class ArchivoSubTareaController extends Controller
+class ArchivoMetadataController extends Controller
 {
     /**
-     * Lists all ArchivoSubTarea entities.
+     * Lists all ArchivoMetadata entities.
      *
      */
     public function indexAction()
@@ -29,7 +29,7 @@ class ArchivoSubTareaController extends Controller
 
         list($entities, $pagerHtml) = $this->paginator($queryBuilder);
 
-        return $this->render('ContadoresBundle:ArchivoSubTarea:index.html.twig', array(
+        return $this->render('ContadoresBundle:ArchivoMetadata:index.html.twig', array(
             'entities' => $entities,
             'pagerHtml' => $pagerHtml,
             'filterForm' => $filterForm->createView(),
@@ -44,13 +44,13 @@ class ArchivoSubTareaController extends Controller
     {
         $request = $this->getRequest();
         $session = $request->getSession();
-        $filterForm = $this->createForm(new ArchivoSubTareaFilterType());
+        $filterForm = $this->createForm(new ArchivoMetadataFilterType());
         $em = $this->getDoctrine()->getManager();
-        $queryBuilder = $em->getRepository('ContadoresBundle:ArchivoSubTarea')->createQueryBuilder('e');
+        $queryBuilder = $em->getRepository('ContadoresBundle:ArchivoMetadata')->createQueryBuilder('e');
 
         // Reset filter
         if ($request->get('filter_action') == 'reset') {
-            $session->remove('ArchivoSubTareaControllerFilter');
+            $session->remove('ArchivoMetadataControllerFilter');
         }
 
         // Filter action
@@ -63,13 +63,13 @@ class ArchivoSubTareaController extends Controller
                 $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
                 // Save filter to session
                 $filterData = $filterForm->getData();
-                $session->set('ArchivoSubTareaControllerFilter', $filterData);
+                $session->set('ArchivoMetadataControllerFilter', $filterData);
             }
         } else {
             // Get filter from session
-            if ($session->has('ArchivoSubTareaControllerFilter')) {
-                $filterData = $session->get('ArchivoSubTareaControllerFilter');
-                $filterForm = $this->createForm(new ArchivoSubTareaFilterType(), $filterData);
+            if ($session->has('ArchivoMetadataControllerFilter')) {
+                $filterData = $session->get('ArchivoMetadataControllerFilter');
+                $filterForm = $this->createForm(new ArchivoMetadataFilterType(), $filterData);
                 $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
             }
         }
@@ -94,7 +94,7 @@ class ArchivoSubTareaController extends Controller
         $me = $this;
         $routeGenerator = function($page) use ($me)
         {
-            return $me->generateUrl('archivosubtarea', array('page' => $page));
+            return $me->generateUrl('archivometadata', array('page' => $page));
         };
 
         // Paginator - view
@@ -110,13 +110,13 @@ class ArchivoSubTareaController extends Controller
     }
 
     /**
-     * Creates a new ArchivoSubTarea entity.
+     * Creates a new ArchivoMetadata entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity  = new ArchivoSubTarea();
-        $form = $this->createForm(new ArchivoSubTareaType(), $entity);
+        $entity  = new ArchivoMetadata();
+        $form = $this->createForm(new ArchivoMetadataType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -125,69 +125,69 @@ class ArchivoSubTareaController extends Controller
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
 
-            return $this->redirect($this->generateUrl('archivosubtarea_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('archivometadata_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('ContadoresBundle:ArchivoSubTarea:new.html.twig', array(
+        return $this->render('ContadoresBundle:ArchivoMetadata:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Displays a form to create a new ArchivoSubTarea entity.
+     * Displays a form to create a new ArchivoMetadata entity.
      *
      */
     public function newAction()
     {
-        $entity = new ArchivoSubTarea();
-        $form   = $this->createForm(new ArchivoSubTareaType(), $entity);
+        $entity = new ArchivoMetadata();
+        $form   = $this->createForm(new ArchivoMetadataType(), $entity);
 
-        return $this->render('ContadoresBundle:ArchivoSubTarea:new.html.twig', array(
+        return $this->render('ContadoresBundle:ArchivoMetadata:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a ArchivoSubTarea entity.
+     * Finds and displays a ArchivoMetadata entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ContadoresBundle:ArchivoSubTarea')->find($id);
+        $entity = $em->getRepository('ContadoresBundle:ArchivoMetadata')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ArchivoSubTarea entity.');
+            throw $this->createNotFoundException('Unable to find ArchivoMetadata entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('ContadoresBundle:ArchivoSubTarea:show.html.twig', array(
+        return $this->render('ContadoresBundle:ArchivoMetadata:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
 
     /**
-     * Displays a form to edit an existing ArchivoSubTarea entity.
+     * Displays a form to edit an existing ArchivoMetadata entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ContadoresBundle:ArchivoSubTarea')->find($id);
+        $entity = $em->getRepository('ContadoresBundle:ArchivoMetadata')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ArchivoSubTarea entity.');
+            throw $this->createNotFoundException('Unable to find ArchivoMetadata entity.');
         }
 
-        $editForm = $this->createForm(new ArchivoSubTareaType(), $entity);
+        $editForm = $this->createForm(new ArchivoMetadataType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('ContadoresBundle:ArchivoSubTarea:edit.html.twig', array(
+        return $this->render('ContadoresBundle:ArchivoMetadata:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -195,21 +195,21 @@ class ArchivoSubTareaController extends Controller
     }
 
     /**
-     * Edits an existing ArchivoSubTarea entity.
+     * Edits an existing ArchivoMetadata entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ContadoresBundle:ArchivoSubTarea')->find($id);
+        $entity = $em->getRepository('ContadoresBundle:ArchivoMetadata')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ArchivoSubTarea entity.');
+            throw $this->createNotFoundException('Unable to find ArchivoMetadata entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new ArchivoSubTareaType(), $entity);
+        $editForm = $this->createForm(new ArchivoMetadataType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -217,12 +217,12 @@ class ArchivoSubTareaController extends Controller
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
 
-            return $this->redirect($this->generateUrl('archivosubtarea_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('archivometadata_edit', array('id' => $id)));
         } else {
             $this->get('session')->getFlashBag()->add('error', 'flash.update.error');
         }
 
-        return $this->render('ContadoresBundle:ArchivoSubTarea:edit.html.twig', array(
+        return $this->render('ContadoresBundle:ArchivoMetadata:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -230,7 +230,7 @@ class ArchivoSubTareaController extends Controller
     }
 
     /**
-     * Deletes a ArchivoSubTarea entity.
+     * Deletes a ArchivoMetadata entity.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -240,10 +240,10 @@ class ArchivoSubTareaController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ContadoresBundle:ArchivoSubTarea')->find($id);
+            $entity = $em->getRepository('ContadoresBundle:ArchivoMetadata')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find ArchivoSubTarea entity.');
+                throw $this->createNotFoundException('Unable to find ArchivoMetadata entity.');
             }
 
             $em->remove($entity);
@@ -253,11 +253,11 @@ class ArchivoSubTareaController extends Controller
             $this->get('session')->getFlashBag()->add('error', 'flash.delete.error');
         }
 
-        return $this->redirect($this->generateUrl('archivosubtarea'));
+        return $this->redirect($this->generateUrl('archivometadata'));
     }
 
     /**
-     * Creates a form to delete a ArchivoSubTarea entity by id.
+     * Creates a form to delete a ArchivoMetadata entity by id.
      *
      * @param mixed $id The entity id
      *

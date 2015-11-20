@@ -1,10 +1,10 @@
-ContadoresBundle\Entity\TareaMetadata:
+ContadoresBundle\Entity\Periodo:
     type: entity
-    table: tarea_metadata
+    table: periodo
     indexes:
-        fk_rubro_tareaMeta_idx:
+        fk_periodo_esquema_idx:
             columns:
-                - rubro_id
+                - esquema_id
     id:
         id:
             type: integer
@@ -21,21 +21,23 @@ ContadoresBundle\Entity\TareaMetadata:
             length: 45
             options:
                 fixed: false
-        esperiodica:
-            type: boolean
+        fechaDesde:
+            type: date
             nullable: false
-            options:
-                default: '0'
-            column: esPeriodica
+            column: fecha_desde
+        fechaHasta:
+            type: date
+            nullable: false
+            column: fecha_hasta
     manyToOne:
-        rubro:
-            targetEntity: Rubro
+        esquema:
+            targetEntity: Esquema
             cascade: {  }
             fetch: LAZY
             mappedBy: null
             inversedBy: null
             joinColumns:
-                rubro_id:
+                esquema_id:
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }

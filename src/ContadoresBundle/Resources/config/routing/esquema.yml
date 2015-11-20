@@ -1,0 +1,30 @@
+esquema:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:Esquema:index" }
+
+esquema_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:Esquema:show" }
+
+esquema_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:Esquema:new" }
+
+esquema_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:Esquema:create" }
+    requirements: { _method: post }
+
+esquema_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:Esquema:edit" }
+
+esquema_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:Esquema:update" }
+    requirements: { _method: post|put }
+
+esquema_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:Esquema:delete" }
+    requirements: { _method: post|delete }

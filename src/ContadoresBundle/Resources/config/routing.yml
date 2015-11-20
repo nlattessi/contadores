@@ -1,3 +1,35 @@
+contadores_archivotarea:
+    resource: "@ContadoresBundle/Resources/config/routing/archivotarea.yml"
+    prefix:   /archivotarea
+
+contadores_archivometadata:
+    resource: "@ContadoresBundle/Resources/config/routing/archivometadata.yml"
+    prefix:   /archivometadata
+
+contadores_archivocliente:
+    resource: "@ContadoresBundle/Resources/config/routing/archivocliente.yml"
+    prefix:   /archivocliente
+
+contadores_archivo:
+    resource: "@ContadoresBundle/Resources/config/routing/archivo.yml"
+    prefix:   /archivo
+
+contadores_vencimiento:
+    resource: "@ContadoresBundle/Resources/config/routing/vencimiento.yml"
+    prefix:   /vencimiento
+
+contadores_periodo:
+    resource: "@ContadoresBundle/Resources/config/routing/periodo.yml"
+    prefix:   /periodo
+
+contadores_esquema:
+    resource: "@ContadoresBundle/Resources/config/routing/esquema.yml"
+    prefix:   /esquema
+
+contadores_rubro:
+    resource: "@ContadoresBundle/Resources/config/routing/rubro.yml"
+    prefix:   /rubro
+
 contadores_tareametadata:
     resource: "@ContadoresBundle/Resources/config/routing/tareametadata.yml"
     prefix:   /tareametadata
@@ -57,10 +89,6 @@ contadores_area:
 contadores_archivotareametadata:
     resource: "@ContadoresBundle/Resources/config/routing/archivotareametadata.yml"
     prefix:   /archivotareametadata
-
-contadores_archivotarea:
-    resource: "@ContadoresBundle/Resources/config/routing/archivotarea.yml"
-    prefix:   /archivotarea
 
 contadores_archivosubtareametadata:
     resource: "@ContadoresBundle/Resources/config/routing/archivosubtareametadata.yml"

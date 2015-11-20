@@ -17,4 +17,10 @@ ContadoresBundle\Entity\TipoEstado:
             length: 45
             options:
                 fixed: false
+        esEstadoFinal:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+            column: es_estado_final
     lifecycleCallbacks: {  }
