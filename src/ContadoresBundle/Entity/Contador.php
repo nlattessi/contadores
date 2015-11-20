@@ -38,14 +38,19 @@ class Contador
     private $telefono;
 
     /**
-     * @var \ContadoresBundle\Entity\Usuario
+     * @var boolean
      */
-    private $usuario;
+    private $esJefe = '0';
 
     /**
      * @var \ContadoresBundle\Entity\Area
      */
     private $area;
+
+    /**
+     * @var \ContadoresBundle\Entity\Usuario
+     */
+    private $usuario;
 
 
     /**
@@ -179,6 +184,54 @@ class Contador
     }
 
     /**
+     * Set esJefe
+     *
+     * @param boolean $esJefe
+     *
+     * @return Contador
+     */
+    public function setEsJefe($esJefe)
+    {
+        $this->esJefe = $esJefe;
+
+        return $this;
+    }
+
+    /**
+     * Get esJefe
+     *
+     * @return boolean
+     */
+    public function getEsJefe()
+    {
+        return $this->esJefe;
+    }
+
+    /**
+     * Set area
+     *
+     * @param \ContadoresBundle\Entity\Area $area
+     *
+     * @return Contador
+     */
+    public function setArea(\ContadoresBundle\Entity\Area $area = null)
+    {
+        $this->area = $area;
+
+        return $this;
+    }
+
+    /**
+     * Get area
+     *
+     * @return \ContadoresBundle\Entity\Area
+     */
+    public function getArea()
+    {
+        return $this->area;
+    }
+
+    /**
      * Set usuario
      *
      * @param \ContadoresBundle\Entity\Usuario $usuario
@@ -201,34 +254,4 @@ class Contador
     {
         return $this->usuario;
     }
-
-
-    /**
-     * Get area
-     *
-     * @return \ContadoresBundle\Entity\Area
-     */
-    public function getArea()
-    {
-        return $this->area;
-    }
-
-    /**
-     * Set area
-     *
-     * @param \ContadoresBundle\Entity\Area $area
-     *
-     * @return Contador
-     */
-    public function setArea($area)
-    {
-        $this->area = $area;
-
-        return $this;
-    }
-
-    public function __toString(){
-        return $this->nombre . " " . $this->apellido;
-    }
-
 }

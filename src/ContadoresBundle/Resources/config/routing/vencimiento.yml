@@ -1,0 +1,30 @@
+vencimiento:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:Vencimiento:index" }
+
+vencimiento_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:Vencimiento:show" }
+
+vencimiento_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:Vencimiento:new" }
+
+vencimiento_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:Vencimiento:create" }
+    requirements: { _method: post }
+
+vencimiento_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:Vencimiento:edit" }
+
+vencimiento_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:Vencimiento:update" }
+    requirements: { _method: post|put }
+
+vencimiento_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:Vencimiento:delete" }
+    requirements: { _method: post|delete }

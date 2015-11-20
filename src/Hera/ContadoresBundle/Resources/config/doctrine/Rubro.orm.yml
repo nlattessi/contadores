@@ -1,0 +1,35 @@
+Hera\ContadoresBundle\Entity\Rubro:
+    type: entity
+    table: rubro
+    indexes:
+        fk_area_rubro_idx:
+            columns:
+                - area_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+    manyToOne:
+        area:
+            targetEntity: Area
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                area_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

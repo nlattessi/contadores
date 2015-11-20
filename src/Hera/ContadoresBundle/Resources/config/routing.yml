@@ -1,0 +1,3 @@
+hera_contadores_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: HeraContadoresBundle:Default:index }

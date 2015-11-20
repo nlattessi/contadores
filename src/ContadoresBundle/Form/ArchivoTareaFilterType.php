@@ -2,7 +2,6 @@
 
 namespace ContadoresBundle\Form;
 
-use Lexik\Bundle\FormFilterBundle\Filter\FilterOperands;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -16,8 +15,6 @@ class ArchivoTareaFilterType extends AbstractType
     {
         $builder
             ->add('id', 'filter_number_range')
-            ->add('nombre', 'filter_text', array('condition_pattern' => FilterOperands::STRING_BOTH,))
-            ->add('ruta', 'filter_text')
         ;
 
         $listener = function(FormEvent $event)

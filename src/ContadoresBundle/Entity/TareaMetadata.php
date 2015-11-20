@@ -20,17 +20,12 @@ class TareaMetadata
     /**
      * @var boolean
      */
-    private $esperiodica = false;
+    private $esperiodica = '0';
 
     /**
-     * @var \ContadoresBundle\Entity\Impuesto
+     * @var \ContadoresBundle\Entity\Rubro
      */
-    private $impuesto;
-
-    /**
-     * @var \ContadoresBundle\Entity\Area
-     */
-    private $area;
+    private $rubro;
 
 
     /**
@@ -92,56 +87,26 @@ class TareaMetadata
     }
 
     /**
-     * Set impuesto
+     * Set rubro
      *
-     * @param \ContadoresBundle\Entity\Impuesto $impuesto
+     * @param \ContadoresBundle\Entity\Rubro $rubro
      *
      * @return TareaMetadata
      */
-    public function setImpuesto(\ContadoresBundle\Entity\Impuesto $impuesto = null)
+    public function setRubro(\ContadoresBundle\Entity\Rubro $rubro = null)
     {
-        $this->impuesto = $impuesto;
+        $this->rubro = $rubro;
 
         return $this;
     }
 
     /**
-     * Get impuesto
+     * Get rubro
      *
-     * @return \ContadoresBundle\Entity\Impuesto
+     * @return \ContadoresBundle\Entity\Rubro
      */
-    public function getImpuesto()
+    public function getRubro()
     {
-        return $this->impuesto;
-    }
-
-    /**
-     * Set area
-     *
-     * @param \ContadoresBundle\Entity\Area $area
-     *
-     * @return TareaMetadata
-     */
-    public function setArea(\ContadoresBundle\Entity\Area $area = null)
-    {
-        $this->area = $area;
-
-        return $this;
-    }
-
-    /**
-     * Get area
-     *
-     * @return \ContadoresBundle\Entity\Area
-     */
-    public function getArea()
-    {
-        return $this->area;
-    }
-
-    public function __toString()
-    {
-        return $this->nombre;
+        return $this->rubro;
     }
 }
-

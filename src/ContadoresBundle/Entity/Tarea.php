@@ -1,7 +1,6 @@
 <?php
 
 namespace ContadoresBundle\Entity;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Tarea
@@ -44,14 +43,24 @@ class Tarea
     private $nombre;
 
     /**
-     * @var \ContadoresBundle\Entity\Contador
+     * @var integer
      */
-    private $contador;
+    private $tiempoEstimado;
+
+    /**
+     * @var \DateTime
+     */
+    private $fechaBaja;
 
     /**
      * @var \ContadoresBundle\Entity\Cliente
      */
     private $cliente;
+
+    /**
+     * @var \ContadoresBundle\Entity\Contador
+     */
+    private $contador;
 
     /**
      * @var \ContadoresBundle\Entity\EstadoTarea
@@ -62,12 +71,6 @@ class Tarea
      * @var \ContadoresBundle\Entity\TareaMetadata
      */
     private $tareaMetadata;
-
-    /**
-     * @ORM\OneToMany(targetEntity="SubTarea", mappedBy="tarea")
-     */
-    private $subTareas;
-
 
 
     /**
@@ -225,27 +228,51 @@ class Tarea
     }
 
     /**
-     * Set contador
+     * Set tiempoEstimado
      *
-     * @param \ContadoresBundle\Entity\Contador $contador
+     * @param integer $tiempoEstimado
      *
      * @return Tarea
      */
-    public function setContador(\ContadoresBundle\Entity\Contador $contador = null)
+    public function setTiempoEstimado($tiempoEstimado)
     {
-        $this->contador = $contador;
+        $this->tiempoEstimado = $tiempoEstimado;
 
         return $this;
     }
 
     /**
-     * Get contador
+     * Get tiempoEstimado
      *
-     * @return \ContadoresBundle\Entity\Contador
+     * @return integer
      */
-    public function getContador()
+    public function getTiempoEstimado()
     {
-        return $this->contador;
+        return $this->tiempoEstimado;
+    }
+
+    /**
+     * Set fechaBaja
+     *
+     * @param \DateTime $fechaBaja
+     *
+     * @return Tarea
+     */
+    public function setFechaBaja($fechaBaja)
+    {
+        $this->fechaBaja = $fechaBaja;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaBaja
+     *
+     * @return \DateTime
+     */
+    public function getFechaBaja()
+    {
+        return $this->fechaBaja;
     }
 
     /**
@@ -270,6 +297,30 @@ class Tarea
     public function getCliente()
     {
         return $this->cliente;
+    }
+
+    /**
+     * Set contador
+     *
+     * @param \ContadoresBundle\Entity\Contador $contador
+     *
+     * @return Tarea
+     */
+    public function setContador(\ContadoresBundle\Entity\Contador $contador = null)
+    {
+        $this->contador = $contador;
+
+        return $this;
+    }
+
+    /**
+     * Get contador
+     *
+     * @return \ContadoresBundle\Entity\Contador
+     */
+    public function getContador()
+    {
+        return $this->contador;
     }
 
     /**
@@ -318,28 +369,5 @@ class Tarea
     public function getTareaMetadata()
     {
         return $this->tareaMetadata;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSubTareas()
-    {
-        return $this->subTareas;
-    }
-
-    /**
-     * @param mixed $subTareas
-     */
-    public function setSubTareas($subTareas)
-    {
-        $this->subTareas = $subTareas;
-    }
-
-
-
-
-    public function __toString(){
-        return $this->nombre;
     }
 }

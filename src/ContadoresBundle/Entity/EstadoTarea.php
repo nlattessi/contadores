@@ -23,9 +23,9 @@ class EstadoTarea
     private $fechaFin;
 
     /**
-     * @var string
+     * @var integer
      */
-    private $indiceCompletado = '0';
+    private $minutosTrabajados = '0';
 
     /**
      * @var \ContadoresBundle\Entity\Tarea
@@ -102,27 +102,27 @@ class EstadoTarea
     }
 
     /**
-     * Set indiceCompletado
+     * Set minutosTrabajados
      *
-     * @param string $indiceCompletado
+     * @param integer $minutosTrabajados
      *
      * @return EstadoTarea
      */
-    public function setIndiceCompletado($indiceCompletado)
+    public function setMinutosTrabajados($minutosTrabajados)
     {
-        $this->indiceCompletado = $indiceCompletado;
+        $this->minutosTrabajados = $minutosTrabajados;
 
         return $this;
     }
 
     /**
-     * Get indiceCompletado
+     * Get minutosTrabajados
      *
-     * @return string
+     * @return integer
      */
-    public function getIndiceCompletado()
+    public function getMinutosTrabajados()
     {
-        return $this->indiceCompletado;
+        return $this->minutosTrabajados;
     }
 
     /**
@@ -196,10 +196,33 @@ class EstadoTarea
     {
         return $this->contador;
     }
+    /**
+     * @var \DateTime
+     */
+    private $fechaCreacion;
 
-    public function __toString()
+
+    /**
+     * Set fechaCreacion
+     *
+     * @param \DateTime $fechaCreacion
+     *
+     * @return EstadoTarea
+     */
+    public function setFechaCreacion($fechaCreacion)
     {
-        return (String) $this->id;
+        $this->fechaCreacion = $fechaCreacion;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaCreacion
+     *
+     * @return \DateTime
+     */
+    public function getFechaCreacion()
+    {
+        return $this->fechaCreacion;
     }
 }
-

@@ -17,12 +17,11 @@ class TipoEstado
      */
     private $nombre;
 
+    /**
+     * @var boolean
+     */
+    private $esEstadoFinal = '0';
 
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
 
     /**
      * Get id
@@ -58,7 +57,27 @@ class TipoEstado
         return $this->nombre;
     }
 
-    public function __toString(){
-        return $this->nombre;
+    /**
+     * Set esEstadoFinal
+     *
+     * @param boolean $esEstadoFinal
+     *
+     * @return TipoEstado
+     */
+    public function setEsEstadoFinal($esEstadoFinal)
+    {
+        $this->esEstadoFinal = $esEstadoFinal;
+
+        return $this;
+    }
+
+    /**
+     * Get esEstadoFinal
+     *
+     * @return boolean
+     */
+    public function getEsEstadoFinal()
+    {
+        return $this->esEstadoFinal;
     }
 }

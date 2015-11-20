@@ -1,0 +1,30 @@
+archivometadata:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:ArchivoMetadata:index" }
+
+archivometadata_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:ArchivoMetadata:show" }
+
+archivometadata_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:ArchivoMetadata:new" }
+
+archivometadata_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:ArchivoMetadata:create" }
+    requirements: { _method: post }
+
+archivometadata_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:ArchivoMetadata:edit" }
+
+archivometadata_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:ArchivoMetadata:update" }
+    requirements: { _method: post|put }
+
+archivometadata_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:ArchivoMetadata:delete" }
+    requirements: { _method: post|delete }

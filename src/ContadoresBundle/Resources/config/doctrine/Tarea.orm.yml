@@ -50,21 +50,17 @@ ContadoresBundle\Entity\Tarea:
             length: 45
             options:
                 fixed: false
-    oneToMany:
-      subTareas:
-        targetEntity: SubTarea
-        mappedBy: tarea
+        tiempoEstimado:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: tiempo_estimado
+        fechaBaja:
+            type: date
+            nullable: true
+            column: fecha_baja
     manyToOne:
-        contador:
-            targetEntity: Contador
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                contador_id:
-                    referencedColumnName: id
-            orphanRemoval: false
         cliente:
             targetEntity: Cliente
             cascade: {  }
@@ -75,17 +71,25 @@ ContadoresBundle\Entity\Tarea:
                 cliente_id:
                     referencedColumnName: id
             orphanRemoval: false
+        contador:
+            targetEntity: Contador
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                contador_id:
+                    referencedColumnName: id
+            orphanRemoval: false
         estadoActual:
             targetEntity: EstadoTarea
-            cascade: { }
-            onDelete: "CASCADE"
+            cascade: {  }
             fetch: LAZY
             mappedBy: null
             inversedBy: null
             joinColumns:
                 estado_actual_id:
                     referencedColumnName: id
-                    onDelete: SET NULL
             orphanRemoval: false
         tareaMetadata:
             targetEntity: TareaMetadata

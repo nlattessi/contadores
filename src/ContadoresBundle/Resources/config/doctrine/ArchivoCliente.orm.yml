@@ -1,0 +1,41 @@
+ContadoresBundle\Entity\ArchivoCliente:
+    type: entity
+    table: archivo_cliente
+    indexes:
+        fk_cliente_archivo_idx:
+            columns:
+                - archivo_id
+        fk_archivo_cliente_idx:
+            columns:
+                - cliente_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        archivo:
+            targetEntity: Archivo
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                archivo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        cliente:
+            targetEntity: Cliente
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                cliente_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

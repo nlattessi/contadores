@@ -1,0 +1,30 @@
+periodo:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:Periodo:index" }
+
+periodo_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:Periodo:show" }
+
+periodo_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:Periodo:new" }
+
+periodo_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:Periodo:create" }
+    requirements: { _method: post }
+
+periodo_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:Periodo:edit" }
+
+periodo_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:Periodo:update" }
+    requirements: { _method: post|put }
+
+periodo_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:Periodo:delete" }
+    requirements: { _method: post|delete }

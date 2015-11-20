@@ -2,12 +2,9 @@ ContadoresBundle\Entity\TareaMetadata:
     type: entity
     table: tarea_metadata
     indexes:
-        area_tareaMetadata_idx:
+        fk_rubro_tareaMeta_idx:
             columns:
-                - area_id
-        impuesto_tarea_idx:
-            columns:
-                - impuesto_id
+                - rubro_id
     id:
         id:
             type: integer
@@ -31,24 +28,14 @@ ContadoresBundle\Entity\TareaMetadata:
                 default: '0'
             column: esPeriodica
     manyToOne:
-        impuesto:
-            targetEntity: Impuesto
+        rubro:
+            targetEntity: Rubro
             cascade: {  }
             fetch: LAZY
             mappedBy: null
             inversedBy: null
             joinColumns:
-                impuesto_id:
-                    referencedColumnName: id
-            orphanRemoval: false
-        area:
-            targetEntity: Area
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                area_id:
+                rubro_id:
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }

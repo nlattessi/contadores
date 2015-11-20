@@ -5,6 +5,9 @@ ContadoresBundle\Entity\Contador:
         usuario_contador_idx:
             columns:
                 - usuario_id
+        IDX_E83EF8FABD0F409C:
+            columns:
+                - area_id
     id:
         id:
             type: integer
@@ -45,6 +48,12 @@ ContadoresBundle\Entity\Contador:
             length: 45
             options:
                 fixed: false
+        esJefe:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+            column: es_jefe
     manyToOne:
         area:
             targetEntity: Area
@@ -66,5 +75,4 @@ ContadoresBundle\Entity\Contador:
                 usuario_id:
                     referencedColumnName: id
             orphanRemoval: false
-
     lifecycleCallbacks: {  }

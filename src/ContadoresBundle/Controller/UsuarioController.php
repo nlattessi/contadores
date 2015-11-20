@@ -286,4 +286,12 @@ class UsuarioController extends Controller
             ->getForm()
         ;
     }
+
+    public function asociarCliente(){
+
+    }
+
+    public function asociarContador(){
+
+    }
 }
