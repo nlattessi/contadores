@@ -35,6 +35,12 @@
             <label class="control-label">Área</label>
             <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.area    }}</span>            </div>
         </div>
+        <div class="control-group">
+            <label class="control-label">¿Es Jefe de área?</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">
+                    {% if entity.esJefe %}Si{% else %}No{% endif %}
+                </span>            </div>
+        </div>
 
     </fieldset>
 <h2>Tareas</h2>

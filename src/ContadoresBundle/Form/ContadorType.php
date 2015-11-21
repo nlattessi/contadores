@@ -18,6 +18,7 @@ class ContadorType extends AbstractType
             ->add('telefono')
             ->add('usuario')
             ->add('area')
+            ->add('esJefe', 'choice', ['choices' => [1 => 'Si', 0 => 'No'], 'label' => '¿Es Jefe de área? ']);
         ;
     }
 
