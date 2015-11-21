@@ -2,6 +2,7 @@
 
 namespace ContadoresBundle\Controller;
 
+use ContadoresBundle\Form\UsuarioClienteType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -287,11 +288,4 @@ class UsuarioController extends Controller
         ;
     }
 
-    public function asociarCliente(){
-
-    }
-
-    public function asociarContador(){
-
-    }
 }

@@ -29,10 +29,3 @@ usuario_delete:
     defaults: { _controller: "ContadoresBundle:Usuario:delete" }
     requirements: { _method: post|delete }
 
-usuario_asociar_cliente:
-    pattern:  /asociarcliente
-    defaults: { _controller: "ContadoresBundle:Usuario:asociarCliente" }
-
-usuario_asociar_contador:
-    pattern:  /asociarcontador
-    defaults: { _controller: "ContadoresBundle:Usuario:asociarContador" }

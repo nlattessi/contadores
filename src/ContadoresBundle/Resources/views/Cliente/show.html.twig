@@ -38,11 +38,7 @@
         <a href="{{ path('tarea_show', { 'id': tarea.id }) }}">
             <b>{{ tarea.nombre }}</b> </a>
         <br/>
-        {% for subTarea in tarea.subTareas %}
-            <a href="{{ path('subtarea_show', { 'id': subTarea.id }) }}">
-                <i>{{ subTarea.nombre }}</i>
-            </a>    <br/>
-        {% endfor %}
+
     {% endfor %}
     {% if not tareas %}
         <p> <i>No hay tareas asignadas</i></p>

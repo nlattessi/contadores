@@ -48,28 +48,9 @@
 </form>
 
 <div>
-    <h4 class="control-label">Sub tareas ({{ entity.subTareas|length }})</h4>
-
-    {% if entity.subTareas|length < 1 %}
-        <p> <i>Esta tarea no tiene sub tareas</i></p>
-    {% endif %}
-    {% for subTarea in entity.subTareas %}
-        <p >
-            <a href="{{ path('subtarea_show', { 'id': subTarea.id }) }}">
-                <i>{{ subTarea.nombre }} ({{ subTarea.estadoActual.tipoEstado }} )</i>
-            </a>
-        </p>
-    {% endfor %}
-</div>
-<div>
     <div class="float-left">
         <a class="btn" href="{{ path('tarea') }}">
             {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>
-    </div>
-    <div class="float-left">
-        <a class="btn btn-primary" href="{{ path('subtarea_new') }}">
-            Crear SubTarea
         </a>
     </div>
     <div class="float-left">

@@ -34,14 +34,6 @@ contadores_tareametadata:
     resource: "@ContadoresBundle/Resources/config/routing/tareametadata.yml"
     prefix:   /tareametadata
 
-contadores_subtarea:
-    resource: "@ContadoresBundle/Resources/config/routing/subtarea.yml"
-    prefix:   /subtarea
-
-contadores_estadosubtarea:
-    resource: "@ContadoresBundle/Resources/config/routing/estadosubtarea.yml"
-    prefix:   /estadosubtarea
-
 contadores_estadotarea:
     resource: "@ContadoresBundle/Resources/config/routing/estadotarea.yml"
     prefix:   /estadotarea
@@ -58,21 +50,9 @@ contadores_tarea:
     resource: "@ContadoresBundle/Resources/config/routing/tarea.yml"
     prefix:   /tarea
 
-contadores_subtareametadata:
-    resource: "@ContadoresBundle/Resources/config/routing/subtareametadata.yml"
-    prefix:   /subtareametadata
-
 contadores_rol:
     resource: "@ContadoresBundle/Resources/config/routing/rol.yml"
     prefix:   /rol
-
-contadores_impuestocuil:
-    resource: "@ContadoresBundle/Resources/config/routing/impuestocuil.yml"
-    prefix:   /impuestocuil
-
-contadores_impuesto:
-    resource: "@ContadoresBundle/Resources/config/routing/impuesto.yml"
-    prefix:   /impuesto
 
 contadores_contador:
     resource: "@ContadoresBundle/Resources/config/routing/contador.yml"
@@ -90,13 +70,6 @@ contadores_archivotareametadata:
     resource: "@ContadoresBundle/Resources/config/routing/archivotareametadata.yml"
     prefix:   /archivotareametadata
 
-contadores_archivosubtareametadata:
-    resource: "@ContadoresBundle/Resources/config/routing/archivosubtareametadata.yml"
-    prefix:   /archivosubtareametadata
-
-contadores_archivosubtarea:
-    resource: "@ContadoresBundle/Resources/config/routing/archivosubtarea.yml"
-    prefix:   /archivosubtarea
 
 login:
     path:     /login

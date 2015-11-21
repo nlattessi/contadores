@@ -281,9 +281,9 @@ class ContadorController extends Controller
     {
         $tareasService =  $this->get('contadores.servicios.tareas');
 
-        $tareasConSubTareas = $tareasService->obtenerTareasPorContador($id,$filterForm,
+        $tareas = $tareasService->obtenerTareasPorContador($id,$filterForm,
             $this->get('lexik_form_filter.query_builder_updater'),$pendientes  );
-        return $tareasConSubTareas;
+        return $tareas;
     }
 
     public function tareasTodasAction(Request $request)
