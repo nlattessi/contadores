@@ -12,7 +12,6 @@ class UsuarioType extends AbstractType
     {
         $builder
             ->add('mail')
-            ->add('entidadId')
             ->add('rol')
         ;
     }
