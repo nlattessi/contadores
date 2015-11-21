@@ -9,7 +9,7 @@
 namespace ContadoresBundle\Servicios;
 
 
-use ContadoresBundle\Entity\EstadoSubTarea;
+
 use ContadoresBundle\Entity\EstadoTarea;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
@@ -125,57 +125,7 @@ class TareasService {
         return $tareas;
     }
 
-    public function cambiarEstadoSubTarea($subTareaId, $nuevoEstadoId, $horas){
 
-        $tipoEstado =  $this->em->getRepository('ContadoresBundle:TipoEstado')->find($nuevoEstadoId);
-        $subTarea = $this->em->getRepository('ContadoresBundle:SubTarea')->find($subTareaId);
-        if($horas == null){
-            $horas = 0;
-        }
-
-        $estadoViejo = $subTarea->getEstadoActual();
-        $estadoViejo->setFechaFin(new \DateTime(null));
-        $estadoViejo->setHorasTrabajadas($horas);
-        $this->em->persist($estadoViejo);
-
-        $estadoSubTarea = $this->crearEstadoSubTarea($subTarea,$tipoEstado);
-
-        if(in_array($nuevoEstadoId,$this->estadosTerminales))
-        {
-            $estadoSubTarea->setFechaFin(new \DateTime(null));
-        }
-
-      //  $estadoSubTarea->setContador($subTarea->getTarea()->getContador());
-        $this->em->persist($estadoSubTarea);
-
-        $subTarea->sumarTiempo($horas);
-        $subTarea->setEstadoActual($estadoSubTarea);
-        $this->em->persist($subTarea);
-
-        $this->em->flush();
-        $this->verificarEstadoTarea($subTarea->getTarea(),$nuevoEstadoId );
-
-        return $subTarea;
-    }
-
-    public function crearEstadoSubTareaNuevo($subTarea)
-    {
-        $tipoEstado =  $this->em->getRepository('ContadoresBundle:TipoEstado')->find($this->tipoEstadoNuevo);
-        return $this->crearEstadoSubTarea($subTarea, $tipoEstado);
-    }
-
-    public function crearEstadoSubTarea($subTarea, $tipoEstado){
-
-        $estadoSubTarea = new EstadoSubTarea();
-        $estadoSubTarea->setTipoEstado($tipoEstado);
-        $estadoSubTarea->setSubTarea($subTarea);
-        $estadoSubTarea->setFechaInicio(new \DateTime(null));
-
-        $this->em->persist($estadoSubTarea);
-        $this->em->flush();
-
-        return $estadoSubTarea;
-    }
 
     public function crearEstadoTareaNuevo($tarea)
     {
@@ -197,12 +147,7 @@ class TareasService {
 
     public function verificarEstadoTarea($tarea,$tipoEstadoId){
 
-        foreach( $tarea->getSubTareas() as $subTarea )
-        {
-            if(! in_array($subTarea->getEstadoActual()->getTipoEstado()->getId(),$this->estadosTerminales)){
-                return false;
-            }
-        }
+
         $tarea->setFechaFin(new \DateTime(null));
         $this->cambiarEstadoTarea($tarea, $tipoEstadoId);
 
@@ -221,7 +166,6 @@ class TareasService {
             $estadoTarea->setFechaFin(new \DateTime(null));
         }
 
-        //  $estadoSubTarea->setContador($subTarea->getTarea()->getContador());
         $this->em->persist($estadoTarea);
 
         $tarea->setEstadoActual($estadoTarea);

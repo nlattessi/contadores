@@ -45,18 +45,7 @@
 
         </fieldset>
     </form>
-    <h4 class="control-label">Sub tareas ({{ entity.subTareas|length }})</h4>
 
-        {% if entity.subTareas|length < 1 %}
-            <p> <i>Esta tarea no tiene sub tareas</i></p>
-        {% endif %}
-        {% for subTarea in entity.subTareas %}
-            <p>
-                <a href="{{ path('subtarea_cliente_show', { 'id': subTarea.id }) }}">
-                    <i>{{ subTarea.nombre }}({{ subTarea.estadoActual.tipoEstado }} )</i>
-                </a>
-            </p>
-        {% endfor %}
 
 
 {% endblock %}

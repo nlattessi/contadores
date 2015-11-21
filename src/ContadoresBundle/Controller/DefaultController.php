@@ -19,10 +19,10 @@ class DefaultController extends Controller
     public function homeAction()
     {
         $tareasService =  $this->get('contadores.servicios.tareas');
-        $tareasConSubTareas = $tareasService->obtenerTareasUrgentesPorUsuario($this->getUser());
+        $tareas = $tareasService->obtenerTareasUrgentesPorUsuario($this->getUser());
 
         return $this->render('ContadoresBundle:Default:home.html.twig', array(
-            'tareas'        => $tareasConSubTareas,     ));
+            'tareas'        => $tareas,     ));
     }
 
     public function enConstruccionAction()

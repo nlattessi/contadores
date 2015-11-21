@@ -1,11 +1,7 @@
-{% extends 'JordiLlonchCrudGeneratorBundle::layout.html.twig' %}
+{% extends 'ContadoresBundle:Layout:layout.html.twig' %}
 
 {% block title %}
-{{ parent() }} - {{ 'views.show.show'|trans({'%entity%': 'Contador'}, 'JordiLlonchCrudGeneratorBundle') }}
-{% endblock %}
-
-{% block menu %}
-{{ include('ContadoresBundle:NavBars:navbar.html.twig') }}
+    {{ parent() }} -  Home
 {% endblock %}
 
 {% block page %}
@@ -48,12 +44,6 @@
         <a href="{{ path('tarea_show', { 'id': tarea.id }) }}" >
             <b>{{ tarea.nombre }}</b>
         </a>  <br/>
-        {% for subTarea in tarea.subTareas %}
-        <a href="{{ path('subtarea_show', { 'id': tarea.id }) }}"
-                >
-            <i>{{ subTarea.nombre }}</i>
-        </a>    <br/>
-        {% endfor %}
     {% endfor %}
     {% if not tareas %}
         <p> <i>No hay tareas asignadas</i></p>
