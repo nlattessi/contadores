@@ -7,6 +7,11 @@ namespace ContadoresBundle\Entity;
  */
 class Rol
 {
+
+    static $admin = 'ROLE_ADMIN';
+    static $jefe = 'ROLE_JEFE';
+    static $contador = 'ROLE_CONTADOR';
+    static $cliente = 'ROLE_CLIENTE';
     /**
      * @var integer
      */

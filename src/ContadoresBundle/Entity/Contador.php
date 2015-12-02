@@ -254,4 +254,9 @@ class Contador
     {
         return $this->usuario;
     }
+
+    function __toString()
+    {
+        return $this->getApellido() . ', ' . $this->getNombre();
+    }
 }

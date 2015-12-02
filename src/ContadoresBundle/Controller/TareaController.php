@@ -2,6 +2,7 @@
 
 namespace ContadoresBundle\Controller;
 
+use ContadoresBundle\Entity\Rol;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -44,9 +45,22 @@ class TareaController extends Controller
     {
         $request = $this->getRequest();
         $session = $request->getSession();
+        $usuario = $this->getUser();
         $filterForm = $this->createForm(new TareaFilterType());
         $em = $this->getDoctrine()->getManager();
-        $queryBuilder = $em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('e');
+        if($usuario->getRol() == Rol::$contador) {
+            $contador = $em->getRepository('ContadoresBundle:Contador')->find($usuario->getEntidadId());
+            if ($contador) {
+            $queryBuilder = $em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('e')
+                ->where('e.contador = ?1')
+                ->setParameter(1, $contador->getId());
+            }else{
+                //TODO: error
+            }
+        }else{
+            $queryBuilder = $em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('e');
+        }
+
 
         // Reset filter
         if ($request->get('filter_action') == 'reset') {
@@ -115,11 +129,17 @@ class TareaController extends Controller
      */
     public function createAction(Request $request)
     {
+        $usuarioService =  $this->get('contadores.servicios.usuario');
         $entity  = new Tarea();
         $form = $this->createForm(new TareaType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
+            if ($this->getUser()->getRol() == 'ROLE_PRESTADOR') {
+                $contador = $usuarioService->obtenerContadorPorUsuario($this->getUser());
+                $entity->setContador($contador);
+            }
+
             if(strlen($entity->getNombre()) < 1){
 
                 $entity->setNombre($entity->getTareaMetadata()->getNombre() . ' ' . $entity->getCliente()->getNombre());

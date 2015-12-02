@@ -12,7 +12,7 @@ class TareaMetadataType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('area')
+            ->add('rubro')
             ->add('esperiodica', 'checkbox', array('required' => false, 'label' => 'Es periódica'))
         ;
     }

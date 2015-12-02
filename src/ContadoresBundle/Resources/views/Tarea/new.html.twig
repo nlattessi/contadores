@@ -1,4 +1,5 @@
-{% extends 'JordiLlonchCrudGeneratorBundle::layout.html.twig' %}
+{% extends 'ContadoresBundle:Layout:layout.html.twig' %}
+{% form_theme form 'ContadoresBundle:Tarea:fields.html.twig' %}
 
 {% block title %}
 {{ parent() }} - {{ 'views.new.creation'|trans({'%entity%': 'Tarea'}, 'JordiLlonchCrudGeneratorBundle') }}
@@ -13,7 +14,9 @@
 <h1>{{ 'views.new.creation'|trans({'%entity%': 'Tarea'}, 'JordiLlonchCrudGeneratorBundle') }}</h1>
 
 <form class="well" action="{{ path('tarea_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+    <div class="row ">
+        {{ form_widget(form.vencimientoInterno, {'attr': {'class': 'form-control', 'data-provide': 'datepicker', 'data-date-format': 'dd/mm/yyyy', 'data-date-autoclose': 'true'}}) }}
+    </div>
     <p>
         <button type="submit" class="btn btn-success">{{ 'views.new.create'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
     </p>

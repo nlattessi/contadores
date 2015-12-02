@@ -80,4 +80,8 @@ class Rubro
     {
         return $this->area;
     }
+
+    public function __toString(){
+        return $this->getNombre();
+    }
 }

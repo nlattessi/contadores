@@ -18,6 +18,9 @@ class TareaMetadataFilterType extends AbstractType
             ->add('id', 'filter_number_range')
             ->add('nombre', 'filter_text', array('condition_pattern' => FilterOperands::STRING_BOTH,))
             ->add('esperiodica', 'filter_choice')
+            ->add('rubro', 'entity',
+                array('class' => 'ContadoresBundle\Entity\Rubro',
+                    'property' => 'nombre'))
         ;
 
         $listener = function(FormEvent $event)

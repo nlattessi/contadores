@@ -1,21 +1,181 @@
-<div class="navbar nav">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <a class="brand" href="{{ path('home') }}">Contadores</a>
+<li class="site-menu-item">
+    <a class="animsition-link" href="{{ path('home') }}" data-slug="angular">
+        <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
+        <span class="site-menu-title">Dashboard</span>
+        <div class="site-menu-label">
 
-          	<div class="nav-collapse collapse">
-                <ul class="nav">
-                    <li class="divider-vertical"></li>
-                    <li><a href="{{ path('contador_pendientes') }}">Mis Tareas pendientes</a></li>
-                    <li><a href="{{ path('contador_tareas') }}">Todas mis Tareas</a></li>
-                </ul>
-                {{ include('ContadoresBundle:NavBars:menu_usuario.html.twig') }}
-            </div>
         </div>
-    </div>
-</div>
+    </a>
+</li>
+<li class="site-menu-item has-sub">
+    <a href="javascript:void(0)" data-slug="layout">
+        <i class="site-menu-icon wb-user-circle" aria-hidden="true"></i>
+        <span class="site-menu-title">Clientes</span>
+        <span class="site-menu-arrow"></span>
+    </a>
+    <ul class="site-menu-sub">
+        <li class="site-menu-item">
+            <a class="animsition-link" href="../../html/jefe/clientes-crear.html" data-slug="layout-menu-collapsed">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Crear clientes</span>
+            </a>
+        </li>
+        <li class="site-menu-item">
+            <a class="animsition-link" href="../../html/jefe/clientes-ver.html" data-slug="layout-menu-expended">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Ver clientes</span>
+            </a>
+        </li>
+        <li class="site-menu-item">
+            <a class="animsition-link" href="../../html/jefe/clientes-asignarPeriodica.html" data-slug="layout-menu-expended">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Asignar T. periodica</span>
+            </a>
+        </li>
+        <li class="site-menu-item">
+            <a class="animsition-link" href="{{ path('tarea_new') }}" data-slug="layout-menu-expended">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Asignar T. no periodica</span>
+            </a>
+        </li>
+        <li class="site-menu-item">
+            <a class="animsition-link" href="{{ path('tarea_new') }}" data-slug="layout-menu-expended">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Cargar tareas realizadas</span>
+            </a>
+        </li>
+        <li class="site-menu-item">
+            <a class="animsition-link" href="../../html/jefe/clientes-agendarTarea.html" data-slug="layout-menu-expended">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Agendar tarea</span>
+            </a>
+        </li>
+    </ul>
+</li>
+
+
+
+<li class="site-menu-item has-sub ">
+    <a href="javascript:void(0)" data-slug="layout">
+        <i class="site-menu-icon wb-clipboard" aria-hidden="true"></i>
+        <span class="site-menu-title">Tareas</span>
+        <span class="site-menu-arrow"></span>
+    </a>
+    <ul class="site-menu-sub">
+        <li class="site-menu-item is-shown">
+            <a class="animsition-link" href="{{ path('tareametadata_new') }}" data-slug="layout-menu-collapsed">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Crear tareas</span>
+            </a>
+        </li>
+
+        <li class="site-menu-item">
+            <a class="animsition-link" href="{{ path('tareametadata') }}" data-slug="layout-menu-expended">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Ver Tareas</span>
+            </a>
+        </li>
+    </ul>
+</li>
+
+<li class="site-menu-item has-sub">
+    <a href="javascript:void(0)" data-slug="layout">
+        <i class="site-menu-icon wb-graph-up" aria-hidden="true"></i>
+        <span class="site-menu-title">Áreas</span>
+        <span class="site-menu-arrow"></span>
+    </a>
+    <ul class="site-menu-sub">
+        <li class="site-menu-item">
+            <a class="animsition-link" href="{{ path('area_new') }}" data-slug="layout-menu-collapsed">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Crear área</span>
+            </a>
+        </li>
+        <li class="site-menu-item">
+            <a class="animsition-link" href="{{ path('area') }}" data-slug="layout-menu-expended">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Ver áreas</span>
+            </a>
+        </li>
+
+    </ul>
+</li>
+<li class="site-menu-item has-sub">
+    <a href="javascript:void(0)" data-slug="layout">
+        <i class="site-menu-icon wb-bookmark" aria-hidden="true"></i>
+        <span class="site-menu-title">Rubro</span>
+        <span class="site-menu-arrow"></span>
+    </a>
+    <ul class="site-menu-sub">
+        <li class="site-menu-item">
+            <a class="animsition-link" href="{{ path('rubro_new') }}" data-slug="layout-menu-collapsed">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Crear rubro</span>
+            </a>
+        </li>
+        <li class="site-menu-item">
+            <a class="animsition-link" href="{{ path('rubro') }}" data-slug="layout-menu-expended">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Ver rubros</span>
+            </a>
+        </li>
+    </ul>
+</li>
+<li class="site-menu-item has-sub">
+    <a href="javascript:void(0)" data-slug="layout">
+        <i class="site-menu-icon wb-users" aria-hidden="true"></i>
+        <span class="site-menu-title">Contadores</span>
+        <span class="site-menu-arrow"></span>
+    </a>
+    <ul class="site-menu-sub">
+        <li class="site-menu-item">
+            <a class="animsition-link" href="{{ path('contador_new') }}" data-slug="layout-menu-collapsed">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Crear contador</span>
+            </a>
+        </li>
+        <li class="site-menu-item">
+            <a class="animsition-link" href="{{ path('contador') }}" data-slug="layout-menu-expended">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Ver contadores</span>
+            </a>
+        </li>
+    </ul>
+</li>
+
+<li class="site-menu-item has-sub">
+    <a href="javascript:void(0)" data-slug="layout">
+        <i class="site-menu-icon wb-calendar" aria-hidden="true"></i>
+        <span class="site-menu-title">Vencimientos</span>
+        <span class="site-menu-arrow"></span>
+    </a>
+    <ul class="site-menu-sub">
+        <li class="site-menu-item">
+            <a class="animsition-link" href="{{ path('vencimiento_new') }}" data-slug="layout-menu-collapsed">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Crear vencimiento</span>
+            </a>
+        </li>
+        <li class="site-menu-item">
+            <a class="animsition-link" href="{{ path('vencimiento') }}" data-slug="layout-menu-expended">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Ver vencimientos</span>
+            </a>
+        </li>
+    </ul>
+</li><li class="site-menu-item has-sub">
+    <a href="javascript:void(0)" data-slug="layout">
+        <i class="site-menu-icon wb-pie-chart" aria-hidden="true"></i>
+        <span class="site-menu-title">Reportes</span>
+        <span class="site-menu-arrow"></span>
+    </a>
+    <ul class="site-menu-sub">
+        <li class="site-menu-item">
+            <a class="animsition-link" href="../../html/jefe/reportes-generar.html" data-slug="layout-menu-collapsed">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Generar Reportes</span>
+            </a>
+        </li>
+
+    </ul>
+</li>
