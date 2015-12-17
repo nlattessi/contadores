@@ -81,4 +81,3 @@ class Rubro
         return $this->area;
     }
 }
-

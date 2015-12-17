@@ -138,5 +138,33 @@ class ArchivoTarea
     {
         return $this->usuario;
     }
-}
+    /**
+     * @var \Hera\ContadoresBundle\Entity\Archivo
+     */
+    private $archivo;
 
+
+    /**
+     * Set archivo
+     *
+     * @param \Hera\ContadoresBundle\Entity\Archivo $archivo
+     *
+     * @return ArchivoTarea
+     */
+    public function setArchivo(\Hera\ContadoresBundle\Entity\Archivo $archivo = null)
+    {
+        $this->archivo = $archivo;
+
+        return $this;
+    }
+
+    /**
+     * Get archivo
+     *
+     * @return \Hera\ContadoresBundle\Entity\Archivo
+     */
+    public function getArchivo()
+    {
+        return $this->archivo;
+    }
+}

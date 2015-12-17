@@ -60,6 +60,10 @@ ContadoresBundle\Entity\Tarea:
             type: date
             nullable: true
             column: fecha_baja
+    oneToMany:
+        observaciones:
+            targetEntity: Observacion
+            mappedBy: tarea
     manyToOne:
         cliente:
             targetEntity: Cliente

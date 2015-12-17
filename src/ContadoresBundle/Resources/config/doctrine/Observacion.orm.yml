@@ -1,0 +1,52 @@
+ContadoresBundle\Entity\Observacion:
+    type: entity
+    table: observacion
+    indexes:
+        fk_tarea_observacion_idx:
+            columns:
+                - tarea_id
+        fk_usuario_observacion_idx:
+            columns:
+                - usuario_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        texto:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        fechaCreacion:
+            type: date
+            nullable: false
+            column: fecha_creacion
+    manyToOne:
+        tarea:
+            targetEntity: Tarea
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: observaciones
+            joinColumns:
+                tarea_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        usuario:
+            targetEntity: Usuario
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                usuario_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

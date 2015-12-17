@@ -1,5 +1,5 @@
 {% block _contadoresbundle_tarea_vencimientoInterno_widget %}
-  <div class="col-sm-6 col-md-6">
+  <div class="col-sm-6 col-md-6 margin-top-30">
     <h4 class="example-title">Vencimiento Interno</h4>
     <div class="input-group">
       <span class="input-group-addon">
@@ -11,125 +11,60 @@
 {% endblock %}
 
 {% block _contadoresbundle_tarea_fechaFin_widget %}
-  <div class="col-sm-6 col-md-6 ">
-    <h4 class="example-title">Fecha fin</h4>
-    <div class="input-group">
+    <div class="col-sm-6 col-md-6 margin-top-30">
+        <h4 class="example-title">Fecha Realización</h4>
+        <div class="input-group">
       <span class="input-group-addon">
         <i class="icon wb-calendar" aria-hidden="true"></i>
       </span>
-      {{ block('form_widget_simple') }}
+            {{ block('form_widget_simple') }}
+        </div>
     </div>
+{% endblock %}
+
+{% block _contadoresbundle_tarea_tareaMetadata_widget %}
+  <div class="col-sm-6 col-md-6 margin-top-30">
+    <h4 class="example-title">Tarea</h4>
+      {{ block('choice_widget') }}
   </div>
 {% endblock %}
 
-{% block _contadoresbundle_tarea_horaInicio_widget %}
-  <div class="col-sm-6 col-md-6">
-    <h4 class="example-title">Hora</h4>
-    <div class="input-group">
-      <span class="input-group-addon">
-        <i class="icon wb-time" aria-hidden="true"></i>
-      </span>
-      {{ block('form_widget_simple') }}
-    </div>
-  </div>
-{% endblock %}
-
-{% block _contadoresbundle_tarea_horaFin_widget %}
-  <div class="col-sm-6 col-md-6">
-    <h4 class="example-title">Hora</h4>
-    <div class="input-group">
-      <span class="input-group-addon">
-        <i class="icon wb-time" aria-hidden="true"></i>
-      </span>
-      {{ block('form_widget_simple') }}
-    </div>
-  </div>
-{% endblock %}
-
-{% block _contadoresbundle_tarea_tarea_widget %}
-  <div class="col-sm-6 col-md-6">
-    <h4 class="example-title">Código</h4>
+{% block _contadoresbundle_tarea_tiempoEstimado_widget %}
+  <div class="col-sm-6 col-md-6 margin-top-30">
+    <h4 class="example-title">Tiempo Estimado (en minutos) </h4>
     {{ block('form_widget_simple') }}
   </div>
 {% endblock %}
 
-{% block _contadoresbundle_tarea_codigo_widget %}
-  <div class="col-sm-6 col-md-6">
-    <h4 class="example-title">Código</h4>
-    {{ block('form_widget_simple') }}
-  </div>
-{% endblock %}
-
-{% block _contadoresbundle_tarea_tipotarea_widget %}
-  <div class="col-sm-6 col-md-6 ">
-    <h4 class="example-title">Tipo de tarea</h4>
+{% block _contadoresbundle_tarea_cliente_widget %}
+  <div class="col-sm-6 col-md-6 margin-top-30">
+    <h4 class="example-title">Cliente</h4>
     <div class="form-group">
       {{ block('choice_widget') }}
     </div>
   </div>
 {% endblock %}
 
-{% block _contadoresbundle_tarea_anio_widget %}
-  <div class="col-sm-6 col-md-6">
-    <h4 class="example-title">Año</h4>
-    <div class="input-group">
-      <span class="input-group-addon">
-        <i class="icon wb-calendar" aria-hidden="true"></i>
-      </span>
-      {{ block('form_widget_simple') }}
-    </div>
-  </div>
-{% endblock %}
-
-{% block _contadoresbundle_tarea_comprobante_widget %}
-  <div class="col-sm-6 col-md-6">
-    <h4 class="example-title">Comprobante</h4>
-    {{ block('form_widget_simple') }}
-  </div>
-{% endblock %}
-
 {% block _contadoresbundle_tarea_observaciones_widget %}
-  <div class="col-sm-6 col-md-6">
+  <div class="col-sm-6 col-md-6 margin-top-30">
     <h4 class="example-title">Observaciones</h4>
     {{ block('form_widget_simple') }}
   </div>
 {% endblock %}
 
-{% block _contadoresbundle_tarea_fechaPago_widget %}
-  <div class="col-sm-6 col-md-6">
-    <h4 class="example-title">Fecha de Pago</h4>
-    <div class="input-group">
-      <span class="input-group-addon">
-        <i class="icon wb-calendar" aria-hidden="true"></i>
-      </span>
-      {{ block('form_widget_simple') }}
-    </div>
-  </div>
-{% endblock %}
-
-{% block _contadoresbundle_tarea_prestador_widget %}
-  <div class="col-sm-6 col-md-6 ">
-    <h4 class="example-title">Prestador</h4>
+{% block _contadoresbundle_tarea_contador_widget %}
+  <div class="col-sm-6 col-md-6 margin-top-30">
+    <h4 class="example-title">Contador</h4>
     <div class="form-group">
       {{ block('choice_widget') }}
     </div>
   </div>
 {% endblock %}
 
-{% block _contadoresbundle_tarea_sede_widget %}
-  <div class="col-sm-6 col-md-6 ">
-    <h4 class="example-title">Sede</h4>
-    <div class="form-group">
-      {{ block('choice_widget') }}
+{% block _contadoresbundle_tarea_archivo_widget %}
+    <div class="col-sm-6 col-md-6 margin-top-30">
+        <h4 class="example-title">Cargar Archivo</h4>
+        {{ block('form_widget_simple') }}
     </div>
-  </div>
 {% endblock %}
 
-{% block _contadoresbundle_tarea_docente_widget %}
-  <div class="col-sm-6 col-md-6">
-    <h4 class="example-title">Docente</h4>
-    <div class="form-group">
-      {{ block('choice_widget') }}
-    </div>
-  </div>
-{% endblock %}

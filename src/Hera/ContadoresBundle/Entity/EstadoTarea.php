@@ -196,5 +196,33 @@ class EstadoTarea
     {
         return $this->contador;
     }
-}
+    /**
+     * @var \DateTime
+     */
+    private $fechaCreacion;
 
+
+    /**
+     * Set fechaCreacion
+     *
+     * @param \DateTime $fechaCreacion
+     *
+     * @return EstadoTarea
+     */
+    public function setFechaCreacion($fechaCreacion)
+    {
+        $this->fechaCreacion = $fechaCreacion;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaCreacion
+     *
+     * @return \DateTime
+     */
+    public function getFechaCreacion()
+    {
+        return $this->fechaCreacion;
+    }
+}

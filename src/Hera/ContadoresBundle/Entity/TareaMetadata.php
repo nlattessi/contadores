@@ -110,4 +110,3 @@ class TareaMetadata
         return $this->rubro;
     }
 }
-

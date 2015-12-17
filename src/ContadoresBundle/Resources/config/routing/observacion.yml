@@ -1,0 +1,30 @@
+observacion:
+    pattern:  /
+    defaults: { _controller: "ContadoresBundle:Observacion:index" }
+
+observacion_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ContadoresBundle:Observacion:show" }
+
+observacion_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:Observacion:new" }
+
+observacion_create:
+    pattern:  /create
+    defaults: { _controller: "ContadoresBundle:Observacion:create" }
+    requirements: { _method: post }
+
+observacion_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ContadoresBundle:Observacion:edit" }
+
+observacion_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ContadoresBundle:Observacion:update" }
+    requirements: { _method: post|put }
+
+observacion_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ContadoresBundle:Observacion:delete" }
+    requirements: { _method: post|delete }

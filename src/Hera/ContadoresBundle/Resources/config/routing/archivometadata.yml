@@ -1,0 +1,30 @@
+archivometadata:
+    pattern:  /
+    defaults: { _controller: "HeraContadoresBundle:ArchivoMetadata:index" }
+
+archivometadata_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "HeraContadoresBundle:ArchivoMetadata:show" }
+
+archivometadata_new:
+    pattern:  /new
+    defaults: { _controller: "HeraContadoresBundle:ArchivoMetadata:new" }
+
+archivometadata_create:
+    pattern:  /create
+    defaults: { _controller: "HeraContadoresBundle:ArchivoMetadata:create" }
+    requirements: { _method: post }
+
+archivometadata_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "HeraContadoresBundle:ArchivoMetadata:edit" }
+
+archivometadata_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "HeraContadoresBundle:ArchivoMetadata:update" }
+    requirements: { _method: post|put }
+
+archivometadata_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "HeraContadoresBundle:ArchivoMetadata:delete" }
+    requirements: { _method: post|delete }

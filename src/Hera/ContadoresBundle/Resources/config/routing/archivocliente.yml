@@ -1,0 +1,30 @@
+archivocliente:
+    pattern:  /
+    defaults: { _controller: "HeraContadoresBundle:ArchivoCliente:index" }
+
+archivocliente_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "HeraContadoresBundle:ArchivoCliente:show" }
+
+archivocliente_new:
+    pattern:  /new
+    defaults: { _controller: "HeraContadoresBundle:ArchivoCliente:new" }
+
+archivocliente_create:
+    pattern:  /create
+    defaults: { _controller: "HeraContadoresBundle:ArchivoCliente:create" }
+    requirements: { _method: post }
+
+archivocliente_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "HeraContadoresBundle:ArchivoCliente:edit" }
+
+archivocliente_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "HeraContadoresBundle:ArchivoCliente:update" }
+    requirements: { _method: post|put }
+
+archivocliente_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "HeraContadoresBundle:ArchivoCliente:delete" }
+    requirements: { _method: post|delete }

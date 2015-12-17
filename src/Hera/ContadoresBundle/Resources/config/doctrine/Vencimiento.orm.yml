@@ -1,0 +1,45 @@
+Hera\ContadoresBundle\Entity\Vencimiento:
+    type: entity
+    table: vencimiento
+    indexes:
+        fk_vencimiento_metadata_idx:
+            columns:
+                - tarea_metadata_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        fecha:
+            type: date
+            nullable: false
+        periodoId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: periodo_id
+        colaCuil:
+            type: string
+            nullable: false
+            length: 1
+            options:
+                fixed: false
+            column: cola_cuil
+    manyToOne:
+        tareaMetadata:
+            targetEntity: TareaMetadata
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tarea_metadata_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

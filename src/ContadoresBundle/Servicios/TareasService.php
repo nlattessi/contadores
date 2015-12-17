@@ -17,7 +17,8 @@ use Doctrine\ORM\EntityManager;
 
 class TareasService {
     protected $em;
-    protected $tipoEstadoNuevo;
+    static $tipoEstadoNuevo = 1;
+    static $tipoEstadoFinalizado = 2;
     protected $rolContador;
     protected $rolCliente;
     protected $rolJefe;
@@ -26,7 +27,6 @@ class TareasService {
     public function __construct(EntityManager $entityManager)
     {
         $this->em = $entityManager;
-        $this->tipoEstadoNuevo = 1;
         $this->rolCliente = "ROLE_CLIENTE";
         $this->rolContador = "ROLE_CONTADOR";
         $this->rolJefe = "ROLE_JEFE";
@@ -127,17 +127,26 @@ class TareasService {
 
 
 
-    public function crearEstadoTareaNuevo($tarea)
+    public function crearEstadoTareaNuevo($tarea, $tiempo)
     {
-        return $this->crearEstadoTarea($tarea, $this->tipoEstadoNuevo);
+        return $this->crearEstadoTarea($tarea, $this::$tipoEstadoNuevo, $tiempo);
     }
 
-    public function crearEstadoTarea($tarea, $tipoEstadoId){
+    public function crearEstadoTareaFinalizado($tarea,  $tiempo)
+    {
+        return $this->crearEstadoTarea($tarea, $this::$tipoEstadoFinalizado, $tiempo);
+    }
+
+    public function crearEstadoTarea($tarea, $tipoEstadoId, $tiempo){
         $tipoEstadoNuevo = $this->em->getRepository('ContadoresBundle:TipoEstado')->find($tipoEstadoId);
         $estadoTarea = new EstadoTarea();
         $estadoTarea->setTipoEstado($tipoEstadoNuevo);
         $estadoTarea->setTarea($tarea);
         $estadoTarea->setFechaInicio(new \DateTime(null));
+        $estadoTarea->setMinutosTrabajados($tiempo);
+        if($tarea->getContador()){
+            $estadoTarea->setContador($tarea->getContador());
+        }
 
         $this->em->persist($estadoTarea);
         $this->em->flush();

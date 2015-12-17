@@ -69,7 +69,9 @@ contadores_area:
 contadores_archivotareametadata:
     resource: "@ContadoresBundle/Resources/config/routing/archivotareametadata.yml"
     prefix:   /archivotareametadata
-
+contadores_observacion:
+    resource: "@ContadoresBundle/Resources/config/routing/observacion.yml"
+    prefix:   /observacion
 
 login:
     path:     /login

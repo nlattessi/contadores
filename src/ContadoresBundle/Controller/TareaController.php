@@ -2,6 +2,7 @@
 
 namespace ContadoresBundle\Controller;
 
+use ContadoresBundle\Entity\Observacion;
 use ContadoresBundle\Entity\Rol;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -135,7 +136,7 @@ class TareaController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            if ($this->getUser()->getRol() == 'ROLE_PRESTADOR') {
+            if ($this->getUser()->getRol() == Rol::$contador ){
                 $contador = $usuarioService->obtenerContadorPorUsuario($this->getUser());
                 $entity->setContador($contador);
             }
@@ -145,14 +146,36 @@ class TareaController extends Controller
                 $entity->setNombre($entity->getTareaMetadata()->getNombre() . ' ' . $entity->getCliente()->getNombre());
             }
             $entity->setFechaCreacion(new \DateTime(null));
+
+            if ($form->has('vencimientoInterno') && $form->get('vencimientoInterno')->getData() !== null) {
+                $vencimientoInterno = $form->get('vencimientoInterno')->getData();
+                $dtVencimientoInterno = \DateTime::createFromFormat('d/m/Y', $vencimientoInterno);
+                $entity->setVencimientoInterno($dtVencimientoInterno);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
+
+            $tiempo = $request->get('tiempoReal');
             $tareasService =  $this->get('contadores.servicios.tareas');
-            $estadoNuevo = $tareasService->crearEstadoTareaNuevo($entity);
-            $entity->setEstadoActual($estadoNuevo);
+            if($request->get('finalizada')){
+                $estado = $tareasService->crearEstadoTareaFinalizado($entity, $tiempo);
+            }else{
+                $estado = $tareasService->crearEstadoTareaNuevo($entity, $tiempo);
+            }
+
+            $entity->setEstadoActual($estado);
             $em->persist($entity);
+
+            $observaciones = $request->get('observaciones');
+            if($observaciones){
+                $observacion = new Observacion($this->getUser(),$entity,$observaciones);
+                $em->persist($observacion);
+            }
+
+
             $em->flush();
 
 
@@ -177,6 +200,16 @@ class TareaController extends Controller
         $form   = $this->createForm(new TareaType(), $entity);
 
         return $this->render('ContadoresBundle:Tarea:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+    public function realizadaAction()
+    {
+        $entity = new Tarea();
+        $form   = $this->createForm(new TareaType(), $entity);
+
+        return $this->render('ContadoresBundle:Tarea:newrealizada.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));

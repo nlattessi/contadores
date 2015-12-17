@@ -125,6 +125,9 @@ class ClienteController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            $entity->getUsuario()->setEntidadId($entity->getId());
+            $em->persist($entity->getUsuario());
+            $em->flush();
             $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
 
             return $this->redirect($this->generateUrl('cliente_show', array('id' => $entity->getId())));
@@ -218,7 +221,10 @@ class ClienteController extends Controller
 
         if ($editForm->isValid()) {
             $em->persist($entity);
+            $entity->getUsuario()->setEntidadId($entity->getId());
+            $em->persist($entity->getUsuario());
             $em->flush();
+
             $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
 
             return $this->redirect($this->generateUrl('cliente_edit', array('id' => $id)));

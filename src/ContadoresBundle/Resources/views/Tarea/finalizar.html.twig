@@ -1,0 +1,113 @@
+{% extends 'ContadoresBundle:Layout:layout.html.twig' %}
+{% form_theme form 'ContadoresBundle:Tarea:fields.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - {{ 'views.new.creation'|trans({'%entity%': 'Tarea'}, 'JordiLlonchCrudGeneratorBundle') }}
+{% endblock %}
+
+{% block menu %}
+    {{ include('ContadoresBundle:NavBars:navbar.html.twig') }}
+{% endblock %}
+
+{% block encabezado %}Cargar tareas realizadas{% endblock %}
+
+{% block breadcrum %}
+    <li><a href="{{ path('home') }}">Inicio</a></li>
+    <li>Clientes</li>
+    <li class="active">Cargar tareas realizadas</li>
+{% endblock %}
+
+{% block page %}
+    <!-- Panel Table Add Row -->
+    <div class="panel">
+        <div class="panel-body">
+            <form  action="{{ path('tarea_finalizar') }}" method="post" {{ form_enctype(form) }}>
+            <table class="table table-bordered table-hover table-striped" id="exampleAddRow">
+
+                <tbody>
+                <tr class="gradeA">
+                    <td><b>Fecha de finalización</b></td>
+                    <td><div class="input-group">
+                              <span class="input-group-addon">
+                                <i class="icon wb-calendar" aria-hidden="true"></i>
+                              </span>
+                            <input name="fechaFin" type="text" class="form-control" data-plugin="datepicker">
+                        </div></td>
+
+                </tr>
+                <tr class="gradeA">
+                    <td><b>Tiempo trabajado</b></td>
+                    <td><div class="input-group">
+                              <span class="input-group-addon">
+                                <i class="icon wb-clock" aria-hidden="true"></i>
+                              </span>
+                            <input name="tiempoReal" type="number" class="form-control" >
+                        </div></td>
+
+                </tr>
+                <tr class="gradeA">
+                    <td><b>Vencimiento interno</b></td>
+                    <td>
+                        {% if entity.vencimientoInterno %}
+                            {{ entity.vencimientoInterno|date('Y-m-d ') }}
+                        {% else %}
+                            <i>Sin Vencimiento Interno</i>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr class="gradeA">
+                    <td><b>Vencimiento Fiscal</b></td>
+                    <td>
+                        {% if entity.vencimientoFiscal %}
+                            {{ entity.vencimientoFiscal|date('Y-m-d ') }}
+                        {% else %}
+                            <i>Sin Vencimiento Fiscal</i>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr class="gradeA">
+                    <td><b>Nombre</b></td>
+                    <td>{{ entity.nombre }}</td>
+                </tr>
+                <tr class="gradeA">
+                    <td><b>Cliente</b></td>
+                    <td>{{ entity.cliente }}</td>
+                </tr>
+                <tr class="gradeA">
+                    <td><b>Contador</b></td>
+                    <td>{{ entity.contador }}</td>
+                </tr>
+                <tr class="gradeA">
+                    <td><b>Nueva Observacion</b></td>
+                    <td><textarea class="form-control" id="textareaDefault" rows="3" name="observaciones"></textarea></td>
+                </tr>
+                <tr class="gradeA">
+                    <td><b>Observaciones</b></td>
+                    <td> {% for observacion in entity.observaciones %}
+                            {{ observacion }} <br/>
+                        {% endfor %} </td>
+                </tr>
+
+
+
+                </tbody>
+                <button type="submit" class="btn btn btn-success">Finalizar</button>
+            </table>
+            </form>
+            <div class="dt-panelfooter clearfix">
+                <div class="row">
+
+                    <button type="button" onclick="location.href='tareas-ver.html';" class="btn btn-outline btn-default margin-top-10">Volver al listado</button>
+
+
+
+
+                </div>
+            </div>
+            <!-- -->
+            <!-- -->
+        </div>
+    </div>
+    <!-- End Panel Table Add Row -->
+
+{% endblock %}

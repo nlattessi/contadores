@@ -1,0 +1,30 @@
+observacion:
+    pattern:  /
+    defaults: { _controller: "HeraContadoresBundle:Observacion:index" }
+
+observacion_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "HeraContadoresBundle:Observacion:show" }
+
+observacion_new:
+    pattern:  /new
+    defaults: { _controller: "HeraContadoresBundle:Observacion:new" }
+
+observacion_create:
+    pattern:  /create
+    defaults: { _controller: "HeraContadoresBundle:Observacion:create" }
+    requirements: { _method: post }
+
+observacion_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "HeraContadoresBundle:Observacion:edit" }
+
+observacion_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "HeraContadoresBundle:Observacion:update" }
+    requirements: { _method: post|put }
+
+observacion_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "HeraContadoresBundle:Observacion:delete" }
+    requirements: { _method: post|delete }
