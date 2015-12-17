@@ -22,11 +22,11 @@ class UsuarioService
         return $prestadores;
     }
 
-    public function obtenerPrestadorPorUsuario($usuario)
+    public function obtenerContadorPorUsuario($usuario)
     {
-        $usuarioPrestador = $this->em->getRepository('ContadoresBundle:UsuarioPrestador')->findOneBy(array('usuario' => $usuario));
+        $contador = $this->em->getRepository('ContadoresBundle:Contador')->findOneBy(array('usuario' => $usuario));
 
-        return $usuarioPrestador->getPrestador();
+        return $contador;
     }
 
     public function obtenerDocentesPorPrestador($prestador)

@@ -1,7 +1,8 @@
 <?php
 
 namespace ContadoresBundle\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 /**
  * Tarea
  */
@@ -72,7 +73,28 @@ class Tarea
      */
     private $tareaMetadata;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Observacion", mappedBy="tarea", cascade={"remove"})
+     */
+    protected $observaciones;
 
+    public function __construct()
+    {
+        $this->observaciones = new ArrayCollection();
+    }
+
+    public function addObservacion(Observacion $e)
+    {
+        $this->observaciones[] = $e;
+        $e->setTarea($this);
+
+        return $this;
+    }
+
+    public function getObservaciones()
+    {
+        return $this->observaciones;
+    }
     /**
      * Get id
      *
@@ -370,4 +392,11 @@ class Tarea
     {
         return $this->tareaMetadata;
     }
+
+    function __toString()
+    {
+        return $this->getNombre();
+    }
+
+
 }

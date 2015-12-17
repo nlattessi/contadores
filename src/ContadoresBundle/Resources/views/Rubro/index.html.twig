@@ -1,4 +1,4 @@
-{% extends 'JordiLlonchCrudGeneratorBundle::layout.html.twig' %}
+{% extends 'ContadoresBundle:Layout:layout.html.twig' %}
 
 {% block title %}
 {{ parent() }} - {{ 'views.index.list'|trans({'%entity%': 'Rubro'}, 'JordiLlonchCrudGeneratorBundle') }}
@@ -69,10 +69,7 @@
         </a>
         <a class="btn btn-mini" href="{{ path('rubro_edit', { 'id': entity.id }) }}">
             {{ 'views.actions.edit'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>
-        <a class="btn btn-mini" href="{{ path('rubro_contadores', { 'id': entity.id }) }}">
-            {{ 'views.actions.contadores'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>   </td>
+        </a>  </td>
         </tr>
     {% endfor %}
     </tbody>

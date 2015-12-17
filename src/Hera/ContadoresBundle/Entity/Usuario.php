@@ -168,4 +168,3 @@ class Usuario
         return $this->rol;
     }
 }
-

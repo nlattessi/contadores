@@ -54,7 +54,7 @@
     </script>
 </head>
 
-<body class="site-menubar-unfold">
+<body>
 
     <nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega" role="navigation">
 
@@ -67,7 +67,7 @@
                 <i class="icon wb-more-horizontal" aria-hidden="true"></i>
             </button>
             <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
-                <img class="navbar-brand-logo" src="{{ asset('bundles/contadores/assets/images/logo.png') }}" title="cntsv logo">
+                <img class="navbar-brand-logo" src="{{ asset('bundles/contadores/assets/images/logo-contadores-xs.png') }}" title="cntsv logo">
                 <span class="navbar-brand-text"> CONTADORES</span>
             </div>
             <button type="button" class="navbar-toggle collapsed" data-target="#site-navbar-search" data-toggle="collapse">
@@ -137,9 +137,9 @@
         </div>
     </nav>
     <div class="site-menubar">
-        <div class="site-menubar-body scrollable scrollable-inverse is-enabled scrollable-vertical" style="position: relative;">
-            <div class="scrollable-container" style="height: 501px; width: 277px;">
-                <div class="scrollable-content" style="width: 260px;">
+        <div class="site-menubar-body">
+            <div>
+                <div>
                     <ul class="site-menu">
                         <li class="site-menu-category">Menu</li>
 
@@ -151,19 +151,21 @@
 
                 </div>
             </div>
-            <div class="scrollable-bar scrollable-bar-vertical scrollable-bar-hide is-disabled" draggable="false"><div class="scrollable-bar-handle"></div></div></div>
-
-
+        </div>
     </div>
 
 
 
     <!-- Page -->
-    <div class="page animsition" style="animation-duration: 0.8s; opacity: 1;">
-        <div class="page-header" id="layout_pageHeader">
-            {% block pageHeader %}{% endblock %}
+    <div class="page animsition" >
+        <div class="page-header">
+            <h1 class="page-title">{% block encabezado %}{% endblock %}</h1>
+            <ol class="breadcrumb">
+                {% block breadcrum %}{% endblock %}
+            </ol>
         </div>
         <div class="page-content">
+            <div class="panel">
           {% for type, flashMessages in app.session.flashbag.all() %}
             {% for flashMessage in flashMessages %}
               <div class="alert ng-isolate-scope alert-{% if type == 'error' %}danger{% else %}{{ type }}{% endif %} alert-dismissible">
@@ -172,12 +174,13 @@
             {% endfor %}
           {% endfor %}
           {% block page %}{% endblock %}
+            </div>
         </div><!-- content-->
     </div>
 
     <!-- Footer -->
     <footer class="site-footer">
-        <span class="site-footer-legal">© 2015 <a href="http://www.cntsv.gob.ar/">Comisión nacional del tránsito y la seguridad vial</a></span>
+        <span class="site-footer-legal">© 2015 Estudio Contable Jorge W. Sauan Asoc. - Contadores públicos</span>
 
     </footer>
 
@@ -225,8 +228,6 @@
    <script src="{{ asset('bundles/contadores/assets/js/components/bootstrap-datepicker.js') }}"></script>
 
    <script src="{{ asset('bundles/contadores/assets/js/components/jt-timepicker.js') }}"></script>
-
-   <script src="{{ asset('bundles/contadores/js/bootstrap3-typeahead.min.js') }}"></script>
 
    {% block javascript %}
    {% endblock %}

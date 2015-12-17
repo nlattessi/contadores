@@ -12,12 +12,15 @@ class TareaType extends AbstractType
     {
         $builder
             ->add('fechaInicio', 'date', array('label' => 'Fecha inicio', 'widget' => 'single_text'))
+            ->add('fechaFin',  'text', array('mapped' => false))
             ->add('vencimientoFiscal', 'date', array('label' => 'Vencimiento Fiscal', 'widget' => 'single_text'))
-            ->add('vencimientoInterno', 'date', array('label' => 'Vencimiento Interno', 'widget' => 'single_text'))
+            ->add('vencimientoInterno', 'text', array('mapped' => false))
             ->add('nombre')
             ->add('contador')
             ->add('cliente')
             ->add('tareaMetadata')
+            ->add('tiempoEstimado')
+            ->add('reset', 'reset', ['label' => 'Limpiar '])
         ;
     }
 

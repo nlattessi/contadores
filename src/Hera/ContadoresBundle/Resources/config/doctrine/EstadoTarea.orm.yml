@@ -36,6 +36,10 @@ Hera\ContadoresBundle\Entity\EstadoTarea:
                 unsigned: false
                 default: '0'
             column: minutos_trabajados
+        fechaCreacion:
+            type: date
+            nullable: true
+            column: fecha_creacion
     manyToOne:
         tarea:
             targetEntity: Tarea

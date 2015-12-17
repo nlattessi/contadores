@@ -2,6 +2,8 @@
 
 namespace ContadoresBundle\Controller;
 
+use ContadoresBundle\Entity\Observacion;
+use ContadoresBundle\Entity\Rol;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -44,9 +46,22 @@ class TareaController extends Controller
     {
         $request = $this->getRequest();
         $session = $request->getSession();
+        $usuario = $this->getUser();
         $filterForm = $this->createForm(new TareaFilterType());
         $em = $this->getDoctrine()->getManager();
-        $queryBuilder = $em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('e');
+        if($usuario->getRol() == Rol::$contador) {
+            $contador = $em->getRepository('ContadoresBundle:Contador')->find($usuario->getEntidadId());
+            if ($contador) {
+            $queryBuilder = $em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('e')
+                ->where('e.contador = ?1')
+                ->setParameter(1, $contador->getId());
+            }else{
+                //TODO: error
+            }
+        }else{
+            $queryBuilder = $em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('e');
+        }
+
 
         // Reset filter
         if ($request->get('filter_action') == 'reset') {
@@ -115,24 +130,52 @@ class TareaController extends Controller
      */
     public function createAction(Request $request)
     {
+        $usuarioService =  $this->get('contadores.servicios.usuario');
         $entity  = new Tarea();
         $form = $this->createForm(new TareaType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
+            if ($this->getUser()->getRol() == Rol::$contador ){
+                $contador = $usuarioService->obtenerContadorPorUsuario($this->getUser());
+                $entity->setContador($contador);
+            }
+
             if(strlen($entity->getNombre()) < 1){
 
                 $entity->setNombre($entity->getTareaMetadata()->getNombre() . ' ' . $entity->getCliente()->getNombre());
             }
             $entity->setFechaCreacion(new \DateTime(null));
+
+            if ($form->has('vencimientoInterno') && $form->get('vencimientoInterno')->getData() !== null) {
+                $vencimientoInterno = $form->get('vencimientoInterno')->getData();
+                $dtVencimientoInterno = \DateTime::createFromFormat('d/m/Y', $vencimientoInterno);
+                $entity->setVencimientoInterno($dtVencimientoInterno);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
+
+            $tiempo = $request->get('tiempoReal');
             $tareasService =  $this->get('contadores.servicios.tareas');
-            $estadoNuevo = $tareasService->crearEstadoTareaNuevo($entity);
-            $entity->setEstadoActual($estadoNuevo);
+            if($request->get('finalizada')){
+                $estado = $tareasService->crearEstadoTareaFinalizado($entity, $tiempo);
+            }else{
+                $estado = $tareasService->crearEstadoTareaNuevo($entity, $tiempo);
+            }
+
+            $entity->setEstadoActual($estado);
             $em->persist($entity);
+
+            $observaciones = $request->get('observaciones');
+            if($observaciones){
+                $observacion = new Observacion($this->getUser(),$entity,$observaciones);
+                $em->persist($observacion);
+            }
+
+
             $em->flush();
 
 
@@ -157,6 +200,16 @@ class TareaController extends Controller
         $form   = $this->createForm(new TareaType(), $entity);
 
         return $this->render('ContadoresBundle:Tarea:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+    public function realizadaAction()
+    {
+        $entity = new Tarea();
+        $form   = $this->createForm(new TareaType(), $entity);
+
+        return $this->render('ContadoresBundle:Tarea:newrealizada.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));

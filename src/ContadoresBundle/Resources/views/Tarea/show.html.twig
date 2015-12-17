@@ -1,4 +1,4 @@
-{% extends 'JordiLlonchCrudGeneratorBundle::layout.html.twig' %}
+{% extends 'ContadoresBundle:Layout:layout.html.twig' %}
 
 {% block title %}
 {{ parent() }} - {{ 'views.show.show'|trans({'%entity%': 'Tarea'}, 'JordiLlonchCrudGeneratorBundle') }}
@@ -44,7 +44,23 @@
         </div>        <div class="control-group">
             <label class="control-label">Nombre</label>
             <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.nombre }}</span>            </div>
-        </div>    </fieldset>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Estado actual</label>
+            <div class="controls">
+                <span class="input-xlarge uneditable-input">{{ entity.estadoActual }}</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Observaciones</label>
+            <div class="controls">
+                <span class="input-xlarge uneditable-input">
+                    {% for observacion in entity.observaciones %}
+                    {{ observacion }} <br/>
+                    {% endfor %}
+                </span>
+            </div>
+        </div>  </fieldset>
 </form>
 
 <div>

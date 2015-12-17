@@ -139,4 +139,3 @@ class ArchivoTareaMetadata
         return $this->usuario;
     }
 }
-

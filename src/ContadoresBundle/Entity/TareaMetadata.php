@@ -20,7 +20,7 @@ class TareaMetadata
     /**
      * @var boolean
      */
-    private $esperiodica = '0';
+    private $esperiodica = false;
 
     /**
      * @var \ContadoresBundle\Entity\Rubro
@@ -109,4 +109,11 @@ class TareaMetadata
     {
         return $this->rubro;
     }
+
+    function __toString()
+    {
+        return $this->getNombre();
+    }
+
+
 }

@@ -10,6 +10,14 @@ tarea_new:
     pattern:  /new
     defaults: { _controller: "ContadoresBundle:Tarea:new" }
 
+tarea_realizada:
+    pattern:  /realizada
+    defaults: { _controller: "ContadoresBundle:Tarea:realizada" }
+
+tarea_finalizar:
+    pattern:  /finalizar
+    defaults: { _controller: "ContadoresBundle:Tarea:finalizar" }
+
 tarea_create:
     pattern:  /create
     defaults: { _controller: "ContadoresBundle:Tarea:create" }

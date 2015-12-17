@@ -1,21 +1,18 @@
-<div class="navbar nav">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <a class="brand" href="{{ path('home') }}">Contadores</a>
+<li class="site-menu-item">
+    <a class="animsition-link" href="{{ path('home') }}" data-slug="angular">
+        <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
+        <span class="site-menu-title">Dashboard</span>
+        <div class="site-menu-label">
 
-          	<div class="nav-collapse collapse">
-                <ul class="nav">
-                    <li class="divider-vertical"></li>
-                    <li><a href="{{ path('cliente_pendientes') }}">Mis Tareas pendientes</a></li>
-                    <li><a href="{{ path('cliente_tareas') }}">Todas mis Tareas</a></li>
-                </ul>
-                {{ include('ContadoresBundle:NavBars:menu_usuario.html.twig') }}
-            </div>
         </div>
-    </div>
-</div>
+    </a>
+</li>
+<li class="site-menu-item">
+    <a class="animsition-link" href="{{ path('tarea') }}" data-slug="angular">
+        <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
+        <span class="site-menu-title">Mis Tareas</span>
+        <div class="site-menu-label">
+
+        </div>
+    </a>
+</li>

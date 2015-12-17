@@ -371,4 +371,3 @@ class Tarea
         return $this->tareaMetadata;
     }
 }
-

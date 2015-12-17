@@ -81,4 +81,3 @@ class TipoEstado
         return $this->esEstadoFinal;
     }
 }
-

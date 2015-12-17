@@ -196,4 +196,11 @@ class Cliente
     {
         return $this->usuario;
     }
+
+    function __toString()
+    {
+        return $this->getNombre();
+    }
+
+
 }

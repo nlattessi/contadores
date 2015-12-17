@@ -52,4 +52,3 @@ class Rol
         return $this->nombre;
     }
 }
-

@@ -255,4 +255,3 @@ class Contador
         return $this->usuario;
     }
 }
-

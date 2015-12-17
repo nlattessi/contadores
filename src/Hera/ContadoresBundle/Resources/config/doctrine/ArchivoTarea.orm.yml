@@ -2,10 +2,10 @@ Hera\ContadoresBundle\Entity\ArchivoTarea:
     type: entity
     table: archivo_tarea
     indexes:
-        usuario_archivoT_idx:
+        fk_archivo_tarea_idx:
             columns:
-                - usuario_id
-        tarea_archivo_idx:
+                - archivo_id
+        fk_tarea_archivo_idx:
             columns:
                 - tarea_id
     id:
@@ -17,20 +17,17 @@ Hera\ContadoresBundle\Entity\ArchivoTarea:
             id: true
             generator:
                 strategy: IDENTITY
-    fields:
-        nombre:
-            type: string
-            nullable: false
-            length: 45
-            options:
-                fixed: false
-        ruta:
-            type: string
-            nullable: false
-            length: 45
-            options:
-                fixed: false
     manyToOne:
+        archivo:
+            targetEntity: Archivo
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                archivo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
         tarea:
             targetEntity: Tarea
             cascade: {  }
@@ -39,16 +36,6 @@ Hera\ContadoresBundle\Entity\ArchivoTarea:
             inversedBy: null
             joinColumns:
                 tarea_id:
-                    referencedColumnName: id
-            orphanRemoval: false
-        usuario:
-            targetEntity: Usuario
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                usuario_id:
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }

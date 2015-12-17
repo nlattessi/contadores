@@ -42,7 +42,6 @@ class EstadoTarea
      */
     private $contador;
 
-
     /**
      * Get id
      *
@@ -225,4 +224,13 @@ class EstadoTarea
     {
         return $this->fechaCreacion;
     }
+
+
+
+    function __toString()
+    {
+        return $this->getTipoEstado()->__toString();
+    }
+
+
 }

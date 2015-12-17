@@ -80,4 +80,11 @@ class TipoEstado
     {
         return $this->esEstadoFinal;
     }
+
+    function __toString()
+    {
+       return $this->getNombre();
+    }
+
+
 }
