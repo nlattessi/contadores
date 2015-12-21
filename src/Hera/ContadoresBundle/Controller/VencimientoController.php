@@ -1,6 +1,6 @@
 <?php
 
-namespace ContadoresBundle\Controller;
+namespace Hera\ContadoresBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -9,9 +9,9 @@ use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\View\TwitterBootstrapView;
 
-use ContadoresBundle\Entity\Vencimiento;
-use ContadoresBundle\Form\VencimientoType;
-use ContadoresBundle\Form\VencimientoFilterType;
+use Hera\ContadoresBundle\Entity\Vencimiento;
+use Hera\ContadoresBundle\Form\VencimientoType;
+use Hera\ContadoresBundle\Form\VencimientoFilterType;
 
 /**
  * Vencimiento controller.
@@ -29,7 +29,7 @@ class VencimientoController extends Controller
 
         list($entities, $pagerHtml) = $this->paginator($queryBuilder);
 
-        return $this->render('ContadoresBundle:Vencimiento:index.html.twig', array(
+        return $this->render('HeraContadoresBundle:Vencimiento:index.html.twig', array(
             'entities' => $entities,
             'pagerHtml' => $pagerHtml,
             'filterForm' => $filterForm->createView(),
@@ -46,7 +46,7 @@ class VencimientoController extends Controller
         $session = $request->getSession();
         $filterForm = $this->createForm(new VencimientoFilterType());
         $em = $this->getDoctrine()->getManager();
-        $queryBuilder = $em->getRepository('ContadoresBundle:Vencimiento')->createQueryBuilder('e');
+        $queryBuilder = $em->getRepository('HeraContadoresBundle:Vencimiento')->createQueryBuilder('e');
 
         // Reset filter
         if ($request->get('filter_action') == 'reset') {
@@ -115,9 +115,8 @@ class VencimientoController extends Controller
      */
     public function createAction(Request $request)
     {
-        $vencimientoService =  $this->get('contadores.servicios.vencimiento');
         $entity  = new Vencimiento();
-        $form = $this->createForm(new VencimientoType($vencimientoService), $entity);
+        $form = $this->createForm(new VencimientoType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -129,7 +128,7 @@ class VencimientoController extends Controller
             return $this->redirect($this->generateUrl('vencimiento_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('ContadoresBundle:Vencimiento:new.html.twig', array(
+        return $this->render('HeraContadoresBundle:Vencimiento:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -141,11 +140,10 @@ class VencimientoController extends Controller
      */
     public function newAction()
     {
-        $vencimientoService =  $this->get('contadores.servicios.vencimiento');
-        $entity  = new Vencimiento();
-        $form = $this->createForm(new VencimientoType($vencimientoService), $entity);
+        $entity = new Vencimiento();
+        $form   = $this->createForm(new VencimientoType(), $entity);
 
-        return $this->render('ContadoresBundle:Vencimiento:new.html.twig', array(
+        return $this->render('HeraContadoresBundle:Vencimiento:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -159,7 +157,7 @@ class VencimientoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ContadoresBundle:Vencimiento')->find($id);
+        $entity = $em->getRepository('HeraContadoresBundle:Vencimiento')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Vencimiento entity.');
@@ -167,7 +165,7 @@ class VencimientoController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('ContadoresBundle:Vencimiento:show.html.twig', array(
+        return $this->render('HeraContadoresBundle:Vencimiento:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
@@ -180,16 +178,16 @@ class VencimientoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ContadoresBundle:Vencimiento')->find($id);
+        $entity = $em->getRepository('HeraContadoresBundle:Vencimiento')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Vencimiento entity.');
         }
-        $vencimientoService =  $this->get('contadores.servicios.vencimiento');
-        $editForm = $this->createForm(new VencimientoType($vencimientoService), $entity);
+
+        $editForm = $this->createForm(new VencimientoType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('ContadoresBundle:Vencimiento:edit.html.twig', array(
+        return $this->render('HeraContadoresBundle:Vencimiento:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -204,15 +202,14 @@ class VencimientoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ContadoresBundle:Vencimiento')->find($id);
+        $entity = $em->getRepository('HeraContadoresBundle:Vencimiento')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Vencimiento entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $vencimientoService =  $this->get('contadores.servicios.vencimiento');
-        $editForm = $this->createForm(new VencimientoType($vencimientoService), $entity);
+        $editForm = $this->createForm(new VencimientoType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -225,7 +222,7 @@ class VencimientoController extends Controller
             $this->get('session')->getFlashBag()->add('error', 'flash.update.error');
         }
 
-        return $this->render('ContadoresBundle:Vencimiento:edit.html.twig', array(
+        return $this->render('HeraContadoresBundle:Vencimiento:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -243,7 +240,7 @@ class VencimientoController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ContadoresBundle:Vencimiento')->find($id);
+            $entity = $em->getRepository('HeraContadoresBundle:Vencimiento')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Vencimiento entity.');

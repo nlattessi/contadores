@@ -40,6 +40,6 @@ class VencimientoFilterType extends AbstractType
 
     public function getName()
     {
-        return 'contadoresbundle_vencimientofiltertype';
+        return 'hera_contadoresbundle_vencimientofiltertype';
     }
 }

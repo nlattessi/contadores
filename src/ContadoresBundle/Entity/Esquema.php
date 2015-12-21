@@ -51,4 +51,11 @@ class Esquema
     {
         return $this->nombre;
     }
+
+    function __toString()
+    {
+        return $this->getNombre();
+    }
+
+
 }

@@ -1,4 +1,4 @@
-{% extends 'ContadoresBundle:Layout:layout.html.twig' %}
+{% extends 'JordiLlonchCrudGeneratorBundle::layout.html.twig' %}
 
 {% block title %}
 {{ parent() }} - {{ 'views.new.creation'|trans({'%entity%': 'Vencimiento'}, 'JordiLlonchCrudGeneratorBundle') }}
@@ -22,7 +22,4 @@
         </a>
     </div>
 </div>
-{% endblock %}
-{% block javascript %}
-<script src="{{ asset('bundles/contadores/assets/js/vencimientoForm.js') }}"></script>
 {% endblock %}

@@ -1,3 +1,7 @@
+hera_contadores_vencimiento:
+    resource: "@HeraContadoresBundle/Resources/config/routing/vencimiento.yml"
+    prefix:   /vencimiento
+
 hera_contadores_archivometadata:
     resource: "@HeraContadoresBundle/Resources/config/routing/archivometadata.yml"
     prefix:   /archivometadata
