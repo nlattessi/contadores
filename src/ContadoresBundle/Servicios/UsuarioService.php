@@ -24,7 +24,7 @@ class UsuarioService
 
     public function obtenerContadorPorUsuario($usuario)
     {
-        $contador = $this->em->getRepository('ContadoresBundle:Contador')->findOneBy(array('usuario' => $usuario));
+        $contador = $this->em->getRepository('ContadoresBundle:Contador')->findOneBy(array('id' => $usuario->getEntidadId()));
 
         return $contador;
     }

@@ -56,7 +56,7 @@ class TareaController extends Controller
                 ->where('e.contador = ?1')
                 ->setParameter(1, $contador->getId());
             }else{
-                //TODO: error
+                //TODO: manejo de error
             }
         }else{
             $queryBuilder = $em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('e');
@@ -132,7 +132,8 @@ class TareaController extends Controller
     {
         $usuarioService =  $this->get('contadores.servicios.usuario');
         $entity  = new Tarea();
-        $form = $this->createForm(new TareaType(), $entity);
+        $tareasService =  $this->get('contadores.servicios.tareas');
+        $form   = $this->createForm(new TareaType($this->getUser(), $tareasService), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -197,7 +198,8 @@ class TareaController extends Controller
     public function newAction()
     {
         $entity = new Tarea();
-        $form   = $this->createForm(new TareaType(), $entity);
+        $tareasService =  $this->get('contadores.servicios.tareas');
+        $form   = $this->createForm(new TareaType($this->getUser(), $tareasService), $entity);
 
         return $this->render('ContadoresBundle:Tarea:new.html.twig', array(
             'entity' => $entity,
@@ -207,7 +209,8 @@ class TareaController extends Controller
     public function realizadaAction()
     {
         $entity = new Tarea();
-        $form   = $this->createForm(new TareaType(), $entity);
+        $tareasService =  $this->get('contadores.servicios.tareas');
+        $form   = $this->createForm(new TareaType($this->getUser(), $tareasService), $entity);
 
         return $this->render('ContadoresBundle:Tarea:newrealizada.html.twig', array(
             'entity' => $entity,
@@ -269,7 +272,9 @@ class TareaController extends Controller
             throw $this->createNotFoundException('Unable to find Tarea entity.');
         }
 
-        $editForm = $this->createForm(new TareaType(), $entity);
+        $tareasService =  $this->get('contadores.servicios.tareas');
+        $editForm   = $this->createForm(new TareaType($this->getUser(), $tareasService), $entity);
+
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ContadoresBundle:Tarea:edit.html.twig', array(
@@ -294,7 +299,8 @@ class TareaController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new TareaType(), $entity);
+        $tareasService =  $this->get('contadores.servicios.tareas');
+        $editForm   = $this->createForm(new TareaType($this->getUser(), $tareasService), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
