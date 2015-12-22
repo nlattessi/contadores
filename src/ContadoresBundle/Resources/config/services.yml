@@ -14,3 +14,7 @@ services:
           class: ContadoresBundle\Servicios\BajaAdministrativaService
           arguments:
               entityManager: @doctrine.orm.entity_manager
+      contadores.servicios.vencimiento:
+          class: ContadoresBundle\Servicios\VencimientoService
+          arguments:
+              entityManager: @doctrine.orm.entity_manager

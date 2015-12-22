@@ -18,9 +18,9 @@ class Vencimiento
     private $fecha;
 
     /**
-     * @var integer
+     * @var \ContadoresBundle\Entity\Periodo
      */
-    private $periodoId;
+    private $periodo;
 
     /**
      * @var string
@@ -31,6 +31,11 @@ class Vencimiento
      * @var \ContadoresBundle\Entity\TareaMetadata
      */
     private $tareaMetadata;
+
+    /**
+     * @var \ContadoresBundle\Entity\Esquema
+     */
+    private $esquema;
 
 
     /**
@@ -68,28 +73,45 @@ class Vencimiento
     }
 
     /**
-     * Set periodoId
+     * Set periodo
      *
-     * @param integer $periodoId
+     * @param \ContadoresBundle\Entity\Periodo $periodo
      *
      * @return Vencimiento
      */
-    public function setPeriodoId($periodoId)
+    public function setPeriodo($periodo)
     {
-        $this->periodoId = $periodoId;
-
+        $this->periodo = $periodo;
+        //$this->esquema = $periodo->getEsquema();
         return $this;
     }
 
     /**
-     * Get periodoId
+     * Get periodo
      *
-     * @return integer
+     * @return \ContadoresBundle\Entity\Periodo
      */
-    public function getPeriodoId()
+    public function getPeriodo()
     {
-        return $this->periodoId;
+        return $this->periodo;
     }
+
+    public function getEsquema(){
+        if($this->esquema){
+            return $this->esquema;
+        }
+        if($this->getPeriodo()){
+            return $this->getPeriodo()->getEsquema();
+        }
+        return null;
+    }
+
+    public function setEsquema($esquema){
+
+        $this->esquema = $esquema;
+        return $this;
+    }
+
 
     /**
      * Set colaCuil
@@ -139,3 +161,4 @@ class Vencimiento
         return $this->tareaMetadata;
     }
 }
+

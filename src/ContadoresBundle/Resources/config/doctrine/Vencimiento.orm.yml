@@ -5,6 +5,9 @@ ContadoresBundle\Entity\Vencimiento:
         fk_vencimiento_metadata_idx:
             columns:
                 - tarea_metadata_id
+        fk_vencimiento_periodo_idx:
+            columns:
+                - periodo_id
     id:
         id:
             type: integer
@@ -18,12 +21,6 @@ ContadoresBundle\Entity\Vencimiento:
         fecha:
             type: date
             nullable: false
-        periodoId:
-            type: integer
-            nullable: false
-            options:
-                unsigned: false
-            column: periodo_id
         colaCuil:
             type: string
             nullable: false
@@ -32,6 +29,16 @@ ContadoresBundle\Entity\Vencimiento:
                 fixed: false
             column: cola_cuil
     manyToOne:
+        periodo:
+            targetEntity: Periodo
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                periodo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
         tareaMetadata:
             targetEntity: TareaMetadata
             cascade: {  }

@@ -138,4 +138,11 @@ class Periodo
     {
         return $this->esquema;
     }
+
+    function __toString()
+    {
+        return $this->getNombre();
+    }
+
+
 }
