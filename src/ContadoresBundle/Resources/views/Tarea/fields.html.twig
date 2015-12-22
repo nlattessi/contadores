@@ -68,3 +68,22 @@
     </div>
 {% endblock %}
 
+{% block _contadoresbundle_tarea_esquema_widget %}
+    <div class="col-sm-6 col-md-6 ">
+        <h4 class="example-title">Esquema</h4>
+        <div class="form-group">
+            {{ block('choice_widget') }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_tarea_periodo_widget %}
+    <div class="col-sm-6 col-md-6 ">
+        <h4 class="example-title">Periodo</h4>
+        <div class="form-group">
+            {{ block('choice_widget') }}
+        </div>
+    </div>
+{% endblock %}
+
+

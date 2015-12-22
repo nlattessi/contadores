@@ -133,7 +133,8 @@ class TareaController extends Controller
         $usuarioService =  $this->get('contadores.servicios.usuario');
         $entity  = new Tarea();
         $tareasService =  $this->get('contadores.servicios.tareas');
-        $form   = $this->createForm(new TareaType($tareasService), $entity, array(
+        $vencimientoService =  $this->get('contadores.servicios.vencimiento');
+        $form   = $this->createForm(new TareaType($tareasService,$vencimientoService), $entity, array(
             'user' => $this->getUser(),
             'periodica' => false
         ));
@@ -194,6 +195,79 @@ class TareaController extends Controller
         ));
     }
 
+    public function createPeriodicaAction(Request $request)
+    {
+        $usuarioService =  $this->get('contadores.servicios.usuario');
+        $entity  = new Tarea();
+        $tareasService =  $this->get('contadores.servicios.tareas');
+        $vencimientoService =  $this->get('contadores.servicios.vencimiento');
+        $form   = $this->createForm(new TareaType($tareasService,$vencimientoService), $entity, array(
+            'user' => $this->getUser(),
+            'periodica' => true
+        ));
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            if ($this->getUser()->getRol() == Rol::$contador ){
+                $contador = $usuarioService->obtenerContadorPorUsuario($this->getUser());
+                if(!$contador->getEsJefe()){
+                    $entity->setContador($contador);
+                }
+            }
+
+            if(strlen($entity->getNombre()) < 1){
+
+                $entity->setNombre($entity->getTareaMetadata()->getNombre() . ' ' . $entity->getCliente()->getNombre());
+            }
+            $entity->setFechaCreacion(new \DateTime(null));
+
+            if ($form->has('vencimientoInterno') && $form->get('vencimientoInterno')->getData() !== null) {
+                $vencimientoInterno = $form->get('vencimientoInterno')->getData();
+                $dtVencimientoInterno = \DateTime::createFromFormat('d/m/Y', $vencimientoInterno);
+                $entity->setVencimientoInterno($dtVencimientoInterno);
+            }
+
+            if ($form->has('periodo') && $form->get('periodo')->getData() !== null) {
+                $vencimientoFiscal = $vencimientoService->obtenerVencimientoFiscal($entity->getPeriodo(),$entity->getCliente());
+                $entity->setVencimientoFiscal($vencimientoFiscal->getFecha());
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+
+            $tiempo = $request->get('tiempoReal');
+            $tareasService =  $this->get('contadores.servicios.tareas');
+            if($request->get('finalizada')){
+                $estado = $tareasService->crearEstadoTareaFinalizado($entity, $tiempo);
+            }else{
+                $estado = $tareasService->crearEstadoTareaNuevo($entity, $tiempo);
+            }
+
+            $entity->setEstadoActual($estado);
+            $em->persist($entity);
+
+            $observaciones = $request->get('observaciones');
+            if($observaciones){
+                $observacion = new Observacion($this->getUser(),$entity,$observaciones);
+                $em->persist($observacion);
+            }
+
+
+            $em->flush();
+
+
+            $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
+
+            return $this->redirect($this->generateUrl('tarea_show', array('id' => $entity->getId())));
+        }
+
+        return $this->render('ContadoresBundle:Tarea:newperiodica.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
     /**
      * Displays a form to create a new Tarea entity.
      *
@@ -202,7 +276,8 @@ class TareaController extends Controller
     {
         $entity = new Tarea();
         $tareasService =  $this->get('contadores.servicios.tareas');
-        $form   = $this->createForm(new TareaType($tareasService), $entity, array(
+        $vencimientoService =  $this->get('contadores.servicios.vencimiento');
+        $form   = $this->createForm(new TareaType($tareasService,$vencimientoService), $entity, array(
             'user' => $this->getUser(),
             'periodica' => false
         ));
@@ -212,11 +287,29 @@ class TareaController extends Controller
             'form'   => $form->createView(),
         ));
     }
+
+    public function newPeriodicaAction()
+    {
+        $entity = new Tarea();
+        $tareasService =  $this->get('contadores.servicios.tareas');
+        $vencimientoService =  $this->get('contadores.servicios.vencimiento');
+        $form   = $this->createForm(new TareaType($tareasService,$vencimientoService), $entity, array(
+            'user' => $this->getUser(),
+            'periodica' => true
+        ));
+
+        return $this->render('ContadoresBundle:Tarea:newperiodica.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+
     public function realizadaAction()
     {
         $entity = new Tarea();
         $tareasService =  $this->get('contadores.servicios.tareas');
-        $form   = $this->createForm(new TareaType($tareasService), $entity, array(
+        $vencimientoService =  $this->get('contadores.servicios.vencimiento');
+        $form   = $this->createForm(new TareaType($tareasService,$vencimientoService), $entity, array(
             'user' => $this->getUser(),
             'periodica' => false
         ));
@@ -282,7 +375,8 @@ class TareaController extends Controller
         }
 
         $tareasService =  $this->get('contadores.servicios.tareas');
-        $editForm   = $this->createForm(new TareaType($tareasService), $entity, array(
+        $vencimientoService =  $this->get('contadores.servicios.vencimiento');
+        $editForm   = $this->createForm(new TareaType($tareasService,$vencimientoService), $entity, array(
             'user' => $this->getUser(),
             'periodica' => false
         ));
@@ -312,7 +406,8 @@ class TareaController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
         $tareasService =  $this->get('contadores.servicios.tareas');
-        $editForm   = $this->createForm(new TareaType($tareasService), $entity, array(
+        $vencimientoService =  $this->get('contadores.servicios.vencimiento');
+        $editForm   = $this->createForm(new TareaType($tareasService,$vencimientoService), $entity, array(
             'user' => $this->getUser(),
             'periodica' => false
         ));
@@ -323,7 +418,6 @@ class TareaController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            $tareasService =  $this->get('contadores.servicios.tareas');
             $estadoNuevo = $tareasService->crearEstadoTareaNuevo($entity);
             $entity->setEstadoActual($estadoNuevo);
             $em->persist($entity);

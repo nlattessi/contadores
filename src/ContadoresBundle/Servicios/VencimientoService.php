@@ -9,7 +9,9 @@
 namespace ContadoresBundle\Servicios;
 
 
+use ContadoresBundle\Entity\Cliente;
 use ContadoresBundle\Entity\Esquema;
+use ContadoresBundle\Entity\Periodo;
 use Doctrine\ORM\EntityManager;
 
 class VencimientoService {
@@ -33,14 +35,17 @@ class VencimientoService {
         return $periodos;
     }
 
-    public function obtenerFalsoPeriodo(){
-        $periodo = $this->em->getRepository('ContadoresBundle:Periodo')->findBy(array('id' => 1));
+    public function obtenerVencimientoFiscal(Periodo $periodo, Cliente $cliente){
 
-        return  $periodo;
-    }
-    public function obtenerFalsoEsquema(){
-        $esquema = $this->em->getRepository('ContadoresBundle:Esquema')->findOneBy(array('id' => 1));
+        $queryBuilder = $this->em->getRepository('ContadoresBundle:Vencimiento')->createQueryBuilder('v')
+            ->where('v.periodo = ?1')
+            ->andWhere('v.colaCuil = ?2')
+            ->setParameter(1, $periodo)
+            ->setParameter(2, substr($cliente->getCuit(),-1));
 
-        return  $esquema;
+        $vencimiento = $queryBuilder->getQuery()->getSingleResult();
+
+        return $vencimiento;
     }
+
 }
