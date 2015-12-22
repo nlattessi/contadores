@@ -100,8 +100,10 @@ class Vencimiento
         if($this->esquema){
             return $this->esquema;
         }
-        return $this->getPeriodo()->getEsquema();
-
+        if($this->getPeriodo()){
+            return $this->getPeriodo()->getEsquema();
+        }
+        return null;
     }
 
     public function setEsquema($esquema){
