@@ -27,6 +27,10 @@ class TareaMetadata
      */
     private $rubro;
 
+    /**
+     * @var boolean
+     */
+    private $activo = true;
 
     /**
      * Get id
@@ -109,6 +113,24 @@ class TareaMetadata
     {
         return $this->rubro;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isActivo()
+    {
+        return $this->activo;
+    }
+
+    /**
+     * @param boolean $activo
+     */
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
+    }
+
+
 
     function __toString()
     {

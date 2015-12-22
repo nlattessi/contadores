@@ -17,4 +17,8 @@ ContadoresBundle\Entity\Area:
             length: 45
             options:
                 fixed: false
+    oneToMany:
+        rubros:
+            targetEntity: Rubro
+            mappedBy: area
     lifecycleCallbacks: {  }

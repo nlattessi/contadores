@@ -205,16 +205,21 @@ class TareasService {
         $contadores = $queryBuilder->getQuery()->getResult();
         return $contadores;
     }
-    public function obtenerTareaMetadataHabilitada($usuario){
-        $queryBuilder = $this->em->getRepository('ContadoresBundle:TareaMetadata')->createQueryBuilder('t');
-          //  ->where('c.activo = true');
+    public function obtenerTareaMetadataHabilitada($usuario, $periodica){
+        $queryBuilder = $this->em->getRepository('ContadoresBundle:TareaMetadata')->createQueryBuilder('t')
+           ->where('t.activo = true');
+
+        if($periodica){
+            $queryBuilder->andWhere('t.esperiodica = true');
+        }else{
+            //para cubrir el null también
+            $queryBuilder->andWhere('t.esperiodica = false');
+        }
 
         if ($usuario->getRol() == $this->rolContador ){
             $contador = $this->usuarioService->obtenerContadorPorUsuario($usuario);
-            $queryBuilder->andWhere('c.area = ?1')
-                    ->setParameter(1, $contador->getArea());
-
-
+            $queryBuilder->andWhere('t.rubro in (?1)')
+                    ->setParameter(1, $contador->getArea()->getRubros());
         }
         $contadores = $queryBuilder->getQuery()->getResult();
         return $contadores;

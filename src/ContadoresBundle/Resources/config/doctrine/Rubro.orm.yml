@@ -27,7 +27,7 @@ ContadoresBundle\Entity\Rubro:
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: null
+            inversedBy: rubros
             joinColumns:
                 area_id:
                     referencedColumnName: id

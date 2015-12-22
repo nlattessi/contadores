@@ -133,7 +133,10 @@ class TareaController extends Controller
         $usuarioService =  $this->get('contadores.servicios.usuario');
         $entity  = new Tarea();
         $tareasService =  $this->get('contadores.servicios.tareas');
-        $form   = $this->createForm(new TareaType($this->getUser(), $tareasService), $entity);
+        $form   = $this->createForm(new TareaType($tareasService), $entity, array(
+            'user' => $this->getUser(),
+            'periodica' => false
+        ));
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -199,7 +202,10 @@ class TareaController extends Controller
     {
         $entity = new Tarea();
         $tareasService =  $this->get('contadores.servicios.tareas');
-        $form   = $this->createForm(new TareaType($this->getUser(), $tareasService), $entity);
+        $form   = $this->createForm(new TareaType($tareasService), $entity, array(
+            'user' => $this->getUser(),
+            'periodica' => false
+        ));
 
         return $this->render('ContadoresBundle:Tarea:new.html.twig', array(
             'entity' => $entity,
@@ -210,7 +216,10 @@ class TareaController extends Controller
     {
         $entity = new Tarea();
         $tareasService =  $this->get('contadores.servicios.tareas');
-        $form   = $this->createForm(new TareaType($this->getUser(), $tareasService), $entity);
+        $form   = $this->createForm(new TareaType($tareasService), $entity, array(
+            'user' => $this->getUser(),
+            'periodica' => false
+        ));
 
         return $this->render('ContadoresBundle:Tarea:newrealizada.html.twig', array(
             'entity' => $entity,
@@ -273,7 +282,10 @@ class TareaController extends Controller
         }
 
         $tareasService =  $this->get('contadores.servicios.tareas');
-        $editForm   = $this->createForm(new TareaType($this->getUser(), $tareasService), $entity);
+        $editForm   = $this->createForm(new TareaType($tareasService), $entity, array(
+            'user' => $this->getUser(),
+            'periodica' => false
+        ));
 
         $deleteForm = $this->createDeleteForm($id);
 
@@ -300,7 +312,10 @@ class TareaController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
         $tareasService =  $this->get('contadores.servicios.tareas');
-        $editForm   = $this->createForm(new TareaType($this->getUser(), $tareasService), $entity);
+        $editForm   = $this->createForm(new TareaType($tareasService), $entity, array(
+            'user' => $this->getUser(),
+            'periodica' => false
+        ));
         $editForm->bind($request);
 
         if ($editForm->isValid()) {

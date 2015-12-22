@@ -27,6 +27,12 @@ ContadoresBundle\Entity\TareaMetadata:
             options:
                 default: '0'
             column: esPeriodica
+        activo:
+            type: boolean
+            nullable: false
+            options:
+                default: '1'
+            column: activo
     manyToOne:
         rubro:
             targetEntity: Rubro

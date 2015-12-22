@@ -14,14 +14,16 @@ class TareaType extends AbstractType
     protected $tareaService;
 
 
-    public function __construct(Usuario $user, TareasService $ts)
+    public function __construct( TareasService $ts)
     {
-        $this->usuario = $user;
         $this->tareaService = $ts;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+        $usuario = $options['user'];
+        $periodica = $options['periodica'];
 
         $builder
             ->add('fechaInicio', 'date', array('label' => 'Fecha inicio', 'widget' => 'single_text'))
@@ -32,10 +34,14 @@ class TareaType extends AbstractType
             ->add('contador', 'entity', [
                 'class' => 'ContadoresBundle:Contador',
                 'empty_value' => '',
-                'choices' => $this->tareaService->obtenerContadoresHabilitados($this->usuario)
+                'choices' => $this->tareaService->obtenerContadoresHabilitados($usuario)
             ])
             ->add('cliente')
-            ->add('tareaMetadata')
+            ->add('tareaMetadata', 'entity', [
+                'class' => 'ContadoresBundle:TareaMetadata',
+                'empty_value' => '',
+                'choices' => $this->tareaService->obtenerTareaMetadataHabilitada($usuario, $periodica)
+            ])
             ->add('tiempoEstimado')
             ->add('reset', 'reset', ['label' => 'Limpiar '])
         ;
@@ -44,7 +50,9 @@ class TareaType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ContadoresBundle\Entity\Tarea'
+            'data_class' => 'ContadoresBundle\Entity\Tarea',
+            'user' => null,
+            'periodica' => true
         ));
     }
 
