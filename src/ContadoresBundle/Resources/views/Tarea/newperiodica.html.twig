@@ -1,0 +1,83 @@
+{% extends 'ContadoresBundle:Layout:layout.html.twig' %}
+{% form_theme form 'ContadoresBundle:Tarea:fields.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - {{ 'views.new.creation'|trans({'%entity%': 'Tarea'}, 'JordiLlonchCrudGeneratorBundle') }}
+{% endblock %}
+
+{% block menu %}
+    {{ include('ContadoresBundle:NavBars:navbar.html.twig') }}
+{% endblock %}
+
+{% block encabezado %}Asignar tarea periódica a cliente {% endblock %}
+
+{% block breadcrum %}
+    <li><a href="{{ path('home') }}">Inicio</a></li>
+    <li>Clientes</li>
+    <li class="active">Cargar tareas Periódicas </li>
+{% endblock %}
+
+{% block page %}
+
+    <div class="panel-heading">
+        <h4 class="panel-title">Complete todos los campos.</h4>
+    </div>
+
+    <div class="panel-body container-fluid">
+        <form action="{{ path('tarea_periodica_create') }}" method="post" {{ form_enctype(form) }}>
+            <div class="row ">
+                <div class="row">
+                    {{ form_widget(form.cliente, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form.tareaMetadata, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="row">
+                    {{ form_widget(form.contador, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form.tiempoEstimado, {'attr': {'class': 'form-control'}}) }}
+
+                </div>
+                <div class="row">
+                    {{ form_widget(form.esquema, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form.periodo, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="row">
+                    {{ form_widget(form.vencimientoInterno, {'attr': {'class': 'form-control', 'data-provide': 'datepicker', 'data-date-format': 'dd/mm/yyyy', 'data-date-autoclose': 'true'}}) }}
+                    <div class="col-sm-6 col-md-6 margin-top-30">
+                        <h4 class="example-title">Cargar Archivo</h4>
+
+                        <div class="input-group input-group-file">
+                            <input type="text" class="form-control" readonly="">
+                    <span class="input-group-btn">
+                      <span class="btn btn-outline btn-file">
+                        <i class="icon wb-upload" aria-hidden="true"></i>
+                        <input type="file" name="archivo" multiple="">
+                      </span>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 margin-top-30 ">
+                        <h4 class="example-title">Observaciones</h4>
+                        <textarea class="form-control" id="textareaDefault" rows="3" name="observaciones"></textarea>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 margin-top-20">
+
+                    <button type="submit" class="btn btn btn-success">Crear</button>
+                    {{ form_widget(form.reset, {'attr': {'class': 'btn btn-outline btn-default'}}) }}
+                    <a  href="{{ path('cliente') }}" class="btn btn-outline btn-warning">Ver clientes</a>
+
+                </div>
+            </div>
+            {{ form_widget(form._token) }}
+        </form>
+    </div>
+
+{% endblock %}
+{% block javascript %}
+    <script src="{{ asset('bundles/contadores/assets/js/tareaForm.js') }}"></script>
+{% endblock %}

@@ -53,7 +53,6 @@ class VencimientoType extends AbstractType
                 $formModifier($event->getForm(), $data->getEsquema());
             }
         );
-        //No invoca esto cuando modifica el dato de esquema!
         $builder->get('esquema')->addEventListener(
             FormEvents::POST_SUBMIT,
             function (FormEvent $event) use ($formModifier) {

@@ -10,6 +10,10 @@ tarea_new:
     pattern:  /new
     defaults: { _controller: "ContadoresBundle:Tarea:new" }
 
+tarea_periodica_new:
+    pattern:  /periodicanew
+    defaults: { _controller: "ContadoresBundle:Tarea:newPeriodica" }
+
 tarea_realizada:
     pattern:  /realizada
     defaults: { _controller: "ContadoresBundle:Tarea:realizada" }
@@ -21,6 +25,11 @@ tarea_finalizar:
 tarea_create:
     pattern:  /create
     defaults: { _controller: "ContadoresBundle:Tarea:create" }
+    requirements: { _method: post }
+
+tarea_periodica_create:
+    pattern:  /periodicacreate
+    defaults: { _controller: "ContadoresBundle:Tarea:createPeriodica" }
     requirements: { _method: post }
 
 tarea_edit:

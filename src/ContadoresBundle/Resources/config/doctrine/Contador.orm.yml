@@ -54,6 +54,12 @@ ContadoresBundle\Entity\Contador:
             options:
                 default: '0'
             column: es_jefe
+        activo:
+            type: boolean
+            nullable: true
+            options:
+                default: '1'
+            column: activo
     manyToOne:
         area:
             targetEntity: Area

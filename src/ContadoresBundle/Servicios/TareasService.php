@@ -17,6 +17,7 @@ use Doctrine\ORM\EntityManager;
 
 class TareasService {
     protected $em;
+    protected $usuarioService;
     static $tipoEstadoNuevo = 1;
     static $tipoEstadoFinalizado = 2;
     protected $rolContador;
@@ -24,9 +25,10 @@ class TareasService {
     protected $rolJefe;
     protected $estadosTerminales;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager, UsuarioService $us)
     {
         $this->em = $entityManager;
+        $this->usuarioService = $us;
         $this->rolCliente = "ROLE_CLIENTE";
         $this->rolContador = "ROLE_CONTADOR";
         $this->rolJefe = "ROLE_JEFE";
@@ -168,7 +170,7 @@ class TareasService {
         $estadoViejo->setFechaFin(new \DateTime(null));
         $this->em->persist($estadoViejo);
 
-        $estadoTarea = $this->crearEstadoTarea($tarea,$nuevoEstadoId);
+        $estadoTarea = $this->crearEstadoTarea($tarea,$nuevoEstadoId,0);
 
         if(in_array($nuevoEstadoId,$this->estadosTerminales))
         {
@@ -183,6 +185,44 @@ class TareasService {
         $this->em->flush();
 
         return $tarea;
+    }
+
+    public function obtenerContadoresHabilitados($usuario){
+        $queryBuilder = $this->em->getRepository('ContadoresBundle:Contador')->createQueryBuilder('c')
+            ->where('c.activo = true');
+
+         if ($usuario->getRol() == $this->rolContador ){
+            $contador = $this->usuarioService->obtenerContadorPorUsuario($usuario);
+            if($contador->getEsJefe()){
+                $queryBuilder->andWhere('c.area = ?1')
+                    ->setParameter(1, $contador->getArea());
+            }else{
+                $queryBuilder->andWhere('c.id = ?1')
+                    ->setParameter(1, $contador->getId());
+            }
+
+        }
+        $contadores = $queryBuilder->getQuery()->getResult();
+        return $contadores;
+    }
+    public function obtenerTareaMetadataHabilitada($usuario, $periodica){
+        $queryBuilder = $this->em->getRepository('ContadoresBundle:TareaMetadata')->createQueryBuilder('t')
+           ->where('t.activo = true');
+
+        if($periodica){
+            $queryBuilder->andWhere('t.esperiodica = true');
+        }else{
+            //para cubrir el null también
+            $queryBuilder->andWhere('t.esperiodica = false');
+        }
+
+        if ($usuario->getRol() == $this->rolContador ){
+            $contador = $this->usuarioService->obtenerContadorPorUsuario($usuario);
+            $queryBuilder->andWhere('t.rubro in (?1)')
+                    ->setParameter(1, $contador->getArea()->getRubros());
+        }
+        $contadores = $queryBuilder->getQuery()->getResult();
+        return $contadores;
     }
 
 }

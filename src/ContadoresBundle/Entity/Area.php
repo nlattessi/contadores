@@ -17,7 +17,28 @@ class Area
      */
     private $nombre;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Rubro", mappedBy="area", cascade={"remove"})
+     */
+    protected $rubros;
 
+    public function __construct()
+    {
+        $this->rubros = new ArrayCollection();
+    }
+
+    public function addRubro(Rubro $e)
+    {
+        $this->rubros[] = $e;
+        $e->setArea($this);
+
+        return $this;
+    }
+
+    public function getRubros()
+    {
+        return $this->rubros;
+    }
     /**
      * Get id
      *

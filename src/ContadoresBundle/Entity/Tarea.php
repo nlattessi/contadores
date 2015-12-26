@@ -78,6 +78,11 @@ class Tarea
      */
     protected $observaciones;
 
+    private $esquema;
+
+    private $periodo;
+
+
     public function __construct()
     {
         $this->observaciones = new ArrayCollection();
@@ -392,6 +397,39 @@ class Tarea
     {
         return $this->tareaMetadata;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEsquema()
+    {
+        return $this->esquema;
+    }
+
+    /**
+     * @param mixed $esquema
+     */
+    public function setEsquema($esquema)
+    {
+        $this->esquema = $esquema;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPeriodo()
+    {
+        return $this->periodo;
+    }
+
+    /**
+     * @param mixed $periodo
+     */
+    public function setPeriodo($periodo)
+    {
+        $this->periodo = $periodo;
+    }
+
 
     function __toString()
     {

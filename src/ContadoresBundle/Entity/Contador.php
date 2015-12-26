@@ -52,6 +52,11 @@ class Contador
      */
     private $usuario;
 
+    /**
+     * @var boolean
+     */
+    private $activo = '1';
+
 
     /**
      * Get id
@@ -254,6 +259,23 @@ class Contador
     {
         return $this->usuario;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isActivo()
+    {
+        return $this->activo;
+    }
+
+    /**
+     * @param boolean $activo
+     */
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
+    }
+
 
     function __toString()
     {

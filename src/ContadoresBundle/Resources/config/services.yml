@@ -6,6 +6,7 @@ services:
           class: ContadoresBundle\Servicios\TareasService
           arguments:
               entityManager: @doctrine.orm.entity_manager
+              us: @contadores.servicios.usuario
       contadores.servicios.usuario:
           class: ContadoresBundle\Servicios\UsuarioService
           arguments:
