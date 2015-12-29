@@ -188,6 +188,7 @@ class TareasService {
     }
 
     public function obtenerContadoresHabilitados($usuario){
+
         $queryBuilder = $this->em->getRepository('ContadoresBundle:Contador')->createQueryBuilder('c')
             ->where('c.activo = true');
 

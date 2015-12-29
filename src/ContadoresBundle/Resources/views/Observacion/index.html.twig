@@ -64,10 +64,10 @@
             <td>{% if entity.fechaCreacion %}{{ entity.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>
         <a class="btn btn-mini" href="{{ path('observacion_show', { 'id': entity.id }) }}">
-            {{ 'views.actions.show'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+            <i class="icon wb-eye" aria-hidden="true"></i>
         </a>
         <a class="btn btn-mini" href="{{ path('observacion_edit', { 'id': entity.id }) }}">
-            {{ 'views.actions.edit'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+            <i class="icon wb-pencil" aria-hidden="true"></i>
         </a>            </td>
         </tr>
     {% endfor %}

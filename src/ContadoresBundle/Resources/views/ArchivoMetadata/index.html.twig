@@ -58,10 +58,10 @@
             <td><a href="{{ path('archivometadata_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>
         <a class="btn btn-mini" href="{{ path('archivometadata_show', { 'id': entity.id }) }}">
-            {{ 'views.actions.show'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+            <i class="icon wb-eye" aria-hidden="true"></i>
         </a>
         <a class="btn btn-mini" href="{{ path('archivometadata_edit', { 'id': entity.id }) }}">
-            {{ 'views.actions.edit'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+            <i class="icon wb-pencil" aria-hidden="true"></i>
         </a>            </td>
         </tr>
     {% endfor %}

@@ -1,48 +1,49 @@
 {% extends 'ContadoresBundle:Layout:layout.html.twig' %}
 
-{% block title %}
-{{ parent() }} - {{ 'views.index.list'|trans({'%entity%': 'Contador'}, 'JordiLlonchCrudGeneratorBundle') }}
+{% block encabezado %}
+    Ver contadores
 {% endblock %}
 
-{% block menu %}
-{{ include('ContadoresBundle:NavBars:navbar.html.twig') }}
+{% block breadcrum %}
+    <li><a href="{{ path('home') }}">Inicio</a></li>
+    <li>Contadores</li>
+    <li class="active">Ver contadores</li>
 {% endblock %}
 
-{% block page %}
 
-<div class="row">
-
-    <div class="span8">
-        <h1>{{ 'views.index.list'|trans({'%entity%': 'Contador'}, 'JordiLlonchCrudGeneratorBundle') }}</h1>
-    </div>
-    <div class="span2">
-        {% if form_errors(filterForm) %}
-        <div class="alert alert-block alert-error fade in form-errors">
-            {{ form_errors(filterForm) }}
+{% block filtro %}
+    {% if form_errors(filterForm) %}
+        <div class="span2">
+            <div class="alert alert-block alert-error fade in form-errors">
+                {{ form_errors(filterForm) }}
+            </div>
+            &nbsp;
         </div>
-        {% endif %}
-        &nbsp;
+    {% endif %}
+    <div class="page-header-actions">
+        <a class="btn btn-sm btn-default btn-outline btn-round" data-toggle="collapse" data-target="#filters">
+            {{ 'views.index.filters'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+            <span class="caret"></span>
+        </a>
     </div>
-    <div class="span2">
-        <div class="filters-right">
-            <a class="btn dropdown-toggle" data-toggle="collapse" data-target="#filters">
-                {{ 'views.index.filters'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-                <span class="caret"></span>
-            </a>
-        </div>
-    </div>
-
     <div class="span12">
         <div id="filters" class="collapse">
 
-            <form class="well" action="{{ path('contador') }}" method="get" {{ form_enctype(filterForm) }}>
-                {{ form_row(filterForm.id) }}
-                {{ form_row(filterForm.nombre) }}
-                {{ form_row(filterForm.apellido) }}
-                {{ form_row(filterForm.celular) }}
-                {{ form_row(filterForm.mail) }}
-                {{ form_row(filterForm.telefono) }}
-                {{ form_rest(filterForm) }}
+            <form class="well" action="{{ path('vencimiento') }}" method="get" {{ form_enctype(filterForm) }}>
+                <form class="well" action="{{ path('contador') }}" method="get" {{ form_enctype(filterForm) }}>
+                    {{ form_row(filterForm.id) }}
+                    {{ form_row(filterForm.nombre) }}
+                    {{ form_row(filterForm.apellido) }}
+                    {{ form_row(filterForm.celular) }}
+                    {{ form_row(filterForm.mail) }}
+                    {{ form_row(filterForm.telefono) }}
+                    {{ form_rest(filterForm) }}
+
+                    <p>
+                        <button type="submit" name="filter_action" value="filter">{{ 'views.index.filter'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+                        <button type="submit" name="filter_action" value="reset">{{ 'views.index.reset'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+                    </p>
+                </form>
 
                 <p>
                     <button type="submit" name="filter_action" value="filter">{{ 'views.index.filter'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
@@ -51,6 +52,11 @@
             </form>
         </div>
     </div>
+{% endblock %}
+
+{% block page %}
+
+<div class="row">
 
     <div class="span12">
 
@@ -77,26 +83,26 @@
             <td>{{ entity.telefono }}</td>
             <td>
         <a class="btn btn-mini" href="{{ path('contador_show', { 'id': entity.id }) }}">
-            {{ 'views.actions.show'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+            <i class="icon wb-eye" aria-hidden="true"></i>
         </a>
         <a class="btn btn-mini" href="{{ path('contador_edit', { 'id': entity.id }) }}">
-            {{ 'views.actions.edit'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+            <i class="icon wb-pencil" aria-hidden="true"></i>
         </a>            </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
     </div>
-
-    <div class="span4">
-    {{ pagerHtml|raw }}
-    </div>
-
-        <div class="span8">
-    <a class="btn btn-primary likepaginator" href="{{ path('contador_new') }}">
+    <div class="dt-panelfooter clearfix">
+        <a class="btn btn-primary likepaginator" href="{{ path('contador_new') }}">
             {{ 'views.index.createnew'|trans({}, 'JordiLlonchCrudGeneratorBundle') }} Contador
         </a>
+        <div class="dataTables_paginate paging_simple_numbers">
+
+            {{ pagerHtml|raw }}
+        </div>
     </div>
-    </div>
+
+</div>
 
 {% endblock %}

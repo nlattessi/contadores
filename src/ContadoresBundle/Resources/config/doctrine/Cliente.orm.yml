@@ -46,6 +46,10 @@ ContadoresBundle\Entity\Cliente:
             options:
                 fixed: false
             column: CUIT
+    oneToMany:
+        tareas:
+            targetEntity: Tarea
+            mappedBy: cliente
     manyToOne:
         usuario:
             targetEntity: Usuario

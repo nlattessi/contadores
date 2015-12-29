@@ -25,9 +25,6 @@ class TareaFilterType extends AbstractType
             ->add('fechaCreacion', 'filter_date_range',array(
                 'left_date_options'  => array('widget' => 'single_text',  ),
                 'right_date_options' => array('widget' => 'single_text',  )))
-            ->add('vencimientoFiscal', 'filter_date_range',array(
-                'left_date_options'  => array('widget' => 'single_text', ),
-                'right_date_options' => array('widget' => 'single_text',  )))
             ->add('vencimientoInterno', 'filter_date_range',array(
                 'left_date_options'  => array('widget' => 'single_text',  ),
                 'right_date_options' => array('widget' => 'single_text',  )))

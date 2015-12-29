@@ -1,6 +1,8 @@
 <?php
 
 namespace ContadoresBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Contador
@@ -57,6 +59,15 @@ class Contador
      */
     private $activo = '1';
 
+    /**
+     * @ORM\OneToMany(targetEntity="Rubro", mappedBy="area", cascade={"remove"})
+     */
+    private $tareas;
+
+    public function __construct()
+    {
+        $this->tareas = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -276,6 +287,21 @@ class Contador
         $this->activo = $activo;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTareas()
+    {
+        return $this->tareas;
+    }
+
+    /**
+     * @param mixed $tareas
+     */
+    public function setTareas($tareas)
+    {
+        $this->tareas = $tareas;
+    }
 
     function __toString()
     {

@@ -1,6 +1,8 @@
 <?php
 
 namespace ContadoresBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Cliente
@@ -42,6 +44,15 @@ class Cliente
      */
     private $usuario;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Rubro", mappedBy="area", cascade={"remove"})
+     */
+    private $tareas;
+
+    public function __construct()
+    {
+        $this->tareas = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -195,6 +206,22 @@ class Cliente
     public function getUsuario()
     {
         return $this->usuario;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTareas()
+    {
+        return $this->tareas;
+    }
+
+    /**
+     * @param mixed $tareas
+     */
+    public function setTareas($tareas)
+    {
+        $this->tareas = $tareas;
     }
 
     function __toString()

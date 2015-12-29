@@ -1,85 +1,91 @@
 {% extends 'ContadoresBundle:Layout:layout.html.twig' %}
 
-{% block title %}
-{{ parent() }} - {{ 'views.show.show'|trans({'%entity%': 'Tarea'}, 'JordiLlonchCrudGeneratorBundle') }}
+{% block encabezado %}
+    Ver detalles de la tarea
 {% endblock %}
 
-{% block menu %}
-{{ include('ContadoresBundle:NavBars:navbar.html.twig') }}
+{% block breadcrum %}
+    <li><a href="{{ path('home') }}">Inicio</a></li>
+    <li><a href="{{ path('tarea') }}">Tareas</a></li>
+    <li class="active">Ver detalles de la tarea</li>
 {% endblock %}
+
 
 {% block page %}
 
-<h1>Tarea</h1>
+<table class="table table-bordered table-hover table-striped" id="exampleAddRow">
 
-<form class="form-horizontal">
-    <fieldset>        <div class="control-group">
-            <label class="control-label">Id</label>
-            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.id }}</span>            </div>
-        </div>        <div class="control-group">
-            <label class="control-label">Fecha inicio</label>
-            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.fechaInicio|date('Y-m-d ') }}</span>            </div>
-        </div>
-        {% if entity.fechaFin %}
-        <div class="control-group">
-            <label class="control-label">Fecha fin</label>
-            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.fechaFin|date('Y-m-d ') }}</span>            </div>
-        </div>
-        {% endif %}
-        <div class="control-group">
-            <label class="control-label">Fecha creacion</label>
-            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.fechaCreacion|date('Y-m-d ') }}</span>            </div>
-        </div>        <div class="control-group">
-            <label class="control-label">Vencimiento fiscal</label>
-            <div class="controls">                <span class="input-xlarge uneditable-input">
-                    {% if entity.vencimientoFiscal %}
-                        {{ entity.vencimientoFiscal|date('Y-m-d ') }}
-                    {% else %}
-                        <i>Sin Vencimiento Fiscal</i>
-                    {% endif %}
-                </span>            </div>
-        </div>        <div class="control-group">
-            <label class="control-label">Vencimiento interno</label>
-            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.vencimientoInterno|date('Y-m-d ') }}</span>            </div>
-        </div>        <div class="control-group">
-            <label class="control-label">Nombre</label>
-            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.nombre }}</span>            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Estado actual</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.estadoActual }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Observaciones</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">
-                    {% for observacion in entity.observaciones %}
-                    {{ observacion }} <br/>
-                    {% endfor %}
-                </span>
-            </div>
-        </div>  </fieldset>
-</form>
+    <tbody>
+    <tr class="gradeA">
+        <td><b>Fecha de inicio</b></td>
+        <td>{{ entity.fechaInicio|date('d-m-Y ') }}</td>
+    </tr>
+    <tr class="gradeA">
+        <td><b>Fecha de finalización</b></td>
+        <td>{% if entity.fechaFin %}
+                {{ entity.fechaFin|date('Y-m-d ') }}
+            {% else %}
+                <i>Tarea sin finalizar</i>
+            {% endif %}
+        </td>
+    </tr>
+    <tr class="gradeA">
+        <td><b>Vencimiento Fiscal</b></td>
+        <td>{% if entity.vencimientoFiscal %}
+               {{ entity.vencimientoFiscal }}
+            {% else %}
+                <i>Sin Vencimiento Fiscal</i>
+            {% endif %}
+        </td>
+    </tr>
+    <tr class="gradeA">
+        <td><b>Vencimiento interno</b></td>
+        <td>{% if entity.vencimientoInterno %}
+                {{ entity.vencimientoInterno|date('Y-m-d ') }}
+            {% else %}
+                <i>Sin vencimiento Interno</i>
+            {% endif %}</td>
+    </tr>
+    <tr class="gradeA">
+        <td><b>Nombre</b></td>
+        <td>{{ entity.nombre }}</td>
+    </tr>
+    <tr class="gradeA">
+        <td><b>Cliente</b></td>
+        <td>
+            <a href="{{ path('cliente_show', { 'id': entity.cliente.id }) }}" >
+                <b> {{ entity.cliente }}</b>
+            </a>
+        </td>
+    </tr>
+    <tr class="gradeA">
+        <td><b>Contador</b></td>
+        <td>
+            <a href="{{ path('contador_show', { 'id': entity.contador.id }) }}" >
+                <b> {{ entity.contador }}</b>
+            </a>
 
-<div>
-    <div class="float-left">
-        <a class="btn" href="{{ path('tarea') }}">
-            {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>
-    </div>
-    <div class="float-left">
-        <a class="btn btn-primary" href="{{ path('tarea_edit', { 'id': entity.id }) }}">
-            {{ 'views.recordactions.edit'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>
-    </div>
-    <div class="float-left">
-        <form action="{{ path('tarea_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit" onclick="return confirm('{{ 'views.recordactions.confirm'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}');">{{ 'views.recordactions.delete'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-        </form>
-    </div>
+        </td>
+    </tr>
+    <tr class="gradeA">
+        <td><b>Observaciones</b></td>
+        <td>
+            {% for observacion in entity.observaciones %}
+                {{ observacion }} <br/>
+            {% endfor %}
+        </td>
+    </tr>
+
+
+
+    </tbody>
+</table>
+<div class="dt-panelfooter clearfix">
+          <div class="row">
+            <a  href="{{ path('tarea') }}" class="btn btn-outline btn-default margin-right-20 margin-top-10">Volver</a>
+          </div>
 </div>
+
+
+
 {% endblock %}

@@ -72,7 +72,7 @@
                         <td>{{ entity.nombre }}</td>
                         <td>
                             <a class="btn btn-mini" href="{{ path('tarea_cliente_show', { 'id': entity.id }) }}">
-                                {{ 'views.actions.show'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+                                <i class="icon wb-eye" aria-hidden="true"></i>
                             </a>                                     </td>
                     </tr>
                 {% endfor %}

@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\View\TwitterBootstrapView;
+use ContadoresBundle\Utils\TwitterBootstrapViewCustom;
 
 use ContadoresBundle\Entity\Cliente;
 use ContadoresBundle\Form\ClienteType;
@@ -101,7 +101,7 @@ class ClienteController extends Controller
 
         // Paginator - view
         $translator = $this->get('translator');
-        $view = new TwitterBootstrapView();
+        $view = new TwitterBootstrapViewCustom();
         $pagerHtml = $view->render($pagerfanta, $routeGenerator, array(
             'proximity' => 3,
             'prev_message' => $translator->trans('views.index.pagprev', array(), 'JordiLlonchCrudGeneratorBundle'),
@@ -169,11 +169,11 @@ class ClienteController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $tareas = $this->obtenerTareasPorCliente($id,null,false);
+        //$tareas = $this->obtenerTareasPorCliente($id,null,false);
 
         return $this->render('ContadoresBundle:Cliente:show.html.twig', array(
             'entity'      => $entity,
-            'tareas' => $tareas ,
+           // 'tareas' => $tareas ,
             'delete_form' => $deleteForm->createView(),        ));
     }
 

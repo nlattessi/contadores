@@ -33,7 +33,7 @@ class TareaType extends AbstractType
         $builder
             ->add('fechaInicio', 'date', array('label' => 'Fecha inicio', 'widget' => 'single_text'))
             ->add('fechaFin',  'text', array('mapped' => false))
-            ->add('vencimientoInterno', 'text', array('mapped' => false))
+            ->add('vencimientoInterno',  'text', array('mapped' => false))
             ->add('nombre')
             ->add('contador', 'entity', [
                 'class' => 'ContadoresBundle:Contador',

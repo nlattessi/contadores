@@ -1,6 +1,7 @@
 <?php
 
 namespace ContadoresBundle\Entity;
+use ContadoresBundle\Utils\Herramientas;
 
 /**
  * Vencimiento
@@ -160,5 +161,12 @@ class Vencimiento
     {
         return $this->tareaMetadata;
     }
+
+    function __toString()
+    {
+        return $this->getFecha()->format("d/m/Y");
+    }
+
+
 }
 

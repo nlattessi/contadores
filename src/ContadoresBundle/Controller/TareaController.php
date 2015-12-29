@@ -4,12 +4,12 @@ namespace ContadoresBundle\Controller;
 
 use ContadoresBundle\Entity\Observacion;
 use ContadoresBundle\Entity\Rol;
+use ContadoresBundle\Utils\TwitterBootstrapViewCustom;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\View\TwitterBootstrapView;
 
 use ContadoresBundle\Entity\Tarea;
 use ContadoresBundle\Form\TareaType;
@@ -114,7 +114,7 @@ class TareaController extends Controller
 
         // Paginator - view
         $translator = $this->get('translator');
-        $view = new TwitterBootstrapView();
+        $view = new TwitterBootstrapViewCustom();
         $pagerHtml = $view->render($pagerfanta, $routeGenerator, array(
             'proximity' => 3,
             'prev_message' => $translator->trans('views.index.pagprev', array(), 'JordiLlonchCrudGeneratorBundle'),

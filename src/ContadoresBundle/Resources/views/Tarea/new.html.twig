@@ -1,14 +1,6 @@
 {% extends 'ContadoresBundle:Layout:layout.html.twig' %}
 {% form_theme form 'ContadoresBundle:Tarea:fields.html.twig' %}
 
-{% block title %}
-{{ parent() }} - {{ 'views.new.creation'|trans({'%entity%': 'Tarea'}, 'JordiLlonchCrudGeneratorBundle') }}
-{% endblock %}
-
-{% block menu %}
-{{ include('ContadoresBundle:NavBars:navbar.html.twig') }}
-{% endblock %}
-
 {% block encabezado %}Asignar tarea no periodica a cliente {% endblock %}
 
 {% block breadcrum %}

@@ -14,6 +14,10 @@ ContadoresBundle\Entity\Tarea:
         contador_tarea_idx:
             columns:
                 - contador_id
+        vencimiento_tarea_idx:
+            columns:
+                - vencimiento_id
+
     id:
         id:
             type: integer
@@ -36,10 +40,6 @@ ContadoresBundle\Entity\Tarea:
             type: datetime
             nullable: true
             column: fecha_creacion
-        vencimientoFiscal:
-            type: date
-            nullable: true
-            column: vencimiento_fiscal
         vencimientoInterno:
             type: date
             nullable: true
@@ -103,6 +103,16 @@ ContadoresBundle\Entity\Tarea:
             inversedBy: null
             joinColumns:
                 tarea_metadata_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        vencimientoFiscal:
+            targetEntity: Vencimiento
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                vencimiento_id:
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }

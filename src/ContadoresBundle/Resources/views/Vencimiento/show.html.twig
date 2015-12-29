@@ -1,43 +1,39 @@
 {% extends 'ContadoresBundle:Layout:layout.html.twig' %}
 
-{% block title %}
-{{ parent() }} - {{ 'views.show.show'|trans({'%entity%': 'Vencimiento'}, 'JordiLlonchCrudGeneratorBundle') }}
+{% block encabezado %}
+    Ver detalles del vencimiento
+{% endblock %}
+
+{% block breadcrum %}
+    <li><a href="{{ path('home') }}">Inicio</a></li>
+    <li><a href="{{ path('vencimiento') }}">Vencimientos</a></li>
+    <li class="active">Ver detalles del vencimiento</li>
 {% endblock %}
 
 {% block page %}
 
-<h1>Vencimiento</h1>
+    <table class="table table-bordered table-hover table-striped" id="exampleAddRow">
 
-<form class="form-horizontal">
-    <fieldset>        <div class="control-group">
-            <label class="control-label">Id</label>
-            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.id }}</span>            </div>
-        </div>        <div class="control-group">
-            <label class="control-label">Fecha</label>
-            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.fecha|date('Y-m-d H:i:s') }}</span>            </div>
-        </div>        <div class="control-group">
-            <label class="control-label">Colacuil</label>
-            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.colaCuil }}</span>            </div>
-        </div>    </fieldset>
-</form>
+        <tbody>
+        <tr class="gradeA">
+            <td><b>Periodo</b></td>
+            <td>{{ entity.periodo }}</td>
+        </tr>
+        <tr class="gradeA">
+            <td><b>Fecha</b></td>
+            <td>{{ entity.fecha|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr class="gradeA">
+            <td><b>Cola CUIL/CUIT</b></td>
+            <td>{{ entity.colaCuil }}</td>
+        </tr>
+        </tbody>
+    </table>
 
-<div>
-    <div class="float-left">
-        <a class="btn" href="{{ path('vencimiento') }}">
-            {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>
+    <div class="dt-panelfooter clearfix">
+        <div class="row">
+            <a  href="{{ path('vencimiento') }}" class="btn btn-outline btn-default margin-right-20 margin-top-10">Volver</a>
+        </div>
     </div>
-    <div class="float-left">
-        <a class="btn btn-primary" href="{{ path('vencimiento_edit', { 'id': entity.id }) }}">
-            {{ 'views.recordactions.edit'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>
-    </div>
-    <div class="float-left">
-        <form action="{{ path('vencimiento_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit" onclick="return confirm('{{ 'views.recordactions.confirm'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}');">{{ 'views.recordactions.delete'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-        </form>
-    </div>
-</div>
+
 {% endblock %}

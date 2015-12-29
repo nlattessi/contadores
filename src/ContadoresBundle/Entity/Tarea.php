@@ -29,7 +29,7 @@ class Tarea
     private $fechaCreacion;
 
     /**
-     * @var \DateTime
+     * @var \ContadoresBundle\Entity\Vencimiento
      */
     private $vencimientoFiscal;
 
@@ -185,7 +185,7 @@ class Tarea
     /**
      * Set vencimientoFiscal
      *
-     * @param \DateTime $vencimientoFiscal
+     * @param \ContadoresBundle\Entity\Vencimiento
      *
      * @return Tarea
      */
@@ -199,7 +199,7 @@ class Tarea
     /**
      * Get vencimientoFiscal
      *
-     * @return \DateTime
+     * @return \ContadoresBundle\Entity\Vencimiento
      */
     public function getVencimientoFiscal()
     {

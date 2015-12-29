@@ -60,6 +60,10 @@ ContadoresBundle\Entity\Contador:
             options:
                 default: '1'
             column: activo
+    oneToMany:
+        tareas:
+            targetEntity: Tarea
+            mappedBy: contador
     manyToOne:
         area:
             targetEntity: Area
