@@ -13,6 +13,7 @@ class RubroType extends AbstractType
         $builder
             ->add('nombre')
             ->add('area')
+            ->add('reset', 'reset', ['label' => 'Limpiar '])
         ;
     }
 

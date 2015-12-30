@@ -1,0 +1,61 @@
+
+{% block _contadoresbundle_contador_nombre_widget %}
+  <div class="col-sm-6 col-md-6">
+    <h4 class="example-title">Nombre</h4>
+    {{ block('form_widget_simple') }}
+  </div>
+{% endblock %}
+
+{% block _contadoresbundle_contador_apellido_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Apellido</h4>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_contador_celular_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Celular</h4>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_contador_mail_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Mail</h4>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_contador_telefono_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Teléfono</h4>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_contador_usuario_widget %}
+    <div class="col-sm-6 col-md-6 ">
+        <h4 class="example-title">Usuario</h4>
+        <div class="form-group">
+            {{ block('choice_widget') }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_contador_area_widget %}
+    <div class="col-sm-6 col-md-6 ">
+        <h4 class="example-title">Area</h4>
+        <div class="form-group">
+            {{ block('choice_widget') }}
+        </div>
+    </div>
+{% endblock %}
+{% block _contadoresbundle_contador_esJefe_widget %}
+    <div class="col-sm-6 col-md-6 ">
+        <h4 class="example-title">Es jefe de área</h4>
+        <div class="form-group">
+            {{ block('choice_widget') }}
+        </div>
+    </div>
+{% endblock %}

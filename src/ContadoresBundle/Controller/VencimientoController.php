@@ -122,6 +122,13 @@ class VencimientoController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            if ($form->has('fecha') && $form->get('fecha')->getData() !== null) {
+                $fecha = $form->get('fecha')->getData();
+                $dtFecha = \DateTime::createFromFormat('d/m/Y', $fecha);
+                $entity->setFecha($dtFecha);
+            }
+
             $em->persist($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', 'flash.create.success');

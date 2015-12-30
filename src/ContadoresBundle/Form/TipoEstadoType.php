@@ -12,6 +12,7 @@ class TipoEstadoType extends AbstractType
     {
         $builder
             ->add('nombre')
+            ->add('reset', 'reset', ['label' => 'Limpiar '])
         ;
     }
 

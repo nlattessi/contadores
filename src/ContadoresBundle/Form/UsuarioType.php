@@ -13,6 +13,7 @@ class UsuarioType extends AbstractType
         $builder
             ->add('mail')
             ->add('rol')
+            ->add('reset', 'reset', ['label' => 'Limpiar '])
         ;
     }
 

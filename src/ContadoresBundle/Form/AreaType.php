@@ -12,6 +12,7 @@ class AreaType extends AbstractType
     {
         $builder
             ->add('nombre')
+            ->add('reset', 'reset', ['label' => 'Limpiar '])
         ;
     }
 
