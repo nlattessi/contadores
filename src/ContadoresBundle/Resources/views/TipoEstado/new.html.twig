@@ -1,29 +1,35 @@
 {% extends 'ContadoresBundle:Layout:layout.html.twig' %}
+{% form_theme form 'ContadoresBundle:TipoEstado:fields.html.twig' %}
 
-{% block title %}
-{{ parent() }} - {{ 'views.new.creation'|trans({'%entity%': 'TipoEstado'}, 'JordiLlonchCrudGeneratorBundle') }}
-{% endblock %}
+{% block encabezado %}Crear tipo de estado{% endblock %}
 
-{% block menu %}
-{{ include('ContadoresBundle:NavBars:navbar.html.twig') }}
+{% block breadcrum %}
+    <li><a href="{{ path('home') }}">Inicio</a></li>
+    <li>Tipos de estado</li>
+    <li class="active">Nuevo tipo de estado</li>
 {% endblock %}
 
 {% block page %}
-
-<h1>{{ 'views.new.creation'|trans({'%entity%': 'TipoEstado'}, 'JordiLlonchCrudGeneratorBundle') }}</h1>
-
-<form class="well" action="{{ path('tipoestado_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit" class="btn btn-success">{{ 'views.new.create'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-    </p>
-</form>
-
-<div>
-    <div class="float-left">
-        <a class="btn" href="{{ path('tipoestado') }}">
-            {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>
+    <div class="panel-heading">
+        <h4 class="panel-title">Complete todos los campos.</h4>
     </div>
-</div>
+
+    <div class="panel-body container-fluid">
+
+        <form class="well" action="{{ path('tipoestado_create') }}" method="post" {{ form_enctype(form) }}>
+            <div class="row ">
+                <div class="row">
+                    {{ form_widget(form.nombre, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 margin-top-20">
+                    <button type="submit" class="btn btn btn-success">Crear</button>
+                    {{ form_widget(form.reset, {'attr': {'class': 'btn btn-outline btn-default'}}) }}
+                </div>
+            </div>
+            {{ form_widget(form._token) }}
+        </form>
+
+    </div>
 {% endblock %}

@@ -7,20 +7,42 @@
 
 {% block page %}
 
-<h1>{{ 'views.new.creation'|trans({'%entity%': 'Vencimiento'}, 'JordiLlonchCrudGeneratorBundle') }}</h1>
+    <div class="panel-heading">
+        <h4 class="panel-title">Complete todos los campos.</h4>
+    </div>
 
-<form class="well" action="{{ path('vencimiento_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit" class="btn btn-success">{{ 'views.new.create'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-    </p>
-</form>
+<div class="panel-body container-fluid">
 
-<div>
-    <div class="float-left">
-        <a class="btn" href="{{ path('vencimiento') }}">
-            {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>
+    <form action="{{ path('vencimiento_create') }}" method="post" {{ form_enctype(form) }}>
+        <div class="row ">
+            <div class="row">
+                {{ form_widget(form.fecha, {'attr': {'class': 'form-control', 'data-provide': 'datepicker', 'data-date-format': 'dd/mm/yyyy', 'data-date-autoclose': 'true'}}) }}
+                {{ form_widget(form.colaCuil, {'attr': {'class': 'form-control'}}) }}
+
+            </div>
+            <div class="row">
+                {{ form_widget(form.tareaMetadata, {'attr': {'class': 'form-control'}}) }}
+                {{ form_widget(form.esquema, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="row">
+                {{ form_widget(form.periodo, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-6 margin-top-20">
+                <button type="submit" class="btn btn btn-success">Crear</button>
+                {{ form_widget(form.reset, {'attr': {'class': 'btn btn-outline btn-default'}}) }}
+            </div>
+        </div>
+        {{ form_widget(form._token) }}
+    </form>
+
+    <div>
+        <div class="float-left">
+            <a class="btn" href="{{ path('vencimiento') }}">
+                {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+            </a>
+        </div>
     </div>
 </div>
 {% endblock %}

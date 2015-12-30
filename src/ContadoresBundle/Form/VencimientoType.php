@@ -23,7 +23,7 @@ class VencimientoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fecha')
+            ->add('fecha',  'text', array('mapped' => false))
             ->add('colaCuil')
             ->add('tareaMetadata')
             ->add('esquema', 'entity', [
@@ -31,6 +31,7 @@ class VencimientoType extends AbstractType
                 'empty_value' => '',
                 'choices' => $this->vencimientoService->obtenerEsquemasHabilitados()
             ])
+            ->add('reset', 'reset', ['label' => 'Limpiar '])
         ;
 
         $formModifier = function(FormInterface $form, Esquema $esquema = null) {

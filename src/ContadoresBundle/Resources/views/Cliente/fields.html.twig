@@ -1,0 +1,45 @@
+
+{% block _contadoresbundle_cliente_nombre_widget %}
+  <div class="col-sm-6 col-md-6">
+    <h4 class="example-title">Nombre</h4>
+    {{ block('form_widget_simple') }}
+  </div>
+{% endblock %}
+
+
+{% block _contadoresbundle_cliente_direccion_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Dirección</h4>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_cliente_mail_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Mail</h4>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_cliente_telefono_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Teléfono</h4>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_cliente_cuit_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">CUIT/CUIL</h4>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_cliente_usuario_widget %}
+    <div class="col-sm-6 col-md-6 ">
+        <h4 class="example-title">Usuario</h4>
+        <div class="form-group">
+            {{ block('choice_widget') }}
+        </div>
+    </div>
+{% endblock %}

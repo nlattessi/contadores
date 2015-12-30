@@ -17,6 +17,7 @@ class ClienteType extends AbstractType
             ->add('mail')
             ->add('cuit')
             ->add('usuario')
+            ->add('reset', 'reset', ['label' => 'Limpiar '])
         ;
     }
 
