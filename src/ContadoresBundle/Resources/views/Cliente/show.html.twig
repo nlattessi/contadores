@@ -33,7 +33,7 @@
     </tr>
     <tr class="gradeA">
         <td><b>CUIL/CUIT</b></td>
-        <td>{{ entity.cuit }}</td>
+        <td>{{ entity.cuit[0:2] }}-{{ entity.cuit[2:8] }}-{{ entity.cuit[10:] }}</td>
     </tr>
     <tr class="gradeA">
         <td><b>Usuario</b></td>
