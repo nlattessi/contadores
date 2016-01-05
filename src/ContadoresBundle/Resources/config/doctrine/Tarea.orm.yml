@@ -70,7 +70,7 @@ ContadoresBundle\Entity\Tarea:
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: null
+            inversedBy: tareas
             joinColumns:
                 cliente_id:
                     referencedColumnName: id
@@ -80,7 +80,7 @@ ContadoresBundle\Entity\Tarea:
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: null
+            inversedBy: tareas
             joinColumns:
                 contador_id:
                     referencedColumnName: id
