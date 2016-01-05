@@ -71,7 +71,7 @@
             <td>{{ entity.direccion }}</td>
             <td>{{ entity.telefono }}</td>
             <td>{{ entity.mail }}</td>
-            <td>{{ entity.cuit }}</td>
+            <td>{{ entity.cuit[0:2] }}-{{ entity.cuit[2:8] }}-{{ entity.cuit[10:] }}</td>
             <td>
         <a class="btn btn-mini" href="{{ path('cliente_show', { 'id': entity.id }) }}">
             <i class="icon wb-eye" aria-hidden="true"></i>
@@ -96,4 +96,8 @@
 
 </div>
 
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('bundles/contadores/assets/js/cuit_cliente.js') }}"></script>
 {% endblock %}
