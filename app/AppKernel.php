@@ -22,7 +22,7 @@ class AppKernel extends Kernel
             new ContadoresBundle\ContadoresBundle(),
 
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new Hera\ContadoresBundle\HeraContadoresBundle(),
+            //new Hera\ContadoresBundle\HeraContadoresBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
