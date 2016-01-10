@@ -20,7 +20,9 @@
         "incenteev/composer-parameter-handler": "~2.0",
 		    "jordillonch/crud-generator": "dev-master",
 		    "xsolve-pl/xsolve-bootstrap-crud-bundle": "dev-master",
-        "doctrine/doctrine-fixtures-bundle": "2.2.*"
+        "doctrine/doctrine-fixtures-bundle": "2.2.*",
+        "knplabs/gaufrette": "dev-master",
+        "knplabs/knp-gaufrette-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

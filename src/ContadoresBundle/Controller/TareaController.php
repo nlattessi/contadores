@@ -180,9 +180,16 @@ class TareaController extends Controller
                 $em->persist($observacion);
             }
 
-
             $em->flush();
 
+            if (! empty($request->files->get('archivo'))) {
+                $archivoService = $this->get('contadores.servicios.archivo');
+                $aaa = $archivoService->createArchivoTarea(
+                    $request->files->get('archivo'),
+                    $this->getUser(),
+                    $entity
+                );
+            }
 
             $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
 

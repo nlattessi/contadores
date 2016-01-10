@@ -19,3 +19,8 @@ services:
           class: ContadoresBundle\Servicios\VencimientoService
           arguments:
               entityManager: @doctrine.orm.entity_manager
+      contadores.servicios.archivo:
+          class: ContadoresBundle\Servicios\ArchivoService
+          arguments:
+              filesystem: @archivos_filesystem
+              entityManager: @doctrine.orm.entity_manager

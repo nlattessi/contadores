@@ -2,10 +2,10 @@ ContadoresBundle\Entity\ArchivoTareaMetadata:
     type: entity
     table: archivo_tarea_metadata
     indexes:
-        usuario_archivoTM_idx:
+        fk_archivo_tarea_metadata_archivo_idx:
             columns:
-                - usuario_id
-        tareaMetadata_archivo_idx:
+                - archivo_id
+        fk_archivo_tarea_metadata_tarea_metada_idx:
             columns:
                 - tarea_metadata_id
     id:
@@ -18,37 +18,32 @@ ContadoresBundle\Entity\ArchivoTareaMetadata:
             generator:
                 strategy: IDENTITY
     fields:
-        nombre:
-            type: string
+        creationTime:
+            type: datetime
             nullable: false
-            length: 45
-            options:
-                fixed: false
-        ruta:
-            type: string
+        updateTime:
+            type: datetime
             nullable: false
-            length: 45
-            options:
-                fixed: false
     manyToOne:
+        archivo:
+            targetEntity: Archivo
+            cascade: [ remove ]
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                archivo_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+            orphanRemoval: false
         tareaMetadata:
             targetEntity: TareaMetadata
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: null
+            inversedBy: archivos
             joinColumns:
                 tarea_metadata_id:
-                    referencedColumnName: id
-            orphanRemoval: false
-        usuario:
-            targetEntity: Usuario
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                usuario_id:
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }

@@ -27,6 +27,12 @@ class Archivo
      */
     private $usuario;
 
+    private $creationTime;
+
+    private $updateTime;
+
+    private $fileSize;
+
 
     /**
      * Get id
@@ -108,5 +114,75 @@ class Archivo
     public function getUsuario()
     {
         return $this->usuario;
+    }
+
+    public function setCreationTime($creationTime)
+    {
+        $this->creationTime = $creationTime;
+
+        return $this;
+    }
+
+    public function getCreationTime()
+    {
+        return $this->creationTime;
+    }
+
+    public function setUpdateTime($updateTime)
+    {
+        $this->updateTime = $updateTime;
+
+        return $this;
+    }
+
+    public function getUpdateTime()
+    {
+        return $this->updateTime;
+    }
+
+    public function setFileSize($fileSize)
+    {
+        $this->fileSize = $fileSize;
+
+        return $this;
+    }
+
+    public function getFileSize()
+    {
+        return $this->fileSize;
+    }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->getRuta()
+            ? null
+            : $this->getUploadRootDir() . '/' . $this->getRuta();
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->getRuta()
+            ? null
+            : $this->getUploadDir() . '/' . $this->getRuta();
+    }
+
+    public function getSize()
+    {
+        return Herramientas::formatSizeUnits(filesize($this->getAbsolutePath()));
+    }
+
+    public function getFileName()
+    {
+        return substr(substr($this->getRuta(), strpos($this->getRuta(), '/')), 1);
+    }
+
+    private function getUploadRootDir()
+    {
+        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+    }
+
+    private function getUploadDir()
+    {
+        return 'bundles/boletines/uploads/archivos';
     }
 }

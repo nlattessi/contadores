@@ -16,7 +16,7 @@
 </div>
 
 <div class="panel-body container-fluid">
-<form action="{{ path('tarea_create') }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('tarea_create') }}" method="post" enctype="multipart/form-data">
     <div class="row ">
         <div class="row">
             {{ form_widget(form.cliente, {'attr': {'class': 'form-control'}}) }}
@@ -32,7 +32,7 @@
                 <h4 class="example-title">Cargar Archivo</h4>
 
                 <div class="input-group input-group-file">
-                    <input type="text" class="form-control" readonly="">
+                    <input type="text" class="form-control" readonly="" id="archivoName">
                     <span class="input-group-btn">
                       <span class="btn btn-outline btn-file">
                         <i class="icon wb-upload" aria-hidden="true"></i>
@@ -63,4 +63,13 @@
 </form>
 </div>
 
+{% endblock %}
+
+{% block javascript %}
+<script>
+$('input[name="archivo"]').change(function(){
+    var fileName = $(this).val();
+    $('#archivoName').val(fileName.substring(12, fileName.length));
+});
+</script>
 {% endblock %}

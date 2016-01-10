@@ -22,6 +22,10 @@ class ArchivoCliente
      */
     private $cliente;
 
+    private $creationTime;
+
+    private $updateTime;
+
 
     /**
      * Get id
@@ -80,5 +84,28 @@ class ArchivoCliente
     {
         return $this->cliente;
     }
-}
 
+    public function setCreationTime($creationTime)
+    {
+        $this->creationTime = $creationTime;
+
+        return $this;
+    }
+
+    public function getCreationTime()
+    {
+        return $this->creationTime;
+    }
+
+    public function setUpdateTime($updateTime)
+    {
+        $this->updateTime = $updateTime;
+
+        return $this;
+    }
+
+    public function getUpdateTime()
+    {
+        return $this->updateTime;
+    }
+}

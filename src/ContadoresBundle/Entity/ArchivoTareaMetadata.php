@@ -13,24 +13,18 @@ class ArchivoTareaMetadata
     private $id;
 
     /**
-     * @var string
+     * @var \ContadoresBundle\Entity\Archivo
      */
-    private $nombre;
-
-    /**
-     * @var string
-     */
-    private $ruta;
+    private $archivo;
 
     /**
      * @var \ContadoresBundle\Entity\TareaMetadata
      */
     private $tareaMetadata;
 
-    /**
-     * @var \ContadoresBundle\Entity\Usuario
-     */
-    private $usuario;
+    private $creationTime;
+
+    private $updateTime;
 
 
     /**
@@ -44,51 +38,27 @@ class ArchivoTareaMetadata
     }
 
     /**
-     * Set nombre
+     * Set archivo
      *
-     * @param string $nombre
+     * @param \ContadoresBundle\Entity\Archivo $archivo
      *
-     * @return ArchivoTareaMetadata
+     * @return ArchivoTarea
      */
-    public function setNombre($nombre)
+    public function setArchivo(\ContadoresBundle\Entity\Archivo $archivo = null)
     {
-        $this->nombre = $nombre;
+        $this->archivo = $archivo;
 
         return $this;
     }
 
     /**
-     * Get nombre
+     * Get archivo
      *
-     * @return string
+     * @return \ContadoresBundle\Entity\Archivo
      */
-    public function getNombre()
+    public function getArchivo()
     {
-        return $this->nombre;
-    }
-
-    /**
-     * Set ruta
-     *
-     * @param string $ruta
-     *
-     * @return ArchivoTareaMetadata
-     */
-    public function setRuta($ruta)
-    {
-        $this->ruta = $ruta;
-
-        return $this;
-    }
-
-    /**
-     * Get ruta
-     *
-     * @return string
-     */
-    public function getRuta()
-    {
-        return $this->ruta;
+        return $this->archivo;
     }
 
     /**
@@ -115,28 +85,27 @@ class ArchivoTareaMetadata
         return $this->tareaMetadata;
     }
 
-    /**
-     * Set usuario
-     *
-     * @param \ContadoresBundle\Entity\Usuario $usuario
-     *
-     * @return ArchivoTareaMetadata
-     */
-    public function setUsuario(\ContadoresBundle\Entity\Usuario $usuario = null)
+    public function setCreationTime($creationTime)
     {
-        $this->usuario = $usuario;
+        $this->creationTime = $creationTime;
 
         return $this;
     }
 
-    /**
-     * Get usuario
-     *
-     * @return \ContadoresBundle\Entity\Usuario
-     */
-    public function getUsuario()
+    public function getCreationTime()
     {
-        return $this->usuario;
+        return $this->creationTime;
+    }
+
+    public function setUpdateTime($updateTime)
+    {
+        $this->updateTime = $updateTime;
+
+        return $this;
+    }
+
+    public function getUpdateTime()
+    {
+        return $this->updateTime;
     }
 }
-

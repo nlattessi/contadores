@@ -2,7 +2,7 @@ ContadoresBundle\Entity\Archivo:
     type: entity
     table: archivo
     indexes:
-        usuario_archivoT_idx:
+        fk_archivo_usuario_idx:
             columns:
                 - usuario_id
     id:
@@ -24,9 +24,21 @@ ContadoresBundle\Entity\Archivo:
         ruta:
             type: string
             nullable: false
-            length: 45
+            length: 75
             options:
                 fixed: false
+        creationTime:
+            type: datetime
+            nullable: false
+            column: creation_time
+        updateTime:
+            type: datetime
+            nullable: false
+            column: update_time
+        fileSize:
+            type: integer
+            nullable: false
+            column: file_size
     manyToOne:
         usuario:
             targetEntity: Usuario

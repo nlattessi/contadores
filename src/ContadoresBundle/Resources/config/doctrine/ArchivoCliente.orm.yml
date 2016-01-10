@@ -2,10 +2,10 @@ ContadoresBundle\Entity\ArchivoCliente:
     type: entity
     table: archivo_cliente
     indexes:
-        fk_cliente_archivo_idx:
+        fk_archivo_cliente_archivo_idx:
             columns:
                 - archivo_id
-        fk_archivo_cliente_idx:
+        fk_archivo_cliente_cliente_idx:
             columns:
                 - cliente_id
     id:
@@ -17,23 +17,31 @@ ContadoresBundle\Entity\ArchivoCliente:
             id: true
             generator:
                 strategy: IDENTITY
+    fields:
+        creationTime:
+            type: datetime
+            nullable: false
+        updateTime:
+            type: datetime
+            nullable: false
     manyToOne:
         archivo:
             targetEntity: Archivo
-            cascade: {  }
+            cascade: [ remove ]
             fetch: LAZY
             mappedBy: null
             inversedBy: null
             joinColumns:
                 archivo_id:
                     referencedColumnName: id
+                    onDelete: CASCADE
             orphanRemoval: false
         cliente:
             targetEntity: Cliente
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: null
+            inversedBy: archivos
             joinColumns:
                 cliente_id:
                     referencedColumnName: id
