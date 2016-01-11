@@ -109,3 +109,7 @@ en_construccion:
 cambiar_password:
     path:     /cambiar_password
     defaults: { _controller: ContadoresBundle:Security:cambiarPassword }
+
+contadores_archivo_downloadZip:
+    pattern: /archivoZip
+    defaults: { _controller: ContadoresBundle:Archivo:downloadZip }

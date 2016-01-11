@@ -80,12 +80,55 @@
 
     </tbody>
 </table>
+
 <div class="dt-panelfooter clearfix">
+  <div class="row">
+    <div class="panel">
+      <div class="panel-body">
+        <table class="table table-bordered table-hover table-striped" id="archivos">
+          <tbody>
+            {% for archivoTarea in entity.archivos %}
+              <tr class="gradeA">
+                <td><b>{{ archivoTarea.archivo.nombre}}</b></td>
+                <td>
+                  <a download="{{ archivoTarea.archivo.nombre }}" href="{{ asset('') }}{{ archivoTarea.archivo.webPath }}" type="button" class="btn btn-outline btn-warning ladda-button margin-top-10" data-style="slide-left" data-plugin="ladda" style="text-decoration: none">
+                    <span class="ladda-label">
+                      <i class="icon wb-download margin-right-10" aria-hidden="true"></i>
+                      Descargar archivo
+                    </span>
+                    <span class="ladda-spinner"></span>
+                    <input type="hidden" class="fileId" name="files[]" value="{{ archivoTarea.archivo.id }}"/>
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+<div class="dt-panelfooter clearfix">
+  {% if entity.archivos|length > 0 %}
+  <div class="row">
+    <button type="button" class="btn btn-outline btn-warning ladda-button margin-top-10" data-style="slide-left" data-plugin="ladda" id="downloadAll" href="{{ path('contadores_archivo_downloadZip') }}">
+      <span class="ladda-label">
+        <i class="icon wb-download margin-right-10" aria-hidden="true"></i>
+        Descargar todos
+      </span>
+      <span class="ladda-spinner"></span>
+    </button>
+  </div>
+  {% endif %}
           <div class="row">
             <a  href="{{ path('tarea') }}" class="btn btn-outline btn-default margin-right-20 margin-top-10">Volver</a>
           </div>
 </div>
 
+</div>
+</div>
+</div>
+</div>
 
+{% endblock %}
 
+{% block javascript %}
+  <script src="{{ asset('bundles/contadores/assets/js/fileFunctions.js') }}"></script>
 {% endblock %}

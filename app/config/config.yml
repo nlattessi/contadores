@@ -84,7 +84,7 @@ knp_gaufrette:
     adapters:
         archivos:
             local:
-                directory: %kernel.root_dir%/../web/bundles/contadores/uploads/archivos
+                directory: %kernel.root_dir%/data/bundles/contadores/uploads/archivos
     filesystems:
         archivos:
             adapter: archivos

@@ -178,11 +178,11 @@ class Archivo
 
     private function getUploadRootDir()
     {
-        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+        return __DIR__ . '/../../../app/data/' . $this->getUploadDir();
     }
 
     private function getUploadDir()
     {
-        return 'bundles/boletines/uploads/archivos';
+        return 'bundles/contadores/uploads/archivos';
     }
 }

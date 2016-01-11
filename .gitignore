@@ -26,3 +26,11 @@ LICENSE
 .idea/misc.xml
 README.md
 .idea/scopes/scope_settings.xml
+app/data/bundles/contadores/tmp/*
+!app/data/bundles/contadores/tmp/.gitkeep
+app/data/bundles/contadores/uploads/archivos/tareas/*
+!app/data/bundles/contadores/uploads/archivos/tareas/.gitkeep
+app/data/bundles/contadores/uploads/archivos/tareasMetadata/*
+!app/data/bundles/contadores/uploads/archivos/tareasMetadata/.gitkeep
+app/data/bundles/contadores/uploads/archivos/clientes/*
+!app/data/bundles/contadores/uploads/archivos/clientes/.gitkeep

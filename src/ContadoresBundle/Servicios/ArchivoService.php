@@ -8,6 +8,8 @@ use Doctrine\ORM\EntityManager;
 
 use ContadoresBundle\Entity\Archivo;
 use ContadoresBundle\Entity\ArchivoTarea;
+use ContadoresBundle\Entity\ArchivoTareaMetadata;
+use ContadoresBundle\Entity\ArchivoCliente;
 
 
 class ArchivoService
@@ -21,6 +23,11 @@ class ArchivoService
         $this->em = $entityManager;
     }
 
+    public function getFileById($id)
+    {
+        return $this->em->getRepository("ContadoresBundle:Archivo")->find($id);
+    }
+
     public function createArchivoTarea(UploadedFile $file, $user, $tarea)
     {
         $filename = $this->createFile($file, 'tareas');
@@ -30,6 +37,28 @@ class ArchivoService
         $archivoTarea = $this->newArchivoTarea($archivo, $tarea);
 
         return $archivoTarea;
+    }
+
+    public function createArchivoTareaMetadata(UploadedFile $file, $user, $tareaMetadata)
+    {
+        $filename = $this->createFile($file, 'tareasMetadata');
+
+        $archivo = $this->newArchivo($file, $filename, $user);
+
+        $archivoTareaMetadata = $this->newArchivoTareaMetadata($archivo, $tareaMetadata);
+
+        return $archivoTareaMetadata;
+    }
+
+    public function createArchivoCliente(UploadedFile $file, $user, $cliente)
+    {
+        $filename = $this->createFile($file, 'clientes');
+
+        $archivo = $this->newArchivo($file, $filename, $user);
+
+        $archivoCliente = $this->newArchivoCliente($archivo, $cliente);
+
+        return $archivoCliente;
     }
 
     private function createFile($file, $folder)
@@ -79,5 +108,33 @@ class ArchivoService
         $this->em->flush();
 
         return $archivoTarea;
+    }
+
+    private function newArchivoTareaMetadata($archivo, $tareaMetadata)
+    {
+        $archivoTareaMetadata = new ArchivoTareaMetadata();
+        $archivoTareaMetadata->setArchivo($archivo);
+        $archivoTareaMetadata->setTareaMetadata($tareaMetadata);
+        $archivoTareaMetadata->setCreationTime(new \DateTime('now'));
+        $archivoTareaMetadata->setUpdateTime(new \DateTime('now'));
+
+        $this->em->persist($archivoTareaMetadata);
+        $this->em->flush();
+
+        return $archivoTareaMetadata;
+    }
+
+    private function newArchivoCliente($archivo, $cliente)
+    {
+        $archivoCliente = new ArchivoCliente();
+        $archivoCliente->setArchivo($archivo);
+        $archivoCliente->setCliente($cliente);
+        $archivoCliente->setCreationTime(new \DateTime('now'));
+        $archivoCliente->setUpdateTime(new \DateTime('now'));
+
+        $this->em->persist($archivoCliente);
+        $this->em->flush();
+
+        return $archivoCliente;
     }
 }

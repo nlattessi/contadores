@@ -182,13 +182,15 @@ class TareaController extends Controller
 
             $em->flush();
 
-            if (! empty($request->files->get('archivo'))) {
+            if (! empty($request->files->get('archivos'))) {
                 $archivoService = $this->get('contadores.servicios.archivo');
-                $aaa = $archivoService->createArchivoTarea(
-                    $request->files->get('archivo'),
-                    $this->getUser(),
-                    $entity
-                );
+                foreach ($request->files->get('archivos') as $archivo) {
+                    $archivoService->createArchivoTarea(
+                        $archivo,
+                        $this->getUser(),
+                        $entity
+                    );
+                }
             }
 
             $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
