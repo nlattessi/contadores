@@ -123,6 +123,18 @@ class TareaMetadataController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+
+            if (! empty($form['attachment']->getData())) {
+                $archivoService = $this->get('contadores.servicios.archivo');
+                foreach ($form['attachment']->getData() as $archivo) {
+                    $archivoService->createArchivoTareaMetadata(
+                        $archivo,
+                        $this->getUser(),
+                        $entity
+                    );
+                }
+            }
+
             $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
 
             return $this->redirect($this->generateUrl('tareametadata_show', array('id' => $entity->getId())));
