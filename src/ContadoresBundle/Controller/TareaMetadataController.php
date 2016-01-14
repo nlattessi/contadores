@@ -124,7 +124,7 @@ class TareaMetadataController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            if (! empty($form['attachment']->getData())) {
+            if (isset($form['attachment']->getData()[0])) {
                 $archivoService = $this->get('contadores.servicios.archivo');
                 foreach ($form['attachment']->getData() as $archivo) {
                     $archivoService->createArchivoTareaMetadata(

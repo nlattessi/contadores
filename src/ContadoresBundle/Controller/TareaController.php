@@ -182,7 +182,7 @@ class TareaController extends Controller
 
             $em->flush();
 
-            if (! empty($request->files->get('archivos'))) {
+            if (isset($request->files->get('archivos')[0])) {
                 $archivoService = $this->get('contadores.servicios.archivo');
                 foreach ($request->files->get('archivos') as $archivo) {
                     $archivoService->createArchivoTarea(
