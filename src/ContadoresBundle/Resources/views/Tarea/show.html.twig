@@ -23,7 +23,7 @@
     <tr class="gradeA">
         <td><b>Fecha de finalización</b></td>
         <td>{% if entity.fechaFin %}
-                {{ entity.fechaFin|date('Y-m-d ') }}
+                {{ entity.fechaFin|date('d-m-Y') }}
             {% else %}
                 <i>Tarea sin finalizar</i>
             {% endif %}

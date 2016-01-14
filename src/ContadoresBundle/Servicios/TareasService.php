@@ -32,7 +32,7 @@ class TareasService {
         $this->rolCliente = "ROLE_CLIENTE";
         $this->rolContador = "ROLE_CONTADOR";
         $this->rolJefe = "ROLE_JEFE";
-        $this->estadosTerminales = array(3);
+        $this->estadosTerminales = array(2);
     }
 
     public function obtenerTareasUrgentesPorUsuario($usuario)
@@ -134,6 +134,10 @@ class TareasService {
         return $this->crearEstadoTarea($tarea, $this::$tipoEstadoNuevo, $tiempo);
     }
 
+    public function finalizarTarea($tarea,  $tiempo){
+        $this->cambiarEstadoTarea($tarea, $this->crearEstadoTareaFinalizado($tarea,  $tiempo));
+    }
+
     public function crearEstadoTareaFinalizado($tarea,  $tiempo)
     {
         return $this->crearEstadoTarea($tarea, $this::$tipoEstadoFinalizado, $tiempo);
@@ -145,6 +149,7 @@ class TareasService {
         $estadoTarea->setTipoEstado($tipoEstadoNuevo);
         $estadoTarea->setTarea($tarea);
         $estadoTarea->setFechaInicio(new \DateTime(null));
+        $estadoTarea->setFechaCreacion(new \DateTime(null));
         $estadoTarea->setMinutosTrabajados($tiempo);
         if($tarea->getContador()){
             $estadoTarea->setContador($tarea->getContador());
@@ -158,21 +163,21 @@ class TareasService {
 
     public function verificarEstadoTarea($tarea,$tipoEstadoId){
 
-
         $tarea->setFechaFin(new \DateTime(null));
         $this->cambiarEstadoTarea($tarea, $tipoEstadoId);
 
     }
 
-    public function cambiarEstadoTarea($tarea, $nuevoEstadoId)
+    public function cambiarEstadoTarea($tarea, $estadoTarea)
     {
         $estadoViejo = $tarea->getEstadoActual();
-        $estadoViejo->setFechaFin(new \DateTime(null));
-        $this->em->persist($estadoViejo);
+        if ($estadoViejo) {
+            $estadoViejo->setFechaFin(new \DateTime(null));
+            $this->em->persist($estadoViejo);
+        }
 
-        $estadoTarea = $this->crearEstadoTarea($tarea,$nuevoEstadoId,0);
 
-        if(in_array($nuevoEstadoId,$this->estadosTerminales))
+        if(in_array($estadoTarea->getTipoEstado()->getId(),$this->estadosTerminales))
         {
             $estadoTarea->setFechaFin(new \DateTime(null));
         }

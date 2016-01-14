@@ -277,6 +277,76 @@ class TareaController extends Controller
             'form'   => $form->createView(),
         ));
     }
+
+
+    public function createRealizadaAction(Request $request)
+    {
+        $usuarioService =  $this->get('contadores.servicios.usuario');
+        $entity  = new Tarea();
+        $tareasService =  $this->get('contadores.servicios.tareas');
+        $vencimientoService =  $this->get('contadores.servicios.vencimiento');
+        $form   = $this->createForm(new TareaType($tareasService,$vencimientoService), $entity, array(
+            'user' => $this->getUser(),
+            'periodica' => false
+        ));
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            if ($this->getUser()->getRol() == Rol::$contador ){
+                $contador = $usuarioService->obtenerContadorPorUsuario($this->getUser());
+                if(!$contador->getEsJefe()){
+                    $entity->setContador($contador);
+                }
+            }
+
+            if(strlen($entity->getNombre()) < 1){
+
+                $entity->setNombre($entity->getTareaMetadata()->getNombre() . ' ' . $entity->getCliente()->getNombre());
+            }
+            $entity->setFechaCreacion(new \DateTime(null));
+
+            if ($form->has('fechaFin') && $form->get('fechaFin')->getData() !== null) {
+                $fechaFin = $form->get('fechaFin')->getData();
+                $fechaFin = \DateTime::createFromFormat('d/m/Y', $fechaFin);
+                $entity->setFechaFin($fechaFin);
+            }
+
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+
+            $tiempo = $request->get('tiempoReal');
+            $tareasService =  $this->get('contadores.servicios.tareas');
+
+           // $estado = $tareasService->crearEstadoTareaFinalizado($entity, $tiempo);
+            $tareasService->finalizarTarea($entity, $tiempo);
+
+            //$entity->setEstadoActual($estado);
+            //$em->persist($entity);
+
+            $observaciones = $request->get('observaciones');
+            if($observaciones){
+                $observacion = new Observacion($this->getUser(),$entity,$observaciones);
+                $em->persist($observacion);
+            }
+
+
+            $em->flush();
+
+
+            $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
+
+            return $this->redirect($this->generateUrl('tarea_show', array('id' => $entity->getId())));
+        }
+
+        return $this->render('ContadoresBundle:Tarea:newrealizada.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+
     /**
      * Displays a form to create a new Tarea entity.
      *
