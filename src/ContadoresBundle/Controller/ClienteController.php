@@ -237,6 +237,17 @@ class ClienteController extends Controller
             $em->persist($entity->getUsuario());
             $em->flush();
 
+            if (isset($editForm['attachment']->getData()[0])) {
+                $archivoService = $this->get('contadores.servicios.archivo');
+                foreach ($editForm['attachment']->getData() as $archivo) {
+                    $archivoService->createArchivoCliente(
+                        $archivo,
+                        $this->getUser(),
+                        $entity
+                    );
+                }
+            }
+
             $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
 
             return $this->redirect($this->generateUrl('cliente_edit', array('id' => $id)));

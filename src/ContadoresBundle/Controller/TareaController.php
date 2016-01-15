@@ -266,6 +266,17 @@ class TareaController extends Controller
 
             $em->flush();
 
+            if (isset($request->files->get('archivos')[0])) {
+                $archivoService = $this->get('contadores.servicios.archivo');
+                foreach ($request->files->get('archivos') as $archivo) {
+                    $archivoService->createArchivoTarea(
+                        $archivo,
+                        $this->getUser(),
+                        $entity
+                    );
+                }
+            }
+
 
             $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
 
@@ -334,6 +345,17 @@ class TareaController extends Controller
 
 
             $em->flush();
+
+            if (isset($request->files->get('archivos')[0])) {
+                $archivoService = $this->get('contadores.servicios.archivo');
+                foreach ($request->files->get('archivos') as $archivo) {
+                    $archivoService->createArchivoTarea(
+                        $archivo,
+                        $this->getUser(),
+                        $entity
+                    );
+                }
+            }
 
 
             $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
@@ -417,8 +439,22 @@ class TareaController extends Controller
         return $entity;
     }
 
-    public function showAction($id)
+    public function showAction(Request $request, $id)
     {
+        if ($request->isMethod('POST')) {
+            $entity = $this->mostrar($id);
+
+            if (isset($request->files->get('archivos')[0])) {
+                $archivoService = $this->get('contadores.servicios.archivo');
+                foreach ($request->files->get('archivos') as $archivo) {
+                    $archivoService->createArchivoTarea(
+                        $archivo,
+                        $this->getUser(),
+                        $entity
+                    );
+                }
+            }
+        }
 
         $deleteForm = $this->createDeleteForm($id);
 
@@ -501,6 +537,17 @@ class TareaController extends Controller
             $entity->setEstadoActual($estadoNuevo);
             $em->persist($entity);
             $em->flush();
+
+            if (isset($editForm['attachment']->getData()[0])) {
+                $archivoService = $this->get('contadores.servicios.archivo');
+                foreach ($editForm['attachment']->getData() as $archivo) {
+                    $archivoService->createArchivoTarea(
+                        $archivo,
+                        $this->getUser(),
+                        $entity
+                    );
+                }
+            }
 
             $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
 

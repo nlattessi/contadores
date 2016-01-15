@@ -20,6 +20,27 @@
     </p>
 </form>
 
+<div class="dt-panelfooter clearfix">
+  <div class="row">
+    <div class="panel">
+      <div class="panel-body">
+        <h5>Archivos</h5>
+        {% if entity.archivos|length > 0 %}
+        <table class="table table-bordered table-hover table-striped" id="archivos">
+          <tbody>
+            {% for archivoCliente in entity.archivos %}
+              <tr class="gradeA">
+                <td><b>{{ archivoCliente.archivo.nombre}}</b></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
 <div>
     <div class="float-left">
         <a class="btn" href="{{ path('cliente') }}">
