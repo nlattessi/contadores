@@ -80,12 +80,86 @@
 
     </tbody>
 </table>
+
+<form action="{{ path('tarea_show', {id: entity.id}) }}" method="post" enctype="multipart/form-data">
+<div class="row">
+  <div class="col-sm-6 col-md-6 margin-top-30">
+      <h4 class="example-title">Cargar Archivos</h4>
+      <div class="input-group input-group-file">
+          <input type="text" class="form-control" readonly="" id="archivoName">
+          <span class="input-group-btn">
+            <span class="btn btn-outline btn-file">
+              <i class="icon wb-upload" aria-hidden="true"></i>
+              <input type="file" name="archivos[]" multiple="multiple" id="archivos">
+            </span>
+          </span>
+          <span class="input-group-btn"><button type="submit" class="btn btn btn-success">Cargar</button></span>
+      </div>
+  </div>
+</div>
+</form>
+
 <div class="dt-panelfooter clearfix">
+  <div class="row">
+    <div class="panel">
+      <div class="panel-body">
+        {% if entity.archivos|length > 0 %}
+        <table class="table table-bordered table-hover table-striped" id="archivos">
+          <tbody>
+            {% for archivoTarea in entity.archivos %}
+              <tr class="gradeA">
+                <td><b>{{ archivoTarea.archivo.nombre}}</b></td>
+                <td>
+                  <a download="{{ archivoTarea.archivo.nombre }}" href="{{ asset('') }}{{ archivoTarea.archivo.webPath }}" type="button" class="btn btn-outline btn-warning ladda-button margin-top-10" data-style="slide-left" data-plugin="ladda" style="text-decoration: none">
+                    <span class="ladda-label">
+                      <i class="icon wb-download margin-right-10" aria-hidden="true"></i>
+                      Descargar archivo
+                    </span>
+                    <span class="ladda-spinner"></span>
+                    <input type="hidden" class="fileId" name="files[]" value="{{ archivoTarea.archivo.id }}"/>
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% endif %}
+
+<div class="dt-panelfooter clearfix">
+  {% if entity.archivos|length > 0 %}
+  <div class="row">
+    <button type="button" class="btn btn-outline btn-warning ladda-button margin-top-10" data-style="slide-left" data-plugin="ladda" id="downloadAll" href="{{ path('contadores_archivo_downloadZip') }}">
+      <span class="ladda-label">
+        <i class="icon wb-download margin-right-10" aria-hidden="true"></i>
+        Descargar todos
+      </span>
+      <span class="ladda-spinner"></span>
+    </button>
+  </div>
+  {% endif %}
           <div class="row">
             <a  href="{{ path('tarea') }}" class="btn btn-outline btn-default margin-right-20 margin-top-10">Volver</a>
           </div>
 </div>
 
+</div>
+</div>
+</div>
+</div>
 
+{% endblock %}
 
+{% block javascript %}
+  <script src="{{ asset('bundles/contadores/assets/js/fileFunctions.js') }}"></script>
+
+  <script>
+  $('#archivos').change(function() {
+    var files = $(this)[0].files;
+    var txt = files[0].name;
+    for (var i = 1; i < files.length; i++) {
+      txt += '; ' + files[i].name;
+    }
+    $('#archivoName').val(txt);
+  });
+  </script>
 {% endblock %}

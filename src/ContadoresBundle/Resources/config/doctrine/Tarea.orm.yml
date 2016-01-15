@@ -64,6 +64,10 @@ ContadoresBundle\Entity\Tarea:
         observaciones:
             targetEntity: Observacion
             mappedBy: tarea
+        archivos:
+            targetEntity: ArchivoTarea
+            mappedBy: tarea
+            orderBy: { 'updateTime': 'DESC'}
     manyToOne:
         cliente:
             targetEntity: Cliente

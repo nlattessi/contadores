@@ -1,0 +1,18 @@
+ALTER TABLE archivo_cliente DROP FOREIGN KEY FK_C12F04446EBF93B;
+ALTER TABLE archivo_cliente ADD creationTime DATETIME NOT NULL, ADD updateTime DATETIME NOT NULL;
+ALTER TABLE archivo_cliente ADD CONSTRAINT FK_C12F04446EBF93B FOREIGN KEY (archivo_id) REFERENCES archivo (id) ON DELETE CASCADE;
+ALTER TABLE archivo_cliente RENAME INDEX fk_cliente_archivo_idx TO fk_archivo_cliente_archivo_idx;
+ALTER TABLE archivo_cliente RENAME INDEX fk_archivo_cliente_idx TO fk_archivo_cliente_cliente_idx;
+ALTER TABLE archivo_tarea DROP FOREIGN KEY FK_FF3D633246EBF93B;
+ALTER TABLE archivo_tarea ADD creationTime DATETIME NOT NULL, ADD updateTime DATETIME NOT NULL;
+ALTER TABLE archivo_tarea ADD CONSTRAINT FK_FF3D633246EBF93B FOREIGN KEY (archivo_id) REFERENCES archivo (id) ON DELETE CASCADE;
+ALTER TABLE archivo_tarea RENAME INDEX fk_archivo_tarea_idx TO fk_archivo_tarea_archivo_idx;
+ALTER TABLE archivo_tarea RENAME INDEX fk_tarea_archivo_idx TO fk_archivo_tarea_archivo_tarea_idx;
+ALTER TABLE archivo_tarea_metadata DROP FOREIGN KEY FK_12075126DB38439E;
+DROP INDEX usuario_archivoTM_idx ON archivo_tarea_metadata;
+ALTER TABLE archivo_tarea_metadata ADD creationTime DATETIME NOT NULL, ADD updateTime DATETIME NOT NULL, DROP nombre, DROP ruta, CHANGE usuario_id archivo_id INT DEFAULT NULL;
+ALTER TABLE archivo_tarea_metadata ADD CONSTRAINT FK_1207512646EBF93B FOREIGN KEY (archivo_id) REFERENCES archivo (id) ON DELETE CASCADE;
+CREATE INDEX fk_archivo_tarea_metadata_archivo_idx ON archivo_tarea_metadata (archivo_id);
+ALTER TABLE archivo_tarea_metadata RENAME INDEX tareametadata_archivo_idx TO fk_archivo_tarea_metadata_tarea_metada_idx;
+ALTER TABLE archivo ADD creation_time DATETIME NOT NULL, ADD update_time DATETIME NOT NULL, ADD file_size INT NOT NULL, CHANGE ruta ruta VARCHAR(75) NOT NULL;
+ALTER TABLE archivo RENAME INDEX usuario_archivot_idx TO fk_archivo_usuario_idx;

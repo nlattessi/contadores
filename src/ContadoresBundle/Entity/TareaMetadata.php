@@ -1,6 +1,7 @@
 <?php
 
 namespace ContadoresBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * TareaMetadata
@@ -31,6 +32,14 @@ class TareaMetadata
      * @var boolean
      */
     private $activo = true;
+
+    private $archivos;
+
+
+    public function __construct()
+    {
+        $this->archivos = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -130,12 +139,24 @@ class TareaMetadata
         $this->activo = $activo;
     }
 
-
-
     function __toString()
     {
         return $this->getNombre();
     }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getArchivos()
+    {
+        return $this->archivos;
+    }
 
+    /**
+     * @param ArrayCollection $archivos
+     */
+    public function setArchivos($archivos)
+    {
+        $this->archivos = $archivos;
+    }
 }

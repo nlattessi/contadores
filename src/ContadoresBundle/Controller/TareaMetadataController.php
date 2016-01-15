@@ -123,6 +123,18 @@ class TareaMetadataController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+
+            if (isset($form['attachment']->getData()[0])) {
+                $archivoService = $this->get('contadores.servicios.archivo');
+                foreach ($form['attachment']->getData() as $archivo) {
+                    $archivoService->createArchivoTareaMetadata(
+                        $archivo,
+                        $this->getUser(),
+                        $entity
+                    );
+                }
+            }
+
             $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
 
             return $this->redirect($this->generateUrl('tareametadata_show', array('id' => $entity->getId())));
@@ -215,6 +227,18 @@ class TareaMetadataController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
+
+            if (isset($editForm['attachment']->getData()[0])) {
+                $archivoService = $this->get('contadores.servicios.archivo');
+                foreach ($editForm['attachment']->getData() as $archivo) {
+                    $archivoService->createArchivoTareaMetadata(
+                        $archivo,
+                        $this->getUser(),
+                        $entity
+                    );
+                }
+            }
+
             $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
 
             return $this->redirect($this->generateUrl('tareametadata_edit', array('id' => $id)));

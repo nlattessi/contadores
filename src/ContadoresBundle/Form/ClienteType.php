@@ -18,6 +18,13 @@ class ClienteType extends AbstractType
             ->add('cuit')
             ->add('usuario')
             ->add('reset', 'reset', ['label' => 'Limpiar '])
+
+            ->add('attachment', 'file', [
+                'label' => 'Cargar Archivos',
+                'required' => false,
+                'mapped' => false,
+                'multiple' => true
+            ])
         ;
     }
 

@@ -33,6 +33,11 @@ ContadoresBundle\Entity\TareaMetadata:
             options:
                 default: '1'
             column: activo
+    oneToMany:
+        archivos:
+            targetEntity: ArchivoTareaMetadata
+            mappedBy: tareaMetadata
+            orderBy: { 'updateTime': 'DESC'}
     manyToOne:
         rubro:
             targetEntity: Rubro

@@ -82,10 +82,13 @@ class Tarea
 
     private $periodo;
 
+    private $archivos;
+
 
     public function __construct()
     {
         $this->observaciones = new ArrayCollection();
+        $this->archivos = new ArrayCollection();
     }
 
     public function addObservacion(Observacion $e)
@@ -436,5 +439,19 @@ class Tarea
         return $this->getNombre();
     }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getArchivos()
+    {
+        return $this->archivos;
+    }
 
+    /**
+     * @param ArrayCollection $archivos
+     */
+    public function setArchivos($archivos)
+    {
+        $this->archivos = $archivos;
+    }
 }

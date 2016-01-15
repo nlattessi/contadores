@@ -13,6 +13,9 @@ use ContadoresBundle\Entity\Archivo;
 use ContadoresBundle\Form\ArchivoType;
 use ContadoresBundle\Form\ArchivoFilterType;
 
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+
 /**
  * Archivo controller.
  *
@@ -269,5 +272,48 @@ class ArchivoController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+    public function downloadZipAction(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            if (!empty($request->request->get('files'))) {
+                $files = [];
+
+                foreach ($request->request->get('files') as $fileId) {
+                    $file = $this->getArchivoUploader()->getFileById($fileId);
+                    if ($file) {
+                        $f = ['name' => $file->getNombre(), 'path' => $file->getAbsolutePath()];
+                        array_push($files, $f);
+                    }
+                }
+
+                $zip = new \ZipArchive();
+                $zipName = 'Documents-'.time().".zip";
+
+                $zip->open($this->getZipDir() . $zipName,  \ZipArchive::CREATE);
+                foreach ($files as $f) {
+                    $zip->addFromString(basename($f['name']),  file_get_contents($f['path']));
+                }
+                $zip->close();
+
+                $response = new BinaryFileResponse($this->getZipDir() . $zipName);
+                $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $zipName);
+
+                return $response;
+            } else {
+                throw $this->createNotFoundException('The files do not exist');
+            }
+        }
+    }
+
+    private function getArchivoUploader()
+    {
+        return $this->get('contadores.servicios.archivo');
+    }
+
+    private function getZipDir()
+    {
+        return $this->get('kernel')->getRootDir() . '/data/bundles/contadores/tmp/';
     }
 }
