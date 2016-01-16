@@ -49,6 +49,11 @@ class Cliente
      */
     private $tareas;
 
+    /**
+     * @var boolean
+     */
+    private $activo = '1';
+
     public function __construct()
     {
         $this->tareas = new ArrayCollection();
@@ -222,6 +227,22 @@ class Cliente
     public function setTareas($tareas)
     {
         $this->tareas = $tareas;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isActivo()
+    {
+        return $this->activo;
+    }
+
+    /**
+     * @param boolean $activo
+     */
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
     }
 
     function __toString()

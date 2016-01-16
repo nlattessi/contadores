@@ -1,5 +1,7 @@
 {% extends 'ContadoresBundle:Layout:layout.html.twig' %}
 
+{% form_theme filterForm 'ContadoresBundle:Area:fieldsFilter.html.twig' %}
+
 {% block encabezado %}
     Ver áreas
 {% endblock %}
@@ -30,14 +32,16 @@
         <div id="filters" class="collapse">
 
             <form class="well" action="{{ path('area') }}" method="get" {{ form_enctype(filterForm) }}>
-                {{ form_row(filterForm.id) }}
-                {{ form_row(filterForm.nombre) }}
-                {{ form_rest(filterForm) }}
-
-                <p>
-                    <button type="submit" name="filter_action" value="filter">{{ 'views.index.filter'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-                    <button type="submit" name="filter_action" value="reset">{{ 'views.index.reset'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-                </p>
+                <div class="row">
+                {{ form_widget(filterForm.nombre, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 margin-top-20">
+                        {{ form_row(filterForm._token) }}
+                        <button type="submit" name="filter_action" class="btn btn-outline btn-default" value="reset">{{ 'views.index.reset'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+                        <button type="submit" name="filter_action" class="btn btn-success"  value="filter">{{ 'views.index.filter'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -67,7 +71,7 @@
             <i class="icon wb-pencil" aria-hidden="true"></i>
         </a>
         <a class="btn btn-mini" href="{{ path('area_contadores', { 'id': entity.id }) }}">
-            {{ 'views.actions.contadores'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+            <i class="icon wb-users" aria-hidden="true"></i>
         </a>   </td>
         </tr>
     {% endfor %}

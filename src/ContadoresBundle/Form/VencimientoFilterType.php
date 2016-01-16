@@ -2,6 +2,7 @@
 
 namespace ContadoresBundle\Form;
 
+use ContadoresBundle\Servicios\FiltroService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -11,11 +12,37 @@ use Symfony\Component\Form\FormError;
 
 class VencimientoFilterType extends AbstractType
 {
+
+    private $filtroService;
+
+    function __construct(FiltroService $fs)
+    {
+        $this->filtroService = $fs;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('id', 'filter_number_range')
-            ->add('fecha', 'filter_date_range')
+            ->add('fecha', 'filter_date_range', array(
+                'left_date_options' => array(
+                    'widget' => 'single_text',
+                    'format' => 'dd/M/yyyy'
+                ),
+                'right_date_options' => array(
+                    'widget' => 'single_text',
+                    'format' => 'dd/M/yyyy'
+                ),
+                'label' => 'Fecha inicio',
+            ))
+            ->add('periodo', 'filter_entity', [
+                'class' => 'ContadoresBundle:Periodo',
+                'choices' => $this->filtroService->obtenerPeriodosActivos()
+            ])
+            ->add('tareaMetadata', 'filter_entity', [
+                'class' => 'ContadoresBundle:TareaMetadata',
+                'choices' => $this->filtroService->obtenerTareaMetadataActivas()
+            ])
             ->add('colaCuil', 'filter_text')
         ;
 
@@ -33,7 +60,7 @@ class VencimientoFilterType extends AbstractType
                 }
             }
 
-            $event->getForm()->addError(new FormError('Filter empty'));
+            $event->getForm()->addError(new FormError('Este filtro no devuelve resultados'));
         };
         $builder->addEventListener(FormEvents::POST_BIND, $listener);
     }

@@ -1,4 +1,5 @@
 {% extends 'ContadoresBundle:Layout:layout.html.twig' %}
+{% form_theme filterForm 'ContadoresBundle:TareaMetadata:fieldsFilter.html.twig' %}
 
 {% block encabezado %}
     Ver tareas
@@ -30,15 +31,21 @@
         <div id="filters" class="collapse">
 
             <form class="well" action="{{ path('tareametadata') }}" method="get" {{ form_enctype(filterForm) }}>
-                {{ form_row(filterForm.id) }}
-                {{ form_row(filterForm.nombre) }}
-                {{ form_row(filterForm.esperiodica) }}
-                {{ form_rest(filterForm) }}
+                <div class="row">
+                    {{ form_widget(filterForm.nombre) }}
+                    {{ form_widget(filterForm.esperiodica) }}
+                </div>
+                <div class="row">
+                    {{ form_widget(filterForm.rubro) }}
+                </div>
 
-                <p>
-                    <button type="submit" name="filter_action" value="filter">{{ 'views.index.filter'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-                    <button type="submit" name="filter_action" value="reset">{{ 'views.index.reset'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-                </p>
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 margin-top-20">
+                        {{ form_row(filterForm._token) }}
+                        <button type="submit" name="filter_action" class="btn btn-outline btn-default" value="reset">{{ 'views.index.reset'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+                        <button type="submit" name="filter_action" class="btn btn-success"  value="filter">{{ 'views.index.filter'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -55,6 +62,7 @@
         <tr>
             <th>Id</th>
             <th>Nombre</th>
+            <th>Rubro</th>
             <th>Es periodica</th>
             <th>{{ 'views.index.actions'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</th>
         </tr>
@@ -64,6 +72,7 @@
         <tr>
             <td><a href="{{ path('tareametadata_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.nombre }}</td>
+            <td>{{ entity.rubro }}</td>
             <td>{% if entity.esperiodica %}Si{% else %}No{% endif %}</td>
             <td>
         <a class="btn btn-mini" href="{{ path('tareametadata_show', { 'id': entity.id }) }}">

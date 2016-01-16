@@ -15,8 +15,8 @@ class AreaFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'filter_number_range')
             ->add('nombre', 'filter_text', array('condition_pattern' => FilterOperands::STRING_BOTH,))
+            ->add('reset', 'reset', ['label' => 'Limpiar '])
         ;
 
         $listener = function(FormEvent $event)
@@ -33,7 +33,7 @@ class AreaFilterType extends AbstractType
                 }
             }
 
-            $event->getForm()->addError(new FormError('Filter empty'));
+            $event->getForm()->addError(new FormError('Este filtro no devuelve resultados'));
         };
         $builder->addEventListener(FormEvents::POST_BIND, $listener);
     }

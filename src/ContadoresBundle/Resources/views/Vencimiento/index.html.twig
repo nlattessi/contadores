@@ -1,4 +1,5 @@
 {% extends 'ContadoresBundle:Layout:layout.html.twig' %}
+{% form_theme filterForm 'ContadoresBundle:Vencimiento:fieldsFilter.html.twig' %}
 
 {% block encabezado %}
     Ver vencimientos
@@ -30,15 +31,26 @@
         <div id="filters" class="collapse">
 
             <form class="well" action="{{ path('vencimiento') }}" method="get" {{ form_enctype(filterForm) }}>
-                {{ form_row(filterForm.id) }}
-                {{ form_row(filterForm.fecha) }}
-                {{ form_row(filterForm.colaCuil) }}
-                {{ form_rest(filterForm) }}
 
-                <p>
-                    <button type="submit" name="filter_action" value="filter">{{ 'views.index.filter'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-                    <button type="submit" name="filter_action" value="reset">{{ 'views.index.reset'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-                </p>
+                <div class="row">
+                    {{ form_widget(filterForm.tareaMetadata) }}
+                    {{ form_widget(filterForm.periodo) }}
+                </div>
+                <div class="row">
+                    {{ form_widget(filterForm.fecha, {'attr': {'class': 'form-control', 'data-provide': 'datepicker', 'data-date-format': 'dd/mm/yyyy', 'data-date-autoclose': 'true'}}) }}
+
+                </div>
+                <div class="row">
+                    {{ form_widget(filterForm.colaCuil) }}
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 margin-top-20">
+                        {{ form_row(filterForm._token) }}
+                        <button type="submit" name="filter_action" class="btn btn-outline btn-default" value="reset">{{ 'views.index.reset'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+                        <button type="submit" name="filter_action" class="btn btn-success"  value="filter">{{ 'views.index.filter'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -54,6 +66,8 @@
         <tr>
             <th>Id</th>
             <th>Fecha</th>
+            <th>Período</th>
+            <th>Tarea</th>
             <th>Colacuil</th>
             <th>{{ 'views.index.actions'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</th>
         </tr>
@@ -63,6 +77,8 @@
         <tr>
             <td><a href="{{ path('vencimiento_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{{ entity.periodo }}</td>
+            <td>{{ entity.tareaMetadata }}</td>
             <td>{{ entity.colaCuil }}</td>
             <td>
         <a class="btn btn-mini" href="{{ path('vencimiento_show', { 'id': entity.id }) }}">

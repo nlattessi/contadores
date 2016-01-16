@@ -19,10 +19,17 @@ class DefaultController extends Controller
     public function homeAction()
     {
         $tareasService =  $this->get('contadores.servicios.tareas');
+        $clientesService =  $this->get('contadores.servicios.cliente');
+        $vencimientosService =  $this->get('contadores.servicios.vencimiento');
+
         $tareas = $tareasService->obtenerTareasUrgentesPorUsuario($this->getUser());
+        $clientes = $clientesService->obtenerClientesActivos();
+        $vencimientos = $vencimientosService->obtenerProximosVencimientos();
 
         return $this->render('ContadoresBundle:Default:home.html.twig', array(
-            'tareas'        => $tareas,     ));
+            'tareas'        => $tareas,
+            'clientes' => $clientes,
+            'vencimientos' => $vencimientos));
     }
 
     public function enConstruccionAction()

@@ -46,7 +46,9 @@ class ContadorController extends Controller
     {
         $request = $this->getRequest();
         $session = $request->getSession();
-        $filterForm = $this->createForm(new ContadorFilterType());
+
+        $filtroService =  $this->get('contadores.servicios.filtro');
+        $filterForm = $this->createForm(new ContadorFilterType($filtroService));
         $em = $this->getDoctrine()->getManager();
         $queryBuilder = $em->getRepository('ContadoresBundle:Contador')->createQueryBuilder('e');
 
@@ -71,7 +73,9 @@ class ContadorController extends Controller
             // Get filter from session
             if ($session->has('ContadorControllerFilter')) {
                 $filterData = $session->get('ContadorControllerFilter');
-                $filterForm = $this->createForm(new ContadorFilterType(), $filterData);
+
+                $filtroService =  $this->get('contadores.servicios.filtro');
+                $filterForm = $this->createForm(new ContadorFilterType($filtroService), $filterData);
                 $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
             }
         }

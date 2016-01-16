@@ -11,11 +11,19 @@ services:
           class: ContadoresBundle\Servicios\UsuarioService
           arguments:
               entityManager: @doctrine.orm.entity_manager
+      contadores.servicios.cliente:
+          class: ContadoresBundle\Servicios\ClienteService
+          arguments:
+              entityManager: @doctrine.orm.entity_manager
       contadores.servicios.bajaAdministrativa:
           class: ContadoresBundle\Servicios\BajaAdministrativaService
           arguments:
               entityManager: @doctrine.orm.entity_manager
       contadores.servicios.vencimiento:
           class: ContadoresBundle\Servicios\VencimientoService
+          arguments:
+              entityManager: @doctrine.orm.entity_manager
+      contadores.servicios.filtro:
+          class: ContadoresBundle\Servicios\FiltroService
           arguments:
               entityManager: @doctrine.orm.entity_manager

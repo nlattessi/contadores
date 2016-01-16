@@ -1,35 +1,247 @@
-{% extends 'ContadoresBundle:Layout:layout.html.twig' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Estudio Contable{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-{% block title %}
-{{ parent() }} -  Home
-{% endblock %}
+    <link rel="apple-touch-icon" href="{{ asset('bundles/contadores/assets/images/apple-touch-icon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('bundles/contadores/assets/images/favicon.ico') }}">
 
-{% block page %}
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/css/bootstrap-extend.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/css/site.css') }}">
 
-<div class="jumbotron">
-    <p class="lead">Bienvenido, {{ app.user.mail }}</p>
-    <h2>Tareas Próximas a vencer</h2>
+    <!-- Plugins -->
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/animsition/animsition.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/asscrollable/asScrollable.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/switchery/switchery.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/intro-js/introjs.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/slidepanel/slidePanel.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/flag-icon-css/flag-icon.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/datatables-bootstrap/dataTables.bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/datatables-fixedheader/dataTables.fixedHeader.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/datatables-responsive/dataTables.responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/bootstrap-datepicker/bootstrap-datepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/jt-timepicker/jquery-timepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/examples/css/tables/datatable.css') }}">
 
-    {% if  tareas %}
-    {% for tarea in tareas %}
-        <a style="color: red;" href=
-        {% if app.user.rol == "ROLE_CONTADOR" %}
-        "{{ path('tarea_contador_show', { 'id': tarea.id }) }}"
-        {% elseif app.user.rol == "ROLE_CLIENTE" %}
-         "{{ path('tarea_cliente_show', { 'id': tarea.id }) }}"
-        {% elseif app.user.rol == "ROLE_JEFE" %}
-            "{{ path('tarea_show', { 'id': tarea.id }) }}"
-        {% endif %}
-        >
-            <b>{{ tarea.nombre }}</b>
-        </a>
-       <br/>
+    <!-- Fonts -->
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/fonts/web-icons/web-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/fonts/brand-icons/brand-icons.min.css') }}">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/css/../fonts/font-awesome/font-awesome.css') }}">
+    <!-- Inline -->
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/examples/css/pages/login-v3.css') }}">
 
-    {% endfor %}
-    {% endif %}
-    {% if not tareas %}
-        <p> <i>No hay tareas Urgentes</i></p>
-    {% endif %}
+    <!--[if lt IE 9]>
+    <script src="{{ asset('bundles/contadores/assets/vendor/html5shiv/html5shiv.min.js') }}"></script>
+    <![endif]-->
+
+    <!--[if lt IE 10]>
+    <script src="{{ asset('bundles/contadores/assets/vendor/media-match/media.match.min.js') }}"></script>
+    <script src="{{ asset('bundles/contadores/assets/vendor/respond/respond.min.js') }}"></script>
+    <![endif]-->
+
+    <!-- Scripts -->
+    <script src="{{ asset('bundles/contadores/assets/vendor/modernizr/modernizr.min.js') }}"></script>
+    <script src="{{ asset('bundles/contadores/assets/vendor/breakpoints/breakpoints.min.js') }}"></script>
+    <script>
+        Breakpoints();
+    </script>
+</head>
+
+<body>
+
+<nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega" role="navigation">
+
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle hamburger hamburger-close navbar-toggle-left hided unfolded" data-toggle="menubar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="hamburger-bar"></span>
+        </button>
+        <button type="button" class="navbar-toggle collapsed" data-target="#site-navbar-collapse" data-toggle="collapse">
+            <i class="icon wb-more-horizontal" aria-hidden="true"></i>
+        </button>
+        <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
+            <img class="navbar-brand-logo" src="{{ asset('bundles/contadores/assets/images/logo-contadores-xs.png') }}" title="cntsv logo">
+            <span class="navbar-brand-text"> CONTADORES</span>
+        </div>
+        <button type="button" class="navbar-toggle collapsed" data-target="#site-navbar-search" data-toggle="collapse">
+            <span class="sr-only">Toggle Search</span>
+            <i class="icon wb-search" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <div class="navbar-container container-fluid">
+        <!-- Navbar Collapse -->
+        <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
+            <!-- Navbar Toolbar -->
+            <ul class="nav navbar-toolbar">
+                <li class="hidden-float" id="toggleMenubar">
+                    <a data-toggle="menubar" href="#" role="button">
+                        <i class="icon hamburger hamburger-arrow-left hided unfolded">
+                            <span class="sr-only">Cambiar visualización</span>
+                            <span class="hamburger-bar"></span>
+                        </i>
+                    </a>
+                </li>
+            </ul>
+            <!-- End Navbar Toolbar -->
+
+            <!-- Navbar Toolbar Right -->
+            <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+                {% if (is_granted('IS_AUTHENTICATED_FULLY')) %}
+                    <li class="dropdown">
+                        <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="scale-up" role="button">
+                            <i class="icon wb-chevron-down-mini"></i>
+                            <span class="avatar avatar-online">{{ app.user.mail }}</span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="presentation">
+                                <a href="{{ path('cambiar_password') }}" role="menuitem"><i class="icon wb-settings" aria-hidden="true"></i> Cambiar contraseña</a>
+                            </li>
+                            <li class="divider" role="presentation"></li>
+                            <li role="presentation">
+                                <a href="{{ path('logout') }}" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Cerrar sesión</a>
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li role="presentation">
+                        <a href="{{ path('login') }}" ><i class="icon wb-power" aria-hidden="true"></i> Ingresar</a>
+                    </li>
+                {% endif %}
+
+            </ul>
+            <!-- End Navbar Toolbar Right -->
+        </div>
+        <!-- End Navbar Collapse -->
+
+        <!-- Site Navbar Seach -->
+        <div class="collapse navbar-search-overlap" id="site-navbar-search">
+            <form role="search">
+                <div class="form-group">
+                    <div class="input-search">
+                        <i class="input-search-icon wb-search" aria-hidden="true"></i>
+                        <input type="text" class="form-control" name="site-search" placeholder="Search...">
+                        <button type="button" class="input-search-close icon wb-close" data-target="#site-navbar-search" data-toggle="collapse" aria-label="Close"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- End Site Navbar Seach -->
+    </div>
+</nav>
+<div class="site-menubar">
+    <div class="site-menubar-body">
+        <div>
+            <div>
+                <ul class="site-menu">
+                    <li class="site-menu-category">Menu</li>
+
+                    {{ include('ContadoresBundle:NavBars:navbar.html.twig') }}
+
+
+                </ul>
+
+
+            </div>
+        </div>
+    </div>
 </div>
 
+
+
+<!-- Page -->
+<div class="page animsition" >
+    {% if app.user.rol == 'ROLE_JEFE' %}
+        {{ include('ContadoresBundle:Home:role_jefe.html.twig') }}
+
+    {% else %}
+        <div class="jumbotron">
+            <p class="lead">Bienvenido, {{ app.user.mail }}</p>
+            <h2>Tareas Próximas a vencer</h2>
+            {% if  tareas %}
+                {% for tarea in tareas %}
+                    <a style="color: red;" href=
+                    {% if app.user.rol == "ROLE_CONTADOR" %}
+                "{{ path('tarea_contador_show', { 'id': tarea.id }) }}"
+            {% elseif app.user.rol == "ROLE_CLIENTE" %}
+                "{{ path('tarea_cliente_show', { 'id': tarea.id }) }}"
+            {% elseif app.user.rol == "ROLE_JEFE" %}
+                "{{ path('tarea_show', { 'id': tarea.id }) }}"
+            {% endif %}
+                    >
+                        <b>{{ tarea.nombre }}</b>
+                    </a>
+                    <br/>
+                {% endfor %}
+            {% endif %}
+            {% if not tareas %}
+                <p> <i>No hay tareas Urgentes</i></p>
+            {% endif %}
+        </div>
+    {% endif %}
+
+
+</div>
+
+<!-- Footer -->
+
+
+<!-- Core  -->
+<script src="{{ asset('bundles/contadores/assets/vendor/jquery/jquery.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/bootstrap/bootstrap.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/animsition/jquery.animsition.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/asscroll/jquery-asScroll.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/mousewheel/jquery.mousewheel.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/asscrollable/jquery.asScrollable.all.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/ashoverscroll/jquery-asHoverScroll.js') }}"></script>
+
+<!-- Plugins -->
+<script src="{{ asset('bundles/contadores/assets/vendor/switchery/switchery.min.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/intro-js/intro.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/slidepanel/jquery-slidePanel.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
+
+<!-- Plugins For This Page -->
+<script src="{{ asset('bundles/contadores/assets/vendor/datatables/jquery.dataTables.js') }}"></script>
+
+<script src="{{ asset('bundles/contadores/assets/vendor/jt-timepicker/jquery.timepicker.min.js') }}"></script>
+
+
+<!-- Scripts -->
+<script src="{{ asset('bundles/contadores/assets/js/core.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/js/site.js') }}"></script>
+
+<script src="{{ asset('bundles/contadores/assets/js/sections/menu.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/js/sections/menubar.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/js/sections/gridmenu.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/js/sections/sidebar.js') }}"></script>
+
+
+<script src="{{ asset('bundles/contadores/assets/js/components/asscrollable.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/js/components/animsition.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/js/components/slidepanel.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/js/components/switchery.js') }}"></script>
+
+<!-- Scripts For This Page -->
+<script src="{{ asset('bundles/contadores/assets/js/components/datatables.js') }}"></script>
+
+<script src="{{ asset('bundles/contadores/assets/examples/js/tables/datatable.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/examples/js/uikit/icon.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/js/components/bootstrap-datepicker.js') }}"></script>
+
+<script src="{{ asset('bundles/contadores/assets/js/components/jt-timepicker.js') }}"></script>
+
+<script src="{{ asset('bundles/contadores/assets/js/jquery.inputmask.bundle.js') }}"></script>
+
+{% block javascript %}
 {% endblock %}
+
+</body>
+</html>

@@ -47,7 +47,8 @@ class TareaController extends Controller
         $request = $this->getRequest();
         $session = $request->getSession();
         $usuario = $this->getUser();
-        $filterForm = $this->createForm(new TareaFilterType());
+        $filtroService =  $this->get('contadores.servicios.filtro');
+        $filterForm = $this->createForm(new TareaFilterType($filtroService));
         $em = $this->getDoctrine()->getManager();
         if($usuario->getRol() == Rol::$contador) {
             $contador = $em->getRepository('ContadoresBundle:Contador')->find($usuario->getEntidadId());
@@ -84,7 +85,8 @@ class TareaController extends Controller
             // Get filter from session
             if ($session->has('TareaControllerFilter')) {
                 $filterData = $session->get('TareaControllerFilter');
-                $filterForm = $this->createForm(new TareaFilterType(), $filterData);
+                $filtroService =  $this->get('contadores.servicios.filtro');
+                $filterForm = $this->createForm(new TareaFilterType($filtroService), $filterData);
                 $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
             }
         }

@@ -1,29 +1,162 @@
-{% extends 'ContadoresBundle:Layout:layout.html.twig' %}
+<!DOCTYPE html>
+<html class="no-js css-menubar" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="bootstrap admin template">
+    <meta name="author" content="">
 
-{% block title %}
-{{ parent() }} - Login
-{% endblock %}
+    <title>Estudio contable- Iniciar sesión</title>
 
-{% block page %}
+    <link rel="apple-touch-icon" href="{{ asset('bundles/contadores/assets/images/apple-touch-icon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('bundles/contadores/assets/images/favicon.ico') }}">
 
-<div class="container">
-  <div class="row">
-  <div class="span4 offset4 well">
-  	<legend>Login</legend>
-      {% if error %}
-        <div class="alert alert-error">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <strong>Error!</strong> {{ error.messageKey|trans(error.messageData, 'security') }}
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/css/bootstrap-extend.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/css/site.css') }}">
+
+    <!-- Plugins -->
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/animsition/animsition.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/asscrollable/asScrollable.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/switchery/switchery.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/intro-js/introjs.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/slidepanel/slidePanel.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/flag-icon-css/flag-icon.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/datatables-bootstrap/dataTables.bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/datatables-fixedheader/dataTables.fixedHeader.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/datatables-responsive/dataTables.responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/bootstrap-datepicker/bootstrap-datepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/vendor/jt-timepicker/jquery-timepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/examples/css/tables/datatable.css') }}">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/fonts/web-icons/web-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/fonts/brand-icons/brand-icons.min.css') }}">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/css/../fonts/font-awesome/font-awesome.css') }}">
+    <!-- Inline -->
+    <link rel="stylesheet" href="{{ asset('bundles/contadores/assets/examples/css/pages/login-v3.css') }}">
+
+    <!--[if lt IE 9]>
+    <script src="{{ asset('bundles/contadores/assets/vendor/html5shiv/html5shiv.min.js') }}"></script>
+    <![endif]-->
+
+    <!--[if lt IE 10]>
+    <script src="{{ asset('bundles/contadores/assets/vendor/media-match/media.match.min.js') }}"></script>
+    <script src="{{ asset('bundles/contadores/assets/vendor/respond/respond.min.js') }}"></script>
+    <![endif]-->
+
+    <!-- Scripts -->
+    <script src="{{ asset('bundles/contadores/assets/vendor/modernizr/modernizr.min.js') }}"></script>
+    <script src="{{ asset('bundles/contadores/assets/vendor/breakpoints/breakpoints.min.js') }}"></script>
+    <script>
+        Breakpoints();
+    </script>
+</head>
+<body class="page-login-v3 layout-full">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+<!-- Page -->
+<div class="page animsition vertical-align text-center" data-animsition-in="fade-in"
+     data-animsition-out="fade-out">
+    <div class="page-content vertical-align-middle">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="brand">
+                    <img class="brand-img" src="{{ asset('bundles/contadores/assets/images/logo-contadores.gif') }}" alt="estudio contable jorge w sauan asociados">
+
+                </div>
+                <form action="{{ path('login_check') }}" method="post">
+                    <div class="form-group form-material floating">
+                        <input type="email" class="form-control"  placeholder="Email" id="username" name="_username" />
+                        <label class="floating-label">Email</label>
+                    </div>
+                    <div class="form-group form-material floating">
+                        <input type="password" class="form-control" placeholder="Password" id="password" name="_password" />
+                        <label class="floating-label">Password</label>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <button type="submit" class="btn btn-success btn-block btn-lg margin-top-40">Iniciar sesión</button>
+                </form>
+            </div>
         </div>
-      {% endif %}
-  	<form action="{{ path('login_check') }}" method="post">
-    	<input type="text" class="span4" placeholder="Email" id="username" name="_username" value="{{ last_username }}">
-    	<input type="password" class="span4" placeholder="Password" id="password" name="_password">
-      <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-    	<button type="submit" name="submit" class="btn btn-info btn-block">Entrar</button>
-  	</form>
-  </div>
-  </div>
-</div>
 
-{% endblock %}
+        <footer class="page-copyright page-copyright-inverse">
+            <p>Este es un producto de <a href="www.hera-digital.com"><img class="hera-brand-img" src="{{ asset('bundles/contadores/assets/images/hera-logo.png') }}" alt="hera logo"></a></p>
+            <p>© 2015. Todos los derechos reservados.</p>
+
+        </footer>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<!-- Core  -->
+<!-- Core  -->
+<script src="{{ asset('bundles/contadores/assets/vendor/jquery/jquery.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/bootstrap/bootstrap.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/animsition/jquery.animsition.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/asscroll/jquery-asScroll.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/mousewheel/jquery.mousewheel.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/asscrollable/jquery.asScrollable.all.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/ashoverscroll/jquery-asHoverScroll.js') }}"></script>
+
+<!-- Plugins -->
+<script src="{{ asset('bundles/contadores/assets/vendor/switchery/switchery.min.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/intro-js/intro.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/slidepanel/jquery-slidePanel.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/vendor/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
+
+<!-- Plugins For This Page -->
+<script src="{{ asset('bundles/contadores/assets/vendor/datatables/jquery.dataTables.js') }}"></script>
+
+<script src="{{ asset('bundles/contadores/assets/vendor/jt-timepicker/jquery.timepicker.min.js') }}"></script>
+
+
+<!-- Scripts -->
+<script src="{{ asset('bundles/contadores/assets/js/core.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/js/site.js') }}"></script>
+
+<script src="{{ asset('bundles/contadores/assets/js/sections/menu.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/js/sections/menubar.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/js/sections/gridmenu.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/js/sections/sidebar.js') }}"></script>
+
+
+<script src="{{ asset('bundles/contadores/assets/js/components/asscrollable.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/js/components/animsition.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/js/components/slidepanel.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/js/components/switchery.js') }}"></script>
+
+<!-- Scripts For This Page -->
+<script src="{{ asset('bundles/contadores/assets/js/components/datatables.js') }}"></script>
+
+<script src="{{ asset('bundles/contadores/assets/examples/js/tables/datatable.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/examples/js/uikit/icon.js') }}"></script>
+<script src="{{ asset('bundles/contadores/assets/js/components/bootstrap-datepicker.js') }}"></script>
+
+<script src="{{ asset('bundles/contadores/assets/js/components/jt-timepicker.js') }}"></script>
+
+<script src="{{ asset('bundles/contadores/assets/js/jquery.inputmask.bundle.js') }}"></script>
+<script>
+    (function(document, window, $) {
+        'use strict';
+
+        var Site = window.Site;
+        $(document).ready(function() {
+            Site.run();
+        });
+    })(document, window, jQuery);
+</script>
+
+
+</body>
+
+</html>
+
+

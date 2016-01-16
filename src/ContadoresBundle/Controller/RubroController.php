@@ -42,9 +42,12 @@ class RubroController extends Controller
     */
     protected function filter()
     {
+
         $request = $this->getRequest();
         $session = $request->getSession();
-        $filterForm = $this->createForm(new RubroFilterType());
+
+        $filtroService =  $this->get('contadores.servicios.filtro');
+        $filterForm = $this->createForm(new RubroFilterType($filtroService));
         $em = $this->getDoctrine()->getManager();
         $queryBuilder = $em->getRepository('ContadoresBundle:Rubro')->createQueryBuilder('e');
 
@@ -69,7 +72,9 @@ class RubroController extends Controller
             // Get filter from session
             if ($session->has('RubroControllerFilter')) {
                 $filterData = $session->get('RubroControllerFilter');
-                $filterForm = $this->createForm(new RubroFilterType(), $filterData);
+
+                $filtroService =  $this->get('contadores.servicios.filtro');
+                $filterForm = $this->createForm(new RubroFilterType($filtroService), $filterData);
                 $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
             }
         }

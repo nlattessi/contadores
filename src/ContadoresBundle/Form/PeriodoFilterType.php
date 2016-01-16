@@ -34,7 +34,7 @@ class PeriodoFilterType extends AbstractType
                 }
             }
 
-            $event->getForm()->addError(new FormError('Filter empty'));
+            $event->getForm()->addError(new FormError('Este filtro no devuelve resultados'));
         };
         $builder->addEventListener(FormEvents::POST_BIND, $listener);
     }

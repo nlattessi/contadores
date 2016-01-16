@@ -1,4 +1,5 @@
 {% extends 'ContadoresBundle:Layout:layout.html.twig' %}
+{% form_theme filterForm 'ContadoresBundle:Tarea:fieldsFilter.html.twig' %}
 
 {% block encabezado %}
 Ver tareas
@@ -30,18 +31,30 @@ Ver tareas
     <div id="filters" class="collapse">
 
         <form class="well" action="{{ path('tarea') }}" method="get" {{ form_enctype(filterForm) }}>
-            {{ form_row(filterForm.id) }}
-            {{ form_row(filterForm.fechaInicio) }}
-            {{ form_row(filterForm.fechaFin) }}
-            {{ form_row(filterForm.fechaCreacion) }}
-            {{ form_row(filterForm.vencimientoInterno) }}
-            {{ form_row(filterForm.nombre) }}
-            {{ form_rest(filterForm) }}
 
-            <p>
-                <button type="submit" name="filter_action" value="filter">{{ 'views.index.filter'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-                <button type="submit" name="filter_action" value="reset">{{ 'views.index.reset'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-            </p>
+            <div class="row">
+                {{ form_widget(filterForm.nombre) }}
+            </div>
+            <div class="row">
+                {{ form_widget(filterForm.cliente) }}
+                {{ form_widget(filterForm.contador) }}
+            </div>
+            <div class="row">
+                {{ form_widget(filterForm.vencimientoInterno, {'attr': {'class': 'form-control', 'data-provide': 'datepicker', 'data-date-format': 'dd/mm/yyyy', 'data-date-autoclose': 'true'}}) }}
+
+            </div>
+            <div class="row">
+                {{ form_widget(filterForm.vencimientoFiscal, {'attr': {'class': 'form-control', 'data-provide': 'datepicker', 'data-date-format': 'dd/mm/yyyy', 'data-date-autoclose': 'true'}}) }}
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 col-md-4 margin-top-20">
+                    {{ form_row(filterForm._token) }}
+                    <button type="submit" name="filter_action" class="btn btn-outline btn-default" value="reset">{{ 'views.index.reset'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+                    <button type="submit" name="filter_action" class="btn btn-success"  value="filter">{{ 'views.index.filter'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+                </div>
+            </div>
         </form>
     </div>
 </div>
@@ -57,12 +70,11 @@ Ver tareas
     <thead>
         <tr>
             <th>Id</th>
-            <th>Fecha inicio</th>
-            <th>Fecha fin</th>
-            <th>Fecha creacion</th>
             <th>Vencimiento fiscal</th>
             <th>Vencimiento interno</th>
             <th>Nombre</th>
+            <th>Contador</th>
+            <th>Cliente</th>
             <th>{{ 'views.index.actions'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</th>
         </tr>
     </thead>
@@ -70,9 +82,6 @@ Ver tareas
     {% for entity in entities %}
         <tr>
             <td><a href="{{ path('tarea_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d ') }}{% endif %}</td>
-            <td>{% if entity.fechaFin %}{{ entity.fechaFin|date('Y-m-d ') }}{% endif %}</td>
-            <td>{% if entity.fechaCreacion %}{{ entity.fechaCreacion|date('Y-m-d ') }}{% endif %}</td>
             <td>{% if entity.vencimientoFiscal %}
                     {{ entity.vencimientoFiscal }}
                 {% else %}
@@ -81,6 +90,10 @@ Ver tareas
             </td>
             <td>{% if entity.vencimientoInterno %}{{ entity.vencimientoInterno|date('Y-m-d ') }}{% endif %}</td>
             <td>{{ entity.nombre }}</td>
+            <td><a href="{{ path('contador_show', { 'id': entity.contador.id }) }}"> {{ entity.contador }}</a>
+               </td>
+            <td><a href="{{ path('cliente_show', { 'id': entity.cliente.id }) }}"> {{ entity.cliente }}</a>
+               </td>
             <td>
         <a class="btn btn-mini" href="{{ path('tarea_show', { 'id': entity.id }) }}">
             <i class="icon wb-eye" aria-hidden="true"></i>
