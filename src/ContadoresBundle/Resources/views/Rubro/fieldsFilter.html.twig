@@ -1,0 +1,17 @@
+{% block _contadoresbundle_rubrofiltertype_nombre_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Nombre</h4>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_rubrofiltertype_area_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Area</h4>
+        <div class="form-group">
+            {{ block('choice_widget') }}
+        </div>
+    </div>
+{% endblock %}
+
+

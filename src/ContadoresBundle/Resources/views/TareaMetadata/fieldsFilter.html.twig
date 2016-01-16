@@ -1,0 +1,26 @@
+{% block _contadoresbundle_tareametadatafiltertype_nombre_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Nombre</h4>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_tareametadatafiltertype_esperiodica_widget %}
+    <div class="col-sm-6 col-md-4">
+        <h4 class="example-title">Es Periódica</h4>
+        <div class="form-group">
+            {{ block('choice_widget') }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_tareametadatafiltertype_rubro_widget %}
+    <div class="col-sm-6 col-md-4">
+        <h4 class="example-title">Rubro</h4>
+        <div class="form-group">
+            {{ block('choice_widget') }}
+        </div>
+    </div>
+{% endblock %}
+
+

@@ -1,0 +1,167 @@
+<div class="page-content  container-fluid">
+    <div class="row">
+
+
+        <div class="col-xlg-6 col-md-6" >
+            <!-- Panel Watchlist -->
+            <div class="widget widget-shadow" id="widgetTable" style="height: 275px;">
+                <div class="widget-body padding-10">
+                    <h3 class="widget-title">
+                        <span class="text-truncate">Crear</span>
+
+                    </h3>
+
+                </div>
+                <div class="list-group bg-blue-grey-100 bg-inherit">
+                    <a class="list-group-item blue-grey-500" href="{{ path('contador_new') }}">
+                        <i class="icon wb-user" aria-hidden="true"></i> Contador
+                    </a>
+                    <a class="list-group-item blue-grey-500" href="{{ path('tareametadata_new') }}">
+                        <i class="icon wb-clipboard" aria-hidden="true"></i> Tarea
+                    </a>
+                    <a class="list-group-item blue-grey-500" href="{{ path('cliente_new') }}">
+                        <i class="icon wb-user-circle" aria-hidden="true"></i> Cliente
+                    </a>
+                    <a class="list-group-item blue-grey-500" href="{{ path('area_new') }}">
+                        <i class="icon wb-graph-up" aria-hidden="true"></i> Área
+                    </a>
+                </div>
+            </div>
+            <!-- End Panel Watchlist -->
+        </div>
+
+
+        <div class="col-xlg-6 col-md-6" >
+            <!-- Panel Watchlist -->
+            <div class="widget widget-shadow" id="widgetTable" style="height: 275px;">
+                <div class="widget-body padding-30">
+                    <h3 class="widget-title">
+                        <span class="text-truncate">Vencimientos fiscales</span>
+
+                    </h3>
+
+                </div>
+                <table class="table margin-bottom-0">
+                    <tbody>
+
+                    {% for vencimiento in vencimientos %}
+                    <tr>
+                        <td></td>
+                        <td><a href="{{ path('vencimiento_show', { 'id': vencimiento.id }) }}">
+                            {{ vencimiento }}
+                            </a>
+                        </td>
+                        <td class="green-600">
+                            <a href="{{ path('tareametadata_show', { 'id': vencimiento.tareaMetadata.id }) }}">
+                            {{ vencimiento.tareaMetadata }}
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+
+                    </tbody>
+                </table>
+                <div class="widget2">
+                    <a href="{{ path('vencimiento_new') }}"><button type="button" class="btn btn btn-outline btn-default">Crear vencimientos</button></a>
+                </div>
+
+            </div>
+            <!-- End Panel Watchlist -->
+        </div>
+    </div><!-- end row -->
+    <div class="row">
+        <div class="col-xlg-6 col-md-6" >
+            <!-- Panel Watchlist -->
+            <div class="widget widget-shadow" id="widgetTable" style="height: 275px;">
+                <div class="widget-body padding-30">
+                    <div class="col-xlg-6 col-md-6" >
+                        <h3 class="widget-title">
+                            <span class="text-truncate">Tareas pendientes</span>
+                        </h3>
+                    </div>
+                    <div class="col-xlg-6 col-md-6" >
+                        <div class="pull-right clearfix">
+                            <ul class="list-unstyled">
+                                <li class="margin-bottom-5 text-truncate">
+                                    <i class="icon wb-medium-point orange-600 margin-right-5" aria-hidden="true"></i>Cliente
+                                </li>
+                                <li class="margin-bottom-5 text-truncate">
+                                    <i class="icon wb-medium-point green-600 margin-right-5" aria-hidden="true"></i>Contador
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <table class="table margin-bottom-0 text-center">
+                    <tbody>
+                    {% for tarea in tareas %}
+                    <tr>
+                        <td><a href="{{ path('tarea_show', { 'id': tarea.id }) }}">
+                            <b>{{ tarea.nombre }}</b>
+                            </a></td>
+                        <td class="orange-600">
+                                <a href="{{ path('cliente_show', { 'id': tarea.cliente.id }) }}">{{ tarea.cliente }}</a>
+                        </td>
+                        <td class="green-600">
+                            {% if tarea.contador %}
+                               <a href="{{ path('contador_show', { 'id': tarea.contador.id }) }}">{{ tarea.contador }}</a>
+                            {% else %}
+                                <i>Sin contador asignado</i>
+                            {% endif %}
+                        </td>
+                        <td class="red-600">
+                            {% if tarea.vencimientoFiscal %}
+                                <a href="{{ path('vencimiento_show', { 'id': tarea.vencimientoFiscal.id }) }}">
+                                    {{ tarea.vencimientoFiscal }}
+                                </a>
+                            {% else %}
+                                {{ tarea.vencimientoInterno|date('d-m-Y') }}
+                            {% endif %}
+                        </td>
+
+                    </tr>
+                {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- End Panel Watchlist -->
+        </div>
+
+        <div class="col-xlg-6 col-md-6" >
+            <!-- Panel Watchlist -->
+            <div class="widget widget-shadow" id="widgetTable" style="height: 275px;">
+                <div class="widget-body padding-30">
+                    <h3 class="widget-title">
+                        <span class="text-truncate">Clientes</span>
+
+                    </h3>
+
+                </div>
+                <table class="table margin-bottom-0">
+                    <tbody>
+                    {% for cliente in clientes %}
+                    <tr>
+                        <td></td>
+                        <td>
+                            <a href="{{ path('cliente_show', { 'id': cliente.id }) }}">
+                                {{ cliente.nombre }}
+                            </a>
+                        </td>
+                        <td class="blue-600">
+                            <a href="{{ path('usuario_show', { 'id': cliente.usuario.id }) }}">
+                                {{ cliente.usuario }}
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- End Panel Watchlist -->
+        </div>
+
+
+    </div><!-- end row -->
+</div><!-- end page content -->

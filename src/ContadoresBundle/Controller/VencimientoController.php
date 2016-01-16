@@ -44,7 +44,9 @@ class VencimientoController extends Controller
     {
         $request = $this->getRequest();
         $session = $request->getSession();
-        $filterForm = $this->createForm(new VencimientoFilterType());
+
+        $filtroService =  $this->get('contadores.servicios.filtro');
+        $filterForm = $this->createForm(new VencimientoFilterType($filtroService));
         $em = $this->getDoctrine()->getManager();
         $queryBuilder = $em->getRepository('ContadoresBundle:Vencimiento')->createQueryBuilder('e');
 
@@ -69,7 +71,9 @@ class VencimientoController extends Controller
             // Get filter from session
             if ($session->has('VencimientoControllerFilter')) {
                 $filterData = $session->get('VencimientoControllerFilter');
-                $filterForm = $this->createForm(new VencimientoFilterType(), $filterData);
+
+                $filtroService =  $this->get('contadores.servicios.filtro');
+                $filterForm = $this->createForm(new VencimientoFilterType($filtroService), $filterData);
                 $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
             }
         }

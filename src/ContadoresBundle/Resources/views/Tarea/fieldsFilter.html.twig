@@ -1,0 +1,81 @@
+{% block _contadoresbundle_tareafiltertype_nombre_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Nombre</h4>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_tareafiltertype_vencimientoInterno_left_date_widget %}
+    <div class="col-sm-6 col-md-4">
+        <h4 class="example-title">Vencimiento Interno (desde)</h4>
+        <div class="input-group">
+      <span class="input-group-addon">
+        <i class="icon wb-calendar" aria-hidden="true"></i>
+      </span>
+            {{ block('form_widget_simple') }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_tareafiltertype_vencimientoInterno_right_date_widget %}
+    <div class="col-sm-6 col-md-4">
+        <h4 class="example-title">Vencimiento Interno  (hasta)</h4>
+        <div class="input-group">
+      <span class="input-group-addon">
+        <i class="icon wb-calendar" aria-hidden="true"></i>
+      </span>
+            {{ block('form_widget_simple') }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_tareafiltertype_vencimientoFiscal_left_date_widget %}
+    <div class="col-sm-6 col-md-4">
+        <h4 class="example-title">Vencimiento Fiscal (desde)</h4>
+        <div class="input-group">
+      <span class="input-group-addon">
+        <i class="icon wb-calendar" aria-hidden="true"></i>
+      </span>
+            {{ block('form_widget_simple') }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_tareafiltertype_vencimientoFiscal_right_date_widget %}
+    <div class="col-sm-6 col-md-4">
+        <h4 class="example-title">Vencimiento Fiscal  (hasta)</h4>
+        <div class="input-group">
+      <span class="input-group-addon">
+        <i class="icon wb-calendar" aria-hidden="true"></i>
+      </span>
+            {{ block('form_widget_simple') }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_tareafiltertype_tareaMetadata_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Tipo Tarea</h4>
+        <div class="form-group">
+            {{ block('choice_widget') }}
+        </div>
+    </div>
+{% endblock %}
+{% block _contadoresbundle_tareafiltertype_cliente_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Cliente</h4>
+        <div class="form-group">
+            {{ block('choice_widget') }}
+        </div>
+    </div>
+{% endblock %}
+{% block _contadoresbundle_tareafiltertype_contador_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Contador</h4>
+        <div class="form-group">
+            {{ block('choice_widget') }}
+        </div>
+    </div>
+{% endblock %}
+
+

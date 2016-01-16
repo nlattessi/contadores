@@ -1,0 +1,52 @@
+{% block _contadoresbundle_vencimientofiltertype_colaCuil_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Cola Cuil</h4>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_vencimientofiltertype_fecha_left_date_widget %}
+    <div class="col-sm-6 col-md-4">
+        <h4 class="example-title">Fecha (desde)</h4>
+        <div class="input-group">
+      <span class="input-group-addon">
+        <i class="icon wb-calendar" aria-hidden="true"></i>
+      </span>
+            {{ block('form_widget_simple') }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_vencimientofiltertype_fecha_right_date_widget %}
+    <div class="col-sm-6 col-md-4">
+        <h4 class="example-title">Fecha (hasta)</h4>
+        <div class="input-group">
+      <span class="input-group-addon">
+        <i class="icon wb-calendar" aria-hidden="true"></i>
+      </span>
+            {{ block('form_widget_simple') }}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+{% block _contadoresbundle_vencimientofiltertype_periodo_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Periodo</h4>
+        <div class="form-group">
+            {{ block('choice_widget') }}
+        </div>
+    </div>
+{% endblock %}
+{% block _contadoresbundle_vencimientofiltertype_tareaMetadata_widget %}
+    <div class="col-sm-6 col-md-6">
+        <h4 class="example-title">Tarea</h4>
+        <div class="form-group">
+            {{ block('choice_widget') }}
+        </div>
+    </div>
+{% endblock %}
+
+
+

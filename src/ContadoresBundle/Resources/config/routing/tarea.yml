@@ -32,6 +32,11 @@ tarea_periodica_create:
     defaults: { _controller: "ContadoresBundle:Tarea:createPeriodica" }
     requirements: { _method: post }
 
+tarea_realizada_create:
+    pattern:  /realizadacreate
+    defaults: { _controller: "ContadoresBundle:Tarea:createRealizada" }
+    requirements: { _method: post }
+
 tarea_edit:
     pattern:  /{id}/edit
     defaults: { _controller: "ContadoresBundle:Tarea:edit" }

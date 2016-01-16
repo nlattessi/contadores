@@ -46,6 +46,12 @@ ContadoresBundle\Entity\Cliente:
             options:
                 fixed: false
             column: CUIT
+        activo:
+            type: boolean
+            nullable: true
+            options:
+                default: '1'
+            column: activo
     oneToMany:
         tareas:
             targetEntity: Tarea

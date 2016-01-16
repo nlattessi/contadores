@@ -1,4 +1,5 @@
 {% extends 'ContadoresBundle:Layout:layout.html.twig' %}
+{% form_theme filterForm 'ContadoresBundle:Contador:fieldsFilter.html.twig' %}
 
 {% block encabezado %}
     Ver contadores
@@ -29,27 +30,29 @@
     <div class="span12">
         <div id="filters" class="collapse">
 
-            <form class="well" action="{{ path('vencimiento') }}" method="get" {{ form_enctype(filterForm) }}>
                 <form class="well" action="{{ path('contador') }}" method="get" {{ form_enctype(filterForm) }}>
-                    {{ form_row(filterForm.id) }}
-                    {{ form_row(filterForm.nombre) }}
-                    {{ form_row(filterForm.apellido) }}
-                    {{ form_row(filterForm.celular) }}
-                    {{ form_row(filterForm.mail) }}
-                    {{ form_row(filterForm.telefono) }}
-                    {{ form_rest(filterForm) }}
+                    <div class="row">
+                        {{ form_widget(filterForm.nombre) }}
+                        {{ form_widget(filterForm.apellido) }}
+                    </div>
+                    <div class="row">
+                        {{ form_widget(filterForm.area) }}
+                        {{ form_widget(filterForm.mail) }}
+                    </div>
+                    <div class="row">
+                        {{ form_widget(filterForm.celular) }}
+                        {{ form_widget(filterForm.telefono) }}
+                    </div>
 
-                    <p>
-                        <button type="submit" name="filter_action" value="filter">{{ 'views.index.filter'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-                        <button type="submit" name="filter_action" value="reset">{{ 'views.index.reset'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-                    </p>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4 margin-top-20">
+                            {{ form_row(filterForm._token) }}
+                            <button type="submit" name="filter_action" class="btn btn-outline btn-default" value="reset">{{ 'views.index.reset'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+                            <button type="submit" name="filter_action" class="btn btn-success"  value="filter">{{ 'views.index.filter'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+                        </div>
+                    </div>
                 </form>
 
-                <p>
-                    <button type="submit" name="filter_action" value="filter">{{ 'views.index.filter'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-                    <button type="submit" name="filter_action" value="reset">{{ 'views.index.reset'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-                </p>
-            </form>
         </div>
     </div>
 {% endblock %}
@@ -69,6 +72,7 @@
             <th>Celular</th>
             <th>Mail</th>
             <th>Telefono</th>
+            <th>Area</th>
             <th>{{ 'views.index.actions'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</th>
         </tr>
     </thead>
@@ -81,6 +85,7 @@
             <td>{{ entity.celular }}</td>
             <td>{{ entity.mail }}</td>
             <td>{{ entity.telefono }}</td>
+            <td>{{ entity.area }}</td>
             <td>
         <a class="btn btn-mini" href="{{ path('contador_show', { 'id': entity.id }) }}">
             <i class="icon wb-eye" aria-hidden="true"></i>

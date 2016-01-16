@@ -17,6 +17,7 @@ use Doctrine\ORM\EntityManager;
 class VencimientoService {
 
     protected $em;
+    static $nproximos = 3;
 
     public function __construct(EntityManager $entityManager)
     {
@@ -44,6 +45,23 @@ class VencimientoService {
             ->setParameter(2, substr($cliente->getCuit(),-1));
 
         $vencimiento = $queryBuilder->getQuery()->getSingleResult();
+
+        return $vencimiento;
+    }
+
+    public function obtenerProximosVencimientos(){
+        return $this->obtenerNProximosVencimientos($this::$nproximos);
+    }
+
+    public function obtenerNProximosVencimientos($i){
+
+        $queryBuilder = $this->em->getRepository('ContadoresBundle:Vencimiento')->createQueryBuilder('v')
+            ->where('v.fecha > ?1')
+            ->setParameter(1, new \DateTime('now'))
+        ->orderBy('v.fecha')
+        ->setMaxResults($i);
+
+        $vencimiento = $queryBuilder->getQuery()->getResult();
 
         return $vencimiento;
     }

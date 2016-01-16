@@ -44,7 +44,9 @@ class TareaMetadataController extends Controller
     {
         $request = $this->getRequest();
         $session = $request->getSession();
-        $filterForm = $this->createForm(new TareaMetadataFilterType());
+
+        $filtroService =  $this->get('contadores.servicios.filtro');
+        $filterForm = $this->createForm(new TareaMetadataFilterType($filtroService));
         $em = $this->getDoctrine()->getManager();
         $queryBuilder = $em->getRepository('ContadoresBundle:TareaMetadata')->createQueryBuilder('e');
 
@@ -69,7 +71,9 @@ class TareaMetadataController extends Controller
             // Get filter from session
             if ($session->has('TareaMetadataControllerFilter')) {
                 $filterData = $session->get('TareaMetadataControllerFilter');
-                $filterForm = $this->createForm(new TareaMetadataFilterType(), $filterData);
+
+                $filtroService =  $this->get('contadores.servicios.filtro');
+                $filterForm = $this->createForm(new TareaMetadataFilterType($filtroService), $filterData);
                 $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
             }
         }
