@@ -2,10 +2,10 @@ ContadoresBundle\Entity\ArchivoTarea:
     type: entity
     table: archivo_tarea
     indexes:
-        fk_archivo_tarea_idx:
+        fk_archivo_tarea_archivo_idx:
             columns:
                 - archivo_id
-        fk_tarea_archivo_idx:
+        fk_archivo_tarea_archivo_tarea_idx:
             columns:
                 - tarea_id
     id:
@@ -17,23 +17,31 @@ ContadoresBundle\Entity\ArchivoTarea:
             id: true
             generator:
                 strategy: IDENTITY
+    fields:
+        creationTime:
+            type: datetime
+            nullable: false
+        updateTime:
+            type: datetime
+            nullable: false
     manyToOne:
         archivo:
             targetEntity: Archivo
-            cascade: {  }
+            cascade: [ remove ]
             fetch: LAZY
             mappedBy: null
             inversedBy: null
             joinColumns:
                 archivo_id:
                     referencedColumnName: id
+                    onDelete: CASCADE
             orphanRemoval: false
         tarea:
             targetEntity: Tarea
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: null
+            inversedBy: archivos
             joinColumns:
                 tarea_id:
                     referencedColumnName: id

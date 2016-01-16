@@ -16,7 +16,7 @@
 </div>
 
 <div class="panel-body container-fluid">
-<form action="{{ path('tarea_create') }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('tarea_create') }}" method="post" enctype="multipart/form-data">
     <div class="row ">
         <div class="row">
             {{ form_widget(form.cliente, {'attr': {'class': 'form-control'}}) }}
@@ -29,14 +29,14 @@
         <div class="row">
             {{ form_widget(form.tiempoEstimado, {'attr': {'class': 'form-control'}}) }}
             <div class="col-sm-6 col-md-6 margin-top-30">
-                <h4 class="example-title">Cargar Archivo</h4>
+                <h4 class="example-title">Cargar Archivos</h4>
 
                 <div class="input-group input-group-file">
-                    <input type="text" class="form-control" readonly="">
+                    <input type="text" class="form-control" readonly="" id="archivoName">
                     <span class="input-group-btn">
                       <span class="btn btn-outline btn-file">
                         <i class="icon wb-upload" aria-hidden="true"></i>
-                        <input type="file" name="archivo" multiple="">
+                        <input type="file" name="archivos[]" multiple="multiple" id="archivos">
                       </span>
                     </span>
                 </div>
@@ -63,4 +63,17 @@
 </form>
 </div>
 
+{% endblock %}
+
+{% block javascript %}
+<script>
+$('#archivos').change(function() {
+  var files = $(this)[0].files;
+  var txt = files[0].name;
+  for (var i = 1; i < files.length; i++) {
+    txt += '; ' + files[i].name;
+  }
+  $('#archivoName').val(txt);
+});
+</script>
 {% endblock %}

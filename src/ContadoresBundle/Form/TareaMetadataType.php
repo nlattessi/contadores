@@ -14,6 +14,13 @@ class TareaMetadataType extends AbstractType
             ->add('nombre')
             ->add('rubro')
             ->add('esperiodica', 'checkbox', array('required' => false, 'label' => 'Es periódica'))
+
+            ->add('attachment', 'file', [
+                'label' => 'Cargar Archivos',
+                'required' => false,
+                'mapped' => false,
+                'multiple' => true
+            ])
         ;
     }
 

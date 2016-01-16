@@ -128,6 +128,18 @@ class ClienteController extends Controller
             $entity->getUsuario()->setEntidadId($entity->getId());
             $em->persist($entity->getUsuario());
             $em->flush();
+
+            if (isset($request->files->get('archivos')[0])) {
+                $archivoService = $this->get('contadores.servicios.archivo');
+                foreach ($request->files->get('archivos') as $archivo) {
+                    $archivoService->createArchivoCliente(
+                        $archivo,
+                        $this->getUser(),
+                        $entity
+                    );
+                }
+            }
+
             $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
 
             return $this->redirect($this->generateUrl('cliente_show', array('id' => $entity->getId())));
@@ -224,6 +236,17 @@ class ClienteController extends Controller
             $entity->getUsuario()->setEntidadId($entity->getId());
             $em->persist($entity->getUsuario());
             $em->flush();
+
+            if (isset($editForm['attachment']->getData()[0])) {
+                $archivoService = $this->get('contadores.servicios.archivo');
+                foreach ($editForm['attachment']->getData() as $archivo) {
+                    $archivoService->createArchivoCliente(
+                        $archivo,
+                        $this->getUser(),
+                        $entity
+                    );
+                }
+            }
 
             $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
 

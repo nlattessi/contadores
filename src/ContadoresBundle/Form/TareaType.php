@@ -47,6 +47,14 @@ class TareaType extends AbstractType
                 'choices' => $this->tareaService->obtenerTareaMetadataHabilitada($usuario, $periodica)
             ])
             ->add('tiempoEstimado')
+
+            ->add('attachment', 'file', [
+                'label' => 'Cargar Archivos',
+                'required' => false,
+                'mapped' => false,
+                'multiple' => true
+            ])
+
             ->add('reset', 'reset', ['label' => 'Limpiar '])
         ;
         if($periodica){

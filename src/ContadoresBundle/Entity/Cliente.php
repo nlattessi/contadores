@@ -49,6 +49,8 @@ class Cliente
      */
     private $tareas;
 
+    private $archivos;
+
     /**
      * @var boolean
      */
@@ -57,6 +59,7 @@ class Cliente
     public function __construct()
     {
         $this->tareas = new ArrayCollection();
+        $this->archivos = new ArrayCollection();
     }
 
     /**
@@ -244,6 +247,8 @@ class Cliente
     {
         $this->activo = $activo;
     }
+
+
 
     function __toString()
     {
