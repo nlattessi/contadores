@@ -37,10 +37,10 @@ UNLOCK TABLES;
 -- Dumping data for table `archivo_metadata`
 --
 
-LOCK TABLES `archivo_metadata` WRITE;
-/*!40000 ALTER TABLE `archivo_metadata` DISABLE KEYS */;
-/*!40000 ALTER TABLE `archivo_metadata` ENABLE KEYS */;
-UNLOCK TABLES;
+-- LOCK TABLES `archivo_metadata` WRITE;
+-- /*!40000 ALTER TABLE `archivo_metadata` DISABLE KEYS */;
+-- /*!40000 ALTER TABLE `archivo_metadata` ENABLE KEYS */;
+-- UNLOCK TABLES;
 
 --
 -- Dumping data for table `archivo_tarea`
