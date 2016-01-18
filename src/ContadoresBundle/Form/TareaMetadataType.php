@@ -13,7 +13,8 @@ class TareaMetadataType extends AbstractType
         $builder
             ->add('nombre')
             ->add('rubro')
-            ->add('esperiodica', 'checkbox', array('required' => false, 'label' => 'Es periódica'))
+            ->add('esPeriodica', 'choice', ['choices' => [1 => 'Si', 0 => 'No'], 'label' => '¿Es Periódica? '])
+            ->add('reset', 'reset', ['label' => 'Limpiar '])
 
             ->add('attachment', 'file', [
                 'label' => 'Cargar Archivos',

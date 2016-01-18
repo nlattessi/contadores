@@ -61,10 +61,13 @@
     <tr class="gradeA">
         <td><b>Contador</b></td>
         <td>
+            {% if entity.contador%}
             <a href="{{ path('contador_show', { 'id': entity.contador.id }) }}" >
                 <b> {{ entity.contador }}</b>
             </a>
-
+            {% else %}
+            <i>Sin contador asignado</i>
+            {% endif %}
         </td>
     </tr>
     <tr class="gradeA">
@@ -80,6 +83,41 @@
 
     </tbody>
 </table>
+        <h4>Finalizar Tarea</h4>
+        <form  action="{{ path('tarea_finalizar', { 'id': entity.id }) }}" method="post" >
+            <input type="hidden" name="finalizada" value="true">
+            <div class="row ">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 margin-top-30">
+                        <h4 class="example-title">Fecha Realización</h4>
+                        <div class="input-group">
+                              <span class="input-group-addon">
+                                <i class="icon wb-calendar" aria-hidden="true"></i>
+                              </span>
+                            <input type="text" id="contadoresbundle_tarea_fechaFin" name="fechaFin" required="required"
+                                   class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-autoclose="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 margin-top-30">
+                        <h4 class="example-title">Tiempo real (en minutos)</h4>
+                        <input type="number" class="form-control" id="tiempoReal" name="tiempoReal">
+                    </div>
+                    <div class="col-sm-6 col-md-6 margin-top-30 ">
+                        <h4 class="example-title">Observaciones</h4>
+                        <textarea class="form-control" id="textareaDefault" rows="3" name="observaciones"></textarea>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 margin-top-20">
+                    <button type="submit" class="btn btn btn-success">Finalizar</button>
+                </div>
+            </div>
+        </form>
+
 
 <form action="{{ path('tarea_show', {id: entity.id}) }}" method="post" enctype="multipart/form-data">
 <div class="row">

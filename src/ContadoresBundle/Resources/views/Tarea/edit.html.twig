@@ -15,11 +15,45 @@
 
 <form class="well" action="{{ path('tarea_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     <input type="hidden" name="_method" value="PUT" />
+    <div class="row ">
+        <div class="row">
+            {{ form_widget(edit_form.cliente, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(edit_form.tareaMetadata, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="row">
+            {{ form_widget(edit_form.contador, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(edit_form.vencimientoInterno, {'attr': {'class': 'form-control', 'data-provide': 'datepicker', 'data-date-format': 'dd/mm/yyyy', 'data-date-autoclose': 'true'}}) }}
+        </div>
+        <div class="row">
+            {{ form_widget(edit_form.tiempoEstimado, {'attr': {'class': 'form-control'}}) }}
+            <div class="col-sm-6 col-md-6 margin-top-30">
+                <h4 class="example-title">Cargar Archivos</h4>
 
-    {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit" class="btn btn-success">{{ 'views.edit.editbutton'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-    </p>
+                <div class="input-group input-group-file">
+                    <input type="text" class="form-control" readonly="" id="archivoName">
+                    <span class="input-group-btn">
+                      <span class="btn btn-outline btn-file">
+                        <i class="icon wb-upload" aria-hidden="true"></i>
+                        <input type="file" name="archivos[]" multiple="multiple" id="archivos">
+                      </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-6 margin-top-30 ">
+                <h4 class="example-title">Observaciones</h4>
+                <textarea class="form-control" id="textareaDefault" rows="3" name="observaciones"></textarea>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 margin-top-20">
+            <button type="submit" class="btn btn btn-success">Editar</button>
+        </div>
+    </div>
+    {{ form_widget(edit_form._token) }}
 </form>
 
 <div class="dt-panelfooter clearfix">

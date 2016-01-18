@@ -50,4 +50,8 @@
 {% endblock %}
 {% block javascript %}
     <script src="{{ asset('bundles/contadores/assets/js/vencimientoForm.js') }}"></script>
+    <script>
+    {% set var = entity.fecha|date('d/m/Y') %}
+    $('#contadoresbundle_vencimiento_fecha').val('{{ var }}');
+    </script>
 {% endblock %}
