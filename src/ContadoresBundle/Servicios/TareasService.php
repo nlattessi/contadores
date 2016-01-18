@@ -133,6 +133,11 @@ class TareasService {
     {
         return $this->crearEstadoTarea($tarea, $this::$tipoEstadoNuevo, $tiempo);
     }
+    public function finalizarTareaConFecha($tarea,  $tiempo, $fechaFin){
+        $this->finalizarTarea($tarea,  $tiempo);
+        $tarea->setFechaFin($fechaFin);
+        return $tarea;
+    }
 
     public function finalizarTarea($tarea,  $tiempo){
         $this->cambiarEstadoTarea($tarea, $this->crearEstadoTareaFinalizado($tarea,  $tiempo));

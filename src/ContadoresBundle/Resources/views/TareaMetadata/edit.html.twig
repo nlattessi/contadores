@@ -1,58 +1,92 @@
 {% extends 'ContadoresBundle:Layout:layout.html.twig' %}
+{% form_theme edit_form 'ContadoresBundle:TareaMetadata:fields.html.twig' %}
 
 {% block title %}
-{{ parent() }} -  {{ 'views.edit.edit'|trans({'%entity%': 'TareaMetadata'}, 'JordiLlonchCrudGeneratorBundle') }}
+    Editar Tarea
 {% endblock %}
 
 {% block menu %}
-{{ include('ContadoresBundle:NavBars:navbar.html.twig') }}
+    {{ include('ContadoresBundle:NavBars:navbar.html.twig') }}
 {% endblock %}
 
 {% block page %}
 
 <h1>{{ 'views.edit.edit'|trans({'%entity%': 'TareaMetadata'}, 'JordiLlonchCrudGeneratorBundle') }}</h1>
 
-<form class="well" action="{{ path('tareametadata_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    <input type="hidden" name="_method" value="PUT" />
-    {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit" class="btn btn-success">{{ 'views.edit.editbutton'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-    </p>
-</form>
 
-<div class="dt-panelfooter clearfix">
-  <div class="row">
-    <div class="panel">
-      <div class="panel-body">
-        <h5>Archivos</h5>
-        {% if entity.archivos|length > 0 %}
-        <table class="table table-bordered table-hover table-striped" id="archivos">
-          <tbody>
-            {% for archivoTareaMetadata in entity.archivos %}
-              <tr class="gradeA">
-                <td><b>{{ archivoTareaMetadata.archivo.nombre}}</b></td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        {% endif %}
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <div>
+
     <div class="float-left">
-        <a class="btn" href="{{ path('tareametadata') }}">
-            {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>
-    </div>
-    <div class="float-left">
-        <form action="{{ path('tareametadata_delete', { 'id': entity.id }) }}" method="post">
+        <form class="well" action="{{ path('tareametadata_delete', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form)}}>
             <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit" onclick="return confirm('{{ 'views.recordactions.confirm'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}');">{{ 'views.recordactions.delete'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+            <div class="row ">
+                <div class="row">
+                    {{ form_widget(edit_form.nombre, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(edit_form.rubro, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="row">
+                    {{ form_widget(edit_form.esPeriodica, {'attr': {'class': 'form-control'}}) }}
+                    <div class="col-sm-6 col-md-6 ">
+                        <h4 class="example-title">Cargar Archivos</h4>
+
+                        <div class="input-group input-group-file">
+                            <input type="text" class="form-control" readonly="" id="archivoName">
+                    <span class="input-group-btn">
+                      <span class="btn btn-outline btn-file">
+                        <i class="icon wb-upload" aria-hidden="true"></i>
+                        <input type="file" name="archivos[]" multiple="multiple" id="archivos">
+                      </span>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 margin-top-20">
+                    {{ form_widget(edit_form._token) }}
+                    <button type="submit" class="btn btn btn-success">Editar</button>
+                </div>
+            </div>
         </form>
+        <div class="dt-panelfooter clearfix">
+            <div class="row">
+                <div class="panel">
+                    <div class="panel-body">
+                        <h5>Archivos</h5>
+                        {% if entity.archivos|length > 0 %}
+                            <table class="table table-bordered table-hover table-striped" id="archivos">
+                                <tbody>
+                                {% for archivoTareaMetadata in entity.archivos %}
+                                    <tr class="gradeA">
+                                        <td><b>{{ archivoTareaMetadata.archivo.nombre}}</b></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="float-left">
+            <a class="btn" href="{{ path('tareametadata') }}">
+                {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+            </a>
+        </div>
     </div>
 </div>
+{% endblock %}
+{% block javascript %}
+    <script>
+        $('#archivos').change(function() {
+            var files = $(this)[0].files;
+            var txt = files[0].name;
+            for (var i = 1; i < files.length; i++) {
+                txt += '; ' + files[i].name;
+            }
+            $('#archivoName').val(txt);
+        });
+    </script>
 {% endblock %}

@@ -19,7 +19,7 @@ tarea_realizada:
     defaults: { _controller: "ContadoresBundle:Tarea:realizada" }
 
 tarea_finalizar:
-    pattern:  /finalizar
+    pattern:  /{id}/finalizar
     defaults: { _controller: "ContadoresBundle:Tarea:finalizar" }
 
 tarea_create:

@@ -1,4 +1,5 @@
 {% extends 'ContadoresBundle:Layout:layout.html.twig' %}
+{% form_theme form 'ContadoresBundle:TareaMetadata:fields.html.twig' %}
 
 {% block title %}
 {{ parent() }} - {{ 'views.new.creation'|trans({'%entity%': 'TareaMetadata'}, 'JordiLlonchCrudGeneratorBundle') }}
@@ -13,10 +14,35 @@
 <h1>{{ 'views.new.creation'|trans({'%entity%': 'TareaMetadata'}, 'JordiLlonchCrudGeneratorBundle') }}</h1>
 
 <form class="well" action="{{ path('tareametadata_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit" class="btn btn-success">{{ 'views.new.create'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-    </p>
+    <div class="row ">
+        <div class="row">
+            {{ form_widget(form.nombre, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(form.rubro, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="row">
+            {{ form_widget(form.esPeriodica, {'attr': {'class': 'form-control'}}) }}
+            <div class="col-sm-6 col-md-6 ">
+                <h4 class="example-title">Cargar Archivos</h4>
+
+                <div class="input-group input-group-file">
+                    <input type="text" class="form-control" readonly="" id="archivoName">
+                    <span class="input-group-btn">
+                      <span class="btn btn-outline btn-file">
+                        <i class="icon wb-upload" aria-hidden="true"></i>
+                        <input type="file" name="archivos[]" multiple="multiple" id="archivos">
+                      </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 margin-top-20">
+            {{ form_widget(form._token) }}
+            <button type="submit" class="btn btn btn-success">Crear</button>
+            {{ form_widget(form.reset, {'attr': {'class': 'btn btn-outline btn-default'}}) }}
+        </div>
+    </div>
 </form>
 
 <div>
@@ -26,4 +52,16 @@
         </a>
     </div>
 </div>
+{% endblock %}
+{% block javascript %}
+    <script>
+        $('#archivos').change(function() {
+            var files = $(this)[0].files;
+            var txt = files[0].name;
+            for (var i = 1; i < files.length; i++) {
+                txt += '; ' + files[i].name;
+            }
+            $('#archivoName').val(txt);
+        });
+    </script>
 {% endblock %}

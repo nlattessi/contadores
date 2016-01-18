@@ -4,6 +4,7 @@ namespace ContadoresBundle\Controller;
 
 use ContadoresBundle\Entity\Observacion;
 use ContadoresBundle\Entity\Rol;
+use ContadoresBundle\Utils\Herramientas;
 use ContadoresBundle\Utils\TwitterBootstrapViewCustom;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -423,6 +424,32 @@ class TareaController extends Controller
         ));
     }
 
+    public function finalizarAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('ContadoresBundle:Tarea')->find($id);
+        $tareasService =  $this->get('contadores.servicios.tareas');
+        $tiempo = $request->request->get('tiempoReal');
+        $fecha = $request->request->get('fechaFin');
+        $fecha = Herramientas::textoADatetime($fecha);
+
+        $tareasService->finalizarTareaConFecha($entity,$tiempo,$fecha);
+
+        $observaciones = $request->get('observaciones');
+        if($observaciones){
+            $observacion = new Observacion($this->getUser(),$entity,$observaciones);
+            $em->persist($observacion);
+            $em->flush();
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+
+        return $this->render('ContadoresBundle:Tarea:show.html.twig', array(
+            'entity'      => $this->mostrar($id),
+            'delete_form' => $deleteForm->createView(),        ));
+    }
+
     /**
      * Finds and displays a Tarea entity.
      *
@@ -495,7 +522,7 @@ class TareaController extends Controller
         $vencimientoService =  $this->get('contadores.servicios.vencimiento');
         $editForm   = $this->createForm(new TareaType($tareasService,$vencimientoService), $entity, array(
             'user' => $this->getUser(),
-            'periodica' => false
+            'periodica' => $entity->getTareaMetadata()->getEsperiodica()
         ));
 
         $deleteForm = $this->createDeleteForm($id);

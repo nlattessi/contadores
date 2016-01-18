@@ -1,0 +1,24 @@
+
+{% block _contadoresbundle_tareametadata_nombre_widget %}
+  <div class="col-sm-6 col-md-6">
+    <h4 class="example-title">Nombre</h4>
+    {{ block('form_widget_simple') }}
+  </div>
+{% endblock %}
+
+{% block _contadoresbundle_tareametadata_rubro_widget %}
+    <div class="col-sm-6 col-md-6 ">
+        <h4 class="example-title">Rubro</h4>
+        <div class="form-group">
+            {{ block('choice_widget') }}
+        </div>
+    </div>
+{% endblock %}
+{% block _contadoresbundle_tareametadata_esPeriodica_widget %}
+    <div class="col-sm-6 col-md-6 ">
+        <h4 class="example-title">¿Es periódica?</h4>
+        <div class="form-group">
+            {{ block('choice_widget') }}
+        </div>
+    </div>
+{% endblock %}

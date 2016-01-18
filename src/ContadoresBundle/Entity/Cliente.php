@@ -248,7 +248,21 @@ class Cliente
         $this->activo = $activo;
     }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getArchivos()
+    {
+        return $this->archivos;
+    }
 
+    /**
+     * @param ArrayCollection $archivos
+     */
+    public function setArchivos($archivos)
+    {
+        $this->archivos = $archivos;
+    }
 
     function __toString()
     {
