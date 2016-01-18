@@ -13,7 +13,7 @@
 
 <h1>{{ 'views.edit.edit'|trans({'%entity%': 'Cliente'}, 'JordiLlonchCrudGeneratorBundle') }}</h1>
 
-<form class="well" action="{{ path('cliente_update', { 'id': entity.id }) }}" method="post" enctype="multipart/form-data"}}>
+<form class="well" action="{{ path('cliente_update', { 'id': entity.id }) }}" method="post" enctype="multipart/form-data">
     <input type="hidden" name="_method" value="PUT" />
     <div class="row ">
         <div class="row">
@@ -53,12 +53,12 @@
     </div>
 </form>
 
+{% if entity.archivos|length > 0 %}
 <div class="dt-panelfooter clearfix">
   <div class="row">
     <div class="panel">
       <div class="panel-body">
         <h5>Archivos</h5>
-        {% if entity.archivos|length > 0 %}
         <table class="table table-bordered table-hover table-striped" id="archivos">
           <tbody>
             {% for archivoCliente in entity.archivos %}
@@ -68,11 +68,11 @@
             {% endfor %}
           </tbody>
         </table>
-        {% endif %}
       </div>
     </div>
   </div>
 </div>
+{% endif %}
 
 <div>
     <div class="float-left">

@@ -13,7 +13,7 @@
 
 <h1>{{ 'views.new.creation'|trans({'%entity%': 'TareaMetadata'}, 'JordiLlonchCrudGeneratorBundle') }}</h1>
 
-<form class="well" action="{{ path('tareametadata_create') }}" method="post" {{ form_enctype(form) }}>
+<form class="well" action="{{ path('tareametadata_create') }}" method="post" enctype="multipart/form-data">
     <div class="row ">
         <div class="row">
             {{ form_widget(form.nombre, {'attr': {'class': 'form-control'}}) }}

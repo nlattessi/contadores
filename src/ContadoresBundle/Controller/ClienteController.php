@@ -237,9 +237,9 @@ class ClienteController extends Controller
             $em->persist($entity->getUsuario());
             $em->flush();
 
-            if (isset($editForm['attachment']->getData()[0])) {
+            if (isset($request->files->get('archivos')[0])) {
                 $archivoService = $this->get('contadores.servicios.archivo');
-                foreach ($editForm['attachment']->getData() as $archivo) {
+                foreach ($request->files->get('archivos') as $archivo) {
                     $archivoService->createArchivoCliente(
                         $archivo,
                         $this->getUser(),

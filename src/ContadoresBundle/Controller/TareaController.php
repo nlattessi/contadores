@@ -567,9 +567,9 @@ class TareaController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            if (isset($editForm['attachment']->getData()[0])) {
+            if (isset($request->files->get('archivos')[0])) {
                 $archivoService = $this->get('contadores.servicios.archivo');
-                foreach ($editForm['attachment']->getData() as $archivo) {
+                foreach ($request->files->get('archivos') as $archivo) {
                     $archivoService->createArchivoTarea(
                         $archivo,
                         $this->getUser(),

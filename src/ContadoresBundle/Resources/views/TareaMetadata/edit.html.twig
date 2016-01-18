@@ -19,8 +19,8 @@
 <div>
 
     <div class="float-left">
-        <form class="well" action="{{ path('tareametadata_delete', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form)}}>
-            <input type="hidden" name="_method" value="DELETE" />
+        <form class="well" action="{{ path('tareametadata_update', { 'id': entity.id }) }}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="PUT" />
             <div class="row ">
                 <div class="row">
                     {{ form_widget(edit_form.nombre, {'attr': {'class': 'form-control'}}) }}
@@ -50,12 +50,12 @@
                 </div>
             </div>
         </form>
+        {% if entity.archivos|length > 0 %}
         <div class="dt-panelfooter clearfix">
             <div class="row">
                 <div class="panel">
                     <div class="panel-body">
                         <h5>Archivos</h5>
-                        {% if entity.archivos|length > 0 %}
                             <table class="table table-bordered table-hover table-striped" id="archivos">
                                 <tbody>
                                 {% for archivoTareaMetadata in entity.archivos %}
@@ -65,11 +65,11 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
-                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
+        {% endif %}
         <div class="float-left">
             <a class="btn" href="{{ path('tareametadata') }}">
                 {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
