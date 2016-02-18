@@ -83,6 +83,7 @@
 
     </tbody>
 </table>
+    {% if not entity.fechaFin %}
         <h4>Finalizar Tarea</h4>
         <form  action="{{ path('tarea_finalizar', { 'id': entity.id }) }}" method="post" >
             <input type="hidden" name="finalizada" value="true">
@@ -117,6 +118,8 @@
                 </div>
             </div>
         </form>
+    {% endif %}
+
 
 
 <form action="{{ path('tarea_show', {id: entity.id}) }}" method="post" enctype="multipart/form-data">
