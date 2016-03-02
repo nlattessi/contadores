@@ -60,6 +60,12 @@ ContadoresBundle\Entity\Tarea:
             type: date
             nullable: true
             column: fecha_baja
+        activo:
+            type: boolean
+            nullable: true
+            options:
+                default: '1'
+            column: activo
     oneToMany:
         observaciones:
             targetEntity: Observacion

@@ -84,6 +84,8 @@ class Tarea
 
     private $archivos;
 
+    private $activo = true;
+
 
     public function __construct()
     {
@@ -453,5 +455,21 @@ class Tarea
     public function setArchivos($archivos)
     {
         $this->archivos = $archivos;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isActivo()
+    {
+        return $this->activo;
+    }
+
+    /**
+     * @param boolean $activo
+     */
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
     }
 }

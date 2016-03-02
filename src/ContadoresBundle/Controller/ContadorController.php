@@ -52,6 +52,12 @@ class ContadorController extends Controller
         $em = $this->getDoctrine()->getManager();
         $queryBuilder = $em->getRepository('ContadoresBundle:Contador')->createQueryBuilder('e');
 
+        // Solo entidades activas
+        $queryBuilder = $em->getRepository('ContadoresBundle:Contador')->createQueryBuilder('d')
+            ->andWhere('d.activo = ?1')
+            ->setParameter(1, true)
+        ;
+
         // Reset filter
         if ($request->get('filter_action') == 'reset') {
             $session->remove('ContadorControllerFilter');
@@ -325,5 +331,23 @@ class ContadorController extends Controller
             'tareas' => $tareas,
             'filterForm'=> $filterForm->createView()
         ));
+    }
+
+    public function darDeBajaAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('ContadoresBundle:Contador')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Contador entity.');
+        }
+
+        $bajaAdministrativaService = $this->get('contadores.servicios.bajaAdministrativa');
+        $bajaAdministrativaService->darDeBaja($entity);
+
+        $this->get('session')->getFlashBag()->add('success', 'Se realizó la baja administrativa.');
+
+        return $this->redirect($this->generateUrl('contador'));
     }
 }

@@ -287,5 +287,21 @@ class UsuarioController extends Controller
             ->getForm()
         ;
     }
+    public function darDeBajaAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
 
+        $entity = $em->getRepository('ContadoresBundle:Usuario')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Usuario entity.');
+        }
+
+        $bajaAdministrativaService = $this->get('contadores.servicios.bajaAdministrativa');
+        $bajaAdministrativaService->darDeBaja($entity);
+
+        $this->get('session')->getFlashBag()->add('success', 'Se realizó la baja administrativa.');
+
+        return $this->redirect($this->generateUrl('usuario'));
+    }
 }

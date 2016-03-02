@@ -29,3 +29,7 @@ usuario_delete:
     defaults: { _controller: "ContadoresBundle:Usuario:delete" }
     requirements: { _method: post|delete }
 
+usuario_dar_de_baja:
+    pattern:  /{id}/dar_de_baja
+    defaults: { _controller: "ContadoresBundle:Usuario:darDeBaja" }
+    requirements: { _method: post|delete }
