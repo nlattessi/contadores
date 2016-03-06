@@ -38,6 +38,9 @@ ContadoresBundle\Entity\TareaMetadata:
             targetEntity: ArchivoTareaMetadata
             mappedBy: tareaMetadata
             orderBy: { 'updateTime': 'DESC'}
+        tareas:
+          targetEntity: Tarea
+          mappedBy: tareaMetadata
     manyToOne:
         rubro:
             targetEntity: Rubro

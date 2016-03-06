@@ -337,14 +337,19 @@ class ContadorController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ContadoresBundle:Contador')->find($id);
+        $contador = $em->getRepository('ContadoresBundle:Contador')->find($id);
 
-        if (!$entity) {
+        if (!$contador) {
             throw $this->createNotFoundException('Unable to find Contador entity.');
         }
 
+        if (count($contador->getTareas()) > 0) {
+            $this->get('session')->getFlashBag()->add('error', 'No se puede dar de baja ya que existen tareas activas.');
+            return $this->redirect($this->generateUrl('contador_show', ['id' => $contador->getId()]));
+        }
+
         $bajaAdministrativaService = $this->get('contadores.servicios.bajaAdministrativa');
-        $bajaAdministrativaService->darDeBaja($entity);
+        $bajaAdministrativaService->darDeBaja($contador);
 
         $this->get('session')->getFlashBag()->add('success', 'Se realizó la baja administrativa.');
 

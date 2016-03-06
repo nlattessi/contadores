@@ -110,7 +110,7 @@ ContadoresBundle\Entity\Tarea:
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: null
+            inversedBy: tareas
             joinColumns:
                 tarea_metadata_id:
                     referencedColumnName: id

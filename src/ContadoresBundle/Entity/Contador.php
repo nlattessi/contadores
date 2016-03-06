@@ -292,7 +292,9 @@ class Contador
      */
     public function getTareas()
     {
-        return $this->tareas;
+        return $this->tareas->filter(function($tarea) {
+          return $tarea->isActivo() == true;
+        });
     }
 
     /**

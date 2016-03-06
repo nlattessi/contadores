@@ -35,10 +35,13 @@ class TareaMetadata
 
     private $archivos;
 
+    private $tareas;
+
 
     public function __construct()
     {
         $this->archivos = new ArrayCollection();
+        $this->tareas = new ArrayCollection();
     }
 
     /**
@@ -158,5 +161,23 @@ class TareaMetadata
     public function setArchivos($archivos)
     {
         $this->archivos = $archivos;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTareas()
+    {
+        return $this->tareas->filter(function($tarea) {
+          return $tarea->isActivo() == true;
+        });
+    }
+
+    /**
+     * @param ArrayCollection $tareas
+     */
+    public function setTareas($tareas)
+    {
+        $this->tareas = $tareas;
     }
 }

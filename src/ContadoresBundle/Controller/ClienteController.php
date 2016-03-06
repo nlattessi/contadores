@@ -356,14 +356,19 @@ class ClienteController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ContadoresBundle:Cliente')->find($id);
+        $cliente = $em->getRepository('ContadoresBundle:Cliente')->find($id);
 
-        if (!$entity) {
+        if (!$cliente) {
             throw $this->createNotFoundException('Unable to find Cliente entity.');
         }
 
+        if (count($cliente->getTareas()) > 0) {
+            $this->get('session')->getFlashBag()->add('error', 'No se puede dar de baja ya que existen tareas activas.');
+            return $this->redirect($this->generateUrl('cliente_show', ['id' => $cliente->getId()]));
+        }
+
         $bajaAdministrativaService = $this->get('contadores.servicios.bajaAdministrativa');
-        $bajaAdministrativaService->darDeBaja($entity);
+        $bajaAdministrativaService->darDeBaja($cliente);
 
         $this->get('session')->getFlashBag()->add('success', 'Se realizó la baja administrativa.');
 
