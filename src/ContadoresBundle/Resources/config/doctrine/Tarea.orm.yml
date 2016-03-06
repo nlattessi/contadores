@@ -60,6 +60,12 @@ ContadoresBundle\Entity\Tarea:
             type: date
             nullable: true
             column: fecha_baja
+        activo:
+            type: boolean
+            nullable: true
+            options:
+                default: '1'
+            column: activo
     oneToMany:
         observaciones:
             targetEntity: Observacion
@@ -104,7 +110,7 @@ ContadoresBundle\Entity\Tarea:
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: null
+            inversedBy: tareas
             joinColumns:
                 tarea_metadata_id:
                     referencedColumnName: id

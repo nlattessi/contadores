@@ -28,3 +28,8 @@ tareametadata_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "ContadoresBundle:TareaMetadata:delete" }
     requirements: { _method: post|delete }
+
+tareametadata_dar_de_baja:
+    pattern:  /{id}/dar_de_baja
+    defaults: { _controller: "ContadoresBundle:TareaMetadata:darDeBaja" }
+    requirements: { _method: post|delete }

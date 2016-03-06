@@ -36,3 +36,8 @@ contador_tareas:
 contador_pendientes:
     pattern:  /pendientes
     defaults: { _controller: "ContadoresBundle:Contador:tareasPendientes" }
+
+contador_dar_de_baja:
+    pattern:  /{id}/dar_de_baja
+    defaults: { _controller: "ContadoresBundle:Contador:darDeBaja" }
+    requirements: { _method: post|delete }

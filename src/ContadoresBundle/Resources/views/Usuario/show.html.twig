@@ -31,10 +31,15 @@
     </table>
 
     <div class="dt-panelfooter clearfix">
-        <div class="row">
-            <a  href="{{ path('usuario') }}" class="btn btn-outline btn-default margin-right-20 margin-top-10">Volver</a>
-        </div>
+      <div class="row">
+        <a type="button" href="{{ path('usuario_dar_de_baja', { id: entity.id }) }}" id="darDeBaja" class="pull-right btn btn-default margin-top-10">Dar de baja</a>
+        <a  href="{{ path('usuario') }}" class="btn btn-outline btn-default margin-right-20 margin-top-10">Volver</a>
+      </div>
     </div>
 
 
+{% endblock %}
+
+{% block javascript %}
+  <script src="{{ asset('bundles/contadores/assets/js/confirmDarDeBaja.js') }}"></script>
 {% endblock %}

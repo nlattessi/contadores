@@ -50,6 +50,12 @@ class ClienteController extends Controller
         $em = $this->getDoctrine()->getManager();
         $queryBuilder = $em->getRepository('ContadoresBundle:Cliente')->createQueryBuilder('e');
 
+        // Solo entidades activas
+        $queryBuilder = $em->getRepository('ContadoresBundle:Cliente')->createQueryBuilder('d')
+            ->andWhere('d.activo = ?1')
+            ->setParameter(1, true)
+        ;
+
         // Reset filter
         if ($request->get('filter_action') == 'reset') {
             $session->remove('ClienteControllerFilter');
@@ -344,5 +350,28 @@ class ClienteController extends Controller
             'tareas' => $tareas,
             'filterForm'=> $filterForm->createView()
         ));
+    }
+
+    public function darDeBajaAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $cliente = $em->getRepository('ContadoresBundle:Cliente')->find($id);
+
+        if (!$cliente) {
+            throw $this->createNotFoundException('Unable to find Cliente entity.');
+        }
+
+        if (count($cliente->getTareas()) > 0) {
+            $this->get('session')->getFlashBag()->add('error', 'No se puede dar de baja ya que existen tareas activas.');
+            return $this->redirect($this->generateUrl('cliente_show', ['id' => $cliente->getId()]));
+        }
+
+        $bajaAdministrativaService = $this->get('contadores.servicios.bajaAdministrativa');
+        $bajaAdministrativaService->darDeBaja($cliente);
+
+        $this->get('session')->getFlashBag()->add('success', 'Se realizó la baja administrativa.');
+
+        return $this->redirect($this->generateUrl('cliente'));
     }
 }

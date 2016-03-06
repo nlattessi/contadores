@@ -193,9 +193,10 @@
     </button>
   </div>
   {% endif %}
-          <div class="row">
-            <a  href="{{ path('tarea') }}" class="btn btn-outline btn-default margin-right-20 margin-top-10">Volver</a>
-          </div>
+  <div class="row">
+    <a type="button" href="{{ path('tarea_dar_de_baja', { id: entity.id }) }}" id="darDeBaja" class="pull-right btn btn-default margin-top-10">Dar de baja</a>
+    <a href="{{ path('tarea') }}" class="btn btn-outline btn-default margin-right-20 margin-top-10">Volver</a>
+  </div>
 </div>
 
 </div>
@@ -207,6 +208,7 @@
 
 {% block javascript %}
   <script src="{{ asset('bundles/contadores/assets/js/fileFunctions.js') }}"></script>
+  <script src="{{ asset('bundles/contadores/assets/js/confirmDarDeBaja.js') }}"></script>
 
   <script>
   $('#archivos').change(function() {

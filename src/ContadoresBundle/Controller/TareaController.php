@@ -64,6 +64,11 @@ class TareaController extends Controller
             $queryBuilder = $em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('e');
         }
 
+        // Solo entidades activas
+        $queryBuilder = $em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('d')
+            ->andWhere('d.activo = ?1')
+            ->setParameter(1, true)
+        ;
 
         // Reset filter
         if ($request->get('filter_action') == 'reset') {
@@ -632,5 +637,23 @@ class TareaController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+    public function darDeBajaAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('ContadoresBundle:Tarea')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Tarea entity.');
+        }
+
+        $bajaAdministrativaService = $this->get('contadores.servicios.bajaAdministrativa');
+        $bajaAdministrativaService->darDeBaja($entity);
+
+        $this->get('session')->getFlashBag()->add('success', 'Se realizó la baja administrativa.');
+
+        return $this->redirect($this->generateUrl('home'));
     }
 }

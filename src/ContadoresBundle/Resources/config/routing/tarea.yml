@@ -58,3 +58,8 @@ tarea_cliente_show:
 tarea_contador_show:
     pattern:  /{id}/showcontador
     defaults: { _controller: "ContadoresBundle:Tarea:showContador" }
+
+tarea_dar_de_baja:
+    pattern:  /{id}/dar_de_baja
+    defaults: { _controller: "ContadoresBundle:Tarea:darDeBaja" }
+    requirements: { _method: post|delete }
