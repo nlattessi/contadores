@@ -236,4 +236,21 @@ class TareasService {
         return $contadores;
     }
 
+    public function regenerarVencimientos(Vencimiento $vencimiento){
+
+        $queryBuilder = $this->em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('t')
+            ->where('t.vencimiento = ?1')
+            ->andWhere('t.fechaFin is NULL')
+            ->setParameter(1, $vencimiento);
+        $tareas = $queryBuilder->getQuery()->getResult();
+
+        foreach($tareas as $tarea){
+            $tarea->setVencimientoInterno($vencimiento->getFecha()->sub(new \DateInterval('P2D')));
+            $this->em->persist($tarea);
+            $this->em->flush();
+        }
+
+
+    }
+
 }
