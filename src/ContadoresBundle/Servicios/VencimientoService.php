@@ -12,6 +12,7 @@ namespace ContadoresBundle\Servicios;
 use ContadoresBundle\Entity\Cliente;
 use ContadoresBundle\Entity\Esquema;
 use ContadoresBundle\Entity\Periodo;
+use ContadoresBundle\Entity\Vencimiento;
 use Doctrine\ORM\EntityManager;
 
 class VencimientoService {
@@ -48,6 +49,23 @@ class VencimientoService {
 
         return $vencimiento;
     }
+    public function obtenerVencimientosFiscales(Periodo $periodo, Cliente $cliente){
+        $periodos = $this->obtenerPeriodosPorEsquema($periodo->getEsquema());
+        //en $periodos tengo los periodos del mismo esquema que el seleccionado
+        //tomo el $periodo como el mínimo que voy a usar
+
+        $queryBuilder = $this->em->getRepository('ContadoresBundle:Vencimiento')->createQueryBuilder('v')
+            ->where('v.periodo in (?1)')
+            ->andWhere('v.periodo >= ?2')
+            ->andWhere('v.colaCuil = ?3')
+            ->setParameter(1, $periodos)
+            ->setParameter(2, $periodo->getId())
+            ->setParameter(3, substr($cliente->getCuit(),-1));
+
+        $vencimientos = $queryBuilder->getQuery()->getResult();
+
+        return $vencimientos;
+    }
 
     public function obtenerProximosVencimientos(){
         return $this->obtenerNProximosVencimientos($this::$nproximos);
@@ -65,5 +83,7 @@ class VencimientoService {
 
         return $vencimiento;
     }
+
+
 
 }

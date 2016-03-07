@@ -196,6 +196,7 @@ class VencimientoController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Vencimiento entity.');
         }
+
         $vencimientoService =  $this->get('contadores.servicios.vencimiento');
         $editForm = $this->createForm(new VencimientoType($vencimientoService), $entity);
         $deleteForm = $this->createDeleteForm($id);
@@ -231,6 +232,8 @@ class VencimientoController extends Controller
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
 
+            $tareaService = $this->get('contadores.servicios.tareas');
+            $tareaService->regenerarVencimientos($entity);
             return $this->redirect($this->generateUrl('vencimiento_edit', array('id' => $id)));
         } else {
             $this->get('session')->getFlashBag()->add('error', 'flash.update.error');

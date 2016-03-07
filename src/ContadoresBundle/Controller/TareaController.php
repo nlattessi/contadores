@@ -212,6 +212,41 @@ class TareaController extends Controller
         ));
     }
 
+    private function crearRelacionesTarea($entity, $finalizada, $tiempo, $observaciones, $archivos){
+        $em = $this->getDoctrine()->getManager();
+
+
+        $tareasService =  $this->get('contadores.servicios.tareas');
+        if($finalizada){
+            $estado = $tareasService->crearEstadoTareaFinalizado($entity, $tiempo);
+        }else{
+            $estado = $tareasService->crearEstadoTareaNuevo($entity, $tiempo);
+        }
+
+        $entity->setEstadoActual($estado);
+        $em->persist($entity);
+
+
+        if($observaciones){
+            $observacion = new Observacion($this->getUser(),$entity,$observaciones);
+            $em->persist($observacion);
+        }
+
+
+        $em->flush();
+
+        if($archivos){
+            $archivoService = $this->get('contadores.servicios.archivo');
+            foreach ($archivos as $archivo) {
+                $archivoService->createArchivoTarea(
+                    $archivo,
+                    $this->getUser(),
+                    $entity
+                );
+            }
+        }
+    }
+
     public function createPeriodicaAction(Request $request)
     {
         $usuarioService =  $this->get('contadores.servicios.usuario');
@@ -236,56 +271,46 @@ class TareaController extends Controller
 
                 $entity->setNombre($entity->getTareaMetadata()->getNombre() . ' ' . $entity->getCliente()->getNombre());
             }
+            $tiempo = $request->get('tiempoReal');
+            $observaciones = $request->get('observaciones');
+            $finalizada = $request->get('finalizada');
+            if (isset($request->files->get('archivos')[0])) {
+                $archivos = $request->files->get('archivos');
+            }else {
+                $archivos = null;
+            }
             $entity->setFechaCreacion(new \DateTime(null));
-
+            $em = $this->getDoctrine()->getManager();
             if ($form->has('vencimientoInterno') && $form->get('vencimientoInterno')->getData() !== null) {
+                //si elige vencimiento Interno generamos tarea para un solo período
                 $vencimientoInterno = $form->get('vencimientoInterno')->getData();
                 $dtVencimientoInterno = \DateTime::createFromFormat('d/m/Y', $vencimientoInterno);
                 $entity->setVencimientoInterno($dtVencimientoInterno);
-            }
-
-            if ($form->has('periodo') && $form->get('periodo')->getData() !== null) {
-                $vencimientoFiscal = $vencimientoService->obtenerVencimientoFiscal($entity->getPeriodo(),$entity->getCliente());
-                $entity->setVencimientoFiscal($vencimientoFiscal->getFecha());
-            }
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-
-            $tiempo = $request->get('tiempoReal');
-            $tareasService =  $this->get('contadores.servicios.tareas');
-            if($request->get('finalizada')){
-                $estado = $tareasService->crearEstadoTareaFinalizado($entity, $tiempo);
-            }else{
-                $estado = $tareasService->crearEstadoTareaNuevo($entity, $tiempo);
-            }
-
-            $entity->setEstadoActual($estado);
-            $em->persist($entity);
-
-            $observaciones = $request->get('observaciones');
-            if($observaciones){
-                $observacion = new Observacion($this->getUser(),$entity,$observaciones);
-                $em->persist($observacion);
-            }
-
-
-            $em->flush();
-
-            if (isset($request->files->get('archivos')[0])) {
-                $archivoService = $this->get('contadores.servicios.archivo');
-                foreach ($request->files->get('archivos') as $archivo) {
-                    $archivoService->createArchivoTarea(
-                        $archivo,
-                        $this->getUser(),
-                        $entity
-                    );
+                if ($form->has('periodo') && $form->get('periodo')->getData() !== null) {
+                    $vencimientoFiscal = $vencimientoService->obtenerVencimientoFiscal($entity->getPeriodo(),$entity->getCliente());
+                    $entity->setVencimientoFiscal($vencimientoFiscal);
                 }
+                $em->persist($entity);
+                $em->flush();
+                $this->crearRelacionesTarea($entity,$finalizada, $tiempo, $observaciones, $archivos);
+
+            }else{
+                $vencimientos= $vencimientoService->obtenerVencimientosFiscales($entity->getPeriodo(),$entity->getCliente());
+
+                 $tarea = null;
+                foreach($vencimientos as $vencimiento){
+                    //Por cada vencimiento que me haya devuelto tengo que crear una tarea
+                    $tarea = clone $entity ;
+                    $tarea->setVencimientoFiscal($vencimiento);
+
+                    $tarea->setVencimientoInterno($vencimiento->getFecha()->sub(new \DateInterval('P2D')));
+                    $em->persist($tarea);
+                    $em->flush();
+                    $this->crearRelacionesTarea($tarea,$finalizada, $tiempo, $observaciones, $archivos);
+                }
+                $entity = $tarea;
+
             }
-
-
             $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
 
             return $this->redirect($this->generateUrl('tarea_show', array('id' => $entity->getId())));
@@ -655,5 +680,9 @@ class TareaController extends Controller
         $this->get('session')->getFlashBag()->add('success', 'Se realizó la baja administrativa.');
 
         return $this->redirect($this->generateUrl('home'));
+    }
+
+    public function agendarAction(){
+
     }
 }

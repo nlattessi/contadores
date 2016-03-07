@@ -55,9 +55,9 @@ tarea_cliente_show:
     pattern:  /{id}/showcliente
     defaults: { _controller: "ContadoresBundle:Tarea:showCliente" }
 
-tarea_contador_show:
-    pattern:  /{id}/showcontador
-    defaults: { _controller: "ContadoresBundle:Tarea:showContador" }
+tarea_agendar:
+    pattern:  /agendartarea
+    defaults: { _controller: "ContadoresBundle:Tarea:agendar" }
 
 tarea_dar_de_baja:
     pattern:  /{id}/dar_de_baja

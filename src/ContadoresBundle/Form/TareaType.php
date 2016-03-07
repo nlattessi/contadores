@@ -64,13 +64,15 @@ class TareaType extends AbstractType
                     'empty_value' => '',
                     'choices' => $this->vencimientoService->obtenerEsquemasHabilitados()
                 ]);
+
             $formModifier = function(FormInterface $form, Esquema $esquema = null) {
                 $periodos = null === $esquema ? array() : $this->vencimientoService->obtenerPeriodosPorEsquema($esquema);
                 //$falsoP =  $this->vencimientoService->obtenerFalsoPeriodo();
                 //array_push($periodos, $falsoP);
+
                 $form->add('periodo', 'entity', array(
                     'class' => 'ContadoresBundle:Periodo',
-                    'empty_value' => '',
+                    'empty_value' => '--Seleccione un Esquema--',
                     'required' => false,
                     'choices' =>$periodos
                 ));
