@@ -245,7 +245,7 @@ class TareasService {
         $tareas = $queryBuilder->getQuery()->getResult();
 
         foreach($tareas as $tarea){
-            $tarea->setVencimientoInterno($vencimiento->getFecha()->sub(new \DateInterval('P2D')));
+            $tarea->setVencimientoInterno($vencimiento->getFecha()->sub(new \DateInterval('P3D')));
             $this->em->persist($tarea);
             $this->em->flush();
         }

@@ -36,6 +36,17 @@ class VencimientoService {
 
         return $periodos;
     }
+    public function obtenerPeriodosPorEsquemaIdReporte($esquemaId)
+    {
+        $queryBuilder = $this->em->getRepository('ContadoresBundle:Periodo')->createQueryBuilder('p')
+            ->select('p.id, p.nombre')
+            ->where('p.esquema = ?1')
+            ->setParameter(1, $esquemaId);
+
+        $periodos = $queryBuilder->getQuery()->getResult();
+
+        return $periodos;
+    }
 
     public function obtenerVencimientoFiscal(Periodo $periodo, Cliente $cliente){
 
@@ -66,6 +77,17 @@ class VencimientoService {
 
         return $vencimientos;
     }
+    public function obtenerVencimientosPorPeriodo($periodoId){
+
+        $queryBuilder = $this->em->getRepository('ContadoresBundle:Vencimiento')->createQueryBuilder('v')
+            ->where('v.periodo =  ?1')
+            ->setParameter(1, $periodoId);
+
+        $vencimientos = $queryBuilder->getQuery()->getResult();
+
+        return $vencimientos;
+    }
+
 
     public function obtenerProximosVencimientos(){
         return $this->obtenerNProximosVencimientos($this::$nproximos);
@@ -83,6 +105,7 @@ class VencimientoService {
 
         return $vencimiento;
     }
+
 
 
 

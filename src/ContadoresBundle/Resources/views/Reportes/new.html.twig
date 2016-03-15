@@ -1,0 +1,143 @@
+{% extends 'ContadoresBundle:Layout:layout.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - {{ 'views.new.creation'|trans({'%entity%': 'Tarea'}, 'JordiLlonchCrudGeneratorBundle') }}
+{% endblock %}
+
+{% block menu %}
+    {{ include('ContadoresBundle:NavBars:navbar.html.twig') }}
+{% endblock %}
+
+{% block encabezado %}Reporte {% endblock %}
+
+{% block breadcrum %}
+    <li><a href="{{ path('home') }}">Inicio</a></li>
+    <li class="active">Reporte</li>
+{% endblock %}
+
+{% block page %}
+
+    <div class="panel-heading">
+        <h4 class="panel-title">Complete todos los campos.</h4>
+    </div>
+
+    <div class="panel-body container-fluid">
+        <form action="{{ path('reporte_filtrar') }}" method="post" >
+
+            <div class="row ">
+                <div class="col-sm-6 col-md-6 margin-top-30">
+                    <h4 class="example-title">Clientes</h4>
+                    <div class="form-group">
+                        <select id="cliente" name="cliente" class="form-control">
+                            <option value="">-- Seleccione un Cliente --</option>
+                            {% for cliente in clientes %}
+                                <option value="{{ cliente.id }}">{{ cliente }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 margin-top-30">
+                    <h4 class="example-title">Contador</h4>
+                    <div class="form-group">
+                        <select id="contador" name="contador" class="form-control">
+                            <option value="">-- Seleccione un Contador --</option>
+                            {% for contador in contadores %}
+                                <option value="{{ contador.id }}">{{ contador }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 margin-top-30">
+                    <h4 class="example-title">Area</h4>
+                    <div class="form-group">
+                        <select id="area" name="area" class="form-control">
+                            <option value="">-- Seleccione un Área --</option>
+                            {% for area in areas %}
+                                <option value="{{ area.id }}">{{ area }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 margin-top-30">
+                    <h4 class="example-title">Rubro</h4>
+                    <div class="form-group">
+                        <select id="rubro" name="rubro" class="form-control">
+                            <option value="">-- Seleccione un área --</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row ">
+                <div class="col-sm-6 col-md-6 margin-top-30">
+                    <h4 class="example-title">Tarea</h4>
+                    <div class="form-group">
+                        <select id="metadata" name="metadata" class="form-control">
+                            <option value="">-- Seleccione un área --</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col-sm-6 col-md-6 margin-top-30">
+                    <h4 class="example-title">Esquema</h4>
+                    <div class="form-group">
+                        <select id="esquema" name="esquema" class="form-control">
+                            <option value="">-- Seleccione un esquema --</option>
+                            {% for esquema in esquemas %}
+                                <option value="{{ esquema.id }}">{{ esquema }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 margin-top-30">
+                    <h4 class="example-title">Periodo Fiscal</h4>
+                    <div class="form-group">
+                        <select id="periodo" name="periodo" class="form-control">
+                            <option value="">-- Seleccione un esquema --</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row ">
+                <div class="col-sm-6 col-md-6 margin-top-30">
+                    <h4 class="example-title">Fechas</h4>
+                    <div class="input-daterange" data-plugin="datepicker">
+                        <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="icon wb-calendar" aria-hidden="true"></i>
+                      </span>
+                            <input type="text" id="fechaD" class="form-control" name="fechaD">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">hasta</span>
+                            <input type="text" id="fechaH" class="form-control" name="fechaH">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- row-->
+
+            <div class="row">
+                <div class="col-sm-6 col-md-6 margin-top-20">
+
+                    <button type="submit" class="btn btn btn-success">Crear</button>
+                    <button type="button" class="btn btn-outline btn-default">Limpiar </button>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <form id="formajax" class="well" action="{{ path('reporte_ajax') }}" method="post" hidden="true">
+    </form>
+{% endblock %}
+{% block javascript %}
+    <script src="{{ asset('bundles/contadores/assets/js/reporte.js') }}"></script>
+{% endblock %}

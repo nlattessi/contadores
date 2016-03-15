@@ -416,7 +416,7 @@ class TareaController extends Controller
             'periodica' => false
         ));
 
-        return $this->render('ContadoresBundle:Tarea:new.html.twig', array(
+        return $this->render('ContadoresBundle:Reporte:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
