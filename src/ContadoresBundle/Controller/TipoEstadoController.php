@@ -33,6 +33,7 @@ class TipoEstadoController extends Controller
             'entities' => $entities,
             'pagerHtml' => $pagerHtml,
             'filterForm' => $filterForm->createView(),
+            'css_active' => 'tipoestado',
         ));
     }
 
@@ -131,6 +132,7 @@ class TipoEstadoController extends Controller
         return $this->render('ContadoresBundle:TipoEstado:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'css_active' => 'tipoestado_new',
         ));
     }
 
@@ -146,6 +148,7 @@ class TipoEstadoController extends Controller
         return $this->render('ContadoresBundle:TipoEstado:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'css_active' => 'tipoestado_new',
         ));
     }
 
@@ -167,7 +170,8 @@ class TipoEstadoController extends Controller
 
         return $this->render('ContadoresBundle:TipoEstado:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+            'delete_form' => $deleteForm->createView(),
+            'css_active' => 'tipoestado',     ));
     }
 
     /**

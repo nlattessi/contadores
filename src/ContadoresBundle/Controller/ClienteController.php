@@ -35,6 +35,7 @@ class ClienteController extends Controller
             'entities' => $entities,
             'pagerHtml' => $pagerHtml,
             'filterForm' => $filterForm->createView(),
+            'css_active' => 'cliente'
         ));
     }
 
@@ -154,6 +155,7 @@ class ClienteController extends Controller
         return $this->render('ContadoresBundle:Cliente:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'css_active' => 'cliente_new'
         ));
     }
 
@@ -169,6 +171,7 @@ class ClienteController extends Controller
         return $this->render('ContadoresBundle:Cliente:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'css_active' => 'cliente_new'
         ));
     }
 
@@ -192,7 +195,8 @@ class ClienteController extends Controller
         return $this->render('ContadoresBundle:Cliente:show.html.twig', array(
             'entity'      => $entity,
            // 'tareas' => $tareas ,
-            'delete_form' => $deleteForm->createView(),        ));
+            'delete_form' => $deleteForm->createView(),
+            'css_active' => 'cliente'));
     }
 
     /**

@@ -169,9 +169,9 @@
                 {% for tarea in tareas %}
                     <a style="color: red;" href=
                     {% if app.user.rol == "ROLE_CONTADOR" %}
-                "{{ path('tarea_contador_show', { 'id': tarea.id }) }}"
+                "{{ path('tarea_show', { 'id': tarea.id }) }}"
             {% elseif app.user.rol == "ROLE_CLIENTE" %}
-                "{{ path('tarea_cliente_show', { 'id': tarea.id }) }}"
+                "{{ path('tarea_show', { 'id': tarea.id }) }}"
             {% elseif app.user.rol == "ROLE_JEFE" %}
                 "{{ path('tarea_show', { 'id': tarea.id }) }}"
             {% endif %}

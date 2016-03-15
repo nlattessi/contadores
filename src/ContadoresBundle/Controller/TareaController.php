@@ -36,6 +36,7 @@ class TareaController extends Controller
             'entities' => $entities,
             'pagerHtml' => $pagerHtml,
             'filterForm' => $filterForm->createView(),
+            'css_active' => 'tarea'
         ));
     }
 
@@ -51,24 +52,35 @@ class TareaController extends Controller
         $filtroService =  $this->get('contadores.servicios.filtro');
         $filterForm = $this->createForm(new TareaFilterType($filtroService));
         $em = $this->getDoctrine()->getManager();
-        if($usuario->getRol() == Rol::$contador) {
+        if($usuario->getRol()->getNombre() == Rol::$contador) {
             $contador = $em->getRepository('ContadoresBundle:Contador')->find($usuario->getEntidadId());
+
             if ($contador) {
             $queryBuilder = $em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('e')
                 ->where('e.contador = ?1')
-                ->setParameter(1, $contador->getId());
+                ->andWhere('e.activo = ?2')
+                ->setParameter(1, $contador->getId())
+                ->setParameter(2, true);
             }else{
                 //TODO: manejo de error
             }
-        }else{
-            $queryBuilder = $em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('e');
-        }
+        }elseif($usuario->getRol()->getNombre() == Rol::$cliente) {
+             $cliente = $em->getRepository('ContadoresBundle:Cliente')->find($usuario->getEntidadId());
 
-        // Solo entidades activas
-        $queryBuilder = $em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('d')
-            ->andWhere('d.activo = ?1')
-            ->setParameter(1, true)
-        ;
+            if ($cliente) {
+                $queryBuilder = $em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('e')
+                    ->where('e.cliente = ?1')
+                    ->andWhere('e.activo = ?2')
+                    ->setParameter(1, $cliente->getId())
+                    ->setParameter(2, true);
+        }else{
+            //TODO: manejo de error
+        }
+    }else{
+            $queryBuilder = $em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('e')
+                ->andWhere('e.activo = ?1')
+                ->setParameter(1, true);
+        }
 
         // Reset filter
         if ($request->get('filter_action') == 'reset') {
@@ -209,6 +221,7 @@ class TareaController extends Controller
         return $this->render('ContadoresBundle:Tarea:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'css_active' => 'tarea_new'
         ));
     }
 
@@ -319,6 +332,7 @@ class TareaController extends Controller
         return $this->render('ContadoresBundle:Tarea:newperiodica.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'css_active' => 'tarea_periodica_new'
         ));
     }
 
@@ -399,6 +413,7 @@ class TareaController extends Controller
         return $this->render('ContadoresBundle:Tarea:newrealizada.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'css_active' => 'tarea_realizada'
         ));
     }
 
@@ -416,9 +431,10 @@ class TareaController extends Controller
             'periodica' => false
         ));
 
-        return $this->render('ContadoresBundle:Reporte:new.html.twig', array(
+        return $this->render('ContadoresBundle:Tarea:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'css_active' => 'tarea_new'
         ));
     }
 
@@ -435,6 +451,7 @@ class TareaController extends Controller
         return $this->render('ContadoresBundle:Tarea:newperiodica.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'css_active' => 'tarea_periodica_new'
         ));
     }
 
@@ -451,6 +468,7 @@ class TareaController extends Controller
         return $this->render('ContadoresBundle:Tarea:newrealizada.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'css_active' => 'tarea_realizada'
         ));
     }
 
@@ -519,19 +537,22 @@ class TareaController extends Controller
 
         return $this->render('ContadoresBundle:Tarea:show.html.twig', array(
             'entity'      => $this->mostrar($id),
-            'delete_form' => $deleteForm->createView(),        ));
+            'delete_form' => $deleteForm->createView(),
+            'css_active' => 'tarea'      ));
     }
 
     public function showClienteAction($id)
     {
         return $this->render('ContadoresBundle:Tarea:showcliente.html.twig', array(
-            'entity'      => $this->mostrar($id),));
+            'entity'      => $this->mostrar($id),
+            'css_active' => 'cliente'));
     }
 
     public function showContadorAction($id)
     {
         return $this->render('ContadoresBundle:Tarea:showcontador.html.twig', array(
-            'entity'      => $this->mostrar($id),));
+            'entity'      => $this->mostrar($id),
+            'css_active' => 'contador'));
     }
 
     /**
@@ -682,7 +703,96 @@ class TareaController extends Controller
         return $this->redirect($this->generateUrl('home'));
     }
 
-    public function agendarAction(){
+    public function newAgendarAction(){
+        $entity = new Tarea();
+        $tareasService =  $this->get('contadores.servicios.tareas');
+        $vencimientoService =  $this->get('contadores.servicios.vencimiento');
+        $form   = $this->createForm(new TareaType($tareasService,$vencimientoService), $entity, array(
+            'user' => $this->getUser(),
+            'periodica' => true
+        ));
 
+        return $this->render('ContadoresBundle:Tarea:agendar.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+            'css_active' => 'tarea_agendar_new'
+        ));
+    }
+
+    public function createAgendarAction(Request $request){
+
+        $usuarioService =  $this->get('contadores.servicios.usuario');
+        $entity  = new Tarea();
+        $tareasService =  $this->get('contadores.servicios.tareas');
+        $vencimientoService =  $this->get('contadores.servicios.vencimiento');
+        $form   = $this->createForm(new TareaType($tareasService,$vencimientoService), $entity, array(
+            'user' => $this->getUser(),
+            'periodica' => false
+        ));
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            if ($this->getUser()->getRol() == Rol::$contador ){
+                $contador = $usuarioService->obtenerContadorPorUsuario($this->getUser());
+                $entity->setContador($contador);
+            }
+
+            if(strlen($entity->getNombre()) < 1){
+
+                $entity->setNombre($entity->getTareaMetadata()->getNombre() . ' ' . $entity->getCliente()->getNombre());
+            }
+            $entity->setFechaCreacion(new \DateTime(null));
+
+            if ($form->has('vencimientoInterno') && $form->get('vencimientoInterno')->getData() !== null) {
+                $vencimientoInterno = $form->get('vencimientoInterno')->getData();
+                $dtVencimientoInterno = \DateTime::createFromFormat('d/m/Y', $vencimientoInterno);
+                $entity->setVencimientoInterno($dtVencimientoInterno);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+
+            $tiempo = $request->get('tiempoReal');
+            $tareasService =  $this->get('contadores.servicios.tareas');
+            if($request->get('finalizada')){
+                $estado = $tareasService->crearEstadoTareaFinalizado($entity, $tiempo);
+            }else{
+                $estado = $tareasService->crearEstadoTareaNuevo($entity, $tiempo);
+            }
+
+            $entity->setEstadoActual($estado);
+            $em->persist($entity);
+
+            $observaciones = $request->get('observaciones');
+            if($observaciones){
+                $observacion = new Observacion($this->getUser(),$entity,$observaciones);
+                $em->persist($observacion);
+            }
+
+            $em->flush();
+
+            if (isset($request->files->get('archivos')[0])) {
+                $archivoService = $this->get('contadores.servicios.archivo');
+                foreach ($request->files->get('archivos') as $archivo) {
+                    $archivoService->createArchivoTarea(
+                        $archivo,
+                        $this->getUser(),
+                        $entity
+                    );
+                }
+            }
+
+            $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
+
+            return $this->redirect($this->generateUrl('tarea_show', array('id' => $entity->getId())));
+        }
+
+        return $this->render('ContadoresBundle:Tarea:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+            'css_active' => 'tarea_agendar_new'
+        ));
     }
 }

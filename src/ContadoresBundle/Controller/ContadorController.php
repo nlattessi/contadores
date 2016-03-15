@@ -35,6 +35,7 @@ class ContadorController extends Controller
             'entities' => $entities,
             'pagerHtml' => $pagerHtml,
             'filterForm' => $filterForm->createView(),
+            'css_active' => 'contador'
         ));
     }
 
@@ -146,6 +147,7 @@ class ContadorController extends Controller
         return $this->render('ContadoresBundle:Contador:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'css_active' => 'contador_new'
         ));
     }
 
@@ -161,6 +163,7 @@ class ContadorController extends Controller
         return $this->render('ContadoresBundle:Contador:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'css_active' => 'contador_new'
         ));
     }
 
@@ -185,7 +188,8 @@ class ContadorController extends Controller
         return $this->render('ContadoresBundle:Contador:show.html.twig', array(
             'entity'      => $entity,
             //'tareas' => $tareas ,
-            'delete_form' => $deleteForm->createView(),        ));
+            'delete_form' => $deleteForm->createView(),
+            'css_active' => 'contador'       ));
     }
 
     /**

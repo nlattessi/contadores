@@ -1,4 +1,4 @@
-<li class="site-menu-item">
+<li class="site-menu-item {% if css_active is defined %}{% if css_active == 'home' %} active{% endif %}{% endif %}">
     <a class="animsition-link" href="{{ path('home') }}" data-slug="angular">
         <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
         <span class="site-menu-title">Dashboard</span>
@@ -7,7 +7,7 @@
         </div>
     </a>
 </li>
-<li class="site-menu-item">
+<li class="site-menu-item {% if css_active is defined %}{% if css_active == 'tarea' %} active{% endif %}{% endif %}">
     <a class="animsition-link" href="{{ path('tarea') }}" data-slug="angular">
         <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
         <span class="site-menu-title">Mis Tareas</span>

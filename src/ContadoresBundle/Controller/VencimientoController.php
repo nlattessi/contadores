@@ -33,6 +33,7 @@ class VencimientoController extends Controller
             'entities' => $entities,
             'pagerHtml' => $pagerHtml,
             'filterForm' => $filterForm->createView(),
+            'css_active' => 'vencimiento'
         ));
     }
 
@@ -143,6 +144,7 @@ class VencimientoController extends Controller
         return $this->render('ContadoresBundle:Vencimiento:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'css_active' => 'vencimiento_new'
         ));
     }
 
@@ -159,6 +161,7 @@ class VencimientoController extends Controller
         return $this->render('ContadoresBundle:Vencimiento:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'css_active' => 'vencimiento_new'
         ));
     }
 
@@ -180,7 +183,8 @@ class VencimientoController extends Controller
 
         return $this->render('ContadoresBundle:Vencimiento:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+            'delete_form' => $deleteForm->createView(),
+            'css_active' => 'vencimiento'        ));
     }
 
     /**
