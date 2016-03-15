@@ -1,0 +1,69 @@
+{% extends 'ContadoresBundle:Layout:layout.html.twig' %}
+
+{% block title %}
+    Estudio Contable - Reporte de Tareas
+{% endblock %}
+
+{% block menu %}
+    {{ include('ContadoresBundle:NavBars:navbar.html.twig') }}
+{% endblock %}
+
+{% block encabezado %}Resultado del reporte{% endblock %}
+
+{% block breadcrum %}
+    <li><a href="{{ path('home') }}">Inicio</a></li>
+    <li class="active">Reporte</li>
+{% endblock %}
+
+{% block page %}
+
+    <div class="panel-heading">
+        <h4 class="panel-title">Resultado.</h4>
+    </div>
+
+    <div class="panel-body container-fluid">
+        <table class="display" id="table_id">
+            <thead>
+            {% for columna in columnas %}
+                <th> {{ columna.data }}</th>
+            {% endfor %}
+            </thead>
+        </table>
+    </div>
+{% endblock %}
+{% block javascript %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/contadores/assets/vendor/datatables/dataTables.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/contadores/assets/vendor/datatables/buttons/css/buttons.dataTables.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/contadores/assets/vendor/datatables/select/css/select.dataTables.min.css')}}">
+    <script type="text/javascript" charset="utf8" src="{{ asset('bundles/contadores/assets/vendor/datatables/dataTables.js')}}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('bundles/contadores/assets/vendor/datatables/buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('bundles/contadores/assets/vendor/datatables/buttons/js/buttons.flash.min.js')}}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('bundles/contadores/assets/vendor/datatables/buttons/js/buttons.html5.min.js')}}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('bundles/contadores/assets/vendor/datatables/buttons/js/buttons.print.min.js')}}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('bundles/contadores/assets/vendor/datatables/JSZip/jszip.min.js')}}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('bundles/contadores/assets/vendor/datatables/pdfmake/build/pdfmake.min.js')}}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('bundles/contadores/assets/vendor/datatables/pdfmake/build/vfs_fonts.js')}}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('bundles/contadores/assets/vendor/datatables/select/js/dataTables.select.min.js')}}"></script>
+
+    <script type="text/javascript">
+        var columnas  = {{ columnas|json_encode|raw }};
+        var datos =  {{ datos|json_encode|raw }};
+        (function(window, document, $) {
+            $('#table_id').DataTable({
+                ordering: false,
+                searching: false,
+                select: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel'
+                ],
+                language: {
+                    url: 'bundles/contadores/assets/vendor/datatables/plug-ins/1.10.10/i18n/Spanish.json'
+                },
+                columns: columnas,
+                data: datos
+            });
+        })(window, document, jQuery);
+    </script>
+{% endblock %}

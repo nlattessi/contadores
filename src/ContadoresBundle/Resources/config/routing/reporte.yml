@@ -1,0 +1,11 @@
+reporte_new:
+    pattern:  /new
+    defaults: { _controller: "ContadoresBundle:Reporte:new" }
+
+reporte_filtrar:
+    pattern:  /new/filtrar
+    defaults: { _controller: "ContadoresBundle:Reporte:filtrar" }
+
+reporte_ajax:
+    path:     /ajaxreporte
+    defaults: { _controller: "ContadoresBundle:Reporte:busquedaAjax" }

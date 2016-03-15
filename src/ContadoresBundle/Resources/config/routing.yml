@@ -72,6 +72,9 @@ contadores_archivotareametadata:
 contadores_observacion:
     resource: "@ContadoresBundle/Resources/config/routing/observacion.yml"
     prefix:   /observacion
+contadores_reporte:
+    resource: "@ContadoresBundle/Resources/config/routing/reporte.yml"
+    prefix:   /reporte
 
 login:
     path:     /login
