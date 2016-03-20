@@ -25,17 +25,29 @@ security:
                 path:   /logout
                 target: /login
 
-    # CAMBIAR ESTO PARA AGREGAR LOS DISTINTOS ROLES Y ACCESOS CORRESPONDIENTES
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
+        - { path: ^/usuario, roles: [ROLE_ADMIN] }
+        - { path: ^/contador, roles: [ROLE_ADMIN, ROLE_JEFE, ROLE_CONTADOR] }
+        - { path: ^/tipoestado, roles: [ROLE_ADMIN] }
+        - { path: ^/cliente, roles: [ROLE_ADMIN, ROLE_JEFE, ROLE_CONTADOR] }
+        - { path: ^/tarea, roles: [ROLE_ADMIN, ROLE_JEFE, ROLE_CONTADOR, ROLE_CLIENTE] }
+        - { path: ^/tareametadata, roles: [ROLE_ADMIN, ROLE_JEFE] }
+        - { path: ^/area, roles: [ROLE_ADMIN, ROLE_JEFE, ROLE_CONTADOR] }
+        - { path: ^/rubro, roles: [ROLE_ADMIN, ROLE_JEFE] }
+        - { path: ^/contador, roles: [ROLE_ADMIN, ROLE_JEFE] }
+        - { path: ^/vencimiento, roles: [ROLE_ADMIN, ROLE_JEFE] }
+        - { path: ^/reporte, roles: [ROLE_ADMIN, ROLE_JEFE] }
+
+        - { path: ^/archivoZip, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/redirect, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/home, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/en_construccion, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/cambiar_password, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/logout, roles: IS_AUTHENTICATED_FULLY }
 
-        - { path: ^/(.+), roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/(.+), roles: ROLE_ADMIN }
 
     encoders:
         ContadoresBundle\Entity\Usuario:
