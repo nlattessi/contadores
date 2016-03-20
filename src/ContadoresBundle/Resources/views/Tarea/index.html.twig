@@ -90,9 +90,13 @@ Ver tareas
             </td>
             <td>{% if entity.vencimientoInterno %}{{ entity.vencimientoInterno|date('Y-m-d ') }}{% endif %}</td>
             <td>{{ entity.nombre }}</td>
-            <td><a href="{{ path('contador_show', { 'id': entity.contador.id }) }}"> {{ entity.contador }}</a>
+            <td>{% if entity.contador %}
+                <a href="{{ path('contador_show', { 'id': entity.contador.id }) }}"> {{ entity.contador }}</a>
+                {% endif %}
                </td>
-            <td><a href="{{ path('cliente_show', { 'id': entity.cliente.id }) }}"> {{ entity.cliente }}</a>
+            <td>{% if entity.cliente %}
+                <a href="{{ path('cliente_show', { 'id': entity.cliente.id }) }}"> {{ entity.cliente }}</a>
+                {% endif %}
                </td>
             <td>
         <a class="btn btn-mini" href="{{ path('tarea_show', { 'id': entity.id }) }}">

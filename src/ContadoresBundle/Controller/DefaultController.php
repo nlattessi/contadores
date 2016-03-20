@@ -29,7 +29,8 @@ class DefaultController extends Controller
         return $this->render('ContadoresBundle:Default:home.html.twig', array(
             'tareas'        => $tareas,
             'clientes' => $clientes,
-            'vencimientos' => $vencimientos));
+            'vencimientos' => $vencimientos,
+            'css_active' => 'home'));
     }
 
     public function enConstruccionAction()

@@ -54,6 +54,33 @@
   </div>
 {% endblock %}
 
+{% block _contadoresbundle_tareapersonal_nombre_widget %}
+    <div class="col-sm-6 col-md-6 margin-top-30">
+        <h4 class="example-title">Nombre</h4>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_tareapersonal_usuario_widget %}
+    <div hidden="true" class="col-sm-6 col-md-6 margin-top-30">
+        <h4 class="example-title">Usuario</h4>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block _contadoresbundle_tareapersonal_fecha_widget %}
+    <div class="col-sm-6 col-md-6 margin-top-30">
+        <h4 class="example-title">Fecha</h4>
+        <div class="input-group">
+      <span class="input-group-addon">
+        <i class="icon wb-calendar" aria-hidden="true"></i>
+      </span>
+            {{ block('form_widget_simple') }}
+        </div>
+    </div>
+{% endblock %}
+
+
 {% block _contadoresbundle_tarea_contador_widget %}
   <div class="col-sm-6 col-md-6 margin-top-30">
     <h4 class="example-title">Contador</h4>

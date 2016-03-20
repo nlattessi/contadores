@@ -89,6 +89,8 @@ class TareasService {
             ->andWhere('t.fechaFin is NULL')
             ->setParameter(1, $id)
             ->setParameter(2, $urgente);
+
+
         $tareas = $queryBuilder->getQuery()->getResult();
 
         return $tareas;

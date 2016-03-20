@@ -68,6 +68,7 @@ class ReporteController extends Controller{
             'clientes' => $clientes,
             'areas' => $areas,
             'esquemas' => $esquemas,
+            'css_active' => 'reporte_new',
         ));
     }
 
@@ -152,7 +153,7 @@ class ReporteController extends Controller{
 
         return $this->render('ContadoresBundle:Reportes:resultado.html.twig', array('columnas' => $columnas,
             'datos' => $tareas,
-            'css_active' => 'reporte',));
+            'css_active' => 'reporte_new',));
     }
 
 

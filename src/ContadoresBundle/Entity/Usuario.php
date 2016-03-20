@@ -40,6 +40,15 @@ class Usuario implements UserInterface, \Serializable, AdvancedUserInterface
      */
     private $rol;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Rubro", mappedBy="area", cascade={"remove"})
+     */
+    private $tareas;
+
+    public function __construct()
+    {
+        $this->tareas = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -188,6 +197,24 @@ class Usuario implements UserInterface, \Serializable, AdvancedUserInterface
     public function getRoles()
     {
         return array($this->getRol()->getNombre());
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTareas()
+    {
+        return $this->tareas->filter(function($tarea) {
+            return $tarea->isActivo() == true;
+        });
+    }
+
+    /**
+     * @param mixed $tareas
+     */
+    public function setTareas($tareas)
+    {
+        $this->tareas = $tareas;
     }
 
     public function eraseCredentials()

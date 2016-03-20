@@ -38,6 +38,10 @@ ContadoresBundle\Entity\Usuario:
             nullable: true
             options:
                 default: '1'
+    oneToMany:
+        tareas:
+            targetEntity: Tarea
+            mappedBy: usuario
     manyToOne:
         rol:
             targetEntity: Rol
