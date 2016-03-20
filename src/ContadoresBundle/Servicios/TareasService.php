@@ -11,6 +11,7 @@ namespace ContadoresBundle\Servicios;
 
 
 use ContadoresBundle\Entity\EstadoTarea;
+use ContadoresBundle\Entity\Vencimiento;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 
@@ -241,13 +242,13 @@ class TareasService {
     public function regenerarVencimientos(Vencimiento $vencimiento){
 
         $queryBuilder = $this->em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('t')
-            ->where('t.vencimiento = ?1')
+            ->where('t.vencimientoFiscal = ?1')
             ->andWhere('t.fechaFin is NULL')
             ->setParameter(1, $vencimiento);
         $tareas = $queryBuilder->getQuery()->getResult();
-
+        $fecha = $vencimiento->getFecha()->sub(new \DateInterval('P3D'));
         foreach($tareas as $tarea){
-            $tarea->setVencimientoInterno($vencimiento->getFecha()->sub(new \DateInterval('P3D')));
+            $tarea->setVencimientoInterno($fecha);
             $this->em->persist($tarea);
             $this->em->flush();
         }
