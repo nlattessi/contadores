@@ -88,7 +88,7 @@ class ReporteController extends Controller{
         /* @var $queryBuilder QueryBuilder */
         $queryBuilder = $em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('t');
         $queryBuilder
-            ->select("t.id AS id, t.nombre as Nombre, d.nombre as Cliente, CONCAT(CONCAT(c.nombre, ', '), c.apellido) as Contador, m.nombre as Tarea, t.vencimientoInterno as Vencimiento")
+            ->select("t.id AS id, t.nombre as Nombre, d.nombre as Cliente, CONCAT(CONCAT(c.nombre, ', '), c.apellido) as Contador, m.nombre as Tarea, DATE_FORMAT(t.vencimientoInterno, '%d/%m/%Y') as Vencimiento")
             ->join('ContadoresBundle:Contador','c', 'WITH', 'c.id = t.contador')
             ->join('ContadoresBundle:Cliente','d', 'WITH', 'd.id = t.cliente')
             ->join('ContadoresBundle:TareaMetadata','m', 'WITH', 'm.id = t.tareaMetadata')
@@ -98,7 +98,7 @@ class ReporteController extends Controller{
             $queryBuilder->andWhere('t.cliente = :cliente')
             ->setParameter("cliente" , $cliente);
         }
-        print $periodo;
+        //print $periodo;
         if($periodo and strlen($periodo) > 0 ){
             /* @var $vencimientoService VencimientoService */
             $vencimientoService = $this->get('contadores.servicios.vencimiento');

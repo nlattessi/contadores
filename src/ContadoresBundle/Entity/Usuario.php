@@ -2,6 +2,7 @@
 
 namespace ContadoresBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
@@ -41,7 +42,7 @@ class Usuario implements UserInterface, \Serializable, AdvancedUserInterface
     private $rol;
 
     /**
-     * @ORM\OneToMany(targetEntity="Rubro", mappedBy="area", cascade={"remove"})
+     * @var \Doctrine\Common\Collections\ArrayCollection
      */
     private $tareas;
 

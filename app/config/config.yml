@@ -71,6 +71,10 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
 
+        dql:
+            datetime_functions:
+                DATE_FORMAT: ContadoresBundle\DQL\DateFormat
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
