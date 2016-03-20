@@ -64,6 +64,11 @@ class Tarea
     private $contador;
 
     /**
+     * @var \ContadoresBundle\Entity\Usuario
+     */
+    private $usuario;
+
+    /**
      * @var \ContadoresBundle\Entity\EstadoTarea
      */
     private $estadoActual;
@@ -472,4 +477,21 @@ class Tarea
     {
         $this->activo = $activo;
     }
+
+    /**
+     * @return Usuario
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * @param Usuario $usuario
+     */
+    public function setUsuario($usuario)
+    {
+        $this->usuario = $usuario;
+    }
+
 }

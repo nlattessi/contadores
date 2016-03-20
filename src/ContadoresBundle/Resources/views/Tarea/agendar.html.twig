@@ -16,15 +16,25 @@
     </div>
 
     <div class="panel-body container-fluid">
-        <form action="{{ path('tarea_create') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ path('tarea_agendar_create') }}" method="post" enctype="multipart/form-data">
             <div class="row ">
                 <div class="row">
                     {{ form_widget(form.cliente, {'attr': {'class': 'form-control'}}) }}
                     {{ form_widget(form.tareaMetadata, {'attr': {'class': 'form-control'}}) }}
                 </div>
                 <div class="row">
-                    {{ form_widget(form.vencimientoInterno, {'attr': {'class': 'form-control', 'data-provide': 'datepicker', 'data-date-format': 'dd/mm/yyyy', 'data-date-autoclose': 'true'}}) }}
-
+                    <div class="col-sm-6 col-md-6 margin-top-30">
+                        <h4 class="example-title">Vencimiento Interno</h4>
+                        <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="icon wb-calendar" aria-hidden="true"></i>
+                    </span>
+                            <input type="text" id="contadoresbundle_tarea_vencimientoInterno" name="vencimientoInterno" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-autoclose="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {{ form_widget(form.tiempoEstimado, {'attr': {'class': 'form-control'}}) }}
                     <div class="col-sm-6 col-md-6 margin-top-30">
                         <h4 class="example-title">Cargar Archivos</h4>
 

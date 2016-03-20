@@ -6,6 +6,7 @@ use ContadoresBundle\Entity\Observacion;
 use ContadoresBundle\Entity\Rol;
 use ContadoresBundle\Utils\Herramientas;
 use ContadoresBundle\Utils\TwitterBootstrapViewCustom;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -56,11 +57,17 @@ class TareaController extends Controller
             $contador = $em->getRepository('ContadoresBundle:Contador')->find($usuario->getEntidadId());
 
             if ($contador) {
+                /**
+                 * @var @queryBuilder \Doctrine\ORM\QueryBuilder
+                 */
             $queryBuilder = $em->getRepository('ContadoresBundle:Tarea')->createQueryBuilder('e')
+
                 ->where('e.contador = ?1')
-                ->andWhere('e.activo = ?2')
+                ->orWhere('e.usuario = ?2')
+                ->andWhere('e.activo = ?3')
                 ->setParameter(1, $contador->getId())
-                ->setParameter(2, true);
+                ->setParameter(2, $usuario)
+                ->setParameter(3, true);
             }else{
                 //TODO: manejo de error
             }
@@ -709,7 +716,7 @@ class TareaController extends Controller
         $vencimientoService =  $this->get('contadores.servicios.vencimiento');
         $form   = $this->createForm(new TareaType($tareasService,$vencimientoService), $entity, array(
             'user' => $this->getUser(),
-            'periodica' => true
+            'periodica' => false
         ));
 
         return $this->render('ContadoresBundle:Tarea:agendar.html.twig', array(
@@ -732,10 +739,8 @@ class TareaController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            if ($this->getUser()->getRol() == Rol::$contador ){
-                $contador = $usuarioService->obtenerContadorPorUsuario($this->getUser());
-                $entity->setContador($contador);
-            }
+
+            $entity->setUsuario($this->getUser());
 
             if(strlen($entity->getNombre()) < 1){
 

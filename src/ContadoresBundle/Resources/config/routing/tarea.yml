@@ -63,6 +63,10 @@ tarea_agendar_create:
     pattern:  /agendarcreate
     defaults: { _controller: "ContadoresBundle:Tarea:createAgendar" }
 
+tarea_personal_show:
+    pattern:  /{id}/showPersonal
+    defaults: { _controller: "ContadoresBundle:Tarea:showPersonal" }
+
 tarea_dar_de_baja:
     pattern:  /{id}/dar_de_baja
     defaults: { _controller: "ContadoresBundle:Tarea:darDeBaja" }

@@ -17,6 +17,9 @@ ContadoresBundle\Entity\Tarea:
         vencimiento_tarea_idx:
             columns:
                 - vencimiento_id
+        usuario_tarea_idx:
+            columns:
+                - usuario_id
 
     id:
         id:
@@ -93,6 +96,16 @@ ContadoresBundle\Entity\Tarea:
             inversedBy: tareas
             joinColumns:
                 contador_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        usuario:
+            targetEntity: Usuario
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: tareas
+            joinColumns:
+                usuario_id:
                     referencedColumnName: id
             orphanRemoval: false
         estadoActual:
