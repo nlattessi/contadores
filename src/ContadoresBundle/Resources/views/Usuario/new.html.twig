@@ -5,8 +5,12 @@
 
 {% block breadcrum %}
     <li><a href="{{ path('home') }}">Inicio</a></li>
-    <li>Usuaruis</li>
+    <li>Usuarios</li>
     <li class="active">Nuevo usuario</li>
+{% endblock %}
+
+{% block title %}
+{{ parent() }} -  {{ 'views.new.creation'|trans({'%entity%': 'Usuario'}, 'JordiLlonchCrudGeneratorBundle') }}
 {% endblock %}
 
 {% block page %}
@@ -15,16 +19,17 @@
 </div>
 
 <div class="panel-body container-fluid">
-<form class="well" action="{{ path('usuario_create') }}" method="post" {{ form_enctype(form) }}>
-    <div class="row ">
-        <div class="row">
-            {{ form_widget(form.mail, {'attr': {'class': 'form-control'}}) }}
-            {{ form_widget(form.rol, {'attr': {'class': 'form-control'}}) }}
-        </div>
+<form action="{{ path('usuario_create') }}" method="post" {{ form_enctype(form) }}>
+    <div class="row">
+        {{ form_widget(form.mail, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.rol, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="row">
+      {{ form_widget(form.activo) }}
     </div>
     <div class="row">
         <div class="col-sm-6 col-md-6 margin-top-20">
-            <button type="submit" class="btn btn btn-success">Crear</button>
+            <button type="submit" class="btn btn-success">Crear</button>
             {{ form_widget(form.reset, {'attr': {'class': 'btn btn-outline btn-default'}}) }}
         </div>
     </div>

@@ -13,6 +13,10 @@ class UsuarioType extends AbstractType
         $builder
             ->add('mail')
             ->add('rol')
+            ->add('activo', 'checkbox', [
+                'label' => 'Activo?',
+                'required' => false
+            ])
             ->add('reset', 'reset', ['label' => 'Limpiar '])
         ;
     }
