@@ -1,46 +1,52 @@
 {% extends 'ContadoresBundle:Layout:layout.html.twig' %}
 {% form_theme edit_form 'ContadoresBundle:Usuario:fields.html.twig' %}
 
+{% block encabezado %}Editar usuario{% endblock %}
+
+{% block breadcrum %}
+    <li><a href="{{ path('home') }}">Inicio</a></li>
+    <li>Usuarios</li>
+    <li class="active">Editar usuario</li>
+{% endblock %}
+
 {% block title %}
 {{ parent() }} -  {{ 'views.edit.edit'|trans({'%entity%': 'Usuario'}, 'JordiLlonchCrudGeneratorBundle') }}
 {% endblock %}
 
-{% block menu %}
-{{ include('ContadoresBundle:NavBars:navbar.html.twig') }}
-{% endblock %}
-
 {% block page %}
+<div class="panel-heading">
+  <h4 class="panel-title">Complete todos los campos.</h4>
+</div>
 
-<h1>{{ 'views.edit.edit'|trans({'%entity%': 'Usuario'}, 'JordiLlonchCrudGeneratorBundle') }}</h1>
-
-<form class="well" action="{{ path('usuario_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+<div class="panel-body container-fluid">
+  <form action="{{ path('usuario_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     <input type="hidden" name="_method" value="PUT" />
     <div class="row ">
-        <div class="row">
-            {{ form_widget(edit_form.mail, {'attr': {'class': 'form-control'}}) }}
-            {{ form_widget(edit_form.rol, {'attr': {'class': 'form-control'}}) }}
-        </div>
+      {{ form_widget(edit_form.mail, {'attr': {'class': 'form-control'}}) }}
+      {{ form_widget(edit_form.rol, {'attr': {'class': 'form-control'}}) }}
     </div>
     <div class="row">
-        <div class="col-sm-6 col-md-6 margin-top-20">
-            {{ form_widget(edit_form._token) }}
-            <button type="submit" class="btn btn btn-success">Editar</button>
-        </div>
+      {{ form_widget(edit_form.activo) }}
     </div>
-</form>
+    <div class="row">
+      <div class="col-sm-6 col-md-6 margin-top-20">
+        {{ form_widget(edit_form._token) }}
+          <button type="submit" class="btn btn btn-success">Editar</button>
+      </div>
+    </div>
+  </form>
 
-<div>
+  <div>
     <div class="float-left">
-        <a class="btn" href="{{ path('usuario') }}">
-            {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>
+      <form action="{{ path('usuario_delete', { 'id': entity.id }) }}" method="post">
+        <input type="hidden" name="_method" value="DELETE" />
+        {{ form_widget(delete_form) }}
+        <button class="btn btn-danger margin-top-10" type="submit" onclick="return confirm('{{ 'views.recordactions.confirm'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}');">{{ 'views.recordactions.delete'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+      </form>
+      <a class="btn btn-default margin-top-10" href="{{ path('usuario') }}">
+        {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+      </a>
     </div>
-    <div class="float-left">
-        <form action="{{ path('usuario_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit" onclick="return confirm('{{ 'views.recordactions.confirm'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}');">{{ 'views.recordactions.delete'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-        </form>
-    </div>
+  </div>
 </div>
 {% endblock %}
