@@ -1,12 +1,12 @@
 {% extends 'ContadoresBundle:Layout:layout.html.twig' %}
 {% form_theme form 'ContadoresBundle:Tarea:fields.html.twig' %}
 
-{% block encabezado %}Asignar tarea no periodica a cliente {% endblock %}
+{% block encabezado %}Agendar tarea {% endblock %}
 
 {% block breadcrum %}
     <li><a href="{{ path('home') }}">Inicio</a></li>
     <li>Clientes</li>
-    <li class="active">Cargar tareas No Periódicas</li>
+    <li class="active">Agendar tarea</li>
 {% endblock %}
 
 {% block page %}

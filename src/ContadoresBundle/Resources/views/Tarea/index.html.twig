@@ -73,8 +73,10 @@ Ver tareas
             <th>Vencimiento fiscal</th>
             <th>Vencimiento interno</th>
             <th>Nombre</th>
+            {% if app.user.rol == "ROLE_JEFE" or app.user.rol == "ROLE_CONTADOR"%}
             <th>Contador</th>
             <th>Cliente</th>
+            {% endif %}
             <th>{{ 'views.index.actions'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</th>
         </tr>
     </thead>
@@ -90,6 +92,7 @@ Ver tareas
             </td>
             <td>{% if entity.vencimientoInterno %}{{ entity.vencimientoInterno|date('Y-m-d ') }}{% endif %}</td>
             <td>{{ entity.nombre }}</td>
+            {% if app.user.rol == "ROLE_JEFE" or app.user.rol == "ROLE_CONTADOR"%}
             <td>{% if entity.contador %}
                 <a href="{{ path('contador_show', { 'id': entity.contador.id }) }}"> {{ entity.contador }}</a>
                 {% endif %}
@@ -98,22 +101,26 @@ Ver tareas
                 <a href="{{ path('cliente_show', { 'id': entity.cliente.id }) }}"> {{ entity.cliente }}</a>
                 {% endif %}
                </td>
+            {% endif %}
             <td>
         <a class="btn btn-mini" href="{{ path('tarea_show', { 'id': entity.id }) }}">
             <i class="icon wb-eye" aria-hidden="true"></i>
         </a>
+                {% if app.user.rol == "ROLE_JEFE" %}
         <a class="btn btn-mini" href="{{ path('tarea_edit', { 'id': entity.id }) }}">
             <i class="icon wb-pencil" aria-hidden="true"></i>
-        </a>            </td>
+        </a>          {% endif %}   </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
     </div>
     <div class="dt-panelfooter clearfix">
+        {% if app.user.rol == "ROLE_JEFE" or app.user.rol == "ROLE_CONTADOR"%}
         <a class="btn btn-success margin-top-10" href="{{ path('tarea_new') }}">
             {{ 'views.index.createnew'|trans({}, 'JordiLlonchCrudGeneratorBundle') }} Tarea
         </a>
+        {% endif %}
         <div class="dataTables_paginate paging_simple_numbers">
             {{ pagerHtml|raw }}
         </div>

@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  */
 class Usuario implements UserInterface, \Serializable, AdvancedUserInterface
 {
+
     /**
      * @var integer
      */
@@ -45,6 +46,7 @@ class Usuario implements UserInterface, \Serializable, AdvancedUserInterface
      * @var \Doctrine\Common\Collections\ArrayCollection
      */
     private $tareas;
+
 
     public function __construct()
     {
@@ -258,5 +260,19 @@ class Usuario implements UserInterface, \Serializable, AdvancedUserInterface
     public function isEnabled()
     {
         return $this->activo;
+    }
+
+    public function isContadorJefe(){
+        if($this->getRol()  == Rol::$contador ){
+            global $kernel;
+            if ('AppCache' == get_class($kernel)){
+                $kernel = $kernel->getKernel();
+            }
+            $usuarioService = $kernel->getContainer()->get('contadores.servicios.usuario');
+
+            $contador = $usuarioService->obtenerContadorPorUsuario($this);
+            return $contador->getEsJefe();
+        }
+        return false;
     }
 }
