@@ -164,8 +164,9 @@
     {% else %}
         <div class="jumbotron">
             <p class="lead">Bienvenido, {{ app.user.mail }}</p>
+
+            {% if  tareas and app.user.rol != "ROLE_ADMIN" %}
             <h2>Tareas Próximas a vencer</h2>
-            {% if  tareas %}
                 {% for tarea in tareas %}
                     <a style="color: red;" href=
                     {% if app.user.rol == "ROLE_CONTADOR" %}

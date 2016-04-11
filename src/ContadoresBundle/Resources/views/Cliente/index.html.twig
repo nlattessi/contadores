@@ -84,9 +84,10 @@
         <a class="btn btn-mini" href="{{ path('cliente_show', { 'id': entity.id }) }}">
             <i class="icon wb-eye" aria-hidden="true"></i>
         </a>
+                {% if app.user.rol == "ROLE_JEFE" %}
         <a class="btn btn-mini" href="{{ path('cliente_edit', { 'id': entity.id }) }}">
             <i class="icon wb-pencil" aria-hidden="true"></i>
-        </a>            </td>
+        </a>    {% endif %}         </td>
         </tr>
     {% endfor %}
     </tbody>

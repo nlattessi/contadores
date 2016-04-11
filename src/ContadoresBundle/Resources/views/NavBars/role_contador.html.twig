@@ -32,6 +32,14 @@ css_active == 'cliente'  %} active open{% endif %}{% endif %}">
                 <span class="site-menu-title">Ver clientes</span>
             </a>
         </li>
+        {% if app.user.contadorJefe %}
+        <li class="site-menu-item {% if css_active is defined %}{% if css_active == 'tarea_periodica_new' %} active{% endif %}{% endif %}">
+            <a class="animsition-link" href="{{ path('tarea_periodica_new') }}" data-slug="layout-menu-expended">
+                <i class="site-menu-icon " aria-hidden="true"></i>
+                <span class="site-menu-title">Asignar T. periodica</span>
+            </a>
+        </li>
+        {% endif %}
         <li class="site-menu-item {% if css_active is defined %}{% if css_active == 'tarea_new' %} active{% endif %}{% endif %}">
             <a class="animsition-link" href="{{ path('tarea_new') }}" data-slug="layout-menu-expended">
                 <i class="site-menu-icon " aria-hidden="true"></i>

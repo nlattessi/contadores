@@ -38,6 +38,7 @@
             {% endif %}
         </td>
     </tr>
+    {% if app.user.rol == "ROLE_JEFE" or app.user.rol == "ROLE_CONTADOR"%}
     <tr class="gradeA">
         <td><b>Vencimiento interno</b></td>
         <td>{% if entity.vencimientoInterno %}
@@ -50,6 +51,7 @@
         <td><b>Nombre</b></td>
         <td>{{ entity.nombre }}</td>
     </tr>
+
     <tr class="gradeA">
         <td><b>Cliente</b></td>
         <td>
@@ -70,6 +72,7 @@
             {% endif %}
         </td>
     </tr>
+    {% endif %}
     <tr class="gradeA">
         <td><b>Observaciones</b></td>
         <td>
@@ -83,7 +86,7 @@
 
     </tbody>
 </table>
-    {% if not entity.fechaFin %}
+    {% if not entity.fechaFin and ( app.user.rol == "ROLE_JEFE" or app.user.rol == "ROLE_CONTADOR")%}
         <h4>Finalizar Tarea</h4>
         <form  action="{{ path('tarea_finalizar', { 'id': entity.id }) }}" method="post" >
             <input type="hidden" name="finalizada" value="true">
