@@ -1,3 +1,5 @@
+USE contadores;
+
 INSERT INTO `rol` (`id`,`nombre`) VALUES (1,'ROLE_ADMIN');
 INSERT INTO `rol` (`id`,`nombre`) VALUES (2,'ROLE_JEFE');
 INSERT INTO `rol` (`id`,`nombre`) VALUES (3,'ROLE_CONTADOR');
@@ -41,3 +43,4 @@ INSERT INTO `periodo` (`id`,`nombre`,`fecha_desde`,`fecha_hasta`,`esquema_id`) V
 INSERT INTO `periodo` (`id`,`nombre`,`fecha_desde`,`fecha_hasta`,`esquema_id`) VALUES (25,'Tercer Cuatrimestre 2016','2016-09-01','2016-12-31',4);
 INSERT INTO `periodo` (`id`,`nombre`,`fecha_desde`,`fecha_hasta`,`esquema_id`) VALUES (26,'Primer Semestre 2016','2016-01-01','2016-06-30',5);
 INSERT INTO `periodo` (`id`,`nombre`,`fecha_desde`,`fecha_hasta`,`esquema_id`) VALUES (27,'Segundo Semestre 2016','2016-07-01','2016-12-31',5);
+
