@@ -297,7 +297,7 @@ CREATE TABLE `tarea` (
   `tiempo_estimado` int(11) DEFAULT NULL,
   `fecha_baja` date DEFAULT NULL,
   `activo` tinyint(1) DEFAULT '1',
-  `usuario_id` int(11) NOT NULL DEFAULT '1',
+  `usuario_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `metaData_tarea_idx` (`tarea_metadata_id`),
   KEY `cliente_tarea_idx` (`cliente_id`),
@@ -420,4 +420,3 @@ CREATE TABLE `vencimiento` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2016-04-11 15:24:53
-
